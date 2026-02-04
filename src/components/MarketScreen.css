@@ -1289,7 +1289,8 @@
 }
 
 .mFYy9.IPADx {
-  background-color: var(--tertiary-fill-background, #2a2a2a);
+  /* Фон трека слайдера: в светлой теме светло-серый, в тёмной — тёмный */
+  background-color: var(--tg-theme-secondary-bg-color, var(--tertiary-fill-background, #2a2a2a));
 }
 
 .IPADx {
@@ -1302,8 +1303,8 @@
   bottom: 2px;
   left: 2px;
   border-radius: 999px;
-  /* Активная «таблетка» слайдера: цвет берём из кнопки Telegram, с запасным вариантом */
-  background-color: var(--tg-theme-button-color, var(--segmented-control-active-background));
+  /* Активная секция при светлой теме — просто светлая (основной фон), не акцент */
+  background-color: var(--tg-theme-bg-color, var(--segmented-control-active-background));
   transition: transform 0.2s ease;
 }
 
@@ -1339,10 +1340,9 @@
   font-weight: 500;
 }
 
-/* Выбранный пункт во всех слайдерах — активный стиль */
+/* Выбранный пункт во всех слайдерах — активный стиль (светлый сегмент = тёмный текст в светлой теме) */
 .r3qNc {
-  /* Текст активной вкладки: контрастный текст для кнопки из темы Telegram */
-  color: var(--tg-theme-button-text-color, var(--tg-theme-accent-text-color, var(--tg-theme-text-color)));
+  color: var(--tg-theme-text-color);
 }
 
 /* Надпись внутри кнопок слайдера (Акции/Фонды, Топ роста/Топ падения) — позиционирование как в референсе */
