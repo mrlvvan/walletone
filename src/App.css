@@ -867,14 +867,20 @@
   color: #000000;
 }
 
+/* Светлая тема: карточки бонусов — белый фон на светлом экране */
+[data-tg-theme="light"] .bonus-card {
+  background: #ffffff;
+}
+
 .bonus-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
 }
 
+/* Карточки бонусов — свой фон, чтобы отличаться от фона экрана */
 .bonus-card {
-  background: transparent;
+  background: var(--tg-theme-section-bg-color, #2b3142);
   border-radius: 16px;
   padding: 16px;
   border: none;
