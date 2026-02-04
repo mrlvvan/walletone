@@ -867,6 +867,14 @@
   color: #000000;
 }
 
+/* Экран бонусов: убрать серую полосу сверху — фон контента как у бонусов */
+.content.screen-bonus {
+  background: var(--tg-theme-bg-color, #121212);
+}
+[data-tg-theme="light"] .content.screen-bonus {
+  background: #f3f3f5;
+}
+
 /* Светлая тема: карточки бонусов — белый фон на светлом экране */
 [data-tg-theme="light"] .bonus-card {
   background: #ffffff;
