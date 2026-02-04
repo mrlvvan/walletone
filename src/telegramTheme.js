@@ -20,14 +20,19 @@ const THEME_VAR_MAP = {
   accent_color: '--tg-theme-accent-color',
 };
 
-/** Определяет платформу/ОС: из Telegram WebApp или по userAgent (вне Telegram). */
+/** Определяет платформу/ОС: из Telegram WebApp или по userAgent (вне Telegram).
+ *  В Mini App на iPhone Telegram часто отдаёт platform "weba", а не "ios" — тогда смотрим userAgent. */
 export function getPlatform() {
   if (typeof window === 'undefined') return 'unknown';
+  const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
   const tg = window.Telegram && window.Telegram.WebApp;
   if (tg && typeof tg.platform === 'string' && tg.platform) {
-    return tg.platform.toLowerCase();
+    const p = tg.platform.toLowerCase();
+    // В Telegram на iPhone может быть weba/webk — определяем iOS по userAgent
+    if ((p === 'weba' || p === 'webk') && /iPhone|iPad|iPod/i.test(ua)) return 'ios';
+    if ((p === 'weba' || p === 'webk') && /Android/i.test(ua)) return 'android';
+    if (p !== 'weba' && p !== 'webk') return p;
   }
-  const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
   if (/iPhone|iPad|iPod/i.test(ua)) return 'ios';
   if (/Android/i.test(ua)) return 'android';
   if (/Mac/i.test(ua)) return 'macos';
