@@ -10,9 +10,48 @@ html[data-tg-platform="ios"] {
   --border-radius-large: 36px;
 }
 
+/* Экран кошелька: отступы от краёв, фон контента — основной (видны «карточки») */
+html[data-tg-platform="ios"] .content:has(.wallet-actions) {
+  background: var(--tg-theme-bg-color, #121212);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Секция кнопок «Перевести, Пополнить, Вывести, Обменять» — закруглённый блок */
+html[data-tg-platform="ios"] .wallet-actions {
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* Только у этих четырёх кнопок — серый прямоугольник с закруглением (не круг) */
+html[data-tg-platform="ios"] .wallet-actions .action-icon {
+  border-radius: 16px;
+  background: var(--tg-theme-secondary-bg-color, #2c2c2e);
+  width: 56px;
+  height: 56px;
+}
+
 /* Карточки списка (Доллары, Крипто, Акции и фонды) */
 html[data-tg-platform="ios"] .list-card {
   border-radius: 20px;
+}
+
+/* Блок баланса и табов Крипто/TON — закругление */
+html[data-tg-platform="ios"] .content:has(.wallet-actions) .wallet-hero {
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* Секции «Крипто», «В тренде» — закругление */
+html[data-tg-platform="ios"] .content:has(.wallet-actions) .section {
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* Промо-слайдер на главной — отступы уже от .content, закругление у .promo-slide */
+html[data-tg-platform="ios"] .content:has(.wallet-actions) .promo-wrapper {
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 /* Кнопки-строки секций (перевести, пополнить и т.д.) */
