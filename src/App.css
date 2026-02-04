@@ -414,7 +414,8 @@
 
 .section-gap {
   height: 12px;
-  background: #0f0f0f;
+  /* Разделитель между секциями: используется цвет вторичного фона из темы, чтобы в светлой теме не быть чёрным */
+  background: var(--tg-theme-secondary-bg-color, #f3f3f5);
   width: 100%;
 }
 
