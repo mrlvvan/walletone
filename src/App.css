@@ -1406,9 +1406,9 @@
   justify-content: center;
 }
 
-/* История: отступы контейнера иконки (SVG) по референсу */
+/* История: отступы контейнера иконки (SVG) — компактно, текст рядом с иконкой */
 .PKleQ .XeMWN {
-  margin: 0 15px 0 14px;
+  margin: 0 10px 0 12px;
 }
 
 /* ref 33331: icon circle 28px; 25042 WKcXc 42px; ref purple #5E4DBE for history */
@@ -1476,6 +1476,14 @@
 /* История: отступы блока «Вывод» и даты по референсу */
 .PKleQ .jOCse.TYgZR.NXXwZ {
   padding: 10px 0;
+}
+
+/* История: надпись операции в одну строку, без кривого переноса; обрезка по многоточию */
+.PKleQ .jOCse.TYgZR.NXXwZ .cpHhd.IqPae.CF5m5.Ka5fP.kzP3J.VyspS {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .jOCse.TYgZR.Gihoq {
