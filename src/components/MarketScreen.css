@@ -1345,13 +1345,11 @@
   color: var(--tg-theme-button-text-color, var(--tg-theme-accent-text-color, var(--tg-theme-text-color)));
 }
 
-/* Надпись внутри кнопок слайдера (Акции/Фонды, Топ роста/Топ падения) — по референсу */
+/* Надпись внутри кнопок слайдера (Акции/Фонды, Топ роста/Топ падения) — позиционирование как в референсе */
 .p_KOn .SNkiP {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
-  right: 0;
   margin: auto;
   width: fit-content;
   height: fit-content;
@@ -1363,6 +1361,7 @@
   line-height: 16px;
 }
 
+/* Цвет текста: зависит и от темы (через переменные), и от активного состояния вкладки */
 .p_KOn:not(.r3qNc) .SNkiP {
   color: var(--tg-theme-hint-color, #8e8e93);
 }
