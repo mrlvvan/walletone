@@ -1374,11 +1374,11 @@
   font-size: 12px;
 }
 
-/* Кнопки «Топ роста» / «Топ падения» — увеличенный текст */
+/* Кнопки «Топ роста» / «Топ падения» — компактный текст, не слишком жирный */
 .CgUOn.pmioA .SNkiP {
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 22px;
+  line-height: 18px;
 }
 
 /* Заголовок «Топ дня» — размер как у «Продукты» (15px / 18px) */
@@ -1510,6 +1510,12 @@
   --cell-separator-color: #000;
   --cell-separator-height: 1px;
 }
+
+/* Светлая тема: разделители между строками «Все активы» — серые, не чёрные */
+[data-tg-theme="light"] .CgUOn.lKYcT .mjigr.LQUdc.lIhZN > * {
+  --cell-separator-color: rgba(0, 0, 0, 0.12);
+}
+
 .CgUOn.lKYcT .Wv9yg::after {
   background: var(--cell-separator-color, #000);
   bottom: 0;
