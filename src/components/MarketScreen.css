@@ -1374,7 +1374,13 @@
   font-size: 12px;
 }
 
-/* Тёмная тема (референс): у обеих вкладок белый текст, различается только фон таблетки */
+/* Тёмная тема: трек почти чёрный, активная таблетка — серосветлая, текст белый */
+[data-tg-theme="dark"] .mFYy9.IPADx {
+  background-color: #0f0f0f;
+}
+[data-tg-theme="dark"] .TsSEl {
+  background-color: #3a3a3c;
+}
 [data-tg-theme="dark"] .p_KOn.r3qNc .SNkiP,
 [data-tg-theme="dark"] .p_KOn:not(.r3qNc) .SNkiP {
   color: #ffffff;
