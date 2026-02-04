@@ -2036,8 +2036,6 @@ function App() {
     setScreen('asset');
   };
 
-  const handleBack = () => setScreen('home');
-
   const handleTabChange = (tab) => {
     if (tab === 'wallet') {
       setScreen('home');
