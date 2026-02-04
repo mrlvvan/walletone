@@ -656,10 +656,10 @@
   background: #7cb342;
 }
 
-/* Секция с бонусом (hero: мешок, заголовок, описание, «Как это работает») — фон как общий (зависит от темы) */
+/* Секция с бонусом (hero: мешок, заголовок, описание, «Как это работает») — фон как в референсе бонусов */
 .bonus-hero,
 .bonus-hero.nluVg.qf2Gj {
-  background: var(--tg-theme-section-bg-color, #121212);
+  background: #f3f3f5;
   border-radius: 16px;
   text-align: center;
   display: flex;
@@ -720,7 +720,8 @@
 .yq6BH {
   font-size: 20px;
   font-weight: 700;
-  color: #f4f6ff;
+  /* Заголовок бонусов: цвет зависит от темы Telegram */
+  color: var(--tg-theme-text-color, #000000);
   margin: 0;
 }
 
@@ -738,7 +739,8 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
-  color: #ffffff;
+  /* Текст под заголовком бонусов: читаемый в обеих темах */
+  color: var(--tg-theme-text-color, #000000);
   --skeleton-height: 12px;
 }
 
@@ -776,9 +778,9 @@
   cursor: pointer;
 }
 
-/* Общий фон экрана бонусов — как общий фон приложения */
+/* Общий фон экрана бонусов — как в референсе (светло-серый фон) */
 .bonus-screen-wrap {
-  background: var(--tg-theme-bg-color, #121212);
+  background: #f3f3f5;
   min-height: 100%;
   flex: 1;
 }
@@ -931,7 +933,8 @@
 
 /* ref 59171 AMsPe: border-radius 14px, padding-block 24px 16px, width 228px */
 .LGGuk .r2DGg.pK3y3.bdh8O {
-  background: #2b2b2b;
+  /* Карточки бонусов: фон зависит от секции темы Telegram */
+  background: var(--tg-theme-section-bg-color, #2b2b2b);
   border-radius: 14px;
   padding: 24px 16px 16px;
   border: none;
