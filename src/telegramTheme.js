@@ -1,5 +1,6 @@
-// Utilities to sync Telegram Web App theme params with CSS variables.
+// Utilities to sync Telegram Web App theme params and platform with CSS.
 // Safe to use in both Telegram Mini App and regular browser (no-op if API missing).
+// В CSS можно использовать: [data-tg-theme="light"], [data-tg-platform="ios"], [data-tg-platform="android"] и т.д.
 
 const THEME_VAR_MAP = {
   bg_color: '--tg-theme-bg-color',
@@ -18,6 +19,22 @@ const THEME_VAR_MAP = {
   destructive_text_color: '--tg-theme-destructive-text-color',
   accent_color: '--tg-theme-accent-color',
 };
+
+/** Определяет платформу/ОС: из Telegram WebApp или по userAgent (вне Telegram). */
+export function getPlatform() {
+  if (typeof window === 'undefined') return 'unknown';
+  const tg = window.Telegram && window.Telegram.WebApp;
+  if (tg && typeof tg.platform === 'string' && tg.platform) {
+    return tg.platform.toLowerCase();
+  }
+  const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
+  if (/iPhone|iPad|iPod/i.test(ua)) return 'ios';
+  if (/Android/i.test(ua)) return 'android';
+  if (/Mac/i.test(ua)) return 'macos';
+  if (/Win/i.test(ua)) return 'windows';
+  if (/Linux/i.test(ua)) return 'linux';
+  return 'web';
+}
 
 export function applyTelegramTheme(themeParams, colorScheme) {
   if (typeof document === 'undefined') return;
@@ -38,10 +55,19 @@ export function applyTelegramTheme(themeParams, colorScheme) {
   }
 }
 
+/** Выставляет на <html> атрибут data-tg-platform (ios, android, web, tdesktop, macos, windows, linux и т.д.). */
+export function applyPlatform() {
+  if (typeof document === 'undefined') return;
+  const platform = getPlatform();
+  document.documentElement.setAttribute('data-tg-platform', platform);
+}
+
 export function initTelegramThemeSync() {
   if (typeof window === 'undefined') return;
 
   const tg = window.Telegram && window.Telegram.WebApp;
+  applyPlatform();
+
   if (!tg) return;
 
   const apply = () => {

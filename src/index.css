@@ -1,4 +1,13 @@
 /* Локальные шрифты Roboto из папки public/fonts */
+/*
+  Платформа/ОС задаётся в telegramTheme.js на <html>:
+  data-tg-theme: "light" | "dark"
+  data-tg-platform: "ios" | "android" | "web" | "tdesktop" | "macos" | "windows" | "linux" и др.
+  Примеры в CSS:
+    [data-tg-platform="ios"] .some-class { ... }
+    [data-tg-platform="android"] .nav { padding-bottom: 8px; }
+    [data-tg-theme="light"][data-tg-platform="android"] .header { ... }
+*/
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
