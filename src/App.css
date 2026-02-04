@@ -811,6 +811,7 @@
 .rquXm .pill-tab {
   background: transparent;
   border: none;
+  /* Нерактивная вкладка: более бледный текст, но всё равно тёмный в светлой теме */
   color: var(--tg-theme-subtitle-text-color, #8a95a8);
   padding-block: 8px;
   padding-inline: 12px;
@@ -826,8 +827,9 @@
 /* Кнопки «Активные» / «Завершённые» — активное состояние: серая подсветка по 12px от текста */
 .bonus-tabs .pill-tab.active,
 .rquXm .pill-tab.active {
-  background: var(--tg-theme-section-bg-color, #2b3142);
-  color: var(--tg-theme-button-text-color, #f4f6fb);
+  /* В бонусах активная вкладка всегда со светлым фоном и тёмным текстом, как в референсе */
+  background: #ffffff;
+  color: #000000;
   font-weight: 600;
   padding-inline: 12px;
 }
