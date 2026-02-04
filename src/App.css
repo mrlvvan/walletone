@@ -844,16 +844,32 @@
   width: auto;
 }
 
-/* Кнопки «Активные» / «Завершённые» — активное состояние: в тёмной теме из темы, в светлой — белая таблетка и чёрный текст */
+/* Кнопки «Активные» / «Завершённые» — активное состояние по референсу: таблетка + голубая скруглённая подчёркивающая полоска в любой теме */
 .bonus-tabs .pill-tab.active,
 .rquXm .pill-tab.active {
+  position: relative;
   background: var(--tg-theme-section-bg-color, #2b3142);
   color: var(--tg-theme-button-text-color, #f4f6fb);
   font-weight: 600;
   padding-inline: 12px;
 }
 
-/* Светлая тема: референсный вид бонусов — светлый фон, белая активная таблетка, чёрный текст */
+/* Голубая скруглённая подчёркивающая полоска у активной вкладки (как на референсе) — в любой теме */
+.bonus-tabs .pill-tab.active::after,
+.rquXm .pill-tab.active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 6px;
+  width: 60%;
+  min-width: 40px;
+  height: 3px;
+  background: var(--tg-theme-button-color, #65b4f3);
+  border-radius: 999px;
+}
+
+/* Светлая тема: референсный вид бонусов — светлый фон, активная таблетка белая, текст чёрный, подчёркивание акцентное */
 [data-tg-theme="light"] .bonus-screen-wrap {
   background: #f3f3f5;
 }
@@ -865,6 +881,10 @@
 [data-tg-theme="light"] .rquXm .pill-tab.active {
   background: #ffffff;
   color: #000000;
+}
+[data-tg-theme="light"] .bonus-tabs .pill-tab.active::after,
+[data-tg-theme="light"] .rquXm .pill-tab.active::after {
+  background: var(--tg-theme-button-color, #65b4f3);
 }
 
 .bonus-grid {
