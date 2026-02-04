@@ -1289,8 +1289,8 @@
 }
 
 .mFYy9.IPADx {
-  /* Фон трека слайдера: в светлой теме светло-серый, в тёмной — тёмный */
-  background-color: var(--tg-theme-secondary-bg-color, var(--tertiary-fill-background, #2a2a2a));
+  /* Фон трека слайдера: темнее активной таблетки в тёмной теме, светлее в светлой */
+  background-color: var(--tg-theme-secondary-bg-color, #1c1c1e);
 }
 
 .IPADx {
@@ -1303,8 +1303,8 @@
   bottom: 2px;
   left: 2px;
   border-radius: 999px;
-  /* Активная секция при светлой теме — просто светлая (основной фон), не акцент */
-  background-color: var(--tg-theme-bg-color, var(--segmented-control-active-background));
+  /* Активная таблетка: в тёмной теме — светлее трека (section-bg), в светлой — основной фон */
+  background-color: var(--tg-theme-section-bg-color, #2b3142);
   transition: transform 0.2s ease;
 }
 
@@ -1372,6 +1372,26 @@
 
 .SNkiP {
   font-size: 12px;
+}
+
+/* Тёмная тема (референс): у обеих вкладок белый текст, различается только фон таблетки */
+[data-tg-theme="dark"] .p_KOn.r3qNc .SNkiP,
+[data-tg-theme="dark"] .p_KOn:not(.r3qNc) .SNkiP {
+  color: #ffffff;
+}
+
+/* Светлая тема: трек и активная таблетка, активный текст чёрный */
+[data-tg-theme="light"] .mFYy9.IPADx {
+  background-color: #e5e5ea;
+}
+[data-tg-theme="light"] .TsSEl {
+  background-color: #ffffff;
+}
+[data-tg-theme="light"] .p_KOn.r3qNc .SNkiP {
+  color: #000000;
+}
+[data-tg-theme="light"] .p_KOn:not(.r3qNc) .SNkiP {
+  color: #8e8e93;
 }
 
 /* Кнопки «Топ роста» / «Топ падения» — компактный текст, не слишком жирный */
