@@ -307,6 +307,9 @@
   flex-direction: column;
   gap: 6px;
   z-index: 1;
+  /* отступ справа, чтобы текст не заходил под SVG на узких экранах */
+  padding-right: 172px;
+  min-width: 0;
 }
 
 .promo-content {
@@ -347,10 +350,10 @@
 
 .promo-art {
   position: absolute;
-  right: 10px;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
-  width: 160px;
+  width: 140px;
   height: 88px;
   border-radius: 0;
   background: transparent;
@@ -362,7 +365,7 @@
 }
 
 .promo-slide.promo-orange .promo-art {
-  width: 160px;
+  width: 140px;
   height: 88px;
 }
 
