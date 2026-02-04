@@ -75,6 +75,8 @@
   --tertiary-fill-background: rgba(123, 123, 123, 0.24);
   --quaternary-fill-background: rgba(122, 122, 122, 0.18);
   --separator-non-opaque-color: #000000;
+  /* fallback для фонового цвета разделителей, если нет Telegram theme params */
+  --secondary-bg-color-fallback: #0f0f0f;
   --accent-orange: #e58943;
   --segmented-control-active-background: #636366;
   --tooltip-background: #3a3a3c;

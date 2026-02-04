@@ -656,10 +656,10 @@
   background: #7cb342;
 }
 
-/* Секция с бонусом (hero: мешок, заголовок, описание, «Как это работает») — фон как общий */
+/* Секция с бонусом (hero: мешок, заголовок, описание, «Как это работает») — фон как общий (зависит от темы) */
 .bonus-hero,
 .bonus-hero.nluVg.qf2Gj {
-  background: #121212;
+  background: var(--tg-theme-section-bg-color, #121212);
   border-radius: 16px;
   text-align: center;
   display: flex;
@@ -778,7 +778,7 @@
 
 /* Общий фон экрана бонусов — как общий фон приложения */
 .bonus-screen-wrap {
-  background: #121212;
+  background: var(--tg-theme-bg-color, #121212);
   min-height: 100%;
   flex: 1;
 }
