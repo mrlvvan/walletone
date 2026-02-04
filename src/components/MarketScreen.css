@@ -1,0 +1,1642 @@
+.market-search {
+  margin-top: 4px;
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+}
+
+.search-input input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #f4f6fb;
+  width: 100%;
+}
+
+.search-icon {
+  opacity: 0.7;
+}
+
+.market-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pill-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  background: transparent;
+  padding: 4px;
+  border-radius: 999px;
+}
+
+.pill-tab {
+  background: transparent;
+  border: none;
+  color: #c6d0e0;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pill-tab.active {
+  background: #2b3142;
+  color: #f4f6fb;
+}
+
+.ticker-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.ticker-card {
+  background: transparent;
+  border-radius: 14px;
+  padding: 10px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  text-align: center;
+}
+
+.ticker-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.ticker-name {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.ticker-change {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ticker-change.neg {
+  color: #ff6b6b;
+}
+
+.ticker-change.pos {
+  color: #3ccf91;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.product-card {
+  background: transparent;
+  border-radius: 14px;
+  padding: 12px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  color: #f4f6fb;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.product-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ticker-icon.tsla {
+  background: #d32f2f;
+}
+
+.ticker-icon.goog {
+  background: #ffffff;
+  color: #1a1f2b;
+}
+
+.ticker-icon.nvda {
+  background: #0f3d2e;
+}
+
+.ticker-icon.aapl {
+  background: #111111;
+}
+
+.ticker-icon.coin {
+  background: #1b2a48;
+}
+
+.ticker-icon.hood {
+  background: #1f3d2c;
+}
+
+.ticker-icon.mcd {
+  background: #d32f2f;
+}
+
+.ticker-icon.cisco {
+  background: #1b2a48;
+}
+
+.ticker-icon.ibm {
+  background: #2b5ccc;
+}
+
+.ticker-icon.msft {
+  background: #1a1f2b;
+}
+
+.ticker-icon.lin {
+  background: #0c3b5f;
+}
+
+.ticker-icon.cvx {
+  background: #2e3b55;
+}
+
+.ton-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.ton-card {
+  background: transparent;
+  border-radius: 14px;
+  padding: 10px 8px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  text-align: center;
+}
+
+.ton-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.ton-code {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ton-change {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.ton-change.pos {
+  color: #3ccf91;
+}
+
+.ton-change.neg {
+  color: #ff6b6b;
+}
+
+.ton-icon.spyx {
+  background: #d32f2f;
+}
+
+.ton-icon.qqq {
+  background: #1b2a48;
+}
+
+.ton-icon.amzn {
+  background: #ff6f00;
+}
+
+.ton-icon.xaut {
+  background: #caa33f;
+}
+
+.ton-icon.aapl {
+  background: #111111;
+}
+
+.ton-icon.major {
+  background: #f5b042;
+}
+
+.ton-icon.dollar {
+  background: #35c67b;
+  color: #0f1117;
+}
+
+.nR3tb {
+  position: relative;
+}
+
+.LPWUW {
+  border: none;
+  height: 1px;
+  width: 100%;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.a0Knu {
+  margin-top: 12px;
+}
+
+.LxOPn {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+.okTpb {
+  padding-block: 4px;
+}
+
+.aVY7i {
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+}
+
+.r2DGg {
+  align-self: flex-start;
+  box-sizing: border-box;
+  flex: 1;
+  min-width: 0;
+}
+
+.Z3c2A {
+  align-self: flex-start;
+  flex: 1;
+}
+
+.Syue2 {
+  border-radius: 6px;
+}
+
+.market-section .r2DGg.Z3c2A.Syue2 {
+  cursor: pointer;
+}
+
+.P13QV {
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.DV0WS {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-inline: 10px;
+}
+
+._0g3V {
+  gap: 8px;
+  padding-block: 12px 8px;
+}
+
+.mUVUv {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ticker-svg {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ticker-svg svg {
+  width: 52px;
+  height: 52px;
+  display: block;
+}
+
+.caBg6 {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+/* Тикер / изменение (TSLA, Акции и т.д.) — референс YLSRc, PmUAN, ku6Sb */
+.YLSRc {
+  --skeleton-height: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.PmUAN {
+  font-weight: 400;
+  color: var(--tg-theme-subtitle-text-color);
+}
+
+.ku6Sb {
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.G5Dxc {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.G4GF9 {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Отображение падения (красный процент с ↓) — ku6Sb даёт flex/nowrap, pPUsT цвет */
+.pPUsT {
+  color: var(--tg-theme-destructive-text-color);
+}
+
+.WXss8 {
+  color: var(--text-confirm-color);
+}
+
+/* Рынок США (сетка Акции/Фонды) — красный для падения, зелёный для роста */
+.market-section .cpHhd.YLSRc.PmUAN.ku6Sb.G5Dxc.pPUsT {
+  color: #e53935;
+}
+
+.market-section .cpHhd.YLSRc.PmUAN.ku6Sb.G5Dxc.WXss8 {
+  color: #61bd67;
+}
+
+.gtBIz {
+  display: none;
+}
+
+.JNQMw {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Панель поиска при фокусе: вкладки + «Все активы» + список */
+.wtAUk.Rmex8 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 8px;
+  background: var(--tg-theme-bg-color);
+}
+
+.wtAUk .qMqm9 {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-block: 4px 0;
+  margin-inline: -14px;
+  padding-inline: 14px;
+}
+
+/* Кнопки в поиске (Все, Крипто, Акции, Фонды) — стили оригинала */
+.wtAUk .yPhAq.hHy4V {
+  --tabs-height: 48px;
+}
+
+.wtAUk .M3D51 {
+  background-color: var(--tg-theme-section-bg-color);
+  margin-block-start: -12px;
+}
+
+.wtAUk .xjd0r {
+  --tabs-height: 50px;
+  height: var(--tabs-height);
+}
+
+.wtAUk .yPhAq {
+  width: 100%;
+  display: flex;
+}
+
+.wtAUk .AY7Xx {
+  --separator-height: -1px;
+  box-shadow: inset 0 var(--separator-height) 0 var(--tg-theme-section-separator-color);
+}
+
+.wtAUk .cJa9x {
+  overflow-x: scroll;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  touch-action: pan-x pan-y;
+  white-space: nowrap;
+  will-change: transform, scroll-position;
+}
+
+.wtAUk .yPhAq.xjd0r {
+  flex-direction: row;
+  gap: 0;
+  align-items: center;
+  min-width: min-content;
+}
+
+.wtAUk .yq9lM {
+  flex-shrink: 0;
+}
+
+.wtAUk .BDWMw.hHy4V {
+  padding-inline: 12px;
+}
+
+.wtAUk .cJa9x .BDWMw {
+  flex: none;
+  width: auto;
+}
+
+.wtAUk .BDWMw {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  padding-block: 0;
+  position: relative;
+}
+
+.wtAUk .ecfXP {
+  color: var(--tg-theme-accent-text-color);
+}
+
+/* Текст активной вкладки (Все) — явно акцентный цвет */
+.wtAUk .ecfXP .cpHhd,
+.wtAUk .BDWMw:has(.ecfXP) .cpHhd {
+  color: var(--tg-theme-accent-text-color);
+}
+
+/* Полоска под выбранной кнопкой (Все) */
+.wtAUk .BDWMw:has(.ecfXP)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 3px;
+  background-color: var(--tg-theme-accent-text-color);
+  border-radius: 2px;
+}
+
+.wtAUk .yaBp6 {
+  color: var(--tg-theme-subtitle-text-color);
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  align-items: center;
+  display: flex;
+  height: 100%;
+}
+
+.wtAUk .r2DGg.BDWMw {
+  flex-shrink: 0;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  color: var(--tg-theme-text-color);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.wtAUk .Rfm73.ZR_ns {
+  justify-content: space-between;
+}
+
+.wtAUk .umRMK {
+  padding-inline: 16px;
+}
+
+.wtAUk .kJf7o {
+  background-color: var(--tg-theme-secondary-bg-color);
+  opacity: 0.5;
+  padding-block: 9px 7px;
+  position: relative;
+  border-top: none;
+  box-shadow: none;
+}
+
+/* Надпись «Все активы» в поиске */
+.wtAUk .Rfm73.ZR_ns.umRMK.kJf7o .CF5m5 {
+  font-weight: 500;
+}
+
+.wtAUk .Rfm73.ZR_ns.umRMK.kJf7o .YLSRc {
+  --skeleton-height: 10px;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.wtAUk .Rfm73.ZR_ns.umRMK.kJf7o .cpHhd {
+  font-family: Roboto, system-ui, sans-serif;
+}
+
+.wtAUk .Rfm73.ZR_ns.umRMK.kJf7o .Ka5fP {
+  color: var(--tg-theme-text-color);
+}
+
+.wtAUk .DTT0W.yPGCL {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: min(70vh, 500px);
+  -webkit-overflow-scrolling: touch;
+  border-top: none;
+  padding-top: 0;
+}
+
+/* Убираем лишнюю полосу над «Все активы» в поиске */
+.wtAUk .DTT0W.yPGCL .oJKLh.CgUOn.lKYcT {
+  border-top: none;
+  padding-top: 0;
+}
+
+.wtAUk .DTT0W.yPGCL .JNQMw {
+  padding-top: 0;
+}
+
+.wtAUk .search-results-list {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.wtAUk .search-results-list .tSWgK {
+  flex-shrink: 0;
+}
+
+/* Заголовок секции: заголовок + «Посмотреть все» — референс Rfm73 */
+.Rfm73 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+/* «Рынок США» и «Топ дня» — «Посмотреть все» справа */
+.market-section .Rfm73.Jn71M.hCZ1A,
+.CgUOn.pmioA .Rfm73.Jn71M.hCZ1A {
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Текст заголовка секции «Рынок США» и др. — референс KbDJo, eqZCR */
+.KbDJo {
+  --skeleton-height: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.cpHhd {
+  font-family: 'Roboto', system-ui, sans-serif;
+  color: var(--tg-theme-text-color);
+}
+
+.eqZCR {
+  color: var(--tg-theme-section-header-text-color);
+}
+
+/* Заголовок секции (Рынок США, Продукты): cpHhd + KbDJo + eqZCR */
+.cpHhd.KbDJo.eqZCR {
+  font-family: Roboto, system-ui, sans-serif;
+  --skeleton-height: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--tg-theme-section-header-text-color);
+}
+
+.ydmxJ {
+  display: flex;
+  flex-direction: column;
+}
+
+.tf4r_ {
+  width: 100%;
+}
+
+.aJFEC {
+  padding-block: 4px;
+}
+
+.vilvX {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.product-icon-svg {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-icon-svg svg {
+  width: 42px;
+  height: 42px;
+  display: block;
+}
+
+.product-icon-crypto {
+  background: rgba(251, 242, 208, 0.12);
+}
+
+.product-icon-stocks {
+  background: rgba(199, 229, 247, 0.12);
+}
+
+.product-icon-funds {
+  background: rgba(217, 190, 255, 0.12);
+}
+
+.oJKLh {
+  width: 100%;
+  background: #212121;
+}
+
+.lKYcT {
+  width: 100%;
+}
+
+.LySHd {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.iXSn4 {
+  padding-block: 4px;
+}
+
+.CgUOn.pmioA .PReSx {
+  padding-block: 12px 0;
+  padding-inline: 20px;
+}
+
+.CgUOn.pmioA .VEQzj {
+  padding-block: 6px;
+}
+
+.CgUOn.pmioA .qcrHS {
+  padding-block: 10px;
+  padding-inline: 16px;
+}
+
+.CgUOn.lKYcT .qcrHS {
+  padding-block: 16px 4px;
+  padding-inline: 16px;
+}
+
+.fNnJ5 {
+  padding-block: 6px;
+}
+
+.s0FlX {
+  padding-block-start: 12px;
+}
+
+.HoRrY {
+  display: flex;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  touch-action: pan-x pan-y;
+  width: 100vw;
+  -webkit-overflow-scrolling: touch;
+}
+
+.HoRrY::-webkit-scrollbar {
+  display: none;
+}
+
+.PaMwm {
+  margin-inline: -16px;
+}
+
+.MEEeT {
+  padding-bottom: 16px;
+}
+
+.ShU74 {
+  flex-shrink: 0;
+  width: 16px;
+}
+
+.ZETuS {
+  min-height: 112px;
+}
+
+.zlKjk {
+  min-height: 119px;
+}
+
+.FhO5I {
+  width: 100%;
+  background: #212121;
+}
+
+/* Полноэкранный оверлей поиска: перекрывает весь контент */
+.FhO5I.search-overlay-open {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--tg-theme-bg-color);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.FhO5I.search-overlay-open .oJKLh.LySHd {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.FhO5I.search-overlay-open .JNQMw {
+  flex-shrink: 0;
+}
+
+.FhO5I.search-overlay-open .wtAUk.Rmex8 {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+
+.FhO5I.search-overlay-open .wtAUk .DTT0W.yPGCL {
+  flex: 1;
+  min-height: 0;
+  max-height: none;
+}
+
+.KIbKh {
+  width: 100%;
+}
+
+.pPd9Y {
+  width: 100%;
+}
+
+.nsMB8 {
+  display: block;
+}
+
+.XTiUr {
+  border: none;
+}
+
+.l_jV4 {
+  box-sizing: border-box;
+}
+
+.KKBuo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tg-theme-subtitle-text-color);
+}
+
+.cqybA {
+  display: block;
+}
+
+.Kndc7 {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--tg-theme-text-color);
+  font-size: 15px;
+  line-height: 20px;
+  outline: none;
+}
+
+.Kndc7::-webkit-search-decoration,
+.Kndc7::-webkit-search-cancel-button,
+.Kndc7::-webkit-search-results-button,
+.Kndc7::-webkit-search-results-decoration {
+  display: none;
+}
+
+.TlsKl {
+  position: absolute;
+  left: 44px;
+  color: var(--tg-theme-subtitle-text-color);
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.Kndc7:focus + .TlsKl,
+.Kndc7:not(:placeholder-shown) + .TlsKl {
+  opacity: 0;
+}
+
+/* Крестик скрыт, когда поле пустое */
+.V2GJs {
+  display: none;
+  align-items: center;
+}
+
+/* Крестик виден только при введённом тексте (для очистки) */
+.JNQMw .DIb0V:has(.Kndc7:not(:placeholder-shown)) .V2GJs {
+  display: flex;
+}
+
+.BSzXJ {
+  background: transparent;
+  border: none;
+  color: var(--tg-theme-subtitle-text-color);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Поиск — всё для блока поиска по референсу (YrFt1, DIb0V, IqPae, PmUAN, cpHhd, Ka5fP) */
+.JNQMw .ydmxJ.tf4r_ {
+  border-radius: 0;
+  overflow: initial;
+}
+
+/* Вся форма поиска — отступ 14px слева и справа, форма заканчивается по отступу */
+.JNQMw .pPd9Y.nsMB8 {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  padding: 14px;
+  box-sizing: border-box;
+}
+
+/* Лейбл поиска — иконка слева, поле справа в одну строку (не колонкой) */
+.JNQMw label.YrFt1.DIb0V,
+.JNQMw .YrFt1 {
+  --icon-size: 24px;
+  --icon-padding: 8px;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  min-height: 50px;
+  background: var(--tg-theme-section-bg-color);
+  color: var(--tg-theme-text-color);
+  box-sizing: border-box;
+}
+
+.JNQMw .YrFt1.DIb0V {
+  --input-text-padding: 14px;
+  --close-icon-padding: 12px;
+  --reserved-space-for-animated-label: 6px;
+  --search-label-padding-inline: 14px;
+  --search-label-translate-x: calc(var(--search-label-padding-inline) + var(--icon-size));
+  --search-label-translate-x-focused: -4px;
+  --search-label-translate-y-focused: calc(var(--input-text-padding) * -1 - 9px);
+  --border-color: oklch(from #aaaaaa l c h / 40%);
+  gap: 8px;
+  border: 0.5px solid var(--border-color);
+  border-radius: 6px;
+  margin-block-start: var(--reserved-space-for-animated-label);
+  outline: 1.5px solid transparent;
+  transition: border 0.2s linear, outline 0.2s linear;
+  padding: 0 var(--search-label-padding-inline);
+}
+
+/* При фокусе: обводка поиска и иконка — акцентный цвет */
+.JNQMw .DIb0V:focus-within {
+  border-color: var(--tg-theme-accent-text-color);
+  outline: 1.5px solid var(--tg-theme-accent-text-color);
+}
+
+.JNQMw .DIb0V:focus-within .KKBuo .cqybA {
+  color: var(--tg-theme-accent-text-color);
+}
+
+.JNQMw .cpHhd.IqPae.PmUAN.Ka5fP {
+  font-family: Roboto, system-ui, sans-serif;
+  --skeleton-height: 12px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--tg-theme-text-color);
+}
+
+/* Отступ 14px влево до иконки — только за счёт padding лейбла, без доп. отступа у контейнера иконки */
+.JNQMw .DIb0V .KKBuo {
+  padding-inline-start: 0;
+}
+
+.JNQMw .KKBuo .cqybA {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  flex-shrink: 0;
+  color: var(--tg-theme-subtitle-text-color);
+  transition: color 0.2s linear;
+}
+
+.JNQMw .Kndc7 {
+  background: transparent;
+  border: none;
+  color: var(--tg-theme-text-color);
+  font: inherit;
+  line-height: inherit;
+  outline: none;
+  width: 100%;
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+/* Инпут поиска — padding top/bottom 14px, слева и справа 8px */
+.JNQMw .DIb0V .Kndc7 {
+  padding-block: var(--input-text-padding);
+  padding-inline-start: var(--icon-padding);
+  padding-inline-end: var(--icon-padding);
+}
+
+.JNQMw .DIb0V:has(.KKBuo) .Kndc7 {
+  padding-inline-start: var(--icon-padding);
+}
+
+.JNQMw .DIb0V:has(.V2GJs) .Kndc7 {
+  padding-inline-end: var(--icon-padding);
+}
+
+/* Плейсхолдер «Поиск» — в одну линию с инпутом: тот же отступ, что и начало текста в поле */
+.JNQMw .TlsKl {
+  position: absolute;
+  /* лейбл 14px + иконка + gap + padding инпута = начало текста в инпуте */
+  left: calc(var(--search-label-padding-inline) + var(--icon-size) + 8px + var(--icon-padding));
+  right: auto;
+  width: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: left;
+  color: var(--tg-theme-subtitle-text-color);
+  pointer-events: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  transition: opacity 0.15s ease;
+}
+
+.CgUOn.lKYcT .ydmxJ {
+  gap: 0;
+}
+
+.lKYcT .P13QV {
+  width: 100%;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.lKYcT .dAgC8 {
+  width: 100%;
+  padding-inline: 20px;
+}
+
+.lKYcT .asset-icon {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+.lKYcT .asset-icon svg {
+  display: block;
+  margin: 0 auto;
+}
+
+.mjigr {
+  width: 100%;
+}
+
+.ODmGt {
+  display: flex;
+  flex-direction: column;
+}
+
+.LQUdc {
+  gap: 0;
+}
+
+.lIhZN {
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.tSWgK {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tizzh {
+  width: 100%;
+}
+
+.tSWgK:last-child {
+  border-bottom: none;
+}
+
+.dAgC8 {
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  gap: 12px;
+}
+
+.t1CPG {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.Bcb3I {
+  gap: 12px;
+}
+
+.RkvKd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+}
+
+.RkvKd .asset-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 20px;
+  font-size: 20px;
+}
+
+.f5GTj {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.Wv9yg {
+  min-width: 0;
+}
+
+.jOCse {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.TYgZR {
+  min-width: 0;
+}
+
+.NXXwZ {
+  align-items: flex-start;
+}
+
+.eslGw {
+  display: flex;
+  align-items: center;
+}
+
+.CFakS {
+  justify-content: flex-end;
+}
+
+.Gihoq {
+  align-items: flex-end;
+}
+
+.IqPae {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--tg-theme-text-color);
+}
+
+.Ka5fP {
+  font-weight: 500;
+}
+
+.kzP3J {
+  line-height: 18px;
+}
+
+.VyspS {
+  text-align: right;
+}
+
+.VyspS span {
+  overflow: visible;
+  white-space: pre-line;
+}
+
+.Fx5Cf {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+/* Подпись под названием (тикер BTC, ETH и т.д.) — 14px, ellipsis по референсу */
+.Bgj6A {
+  color: var(--tg-theme-subtitle-text-color);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cpHhd.YLSRc.PmUAN.Fx5Cf.Bgj6A {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  --skeleton-height: 10px;
+}
+
+.mdnGg {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Надпись «9% годовых» — бейдж рядом с тикером */
+.LMb8t {
+  --skeleton-height: 8px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+}
+
+.jJi8N {
+  font-weight: 600;
+  border-radius: 6px;
+  padding-block: 2px;
+  padding-inline: 4px;
+  text-transform: uppercase;
+}
+
+.VbUp4 {
+  padding-block: 1px;
+  letter-spacing: 0.2px;
+}
+
+.tej97 {
+  background-color: var(--quaternary-fill-background, rgba(255, 255, 255, 0.08));
+  color: var(--tg-theme-subtitle-text-color);
+}
+
+
+.Ofdvj {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.PReSx {
+  padding-block: 12px 0;
+  padding-inline: 20px;
+}
+
+/* Слайды (Акции/Фонды, Топ роста/Топ падения) — нормальный вид: скруглённая подложка, активная вкладка светлая */
+.Zwf9p {
+  border-radius: 18px;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  height: 36px;
+  max-height: 36px;
+  max-width: 388px;
+  overflow: hidden;
+  position: relative;
+  transition: background-color 0.2s ease;
+  width: 100%;
+  will-change: transform;
+}
+
+.mFYy9 {
+  width: 100%;
+  padding-inline: 2px;
+}
+
+.mFYy9.IPADx {
+  background-color: var(--tertiary-fill-background, #2a2a2a);
+}
+
+.IPADx {
+  width: 100%;
+}
+
+.TsSEl {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  border-radius: 999px;
+  background-color: var(--segmented-control-active-background);
+  transition: transform 0.2s ease;
+}
+
+.TRjCi {
+  transition: transform 0.2s ease;
+}
+
+.uuakV {
+  width: calc(50% - 4px);
+}
+
+/* Пункты слайдера (Акции/Фонды, Топ роста/Топ падения) — макс. ширина 212px, высота 36px, паддинг 10px сверху/снизу от текста */
+.p_KOn {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 36px;
+  max-height: 36px;
+  max-width: 212px;
+  padding: 10px 0;
+  justify-content: center;
+  position: relative;
+  transform: translateZ(0);
+  white-space: nowrap;
+  z-index: 2;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+}
+
+.CF5m5 {
+  font-weight: 500;
+}
+
+/* Выбранный пункт во всех слайдерах — активный стиль */
+.r3qNc {
+  color: var(--tg-theme-text-color);
+}
+
+/* Надпись внутри кнопок слайдера (Акции/Фонды, Топ роста/Топ падения) — по референсу */
+.p_KOn .SNkiP {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  transition: color 0.2s ease;
+  font-family: Roboto, system-ui, sans-serif;
+  --skeleton-height: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.p_KOn:not(.r3qNc) .SNkiP {
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+
+.p_KOn.r3qNc .SNkiP {
+  color: var(--tg-theme-text-color);
+}
+
+.SNkiP {
+  font-size: 12px;
+}
+
+/* Кнопки «Топ роста» / «Топ падения» — увеличенный текст */
+.CgUOn.pmioA .SNkiP {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+/* Заголовок «Топ дня» — размер как у «Продукты» (15px / 18px) */
+.CgUOn.pmioA .section-title-subtitle {
+  font-size: 15px;
+  line-height: 18px;
+}
+
+/* Карточки акций в «Топ дня» — SVG 52×52, текст меньше */
+.CgUOn.pmioA .ticker-svg {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.CgUOn.pmioA .ticker-svg svg {
+  width: 52px;
+  height: 52px;
+  display: block;
+}
+
+.CgUOn.pmioA .r2DGg.Z3c2A.Syue2 .caBg6 {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+/* Текст с изменениями (процент) в «Топ дня» — меньше */
+.CgUOn.pmioA .r2DGg.Z3c2A.Syue2 .cpHhd.YLSRc.PmUAN {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  --skeleton-height: 10px;
+}
+
+.CgUOn.pmioA .r2DGg.Z3c2A.Syue2 .cpHhd.YLSRc.PmUAN.ku6Sb.G5Dxc {
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.CgUOn.pmioA .r2DGg.Z3c2A.Syue2 .cpHhd.YLSRc.PmUAN.ku6Sb.G5Dxc.WXss8 {
+  color: var(--text-confirm-color);
+}
+
+.CgUOn.pmioA .r2DGg.Z3c2A.Syue2 .cpHhd.YLSRc.PmUAN.ku6Sb.G5Dxc.pPUsT {
+  color: var(--tg-theme-destructive-text-color);
+}
+
+.CgUOn.pmioA .r2DGg.Z3c2A.Syue2 ._0g3V {
+  gap: 10px;
+  padding-block: 14px 10px;
+}
+
+._BP0C {
+  display: none;
+}
+
+.z5Bkg {
+  display: flex;
+}
+
+/* Обёртка «Посмотреть все» — референс UBSxc */
+.UBSxc {
+  display: inline-flex;
+  align-items: center;
+  --skeleton-height: 12px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.t6rva {
+  color: var(--tg-theme-link-color);
+}
+
+/* Кнопка «Посмотреть все» — референс uzQIE, SqDwU */
+.uzQIE {
+  background: transparent;
+  border: none;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  text-transform: inherit;
+}
+
+.SqDwU {
+  color: var(--tg-theme-accent-text-color);
+}
+
+.hQlED {
+  line-height: 18px;
+}
+
+/* Секция «Все активы» — размер заголовка как у «Продукты», «Посмотреть все» — цвет как в «Топ дня» */
+.CgUOn.lKYcT .Rfm73 {
+  justify-content: space-between;
+}
+
+.CgUOn.lKYcT .Rfm73 .section-title-subtitle {
+  color: var(--tg-theme-section-header-text-color);
+  font-size: 15px;
+  line-height: 18px;
+}
+
+.CgUOn.lKYcT .Rfm73 .z5Bkg .uzQIE.SqDwU {
+  color: var(--tg-theme-accent-text-color);
+}
+
+.CgUOn.lKYcT .tSWgK {
+  border-bottom: none;
+}
+
+.CgUOn.lKYcT .lIhZN {
+  border-top: none;
+}
+
+/* «Все активы» — стиль как у транзакций: разделитель через псевдоэлемент .Wv9yg::after, высота строки 58px */
+.CgUOn.lKYcT .mjigr.LQUdc.lIhZN > * {
+  --cell-separator-color: #000;
+  --cell-separator-height: 1px;
+}
+.CgUOn.lKYcT .Wv9yg::after {
+  background: var(--cell-separator-color, #000);
+  bottom: 0;
+  content: "";
+  height: var(--cell-separator-height, 1px);
+  inset-inline-start: 0;
+  position: absolute;
+  transform: scaleY(calc(1 / var(--dpr, 1)));
+  transform-origin: bottom left;
+  width: 100%;
+}
+
+.CgUOn.lKYcT .mjigr.LQUdc.lIhZN > *:last-child .Wv9yg::after {
+  display: none;
+}
+.CgUOn.lKYcT .tSWgK {
+  height: 58px;
+  min-height: 58px;
+  box-sizing: border-box;
+}
+
+/* Имена и суммы активов — белый; тикер и % — серый/зелёный/красный; увеличенные надписи */
+/* Верхнее название монет в «Все активы» — как в референсе: 16px, font-weight 500 */
+.CgUOn.lKYcT .cpHhd.IqPae.CF5m5.Ka5fP.kzP3J {
+  color: #ffffff;
+  --skeleton-height: 12px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Ценник справа — увеличенный текст */
+.CgUOn.lKYcT .cpHhd.IqPae.PmUAN.Ka5fP.kzP3J.VyspS {
+  color: #ffffff;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  justify-content: flex-end;
+}
+
+/* Нижнее название (тикер BTC, ETH) в «Все активы» — 14px, font-weight 400, ellipsis */
+.CgUOn.lKYcT .cpHhd.YLSRc.PmUAN.Fx5Cf.Bgj6A {
+  color: rgba(255, 255, 255, 0.6);
+  --skeleton-height: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.CgUOn.lKYcT .cpHhd.YLSRc.PmUAN.ku6Sb.G5Dxc.WXss8 {
+  color: #61bd67;
+}
+
+.CgUOn.lKYcT .cpHhd.YLSRc.PmUAN.ku6Sb.G5Dxc.pPUsT {
+  color: #e53935;
+}
+
+/* Контейнер иконки и центрирование в «Все активы» (размеры — по умолчанию) */
+.CgUOn.lKYcT .RkvKd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 15px 0 14px;
+}
+
+.CgUOn.lKYcT .RkvKd .asset-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.CgUOn.lKYcT .RkvKd .asset-icon svg {
+  display: block;
+}
+
+/* высота строки 58px задана выше (стиль как у транзакций) */
+
+/* Без паддинга и без лишней высоты — переопределяем .r2DGg.tizzh .P13QV.dAgC8 из App.css (padding 16px, min-height 69px) */
+.CgUOn.lKYcT .r2DGg.tizzh .P13QV.dAgC8 {
+  padding: 0;
+  min-height: 0;
+  height: 58px;
+  box-sizing: border-box;
+  align-items: stretch;
+  gap: 0;
+}
+
+.CgUOn.lKYcT .f5GTj {
+  gap: 16px;
+  min-width: 0;
+}
+
+.CgUOn.lKYcT .f5GTj .jOCse.NXXwZ {
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+}
+
+.CgUOn.lKYcT .f5GTj .jOCse.NXXwZ .cpHhd.IqPae.CF5m5.Ka5fP.kzP3J {
+  margin: 0;
+  padding: 0;
+}
+
+.CgUOn.lKYcT .f5GTj .jOCse.NXXwZ .cpHhd.YLSRc.PmUAN.Fx5Cf.Bgj6A,
+.CgUOn.lKYcT .f5GTj .jOCse.NXXwZ .cpHhd.YLSRc.PmUAN.Fx5Cf.Bgj6A.mdnGg {
+  margin: 0;
+  padding: 0;
+  line-height: 18px;
+  align-self: flex-start;
+}
+
+.CgUOn.lKYcT .f5GTj .jOCse.NXXwZ .mdnGg {
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.CgUOn.lKYcT .mdnGg .tej97 {
+  margin: 0;
+  padding: 2px 6px;
+  line-height: 1.2;
+}
+
+/* Справа: стоимость и изменение — отступы по референсу: padding 10px сверху/снизу, margin 11px слева, 20px справа */
+.CgUOn.lKYcT .f5GTj .jOCse.TYgZR.Gihoq {
+  margin: 0 20px 0 11px;
+  padding: 10px 0;
+  align-items: flex-end;
+  gap: 4px;
+}

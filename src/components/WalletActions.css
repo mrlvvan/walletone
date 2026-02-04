@@ -1,0 +1,71 @@
+.wallet-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--tg-theme-accent-text-color);
+  background: var(--tg-theme-section-bg-color);
+  height: 85px;
+}
+
+.actions-section {
+  position: relative;
+  --skeleton-transition-duration: 500ms;
+}
+
+.action-item {
+  background: transparent;
+  border: none;
+  color: var(--tg-theme-accent-text-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  flex: 1;
+  padding: 0;
+  height: 65px;
+}
+
+.action-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 0;
+  background: var(--tg-theme-section-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--tg-theme-accent-text-color);
+}
+
+.action-label {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--tg-theme-accent-text-color);
+  margin-top: -2px;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.action-icon svg {
+  width: 36px;
+  height: 36px;
+  display: block;
+  fill: currentColor;
+}
+
+.action-icon svg path {
+  fill: currentColor;
+}

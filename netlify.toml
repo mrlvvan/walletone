@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+# SPA: все запросы отдавать index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

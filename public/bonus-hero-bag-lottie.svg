@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+  <defs>
+    <linearGradient id="bag-shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff5c4"/>
+      <stop offset="25%" stop-color="#ffe082"/>
+      <stop offset="50%" stop-color="#ffd54f"/>
+      <stop offset="75%" stop-color="#ffca28"/>
+      <stop offset="100%" stop-color="#ffc107"/>
+    </linearGradient>
+    <linearGradient id="bag-body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff8e1"/>
+      <stop offset="15%" stop-color="#ffecb3"/>
+      <stop offset="40%" stop-color="#ffe082"/>
+      <stop offset="70%" stop-color="#ffd54f"/>
+      <stop offset="100%" stop-color="#ffb300"/>
+    </linearGradient>
+    <linearGradient id="bag-shadow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffb300" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#e65100" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="ribbon-v" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff6f00"/>
+      <stop offset="50%" stop-color="#ff8f00"/>
+      <stop offset="100%" stop-color="#ff6f00"/>
+    </linearGradient>
+    <linearGradient id="ribbon-h" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff8f00"/>
+      <stop offset="50%" stop-color="#ffb300"/>
+      <stop offset="100%" stop-color="#ff8f00"/>
+    </linearGradient>
+  </defs>
+  <!-- Bag body (trapezoid: top opening, wider bottom) -->
+  <path fill="url(#bag-body)" d="M34 22 L66 22 L76 90 L24 90 Z"/>
+  <!-- Side shadow for depth -->
+  <path fill="url(#bag-shadow)" d="M24 90 L34 22 L34 90 Z" opacity="0.5"/>
+  <path fill="url(#bag-shadow)" d="M76 90 L66 22 L66 90 Z" opacity="0.3"/>
+  <!-- Top fold / opening highlight -->
+  <path fill="url(#bag-shine)" d="M34 22 L66 22 L62 30 L38 30 Z" opacity="0.9"/>
+  <!-- Vertical ribbon (center) -->
+  <path fill="url(#ribbon-v)" d="M48 18 h4 v72 h-4 z"/>
+  <!-- Ribbon bow left -->
+  <ellipse fill="url(#ribbon-h)" cx="36" cy="20" rx="11" ry="6"/>
+  <!-- Ribbon bow right -->
+  <ellipse fill="url(#ribbon-h)" cx="64" cy="20" rx="11" ry="6"/>
+  <!-- Ribbon knot -->
+  <circle fill="#ff6f00" cx="50" cy="20" r="4"/>
+  <!-- Opening line -->
+  <path fill="none" stroke="#ffb300" stroke-width="1.2" stroke-opacity="0.6" d="M38 30 h24" stroke-linecap="round"/>
+</svg>
