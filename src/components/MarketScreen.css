@@ -1289,8 +1289,8 @@
 }
 
 .mFYy9.IPADx {
-  /* Фон трека слайдера: темнее активной таблетки в тёмной теме, светлее в светлой */
-  background-color: var(--tg-theme-secondary-bg-color, #1c1c1e);
+  /* Тёмная тема: трек серо-тёмный (#3a3a3a), не чёрный */
+  background-color: #3a3a3a !important;
 }
 
 .IPADx {
@@ -1303,8 +1303,8 @@
   bottom: 2px;
   left: 2px;
   border-radius: 999px;
-  /* Активная таблетка: в тёмной теме — светлее трека (section-bg), в светлой — основной фон */
-  background-color: var(--tg-theme-section-bg-color, #2b3142);
+  /* Тёмная тема: активная таблетка серо-светлая (#5e5e5e) */
+  background-color: #5e5e5e !important;
   transition: transform 0.2s ease;
 }
 
@@ -1370,28 +1370,21 @@
   color: var(--tg-theme-text-color);
 }
 
+/* По умолчанию (тёмная тема / телефон): текст слайдера белый */
+.p_KOn .SNkiP {
+  color: #ffffff;
+}
+
 .SNkiP {
   font-size: 12px;
 }
 
-/* Тёмная тема: трек почти чёрный, активная таблетка — серосветлая, текст белый */
-[data-tg-theme="dark"] .mFYy9.IPADx {
-  background-color: #0f0f0f;
-}
-[data-tg-theme="dark"] .TsSEl {
-  background-color: #3a3a3c;
-}
-[data-tg-theme="dark"] .p_KOn.r3qNc .SNkiP,
-[data-tg-theme="dark"] .p_KOn:not(.r3qNc) .SNkiP {
-  color: #ffffff;
-}
-
 /* Светлая тема: трек и активная таблетка, активный текст чёрный */
 [data-tg-theme="light"] .mFYy9.IPADx {
-  background-color: #e5e5ea;
+  background-color: #e5e5ea !important;
 }
 [data-tg-theme="light"] .TsSEl {
-  background-color: #ffffff;
+  background-color: #ffffff !important;
 }
 [data-tg-theme="light"] .p_KOn.r3qNc .SNkiP {
   color: #000000;
