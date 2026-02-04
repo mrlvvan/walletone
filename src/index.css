@@ -32,6 +32,7 @@
 }
 
 :root {
+  /* Значения по умолчанию (если не в Telegram) */
   --tg-color-scheme: dark;
   --tg-theme-bg-color: #212121;
   --tg-theme-text-color: #ffffff;
@@ -46,6 +47,8 @@
   --tg-theme-section-header-text-color: #aaaaaa;
   --tg-theme-subtitle-text-color: #aaaaaa;
   --tg-theme-destructive-text-color: #e53935;
+  /* Акцентный цвет пользователя в Telegram (если есть themeParams.accent_color) */
+  --tg-theme-accent-color: #8774e1;
   --tg-viewport-height: 854px;
   --tg-viewport-stable-height: 854px;
   --tg-safe-area-inset-top: 0px;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import AssetScreen from './components/AssetScreen';
 import BonusScreen from './components/BonusScreen';
@@ -6,6 +6,7 @@ import HomeScreen from './components/HomeScreen';
 import HistoryScreen from './components/HistoryScreen';
 import MarketScreen from './components/MarketScreen';
 import TabBar from './components/TabBar';
+import { initTelegramThemeSync } from './telegramTheme';
 
 function App() {
   const assets = [
@@ -51,6 +52,11 @@ function App() {
 
   const [screen, setScreen] = useState('home');
   const [selectedAsset, setSelectedAsset] = useState(assets[0]);
+
+  useEffect(() => {
+    const cleanup = initTelegramThemeSync();
+    return cleanup;
+  }, []);
 
   const walletStats = {
     balanceInt: '1',
