@@ -1646,3 +1646,32 @@
   align-items: flex-end;
   gap: 4px;
 }
+
+/* ========== Светлая тема: текст в секциях поиска и «Все активы» — чёрный ========== */
+[data-tg-theme="light"] .CgUOn.lKYcT .cpHhd.IqPae.CF5m5.Ka5fP.kzP3J,
+[data-tg-theme="light"] .CgUOn.lKYcT .cpHhd.IqPae.PmUAN.Ka5fP.kzP3J.VyspS {
+  color: #000000;
+}
+
+[data-tg-theme="light"] .CgUOn.lKYcT .cpHhd.YLSRc.PmUAN.Fx5Cf.Bgj6A {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+[data-tg-theme="light"] .CgUOn.lKYcT .Rfm73 .section-title-subtitle,
+[data-tg-theme="light"] .CgUOn.lKYcT .cpHhd.KbDJo.eqZCR {
+  color: #000000;
+}
+
+[data-tg-theme="light"] .tej97 {
+  background-color: rgba(0, 0, 0, 0.06);
+  color: #000000;
+}
+
+[data-tg-theme="light"] .wtAUk .yaBp6 .cpHhd {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+[data-tg-theme="light"] .wtAUk .ecfXP .cpHhd,
+[data-tg-theme="light"] .wtAUk .BDWMw:has(.ecfXP) .cpHhd {
+  color: #000000;
+}

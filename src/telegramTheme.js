@@ -34,6 +34,7 @@ export function applyTelegramTheme(themeParams, colorScheme) {
 
   if (colorScheme) {
     root.style.setProperty('--tg-color-scheme', colorScheme);
+    root.setAttribute('data-tg-theme', colorScheme);
   }
 }
 
