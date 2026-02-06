@@ -45,10 +45,78 @@ function App() {
   ];
 
   const activity = [
-    { id: 1, title: 'Received BTC', time: 'Today, 12:14', value: '+0.012 BTC', tone: 'success' },
-    { id: 2, title: 'Swap USDT → TON', time: 'Yesterday, 19:40', value: '-100 USDT', tone: 'pending' },
-    { id: 3, title: 'Sent BTC', time: 'Jan 30, 09:12', value: '-0.004 BTC', tone: 'danger' },
+    { id: 1, title: 'Обмен: BTC на USDT', time: '12 нояб. 2025 г. в 16:16', value: '0,0002039 BTC', tone: 'danger' },
+    { id: 2, title: 'Покупка: P2P', time: '12 нояб. 2025 г. в 15:49', value: '+0,0002039 BTC', tone: 'success' },
+    { id: 3, title: 'Обмен: BTC на USDT', time: '23 мая 2024 г. в 19:01', value: '0,0000359 BTC', tone: 'danger' },
   ];
+
+  // Данные развертки для каждой монеты (по id)
+  const assetDetails = {
+    major: {
+      price: '0,20 ₽',
+      delta: '-0,01 ₽',
+      percent: '-0,04%',
+      period: '24 ч',
+      description: 'Major (MAJOR) — токен платформы с возможностью расчётов и переводов.',
+      features: [
+        'Получайте и отправляйте MAJOR кому угодно (с комиссией).',
+        'Подходит для расчётов в экосистеме.',
+      ],
+      overview: {
+        capitalization: { value: '₽1,38', change: '-0,04%', isPositive: false },
+        volume: { value: '₽0,05', change: '+2,1%', isPositive: true },
+        inCirculation: { value: '6.91 MAJOR' },
+      },
+    },
+    btc: {
+      price: '5 014 761,57 ₽',
+      delta: '-384 902,36 ₽',
+      percent: '-7,13%',
+      period: 'Сегодня',
+      description: 'Bitcoin (BTC) — это первая криптовалюта, созданная в 2009.',
+      features: [
+        'Получайте и отправляйте кому угодно (с комиссией).',
+        'Подходит для любых расчётов в Bitcoin.',
+      ],
+      overview: {
+        capitalization: { value: '₽100.22T', change: '-7,13%', isPositive: false },
+        volume: { value: '₽11.1T', change: '+80,74%', isPositive: true },
+        inCirculation: { value: '19.99M BTC' },
+      },
+    },
+    ton: {
+      price: '684,50 ₽',
+      delta: '+12,30 ₽',
+      percent: '+1,83%',
+      period: 'Сегодня',
+      description: 'Toncoin (TON) — нативный токен сети TON, созданный для быстрых и дешёвых переводов.',
+      features: [
+        'Мгновенные переводы с минимальной комиссией.',
+        'Интеграция с Telegram и приложениями TON.',
+      ],
+      overview: {
+        capitalization: { value: '₽18.5T', change: '+1,83%', isPositive: true },
+        volume: { value: '₽2.1T', change: '+15,2%', isPositive: true },
+        inCirculation: { value: '5.1B TON' },
+      },
+    },
+    usdt: {
+      price: '75,98 ₽',
+      delta: '+0,12 ₽',
+      percent: '+0,16%',
+      period: 'Сегодня',
+      description: 'Tether (USDT) — стейблкоин, привязанный к курсу доллара США.',
+      features: [
+        'Стабильная стоимость 1 USDT ≈ 1 USD.',
+        'Удобен для хранения и переводов в долларовом эквиваленте.',
+      ],
+      overview: {
+        capitalization: { value: '₽22.8T', change: '+0,16%', isPositive: true },
+        volume: { value: '₽45.2T', change: '-3,2%', isPositive: false },
+        inCirculation: { value: '120B USDT' },
+      },
+    },
+  };
 
   const [screen, setScreen] = useState('home');
   const [selectedAsset, setSelectedAsset] = useState(assets[0]);
@@ -2081,7 +2149,7 @@ function App() {
             onOpenTrade={() => setScreen('trade')}
           />
         )}
-        {screen === 'asset' && <AssetScreen selectedAsset={selectedAsset} activity={activity} />}
+        {screen === 'asset' && <AssetScreen selectedAsset={selectedAsset} activity={activity} assetDetails={assetDetails} />}
         {screen === 'trade' && (
           <MarketScreen
             promoSlides={promoSlides}
@@ -2092,6 +2160,7 @@ function App() {
             assets={marketAssets}
             searchAssets={allMarketAssetsForSearch}
             tonAssets={tonAssets}
+            onOpenAsset={openAsset}
           />
         )}
         {screen === 'bonus' && (

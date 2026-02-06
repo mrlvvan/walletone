@@ -1,3 +1,4 @@
+/* Локальные переменные (дублируют index.css для совместимости). Основная палитра темы — в index.css и telegramTheme.js. */
 :root {
   --tg-theme-bg-color: #212121;
   --tg-theme-text-color: #ffffff;
@@ -127,8 +128,7 @@
   gap: 8px;
   padding: 4px;
   border-radius: 22px;
-  /* Трек: в тёмной теме тёмный, в светлой — светло-серый */
-  background: #2a2a2a;
+  background: var(--tg-theme-secondary-bg-color);
 }
 
 .tab-chip {
@@ -144,24 +144,18 @@
   line-height: 14px;
 }
 
-/* Активная таблетка: контрастная к треку (в тёмной теме — светлее трека) */
+/* Активная таблетка: контрастная к треку, цвет от темы */
 .tab-chip.active {
-  background: #3a3a3a;
-  color: var(--tg-theme-text-color, #ffffff);
-}
-
-/* Светлая тема: светлый трек и белая активная таблетка с чёрным текстом */
-[data-tg-theme="light"] .wallet-tabs {
-  background: #e5e5ea;
+  background: var(--segmented-control-active-background);
+  color: var(--tg-theme-text-color);
 }
 
 [data-tg-theme="light"] .tab-chip {
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--tg-theme-subtitle-text-color);
 }
 
 [data-tg-theme="light"] .tab-chip.active {
-  background: #ffffff;
-  color: #000000;
+  color: var(--tg-theme-text-color);
 }
 
 .wallet-balance {
@@ -434,7 +428,7 @@
 .section-gap {
   height: 12px;
   /* Разделитель между секциями: используется цвет вторичного фона из темы, чтобы в светлой теме не быть чёрным */
-  background: var(--tg-theme-secondary-bg-color, #f3f3f5);
+  background: var(--tg-theme-secondary-bg-color);
   width: 100%;
 }
 
@@ -676,10 +670,9 @@
   background: #7cb342;
 }
 
-/* Секция с бонусом (hero): в тёмной теме — из темы, в светлой — светлый по референсу */
 .bonus-hero,
 .bonus-hero.nluVg.qf2Gj {
-  background: var(--tg-theme-section-bg-color, #121212);
+  background: var(--tg-theme-section-bg-color);
   border-radius: 16px;
   text-align: center;
   display: flex;
@@ -800,7 +793,7 @@
 
 /* Общий фон экрана бонусов: в тёмной теме — из темы, в светлой — светлый по референсу */
 .bonus-screen-wrap {
-  background: var(--tg-theme-bg-color, #121212);
+  background: var(--tg-theme-bg-color);
   min-height: 100%;
   flex: 1;
 }
@@ -847,37 +840,31 @@
 /* Кнопки «Активные» / «Завершённые» — активное состояние: таблетка и жирный текст в любой теме */
 .bonus-tabs .pill-tab.active,
 .rquXm .pill-tab.active {
-  background: var(--tg-theme-section-bg-color, #2b3142);
-  color: var(--tg-theme-button-text-color, #f4f6fb);
+  background: var(--segmented-control-active-background);
+  color: var(--tg-theme-text-color);
   font-weight: 600;
   padding-inline: 12px;
 }
 
-/* Светлая тема: светлый фон секции, активная таблетка белая, текст чёрный */
 [data-tg-theme="light"] .bonus-screen-wrap {
-  background: #f3f3f5;
+  background: var(--tg-theme-secondary-bg-color);
 }
 [data-tg-theme="light"] .bonus-hero,
 [data-tg-theme="light"] .bonus-hero.nluVg.qf2Gj {
-  background: #f3f3f5;
+  background: var(--tg-theme-secondary-bg-color);
 }
 [data-tg-theme="light"] .bonus-tabs .pill-tab.active,
 [data-tg-theme="light"] .rquXm .pill-tab.active {
-  background: #ffffff;
-  color: #000000;
+  background: var(--segmented-control-active-background);
+  color: var(--tg-theme-text-color);
 }
 
-/* Экран бонусов: убрать серую полосу сверху — фон контента как у бонусов */
 .content.screen-bonus {
-  background: var(--tg-theme-bg-color, #121212);
-}
-[data-tg-theme="light"] .content.screen-bonus {
-  background: #f3f3f5;
+  background: var(--tg-theme-bg-color);
 }
 
-/* Светлая тема: карточки бонусов — белый фон на светлом экране */
 [data-tg-theme="light"] .bonus-card {
-  background: #ffffff;
+  background: var(--tg-theme-section-bg-color);
 }
 
 .bonus-grid {
@@ -886,9 +873,9 @@
   gap: 12px;
 }
 
-/* Карточки бонусов — свой фон, чтобы отличаться от фона экрана */
+/* Карточки бонусов — фон секции (реагирует на тему) */
 .bonus-card {
-  background: var(--tg-theme-section-bg-color, #2b3142);
+  background: var(--tg-theme-section-bg-color);
   border-radius: 16px;
   padding: 16px;
   border: none;
@@ -983,7 +970,7 @@
 /* ref 59171 AMsPe: border-radius 14px, padding-block 24px 16px, width 228px */
 .LGGuk .r2DGg.pK3y3.bdh8O {
   /* Карточки бонусов: фон зависит от секции темы Telegram */
-  background: var(--tg-theme-section-bg-color, #2b2b2b);
+  background: var(--tg-theme-section-bg-color);
   border-radius: 14px;
   padding: 24px 16px 16px;
   border: none;

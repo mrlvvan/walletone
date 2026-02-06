@@ -137,7 +137,7 @@ function HomeScreen({
         <span className="section-button-chevron">›</span>
       </button>
       <div className="section-gap" aria-hidden="true" />
-      <TrendingSection items={trendingItems} />
+      <TrendingSection items={trendingItems} onOpenAsset={onOpenAsset} />
     </>
   );
 }

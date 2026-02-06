@@ -1283,14 +1283,14 @@
   will-change: transform;
 }
 
+/* Отступы слайдера: 2px слева и справа (эталон), таблетка не прилипает к краям */
 .mFYy9 {
   width: 100%;
   padding-inline: 2px;
 }
 
 .mFYy9.IPADx {
-  /* Тёмная тема: трек серо-тёмный (#3a3a3a), не чёрный */
-  background-color: #3a3a3a !important;
+  background-color: var(--tg-theme-secondary-bg-color);
 }
 
 .IPADx {
@@ -1303,8 +1303,7 @@
   bottom: 2px;
   left: 2px;
   border-radius: 999px;
-  /* Тёмная тема: активная таблетка серо-светлая (#5e5e5e) */
-  background-color: #5e5e5e !important;
+  background-color: var(--segmented-control-active-background);
   transition: transform 0.2s ease;
 }
 
@@ -1370,27 +1369,25 @@
   color: var(--tg-theme-text-color);
 }
 
-/* По умолчанию (тёмная тема / телефон): текст слайдера белый */
-.p_KOn .SNkiP {
-  color: #ffffff;
+.p_KOn:not(.r3qNc) .SNkiP {
+  color: var(--tg-theme-hint-color);
 }
 
 .SNkiP {
   font-size: 12px;
 }
 
-/* Светлая тема: трек и активная таблетка, активный текст чёрный */
 [data-tg-theme="light"] .mFYy9.IPADx {
-  background-color: #e5e5ea !important;
+  background-color: var(--tg-theme-secondary-bg-color);
 }
 [data-tg-theme="light"] .TsSEl {
-  background-color: #ffffff !important;
+  background-color: var(--segmented-control-active-background);
 }
 [data-tg-theme="light"] .p_KOn.r3qNc .SNkiP {
-  color: #000000;
+  color: var(--tg-theme-text-color);
 }
 [data-tg-theme="light"] .p_KOn:not(.r3qNc) .SNkiP {
-  color: #8e8e93;
+  color: var(--tg-theme-hint-color);
 }
 
 /* Кнопки «Топ роста» / «Топ падения» — компактный текст, не слишком жирный */

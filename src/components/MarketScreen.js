@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import PromoSlider from './PromoSlider';
 import './MarketScreen.css';
 
-function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, topDayFall = [], assets, searchAssets, tonAssets }) {
+function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, topDayFall = [], assets, searchAssets, tonAssets, onOpenAsset }) {
   const searchInputRef = useRef(null);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [searchFilterTab, setSearchFilterTab] = useState('all'); // 'all' | 'crypto' | 'stocks' | 'funds'
@@ -142,7 +142,7 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
 
                             return (
                               <div className="tSWgK" key={item.id}>
-                                <div className="r2DGg tizzh">
+                                <div className="r2DGg tizzh" role="button" onClick={() => onOpenAsset && onOpenAsset(item)}>
                                   <div className="P13QV dAgC8">
                                     <div className="t1CPG Bcb3I">
                                       <div className="RkvKd">
@@ -227,7 +227,7 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
             <div
               className="TsSEl TRjCi uuakV"
               style={{
-                transform: usMarketTab === 'stocks' ? 'translateX(0)' : 'translateX(194px)',
+                transform: usMarketTab === 'stocks' ? 'translateX(0)' : 'translateX(192px)',
                 width: '190px',
               }}
             />
@@ -266,7 +266,7 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
                   const changeValue = item.change.replace(/^[-+]/, '');
 
                   return (
-                    <div className="r2DGg Z3c2A Syue2" key={item.id}>
+                    <div className="r2DGg Z3c2A Syue2" key={item.id} role="button" onClick={() => onOpenAsset && onOpenAsset(item)}>
                       <div className="P13QV DV0WS _0g3V">
                         <div className="ticker-svg">{item.icon}</div>
                         <div className="mUVUv">
@@ -561,7 +561,7 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
                 <div
                   className="TsSEl TRjCi uuakV"
                   style={{
-                    transform: topDayTab === 'gain' ? 'translateX(0)' : 'translateX(194px)',
+                    transform: topDayTab === 'gain' ? 'translateX(0)' : 'translateX(192px)',
                     width: '190px',
                   }}
                 />
@@ -605,7 +605,7 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
                         const changeValue = item.change.replace(/^[-+]/, '');
 
                         return (
-                          <div className="r2DGg Z3c2A Syue2" key={item.id}>
+                          <div className="r2DGg Z3c2A Syue2" key={item.id} role="button" onClick={() => onOpenAsset && onOpenAsset(item)}>
                             <div className="P13QV DV0WS _0g3V">
                               <div className="ticker-svg">{item.icon}</div>
                               <div className="mUVUv">
@@ -686,7 +686,7 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
 
                 return (
                   <div className="tSWgK" key={item.id}>
-                    <div className="r2DGg tizzh">
+                    <div className="r2DGg tizzh" role="button" onClick={() => onOpenAsset && onOpenAsset(item)}>
                       <div className="P13QV dAgC8">
                         <div className="t1CPG Bcb3I">
                           <div className="RkvKd">
@@ -791,7 +791,7 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
                             .replace(/^↑\s?/, '');
 
                           return (
-                            <div className="r2DGg Z3c2A Syue2" key={item.id}>
+                            <div className="r2DGg Z3c2A Syue2" key={item.id} role="button" onClick={() => onOpenAsset && onOpenAsset(item)}>
                               <div className="P13QV DV0WS _0g3V">
                                 <div style={{ willChange: 'auto', opacity: 1 }}>{item.icon}</div>
                                 <div className="mUVUv">
