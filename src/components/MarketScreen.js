@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import PromoSlider from './PromoSlider';
 import './MarketScreen.css';
 
@@ -17,6 +17,35 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
     setIsSearchFocused(true);
     setTimeout(() => searchInputRef.current?.focus(), 50);
   };
+
+  const closeSearch = () => {
+    setIsSearchFocused(false);
+    if (searchInputRef.current) {
+      searchInputRef.current.value = '';
+    }
+  };
+
+  // Управление кнопкой "Назад" в Telegram WebApp при открытии/закрытии поиска
+  useEffect(() => {
+    const tg = window.Telegram?.WebApp;
+    if (!tg) return;
+
+    const backButton = tg.backButton;
+    if (!backButton) return;
+
+    if (isSearchFocused) {
+      backButton.show();
+      backButton.onClick(closeSearch);
+    } else {
+      backButton.hide();
+      backButton.offClick(closeSearch);
+    }
+
+    return () => {
+      backButton.offClick(closeSearch);
+      backButton.hide();
+    };
+  }, [isSearchFocused]);
   const tickerRows = [];
   const fundRows = [];
 
@@ -71,12 +100,7 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
                       className="BSzXJ"
                       aria-label="Закрыть поиск"
                       tabIndex={-1}
-                      onClick={() => {
-                        if (searchInputRef.current) {
-                          searchInputRef.current.value = '';
-                        }
-                        setIsSearchFocused(false);
-                      }}
+                      onClick={closeSearch}
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 28 28" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
                         <path stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" d="m6 6 16 16" />

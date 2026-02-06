@@ -17,7 +17,8 @@
 }
 
 .action-item {
-  background: transparent;
+  /* Подсветка должна быть под всей кнопкой (и под SVG, и под текстом) */
+  background: var(--second-button-color);
   border: none;
   color: var(--tg-theme-accent-text-color);
   display: flex;
@@ -32,13 +33,15 @@
   flex: 1;
   padding: 0;
   height: 65px;
+  border-radius: 20px;
 }
 
 .action-icon {
   width: 56px;
   height: 56px;
   border-radius: 0;
-  background: var(--tg-theme-section-bg-color);
+  /* Фон убираем — подсветка идёт от .action-item, под иконкой и текстом сразу */
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -116,19 +116,23 @@
 
 /* Светлая тема: fallback-значения, если Telegram не передал themeParams (тему задаёт data-tg-theme из telegramTheme.js) */
 [data-tg-theme="light"] {
-  --tg-theme-bg-color: #f4f4f5;
+  /* Общий фон приложения — белый */
+  --tg-theme-bg-color: #ffffff;
   --tg-theme-text-color: #000000;
   --tg-theme-hint-color: #8e8e93;
-  --tg-theme-secondary-bg-color: #e5e5ea;
-  --tg-theme-section-bg-color: #ffffff;
+  /* Сероватые фоны для секций и карточек */
+  --tg-theme-secondary-bg-color: #f3f3f5;
+  --tg-theme-section-bg-color: #f3f3f5;
   --tg-theme-section-header-text-color: #8e8e93;
-  --tg-theme-section-separator-color: rgba(0, 0, 0, 0.08);
+  --tg-theme-section-separator-color: rgba(0, 0, 0, 0.06);
   --tg-theme-subtitle-text-color: #8e8e93;
-  --tg-theme-bottom-bar-bg-color: #f4f4f5;
-  --tertiary-fill-background: rgba(120, 120, 128, 0.16);
+  /* Нижняя панель тоже на белом фоне */
+  --tg-theme-bottom-bar-bg-color: #ffffff;
+  /* Дополнительные серые фоны/подсветки */
+  --tertiary-fill-background: rgba(120, 120, 128, 0.12);
   --segmented-control-active-background: #ffffff;
-  --highlight-default: rgba(0, 0, 0, 0.05);
-  --quick-menu-background: #e5e5ea;
+  --highlight-default: rgba(0, 0, 0, 0.04);
+  --quick-menu-background: #f3f3f5;
   --quick-menu-foreground: #000000;
   --tooltip-background: #3a3a3c;
 }
