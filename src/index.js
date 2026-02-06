@@ -1,12 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { applyPlatform } from './telegramTheme';
 import './index.css';
-import './ios-overrides.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-applyPlatform();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

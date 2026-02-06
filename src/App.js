@@ -42,6 +42,9 @@ function App() {
       ),
       styleClass: 'major',
     },
+    { id: 'btc', name: 'Bitcoin', code: 'BTC · 4 979 195 ₽', amount: '0,0002039 BTC', value: '1 014,38 ₽', delta: '-80,92 ₽', price: '4 979 195 ₽', change: '-7,38%', icon: <span className="asset-icon bitcoin">₿</span>, styleClass: 'bitcoin' },
+    { id: 'ton', name: 'Toncoin', code: 'TON · 684,50 ₽', amount: '0,018 TON', value: '12,32 ₽', delta: '+0,22 ₽', price: '684,50 ₽', change: '+1,83%', icon: <span className="asset-icon ton">T</span>, styleClass: 'ton' },
+    { id: 'usdt', name: 'Tether', code: 'USDT · 75,98 ₽', amount: '0,00 USDT', value: '0,00 ₽', delta: '+0,00 ₽', price: '75,98 ₽', change: '+0,16%', icon: <span className="asset-icon usdt">₮</span>, styleClass: 'usdt' },
   ];
 
   const activity = [
@@ -120,10 +123,35 @@ function App() {
 
   const [screen, setScreen] = useState('home');
   const [selectedAsset, setSelectedAsset] = useState(assets[0]);
+  const [walletSparklines, setWalletSparklines] = useState({});
+
+  const COINGECKO_IDS = { btc: 'bitcoin', bitcoin: 'bitcoin', ton: 'the-open-network', usdt: 'tether', tether: 'tether', major: null };
 
   useEffect(() => {
     const cleanup = initTelegramThemeSync();
     return cleanup;
+  }, []);
+
+  useEffect(() => {
+    const fetchSparklines = async () => {
+      const next = {};
+      for (const asset of assets) {
+        const id = asset.id?.toLowerCase() || '';
+        const cgId = COINGECKO_IDS[id];
+        if (!cgId) continue;
+        try {
+          const res = await fetch(`https://api.coingecko.com/api/v3/coins/${cgId}/market_chart?vs_currency=rub&days=7`);
+          if (!res.ok) continue;
+          const data = await res.json();
+          const prices = (data.prices || []).map((p) => p[1]);
+          if (prices.length) next[asset.id] = prices;
+        } catch (_) {}
+      }
+      setWalletSparklines((prev) => ({ ...prev, ...next }));
+    };
+    fetchSparklines();
+    const t = setInterval(fetchSparklines, 60000);
+    return () => clearInterval(t);
   }, []);
 
   const walletStats = {
@@ -2140,6 +2168,7 @@ function App() {
         {screen === 'home' && (
           <HomeScreen
             assets={assets}
+            walletSparklines={walletSparklines}
             walletStats={walletStats}
             cashAsset={cashAsset}
             cryptoTotal={cryptoTotal}

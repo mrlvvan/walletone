@@ -123,7 +123,8 @@
   min-height: 200px;
   padding-top: 0;
   padding-bottom: 0;
-  background: var(--tg-theme-section-bg-color);
+  /* Общий фон баланса — белый (как основной фон приложения), не серый */
+  background: var(--tg-theme-bg-color);
   margin: 0;
 }
 
@@ -1789,6 +1790,23 @@
 
 .asset-right {
   text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.asset-sparkline {
+  width: 56px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-bottom: 2px;
+}
+
+.asset-sparkline svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .asset-amount {
