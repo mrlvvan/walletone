@@ -799,7 +799,7 @@
 
 /* Общий фон экрана бонусов: в тёмной теме — из темы, в светлой — светлый по референсу */
 .bonus-screen-wrap {
-  background: var(--tg-theme-bg-color);
+  background: var(--tg-theme-secondary-bg-color);
   min-height: 100%;
   flex: 1;
 }
@@ -866,11 +866,11 @@
 }
 
 .content.screen-bonus {
-  background: var(--tg-theme-bg-color);
+  background: var(--tg-theme-secondary-bg-color);
 }
 
 [data-tg-theme="light"] .bonus-card {
-  background: var(--tg-theme-section-bg-color);
+  background: var(--tg-theme-bg-color);
 }
 
 .bonus-grid {
@@ -881,7 +881,7 @@
 
 /* Карточки бонусов — фон секции (реагирует на тему) */
 .bonus-card {
-  background: var(--tg-theme-section-bg-color);
+  background: var(--tg-theme-bg-color);
   border-radius: 16px;
   padding: 16px;
   border: none;
