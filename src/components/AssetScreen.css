@@ -1,37 +1,45 @@
+/* Стили заголовка актива по разметке ref (78486: tTQWa, l0Izn, iRQp9, ryZ28, VMysj, jskoB, AyH8M, q1b9y) */
+
 .asset-screen {
   padding-bottom: 64px;
 }
 
-/* Заголовок секции */
+/* Заголовок секции — по разметке ref (tTQWa, l0Izn, iRQp9, ryZ28, VMysj, jskoB, AyH8M, q1b9y) */
 .asset-header-section {
   padding: 16px 24px;
-  gap: 8px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  position: relative;
+  margin-block: 20px 13px;
 }
 
 .asset-header-content {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .asset-logo-container {
-  width: 72px;
-  height: 72px;
-  flex-shrink: 0;
+  --logo-icon-spacing: 3px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 6px;
   position: relative;
-  display: block;
+  flex-shrink: 0;
 }
 
 .asset-icon-large {
-  width: 72px;
-  height: 72px;
+  position: absolute;
+  width: calc(100% + var(--logo-icon-spacing) * 2);
+  height: calc(100% + var(--logo-icon-spacing) * 2);
+  top: calc(var(--logo-icon-spacing) * -1);
+  right: calc(var(--logo-icon-spacing) * -1);
   display: flex;
   align-items: center;
   justify-content: center;
-  --logo-icon-spacing: 3px;
 }
 
 .asset-icon-large svg,
@@ -44,6 +52,7 @@
 
 .asset-title-group {
   flex: 1;
+  min-width: 0;
 }
 
 .asset-name-title {
@@ -52,12 +61,13 @@
   gap: 4px;
 }
 
+/* body medium text / subtitleText */
 .asset-name-text {
   font-family: Roboto, system-ui, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
-  color: var(--tg-theme-text-color, #ffffff);
+  color: var(--tg-theme-text-color, #1c1c1e);
 }
 
 .asset-code-text {
@@ -65,49 +75,55 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
-  color: var(--tg-theme-subtitle-text-color, rgba(255, 255, 255, 0.6));
+  color: var(--tg-theme-subtitle-text-color, rgba(60, 60, 67, 0.6));
 }
 
-/* Цена */
+/* Цена — title1, по ref */
 .asset-price-container {
-  margin-bottom: 8px;
+  margin-block-end: 10px;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .asset-price-value {
   font-family: Roboto, system-ui, sans-serif;
-  font-size: 32px;
-  font-weight: 500;
-  line-height: 40px;
-  color: var(--tg-theme-text-color, #ffffff);
-  letter-spacing: -0.5px;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 41px;
+  color: var(--tg-theme-text-color, #1c1c1e);
   font-variant-numeric: lining-nums tabular-nums;
 }
 
-/* Изменение цены */
+/* Изменение цены — subheadline2 confirm / subtitleText */
 .asset-delta-container {
-  margin-bottom: 24px;
+  margin-top: 3px;
+  min-height: 22px;
+  margin-bottom: 0;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .asset-delta-group {
   display: flex;
   align-items: center;
   gap: 8px;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
 .asset-delta-value {
   font-family: Roboto, system-ui, sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   line-height: 18px;
 }
 
 .asset-delta-value.negative {
-  color: var(--tg-theme-destructive-text-color, #ff4444);
+  color: var(--tg-theme-destructive-text-color, #ff3b30);
 }
 
 .asset-delta-value.positive {
-  color: var(--tg-theme-button-color, #4caf50);
+  color: var(--tg-theme-button-color, #34c759);
 }
 
 .asset-delta-percent {
@@ -115,17 +131,17 @@
   align-items: center;
   gap: 4px;
   font-family: Roboto, system-ui, sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   line-height: 18px;
 }
 
 .asset-delta-percent.negative {
-  color: var(--tg-theme-destructive-text-color, #ff4444);
+  color: var(--tg-theme-destructive-text-color, #ff3b30);
 }
 
 .asset-delta-percent.positive {
-  color: var(--tg-theme-button-color, #4caf50);
+  color: var(--tg-theme-button-color, #34c759);
 }
 
 .asset-delta-percent svg {
@@ -136,10 +152,10 @@
 
 .asset-delta-period {
   font-family: Roboto, system-ui, sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   line-height: 18px;
-  color: var(--tg-theme-subtitle-text-color, rgba(255, 255, 255, 0.6));
+  color: var(--tg-theme-subtitle-text-color, rgba(60, 60, 67, 0.6));
 }
 
 /* График */

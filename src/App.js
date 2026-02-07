@@ -7,6 +7,20 @@ import HistoryScreen from './components/HistoryScreen';
 import MarketScreen from './components/MarketScreen';
 import TabBar from './components/TabBar';
 import { initTelegramThemeSync } from './telegramTheme';
+import {
+  IconBitcoin,
+  IconTon,
+  IconUsdt,
+  IconDollar,
+  SearchAssetIcon,
+  IconBtc,
+  IconEth,
+  IconXrp,
+  IconSol,
+  IconTrx,
+  IconDoge,
+  IconBch,
+} from './components/Icons';
 
 function App() {
   const assets = [
@@ -51,14 +65,7 @@ function App() {
       delta: '-80,92 ₽',
       price: '4 979 195 ₽',
       change: '-7,38%',
-      icon: (
-        <span className="asset-icon bitcoin" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <circle cx="18" cy="18" r="18" fill="#f7931a" />
-            <path fill="#fff" fillRule="evenodd" d="M23.19 14.27c.36-2.26-1.15-3.54-3.73-4.1l.76-3.06-1.51-.38-.78 2.94c-.4-.1-.8-.2-1.22-.29l.78-3.01-1.51-.38-.76 3.04c-.33-.07-.66-.15-.99-.24l-2.18-.55.42-1.67s1.17.3 1.15.3c.65.14.85.54.79.93l-.87 3.49c.05.02.12.03.17.05l-.02.12 3.27.83.45-1.8-2.25-.57c.17.12.33.26.48.41.23.24.45.51.63.82.36.61.5 1.36.36 2.13-.2 1.06-.89 1.77-1.92 2.14 1.14.22 2.01.85 2.33 1.75.4 1.17.18 2.43-.64 3.32-.6.64-1.48 1.04-2.48 1.18-.32.05-.63.07-.95.07-1.87 0-3.28-.88-3.87-2.48l-1.52.39.39-1.55 1.48-.38c.31-1.24.62-2.47.92-3.7l-1.49-.38-.4 1.58-1.51-.38.4-1.6c-.27-.07-.54-.14-.82-.23l.41-1.63 1.5.38c.27-1.11.53-2.22.8-3.32l-1.56-.4-.43 1.7z" clipRule="evenodd" />
-          </svg>
-        </span>
-      ),
+      icon: <IconBitcoin size={36} className="asset-icon bitcoin" />,
       styleClass: 'bitcoin',
     },
     {
@@ -70,14 +77,7 @@ function App() {
       delta: '+0,22 ₽',
       price: '684,50 ₽',
       change: '+1,83%',
-      icon: (
-        <span className="asset-icon ton" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <circle cx="18" cy="18" r="18" fill="#0088CC" />
-            <path fill="#fff" fillRule="evenodd" d="M25.58 12.23L18 21.77l-3.5-5.42 1.95-3.02h3.1l.85 1.32 2.08-1.32h2.92l-5.9 9.54 4.05 6.23h-2.94l-2.6-4.02-2.6 4.02h-2.94l4.05-6.23-5.9-9.54h2.92l2.08 1.32.85-1.32h3.1l1.95 3.02z" clipRule="evenodd" />
-          </svg>
-        </span>
-      ),
+      icon: <IconTon size={36} className="asset-icon ton" />,
       styleClass: 'ton',
     },
     {
@@ -89,14 +89,7 @@ function App() {
       delta: '+0,00 ₽',
       price: '75,98 ₽',
       change: '+0,16%',
-      icon: (
-        <span className="asset-icon usdt" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <circle cx="18" cy="18" r="18" fill="#26a17a" />
-            <path fill="#fff" fillRule="evenodd" d="M18 8v3.2h6.6v2.4H18v12h-3.6v-12H7.8v-2.4h6.6V8H18z" clipRule="evenodd" />
-          </svg>
-        </span>
-      ),
+      icon: <IconUsdt size={36} className="asset-icon usdt" />,
       styleClass: 'usdt',
     },
   ];
@@ -195,23 +188,7 @@ function App() {
     title: 'Доллары',
     subtitle: 'USDT · 75,98 ₽',
     value: '0,00 ₽',
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="42"
-        height="42"
-        fill="none"
-        viewBox="0 0 40 40"
-        preserveAspectRatio="xMidYMid meet"
-        aria-hidden="true"
-      >
-        <rect width="40" height="40" fill="#28C281" rx="20" />
-        <path
-          fill="#fff"
-          d="M20.014 32.05c-.739 0-1.217-.464-1.217-1.243v-1.381c-2.899-.342-4.908-1.832-5.496-3.733a2.2 2.2 0 0 1-.137-.752c0-.86.588-1.435 1.531-1.435.793 0 1.245.465 1.532 1.107.546 1.395 1.832 2.16 3.91 2.16 2.2 0 3.61-.875 3.61-2.501 0-1.381-1.259-2.092-3.35-2.584l-1.86-.438c-3.117-.71-5.181-2.488-5.181-5.072 0-3.09 2.378-4.95 5.44-5.332V9.45c0-.78.48-1.244 1.218-1.244s1.217.465 1.217 1.244v1.395c2.68.328 4.62 1.777 5.222 3.787.069.26.123.506.123.765 0 .793-.601 1.272-1.476 1.272-.793 0-1.217-.383-1.559-1.04-.615-1.435-1.682-2.132-3.514-2.132-2.091 0-3.35.93-3.35 2.393 0 1.257 1.231 2.037 3.05 2.447l1.777.41c3.514.807 5.51 2.516 5.51 5.195 0 3.364-2.68 5.168-5.783 5.51v1.354c0 .779-.479 1.244-1.217 1.244"
-        />
-      </svg>
-    ),
+    icon: <IconDollar size={42} />,
     styleClass: 'dollar',
   };
 
@@ -1710,207 +1687,43 @@ function App() {
   ];
 
   const marketAssets = [
-    {
-      id: 'btc',
-      name: 'Bitcoin',
-      code: 'BTC',
-      price: '6 027 825,43 ₽',
-      change: '↑ 0,80%',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="none" viewBox="0 0 40 40" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <path fill="#F7931A" d="M39.397 24.838c-2.671 10.715-13.523 17.235-24.239 14.563C4.448 36.731-2.073 25.877.6 15.164 3.269 4.448 14.121-2.073 24.833.598c10.715 2.672 17.235 13.525 14.564 24.24"></path>
-          <path fill="#fff" d="M28.817 17.155c.398-2.661-1.628-4.092-4.4-5.046l.9-3.606-2.195-.546-.875 3.51c-.577-.144-1.17-.28-1.759-.414l.882-3.533-2.193-.547-.9 3.604a73 73 0 0 1-1.401-.33l.002-.01-3.026-.757-.584 2.344s1.628.374 1.594.397c.889.221 1.05.81 1.023 1.276l-1.024 4.107c.061.016.14.038.228.074l-.232-.058-1.435 5.754c-.109.27-.385.675-1.006.521.022.032-1.595-.398-1.595-.398l-1.09 2.512 2.857.712c.53.134 1.051.273 1.564.404l-.908 3.647 2.192.547.9-3.608q.896.242 1.749.454l-.897 3.59 2.195.547.908-3.64c3.742.709 6.556.423 7.74-2.962.955-2.725-.047-4.297-2.016-5.322 1.434-.33 2.515-1.274 2.803-3.222zm-5.015 7.032c-.678 2.725-5.266 1.252-6.754.882l1.205-4.83c1.488.37 6.258 1.106 5.55 3.948m.68-7.071c-.62 2.479-4.439 1.22-5.677.91l1.092-4.381c1.239.309 5.229.885 4.584 3.47"></path>
-        </svg>
-      ),
-      styleClass: 'bitcoin',
-    },
-    {
-      id: 'eth',
-      name: 'Ethereum',
-      code: 'ETH',
-      price: '176 661,52 ₽',
-      change: '↓ 0,40%',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="none" viewBox="0 0 96 96" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <g clipPath="url(#ETH_a)">
-            <path fill="#627EEA" fillRule="evenodd" d="M48 96c26.51 0 48-21.49 48-48S74.51 0 48 0 0 21.49 0 48s21.49 48 48 48" clipRule="evenodd"></path>
-            <path fill="#fff" d="M27.692 48.462 48 14.769l20.308 33.693-20.308 12z"></path>
-            <path fill="#fff" d="M68.308 52.615 48 80.77 27.692 52.615l20.308 12z"></path>
-            <path fill="#C1CCF7" d="m48 14.77 20.308 33.692L48 39.38z"></path>
-            <path fill="#8198EE" d="M48 39.38v21.082l20.308-12z"></path>
-            <path fill="#C1CCF7" d="m48 60.462-20.308-12L48 39.38z"></path>
-            <path fill="#fff" d="m27.692 52.615 20.308 12V80.77z"></path>
-            <path fill="#C1CCF7" d="M68.308 52.615 48 80.77V64.615z"></path>
-            <path fill="#fff" fillOpacity="0.03" fillRule="evenodd" d="M48 96c26.51 0 48-21.49 48-48S74.51 0 48 0 0 21.49 0 48s21.49 48 48 48m0-2c25.405 0 46-20.595 46-46S73.405 2 48 2 2 22.595 2 48s20.595 46 46 46" clipRule="evenodd" style={{ mixBlendMode: 'difference' }}></path>
-          </g>
-          <defs>
-            <clipPath id="ETH_a">
-              <path fill="#fff" d="M0 0h96v96H0z"></path>
-            </clipPath>
-          </defs>
-        </svg>
-      ),
-      styleClass: 'eth',
-    },
-    {
-      id: 'usdt',
-      name: 'Доллары',
-      code: 'USDT',
-      badge: '9% годовых',
-      price: '76,93 ₽',
-      change: '↓ 0,04%',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="none" viewBox="0 0 40 40" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <rect width="40" height="40" fill="#28C281" rx="20"></rect>
-          <path fill="#fff" d="M20.014 32.05c-.739 0-1.217-.464-1.217-1.243v-1.381c-2.899-.342-4.908-1.832-5.496-3.733a2.2 2.2 0 0 1-.137-.752c0-.86.588-1.435 1.531-1.435.793 0 1.245.465 1.532 1.107.546 1.395 1.832 2.16 3.91 2.16 2.2 0 3.61-.875 3.61-2.501 0-1.381-1.259-2.092-3.35-2.584l-1.86-.438c-3.117-.71-5.181-2.488-5.181-5.072 0-3.09 2.378-4.95 5.44-5.332V9.45c0-.78.48-1.244 1.218-1.244s1.217.465 1.217 1.244v1.395c2.68.328 4.62 1.777 5.222 3.787.069.26.123.506.123.765 0 .793-.601 1.272-1.476 1.272-.793 0-1.217-.383-1.559-1.04-.615-1.435-1.682-2.132-3.514-2.132-2.091 0-3.35.93-3.35 2.393 0 1.257 1.231 2.037 3.05 2.447l1.777.41c3.514.807 5.51 2.516 5.51 5.195 0 3.364-2.68 5.168-5.783 5.51v1.354c0 .779-.479 1.244-1.217 1.244"></path>
-        </svg>
-      ),
-      styleClass: 'dollar',
-    },
-    {
-      id: 'xrp',
-      name: 'XRP',
-      code: 'XRP',
-      price: '123,33 ₽',
-      change: '↓ 0,50%',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="none" viewBox="0 0 96 96" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <g clipPath="url(#XRP_a)">
-            <path fill="#23292F" d="M48 96a48 48 0 0 0 44.346-29.631 47.995 47.995 0 0 0-10.405-52.31A48 48 0 1 0 48 96"></path>
-            <path fill="#fff" d="M65.563 27.557h7.217L57.771 42.531a13.91 13.91 0 0 1-19.662 0L23.143 27.557h7.208l11.4 11.374a8.81 8.81 0 0 0 12.455 0zM30.317 69.206h-7.174l15.06-15.069a13.91 13.91 0 0 1 19.663 0L72.96 69.206h-7.209L54.266 57.737a8.81 8.81 0 0 0-12.455 0z"></path>
-            <path fill="#fff" fillOpacity="0.03" fillRule="evenodd" d="M48 96c26.51 0 48-21.49 48-48S74.51 0 48 0 0 21.49 0 48s21.49 48 48 48m0-2c25.405 0 46-20.595 46-46S73.405 2 48 2 2 22.595 2 48s20.595 46 46 46" clipRule="evenodd" style={{ mixBlendMode: 'difference' }}></path>
-          </g>
-          <defs>
-            <clipPath id="XRP_a">
-              <rect width="96" height="96" fill="#fff" rx="48"></rect>
-            </clipPath>
-          </defs>
-        </svg>
-      ),
-      styleClass: 'xrp',
-    },
-    {
-      id: 'sol',
-      name: 'Solana',
-      code: 'SOL',
-      price: '7 940,88 ₽',
-      change: '↑ 0,23%',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="42" height="42" fill="none" viewBox="0 0 96 96" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <linearGradient id="SOL_a"><stop offset="0" stopColor="#00ffa3"></stop><stop offset="1" stopColor="#dc1fff"></stop></linearGradient>
-          <linearGradient xlinkHref="#SOL_a" id="SOL_b" x1="71.465" x2="39.653" y1="20.975" y2="81.907" gradientUnits="userSpaceOnUse"></linearGradient>
-          <linearGradient xlinkHref="#SOL_a" id="SOL_c" x1="57.555" x2="25.743" y1="13.714" y2="74.646" gradientUnits="userSpaceOnUse"></linearGradient>
-          <linearGradient xlinkHref="#SOL_a" id="SOL_d" x1="64.466" x2="32.654" y1="17.321" y2="78.253" gradientUnits="userSpaceOnUse"></linearGradient>
-          <path fill="#000" d="M48 96c26.51 0 48-21.49 48-48S74.51 0 48 0 0 21.49 0 48s21.49 48 48 48"></path>
-          <path fill="url(#SOL_b)" d="M28.558 60.852c.348-.348.826-.55 1.332-.55h45.966c.84 0 1.26 1.013.666 1.607l-9.08 9.08c-.348.348-.826.55-1.332.55H20.143c-.84 0-1.26-1.013-.666-1.607z"></path>
-          <path fill="url(#SOL_c)" d="M28.558 26.95c.362-.347.84-.55 1.332-.55h45.966c.84 0 1.26 1.014.666 1.608l-9.08 9.08c-.348.347-.826.55-1.332.55H20.143c-.84 0-1.26-1.014-.666-1.608z"></path>
-          <path fill="url(#SOL_d)" d="M67.442 43.792a1.9 1.9 0 0 0-1.332-.55H20.143c-.84 0-1.26 1.014-.666 1.607l9.08 9.08c.348.348.826.55 1.332.55h45.966c.84 0 1.26-1.013.666-1.607z"></path>
-          <path fill="#fff" fillOpacity="0.03" fillRule="evenodd" d="M48 96c26.51 0 48-21.49 48-48S74.51 0 48 0 0 21.49 0 48s21.49 48 48 48m0-2c25.405 0 46-20.595 46-46S73.405 2 48 2 2 22.595 2 48s20.595 46 46 46" clipRule="evenodd"></path>
-        </svg>
-      ),
-      styleClass: 'sol',
-    },
-    {
-      id: 'trx',
-      name: 'TRON',
-      code: 'TRX',
-      price: '21,80 ₽',
-      change: '↓ 0,14%',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="none" viewBox="0 0 40 40" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <g clipPath="url(#TRX_clip0_150_5278)">
-            <g clipPath="url(#TRX_clip1_150_5278)">
-              <circle cx="20" cy="20" r="20" fill="#FF060A"></circle>
-              <path fill="#fff" d="M31.5 16.23c-1.125-1.038-2.681-2.625-3.949-3.75l-.075-.052a1.4 1.4 0 0 0-.416-.233C24.004 11.625 9.78 8.967 9.503 9a.5.5 0 0 0-.218.083l-.071.056a.8.8 0 0 0-.195.315L9 9.503v.307c1.601 4.46 7.924 19.065 9.169 22.493.075.232.217.675.483.697h.06c.143 0 .75-.802.75-.802s10.86-13.17 11.96-14.573a3.5 3.5 0 0 0 .374-.555.9.9 0 0 0-.296-.84m-9.251 1.534 4.635-3.844 2.718 2.505-7.353 1.34zm-1.8-.251-7.98-6.54 12.911 2.381zm.72 1.714 8.167-1.317L20 29.16l1.17-9.933zm-9.784-7.602 8.396 7.125-1.215 10.418z"></path>
-            </g>
-          </g>
-          <defs>
-            <clipPath id="TRX_clip0_150_5278">
-              <rect width="40" height="40" fill="#fff" rx="20"></rect>
-            </clipPath>
-            <clipPath id="TRX_clip1_150_5278">
-              <path fill="#fff" d="M0 0h40v40H0z"></path>
-            </clipPath>
-          </defs>
-        </svg>
-      ),
-      styleClass: 'trx',
-    },
-    {
-      id: 'doge',
-      name: 'Dogecoin',
-      code: 'DOGE',
-      price: '8,23 ₽',
-      change: '↑ 2,17%',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="none" viewBox="0 0 96 96" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <clipPath id="DOGE_a"><path d="M0 0h96v96H0z"></path></clipPath>
-          <g clipPath="url(#DOGE_a)">
-            <path fill="#988430" d="M48 96c26.51 0 48-21.49 48-48S74.51 0 48 0 0 21.49 0 48s21.49 48 48 48"></path>
-            <path fill="#7a6a2a" d="M48 94.462c25.66 0 46.462-20.802 46.462-46.462S73.66 1.537 48 1.537 1.537 22.34 1.537 48 22.34 94.462 48 94.462"></path>
-            <path fill="#ba9f33" d="M48 93.484c25.12 0 45.483-20.364 45.483-45.484S73.12 2.517 48 2.517 2.516 22.88 2.516 48 22.88 93.484 48 93.484"></path>
-            <path fill="#fff" fillOpacity="0.8" d="M74.4 36.194C69.546 23.66 57.546 21.336 57.546 21.336H23.309l.132 12.769h6.818v28.513h-6.95v12.745h33.289c8.023 0 14.454-8.062 14.454-8.062 10.3-14.617 3.348-31.107 3.348-31.107M56.777 58.711s-2.611 3.767-5.453 3.767h-5.683l-.134-28.342H52.8s3.38.707 5.74 7.394c0 0 3.13 9.574-1.763 17.18"></path>
-          </g>
-        </svg>
-      ),
-      styleClass: 'doge',
-    },
-    {
-      id: 'bch',
-      name: 'Bitcoin Cash',
-      code: 'BCH',
-      price: '40 605,84 ₽',
-      change: '↑ 1,84%',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="none" viewBox="0 0 2500 2500" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <g clipPath="url(#BCH_clip0_546_33102)">
-            <path fill="#8CC451" d="M1250 2500c690.36 0 1250-559.64 1250-1250C2500 559.644 1940.36 0 1250 0 559.644 0 0 559.644 0 1250c0 690.36 559.644 1250 1250 1250"></path>
-            <path fill="#fff" d="M1640.3 831.7c-62.7-142.5-206.7-172-383.2-143L1200.3 469l-133.9 34.6 55.7 219.2c-35.1 9-71.2 16.5-106.8 26.6l-56.2-217.7-133.9 34.6L881.8 786c-28.6 8-269.4 70.2-269.4 70.2l37.1 143s98.3-27.6 97.3-25.1c54.2-14 79.8 13 92.3 38.6l155.5 601.9c2 17.6-1 47.7-38.6 57.2 2 1-97.3 25.1-97.3 25.1l14.6 166.5s238.3-61.2 269.9-68.7l57.7 222.2 133.4-34.6-57.2-223.7c37.1-8.5 72.2-17.6 107.3-26.6l57.2 222.7 133.9-34.6-57.2-221.7c205.7-50.2 351.1-179.6 321-378.2-19.1-119.4-149.5-217.7-258.3-228.7 66.3-60.2 100.4-147 59.3-259.8m-64.7 523.6c26.6 196.6-246.3 220.7-337.1 244.3l-78.8-293.9c91.3-24.1 371.2-123.9 415.9 49.6M1411 955.1c28.1 174.6-205.2 195.1-280.9 214.7L1058.9 903c75.7-19.7 294.9-109.5 352.1 52.1"></path>
-          </g>
-          <defs>
-            <clipPath id="BCH_clip0_546_33102">
-              <path fill="#fff" d="M0 0h2500v2500H0z"></path>
-            </clipPath>
-          </defs>
-        </svg>
-      ),
-      styleClass: 'bch',
-    }
+    { id: 'btc', name: 'Bitcoin', code: 'BTC', price: '6 027 825,43 ₽', change: '↑ 0,80%', icon: <IconBtc size={42} />, styleClass: 'bitcoin' },
+    { id: 'eth', name: 'Ethereum', code: 'ETH', price: '176 661,52 ₽', change: '↓ 0,40%', icon: <IconEth size={42} />, styleClass: 'eth' },
+    { id: 'usdt', name: 'Доллары', code: 'USDT', badge: '9% годовых', price: '76,93 ₽', change: '↓ 0,04%', icon: <IconDollar size={42} />, styleClass: 'dollar' },
+    { id: 'xrp', name: 'XRP', code: 'XRP', price: '123,33 ₽', change: '↓ 0,50%', icon: <IconXrp size={42} />, styleClass: 'xrp' },
+    { id: 'sol', name: 'Solana', code: 'SOL', price: '7 940,88 ₽', change: '↑ 0,23%', icon: <IconSol size={42} />, styleClass: 'sol' },
+    { id: 'trx', name: 'TRON', code: 'TRX', price: '21,80 ₽', change: '↓ 0,14%', icon: <IconTrx size={42} />, styleClass: 'trx' },
+    { id: 'doge', name: 'Dogecoin', code: 'DOGE', price: '8,23 ₽', change: '↑ 2,17%', icon: <IconDoge size={42} />, styleClass: 'doge' },
+    { id: 'bch', name: 'Bitcoin Cash', code: 'BCH', price: '40 605,84 ₽', change: '↑ 1,84%', icon: <IconBch size={42} />, styleClass: 'bch' },
   ];
 
-  const makeSearchAssetIcon = (letter, bg) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 40 40">
-      <circle cx="20" cy="20" r="20" fill={bg || '#2b3142'} />
-      <text x="20" y="25" fill="#fff" textAnchor="middle" fontSize="14" fontWeight="600">{letter}</text>
-    </svg>
-  );
   const additionalMarketAssetsForSearch = [
-    { id: 'ada', name: 'Cardano', code: 'ADA', price: '22,78 ₽', change: '↑ 1,35%', icon: makeSearchAssetIcon('A', '#0033ad'), styleClass: 'ada' },
-    { id: 'link', name: 'Chainlink', code: 'LINK', price: '738,28 ₽', change: '↓ 0,17%', icon: makeSearchAssetIcon('L', '#2A5ADA'), styleClass: 'link' },
-    { id: 'xlm', name: 'Stellar', code: 'XLM', badge: '333% годовых', price: '13,57 ₽', change: '↓ 0,37%', icon: makeSearchAssetIcon('S', '#030303'), styleClass: 'xlm' },
-    { id: 'ltc', name: 'Litecoin', code: 'LTC', price: '4 592,02 ₽', change: '↑ 0,66%', icon: makeSearchAssetIcon('L', '#345d9d'), styleClass: 'ltc' },
-    { id: 'sui', name: 'Sui', code: 'SUI', price: '87,28 ₽', change: '↑ 0,65%', icon: makeSearchAssetIcon('S', '#4DA2FF'), styleClass: 'sui' },
-    { id: 'avax', name: 'Avalanche', code: 'AVAX', price: '773,39 ₽', change: '↑ 0,18%', icon: makeSearchAssetIcon('A', '#E84142'), styleClass: 'avax' },
-    { id: 'shib', name: 'Shiba Inu', code: 'SHIB', price: '0,000523 ₽', change: '↑ 0,93%', icon: makeSearchAssetIcon('S', '#CF1324'), styleClass: 'shib' },
-    { id: 'hbar', name: 'Hedera', code: 'HBAR', price: '6,99 ₽', change: '↓ 0,40%', icon: makeSearchAssetIcon('H', '#000'), styleClass: 'hbar' },
-    { id: 'wlfi', name: 'World Liberty Financial', code: 'WLFI', price: '9,85 ₽', change: '↓ 0,47%', icon: makeSearchAssetIcon('W', '#1C1917'), styleClass: 'wlfi' },
-    { id: 'ton', name: 'Toncoin', code: 'TON', badge: '7.75% годовых', price: '105,03 ₽', change: '↑ 1,23%', icon: makeSearchAssetIcon('T', '#0098EA'), styleClass: 'ton' },
-    { id: 'dot', name: 'Polkadot', code: 'DOT', price: '116,69 ₽', change: '↓ 0,61%', icon: makeSearchAssetIcon('P', '#E6007A'), styleClass: 'dot' },
-    { id: 'uni', name: 'Uniswap', code: 'UNI', price: '298,23 ₽', change: '↓ 1,06%', icon: makeSearchAssetIcon('U', '#FF007A'), styleClass: 'uni' },
-    { id: 'xaut', name: 'Золото', code: 'XAUT', badge: '25% годовых', price: '378 576,60 ₽', change: '↑ 4,46%', icon: makeSearchAssetIcon('G', '#D6A535'), styleClass: 'xaut' },
-    { id: 'mnt', name: 'Mantle', code: 'MNT', price: '55,66 ₽', change: '↑ 1,98%', icon: makeSearchAssetIcon('M', '#000'), styleClass: 'mnt' },
-    { id: 'aave', name: 'Aave', code: 'AAVE', price: '9 761,38 ₽', change: '↓ 0,01%', icon: makeSearchAssetIcon('A', '#9391f7'), styleClass: 'aave' },
-    { id: 'pepe', name: 'Pepe', code: 'PEPE', price: '0,000321 ₽', change: '↑ 0,21%', icon: makeSearchAssetIcon('P', '#3B8339'), styleClass: 'pepe' },
-    { id: 'near', name: 'NEAR Protocol', code: 'NEAR', price: '91,59 ₽', change: '↑ 0,38%', icon: makeSearchAssetIcon('N', '#00EC97'), styleClass: 'near' },
-    { id: 'aster', name: 'Aster', code: 'ASTER', price: '45,54 ₽', change: '↑ 6,24%', icon: makeSearchAssetIcon('A', '#EFBE84'), styleClass: 'aster' },
-    { id: 'etc', name: 'Ethereum Classic', code: 'ETC', price: '744,56 ₽', change: '↑ 0,88%', icon: makeSearchAssetIcon('E', '#3AB83A'), styleClass: 'etc' },
-    { id: 'icp', name: 'Internet Computer', code: 'ICP', price: '205,47 ₽', change: '↓ 0,19%', icon: makeSearchAssetIcon('I', '#29ABE2'), styleClass: 'icp' },
-    { id: 'sky', name: 'Sky', code: 'SKY', price: '4,76 ₽', change: '↑ 2,00%', icon: makeSearchAssetIcon('S', '#25E2FC'), styleClass: 'sky' },
-    { id: 'pi', name: 'Pi', code: 'PI', price: '12,17 ₽', change: '↑ 1,34%', icon: makeSearchAssetIcon('P', '#572878'), styleClass: 'pi' },
-    { id: 'ondo', name: 'Ondo', code: 'ONDO', price: '21,61 ₽', change: '↑ 0,51%', icon: makeSearchAssetIcon('O', '#06070A'), styleClass: 'ondo' },
-    { id: 'pol', name: 'POL (prev. MATIC)', code: 'POL', price: '8,96 ₽', change: '↑ 12,64%', icon: makeSearchAssetIcon('P', '#6C00F6'), styleClass: 'pol' },
-    { id: 'wld', name: 'Worldcoin', code: 'WLD', price: '31,12 ₽', change: '↑ 0,75%', icon: makeSearchAssetIcon('W', '#1a1a1a'), styleClass: 'wld' },
-    { id: 'ena', name: 'Ethena', code: 'ENA', price: '10,59 ₽', change: '↓ 0,95%', icon: makeSearchAssetIcon('E', '#1C1917'), styleClass: 'ena' },
+    { id: 'ada', name: 'Cardano', code: 'ADA', price: '22,78 ₽', change: '↑ 1,35%', icon: <SearchAssetIcon letter="A" bg="#0033ad" />, styleClass: 'ada' },
+    { id: 'link', name: 'Chainlink', code: 'LINK', price: '738,28 ₽', change: '↓ 0,17%', icon: <SearchAssetIcon letter="L" bg="#2A5ADA" />, styleClass: 'link' },
+    { id: 'xlm', name: 'Stellar', code: 'XLM', badge: '333% годовых', price: '13,57 ₽', change: '↓ 0,37%', icon: <SearchAssetIcon letter="S" bg="#030303" />, styleClass: 'xlm' },
+    { id: 'ltc', name: 'Litecoin', code: 'LTC', price: '4 592,02 ₽', change: '↑ 0,66%', icon: <SearchAssetIcon letter="L" bg="#345d9d" />, styleClass: 'ltc' },
+    { id: 'sui', name: 'Sui', code: 'SUI', price: '87,28 ₽', change: '↑ 0,65%', icon: <SearchAssetIcon letter="S" bg="#4DA2FF" />, styleClass: 'sui' },
+    { id: 'avax', name: 'Avalanche', code: 'AVAX', price: '773,39 ₽', change: '↑ 0,18%', icon: <SearchAssetIcon letter="A" bg="#E84142" />, styleClass: 'avax' },
+    { id: 'shib', name: 'Shiba Inu', code: 'SHIB', price: '0,000523 ₽', change: '↑ 0,93%', icon: <SearchAssetIcon letter="S" bg="#CF1324" />, styleClass: 'shib' },
+    { id: 'hbar', name: 'Hedera', code: 'HBAR', price: '6,99 ₽', change: '↓ 0,40%', icon: <SearchAssetIcon letter="H" bg="#000" />, styleClass: 'hbar' },
+    { id: 'wlfi', name: 'World Liberty Financial', code: 'WLFI', price: '9,85 ₽', change: '↓ 0,47%', icon: <SearchAssetIcon letter="W" bg="#1C1917" />, styleClass: 'wlfi' },
+    { id: 'ton', name: 'Toncoin', code: 'TON', badge: '7.75% годовых', price: '105,03 ₽', change: '↑ 1,23%', icon: <SearchAssetIcon letter="T" bg="#0098EA" />, styleClass: 'ton' },
+    { id: 'dot', name: 'Polkadot', code: 'DOT', price: '116,69 ₽', change: '↓ 0,61%', icon: <SearchAssetIcon letter="P" bg="#E6007A" />, styleClass: 'dot' },
+    { id: 'uni', name: 'Uniswap', code: 'UNI', price: '298,23 ₽', change: '↓ 1,06%', icon: <SearchAssetIcon letter="U" bg="#FF007A" />, styleClass: 'uni' },
+    { id: 'xaut', name: 'Золото', code: 'XAUT', badge: '25% годовых', price: '378 576,60 ₽', change: '↑ 4,46%', icon: <SearchAssetIcon letter="G" bg="#D6A535" />, styleClass: 'xaut' },
+    { id: 'mnt', name: 'Mantle', code: 'MNT', price: '55,66 ₽', change: '↑ 1,98%', icon: <SearchAssetIcon letter="M" bg="#000" />, styleClass: 'mnt' },
+    { id: 'aave', name: 'Aave', code: 'AAVE', price: '9 761,38 ₽', change: '↓ 0,01%', icon: <SearchAssetIcon letter="A" bg="#9391f7" />, styleClass: 'aave' },
+    { id: 'pepe', name: 'Pepe', code: 'PEPE', price: '0,000321 ₽', change: '↑ 0,21%', icon: <SearchAssetIcon letter="P" bg="#3B8339" />, styleClass: 'pepe' },
+    { id: 'near', name: 'NEAR Protocol', code: 'NEAR', price: '91,59 ₽', change: '↑ 0,38%', icon: <SearchAssetIcon letter="N" bg="#00EC97" />, styleClass: 'near' },
+    { id: 'aster', name: 'Aster', code: 'ASTER', price: '45,54 ₽', change: '↑ 6,24%', icon: <SearchAssetIcon letter="A" bg="#EFBE84" />, styleClass: 'aster' },
+    { id: 'etc', name: 'Ethereum Classic', code: 'ETC', price: '744,56 ₽', change: '↑ 0,88%', icon: <SearchAssetIcon letter="E" bg="#3AB83A" />, styleClass: 'etc' },
+    { id: 'icp', name: 'Internet Computer', code: 'ICP', price: '205,47 ₽', change: '↓ 0,19%', icon: <SearchAssetIcon letter="I" bg="#29ABE2" />, styleClass: 'icp' },
+    { id: 'sky', name: 'Sky', code: 'SKY', price: '4,76 ₽', change: '↑ 2,00%', icon: <SearchAssetIcon letter="S" bg="#25E2FC" />, styleClass: 'sky' },
+    { id: 'pi', name: 'Pi', code: 'PI', price: '12,17 ₽', change: '↑ 1,34%', icon: <SearchAssetIcon letter="P" bg="#572878" />, styleClass: 'pi' },
+    { id: 'ondo', name: 'Ondo', code: 'ONDO', price: '21,61 ₽', change: '↑ 0,51%', icon: <SearchAssetIcon letter="O" bg="#06070A" />, styleClass: 'ondo' },
+    { id: 'pol', name: 'POL (prev. MATIC)', code: 'POL', price: '8,96 ₽', change: '↑ 12,64%', icon: <SearchAssetIcon letter="P" bg="#6C00F6" />, styleClass: 'pol' },
+    { id: 'wld', name: 'Worldcoin', code: 'WLD', price: '31,12 ₽', change: '↑ 0,75%', icon: <SearchAssetIcon letter="W" bg="#1a1a1a" />, styleClass: 'wld' },
+    { id: 'ena', name: 'Ethena', code: 'ENA', price: '10,59 ₽', change: '↓ 0,95%', icon: <SearchAssetIcon letter="E" bg="#1C1917" />, styleClass: 'ena' },
   ];
   const searchStocks = marketTickers.map((t) => ({
     ...t,

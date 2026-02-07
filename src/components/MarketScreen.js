@@ -247,12 +247,11 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
           </div>
         </div>
         <div className="Ofdvj PReSx">
-          <div className="Zwf9p mFYy9 IPADx" role="radiogroup" style={{ width: '388px' }}>
+          <div className="Zwf9p mFYy9 IPADx" role="radiogroup">
             <div
               className="TsSEl TRjCi uuakV"
               style={{
-                transform: usMarketTab === 'stocks' ? 'translateX(0)' : 'translateX(190px)',
-                width: '190px',
+                transform: usMarketTab === 'stocks' ? 'translateX(0)' : 'translateX(100%)',
               }}
             />
             <button
@@ -581,12 +580,11 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
           </div>
           <div className="ydmxJ tf4r_">
             <div className="Ofdvj PReSx">
-              <div className="Zwf9p mFYy9 IPADx" role="radiogroup" style={{ width: '388px' }}>
+              <div className="Zwf9p mFYy9 IPADx" role="radiogroup">
                 <div
                   className="TsSEl TRjCi uuakV"
                   style={{
-                    transform: topDayTab === 'gain' ? 'translateX(0)' : 'translateX(190px)',
-                    width: '190px',
+                    transform: topDayTab === 'gain' ? 'translateX(0)' : 'translateX(100%)',
                   }}
                 />
                 <button
