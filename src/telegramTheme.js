@@ -89,6 +89,10 @@ export function initTelegramThemeSync() {
     tg.ready();
   }
 
+  if (typeof tg.expand === 'function') {
+    tg.expand();
+  }
+
   return () => {
     if (typeof tg.offEvent === 'function') {
       tg.offEvent('themeChanged', apply);

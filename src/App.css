@@ -106,11 +106,12 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding-bottom: var(
-    --content-safe-area-inset-bottom,
-    calc(var(--tabbar-current-height, var(--tabbar-height, 74px)) + 16px)
-  );
+  padding-bottom: 0;
   box-sizing: border-box;
+}
+
+.content.screen-asset {
+  padding-bottom: 0;
 }
 
 .wallet-hero {
@@ -1663,6 +1664,12 @@
   color: #0f1117;
 }
 
+.asset-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .asset-icon.large {
   width: 48px;
   height: 48px;
@@ -1671,15 +1678,15 @@
 }
 
 .asset-icon.bitcoin {
-  background: #f7931a;
+  background: transparent;
 }
 
 .asset-icon.usdt {
-  background: #26a17b;
+  background: transparent;
 }
 
 .asset-icon.ton {
-  background: #6e7bff;
+  background: transparent;
 }
 
 .asset-icon.major {

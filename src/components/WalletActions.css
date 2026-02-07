@@ -17,8 +17,7 @@
 }
 
 .action-item {
-  /* Подсветка должна быть под всей кнопкой (и под SVG, и под текстом) */
-  background: var(--second-button-color);
+  background: transparent;
   border: none;
   color: var(--tg-theme-accent-text-color);
   display: flex;

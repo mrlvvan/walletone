@@ -27,10 +27,10 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
 
   // Управление кнопкой "Назад" в Telegram WebApp при открытии/закрытии поиска
   useEffect(() => {
-    const tg = window.Telegram?.WebApp;
+    const tg = window.Telegram?.WebApp || window.telegram?.webapp;
     if (!tg) return;
 
-    const backButton = tg.backButton;
+    const backButton = tg.BackButton || tg.backButton;
     if (!backButton) return;
 
     if (isSearchFocused) {

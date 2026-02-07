@@ -7,20 +7,7 @@ import HistoryScreen from './components/HistoryScreen';
 import MarketScreen from './components/MarketScreen';
 import TabBar from './components/TabBar';
 import { initTelegramThemeSync } from './telegramTheme';
-import {
-  IconBitcoin,
-  IconTon,
-  IconUsdt,
-  IconDollar,
-  SearchAssetIcon,
-  IconBtc,
-  IconEth,
-  IconXrp,
-  IconSol,
-  IconTrx,
-  IconDoge,
-  IconBch,
-} from './components/Icons';
+import { IconDollar, SearchAssetIcon, IconBtc, IconEth, IconXrp, IconSol, IconTrx, IconDoge, IconBch } from './components/Icons';
 
 function App() {
   const assets = [
@@ -56,42 +43,7 @@ function App() {
       ),
       styleClass: 'major',
     },
-    {
-      id: 'btc',
-      name: 'Bitcoin',
-      code: 'BTC · 4 979 195 ₽',
-      amount: '0,0002039 BTC',
-      value: '1 014,38 ₽',
-      delta: '-80,92 ₽',
-      price: '4 979 195 ₽',
-      change: '-7,38%',
-      icon: <IconBitcoin size={36} className="asset-icon bitcoin" />,
-      styleClass: 'bitcoin',
-    },
-    {
-      id: 'ton',
-      name: 'Toncoin',
-      code: 'TON · 684,50 ₽',
-      amount: '0,018 TON',
-      value: '12,32 ₽',
-      delta: '+0,22 ₽',
-      price: '684,50 ₽',
-      change: '+1,83%',
-      icon: <IconTon size={36} className="asset-icon ton" />,
-      styleClass: 'ton',
-    },
-    {
-      id: 'usdt',
-      name: 'Tether',
-      code: 'USDT · 75,98 ₽',
-      amount: '0,00 USDT',
-      value: '0,00 ₽',
-      delta: '+0,00 ₽',
-      price: '75,98 ₽',
-      change: '+0,16%',
-      icon: <IconUsdt size={36} className="asset-icon usdt" />,
-      styleClass: 'usdt',
-    },
+    // Оставляем в кошельке только Major
   ];
 
   const activity = [
@@ -169,12 +121,45 @@ function App() {
   };
 
   const [screen, setScreen] = useState('home');
+  const [prevScreen, setPrevScreen] = useState('home');
   const [selectedAsset, setSelectedAsset] = useState(assets[0]);
 
   useEffect(() => {
     const cleanup = initTelegramThemeSync();
+    const tg = (window.Telegram && window.Telegram.WebApp) || (window.telegram && window.telegram.webapp);
+    if (tg && typeof tg.ready === 'function') {
+      tg.ready();
+    }
+    if (tg && typeof tg.expand === 'function') {
+      tg.expand();
+    }
     return cleanup;
   }, []);
+
+  useEffect(() => {
+    const tg = (window.Telegram && window.Telegram.WebApp) || (window.telegram && window.telegram.webapp);
+    const backButton = tg?.BackButton || tg?.backButton;
+    if (!backButton) return;
+
+    const handleBack = () => {
+      setScreen(prevScreen || 'home');
+    };
+
+    if (screen === 'asset') {
+      backButton.show();
+      backButton.onClick(handleBack);
+    } else if (screen !== 'trade') {
+      backButton.offClick(handleBack);
+      backButton.hide();
+    }
+
+    return () => {
+      backButton.offClick(handleBack);
+      if (screen === 'asset') {
+        backButton.hide();
+      }
+    };
+  }, [screen, prevScreen]);
 
   const walletStats = {
     balanceInt: '1',
@@ -1976,6 +1961,7 @@ function App() {
   ];
 
   const openAsset = (asset) => {
+    setPrevScreen(screen);
     setSelectedAsset(asset);
     setScreen('asset');
   };
@@ -2006,7 +1992,7 @@ function App() {
 
   return (
     <div className="app">
-      <main className={`content ${screen === 'history' ? 'screen-history' : ''} ${screen === 'bonus' ? 'screen-bonus' : ''}`}>
+      <main className={`content ${screen === 'history' ? 'screen-history' : ''} ${screen === 'bonus' ? 'screen-bonus' : ''} ${screen === 'asset' ? 'screen-asset' : ''}`}>
         {screen === 'home' && (
           <HomeScreen
             assets={assets}

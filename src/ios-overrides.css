@@ -1,1 +1,6 @@
 /* iOS-специфичные стили будут добавляться здесь по мере необходимости */
+
+/* Подсветка под кнопками кошелька — только на iOS */
+[data-tg-platform="ios"] .wallet-actions .action-item {
+  background: var(--second-button-color);
+}

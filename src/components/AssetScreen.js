@@ -6,6 +6,7 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
   const [selectedPeriod, setSelectedPeriod] = useState('1Д');
 
   const periods = ['1Д', '7Д', '1М', '1Г', 'Все'];
+  const periodIndex = Math.max(0, periods.indexOf(selectedPeriod));
 
   const symbol = (selectedAsset.code && selectedAsset.code.split(' · ')[0]) || selectedAsset.name || '—';
 
@@ -114,7 +115,11 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
             </svg>
           </div>
           <div className="asset-chart-periods">
-            <div className="asset-period-selector" role="radiogroup">
+            <div
+              className="asset-period-selector"
+              role="radiogroup"
+              style={{ '--period-count': periods.length, '--period-index': periodIndex }}
+            >
               {periods.map((period) => (
                 <button
                   key={period}
@@ -131,50 +136,7 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
         </div>
       </section>
 
-      <section className="asset-section">
-        <div className="asset-section-header">
-          <div className="asset-section-title">История транзакций</div>
-        </div>
-        <div className="asset-section-content">
-          <div className="asset-transaction-list">
-            {activity.slice(0, 3).map((item) => (
-              <div key={item.id} className="asset-transaction-item">
-                <div className="asset-transaction-left">
-                  <div className="asset-transaction-icon">
-                    {item.tone === 'success' ? (
-                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 28 28" preserveAspectRatio="xMidYMid meet">
-                        <path fill="currentColor" fillRule="evenodd" d="M14 25c6.075 0 11-4.925 11-11S20.075 3 14 3 3 7.925 3 14s4.925 11 11 11m-3.434-10.566a.8.8 0 0 0-1.132 1.132l4 4a.8.8 0 0 0 1.132 0l4-4a.8.8 0 0 0-1.132-1.132L14.8 17.07V9.5a.8.8 0 0 0-1.6 0v7.569z" clipRule="evenodd"></path>
-                      </svg>
-                    ) : (
-                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="29" fill="none" viewBox="0 0 28 29" preserveAspectRatio="xMidYMid meet">
-                        <path fill="currentColor" fillRule="evenodd" d="M3 14.5c0-6.075 4.925-11 11-11s11 4.925 11 11-4.925 11-11 11-11-4.925-11-11m9.304-5.97c.26.26.26.68 0 .94l-1.365 1.365h7.394a.665.665 0 1 1 0 1.33H10.94l1.364 1.365a.665.665 0 1 1-.94.94l-2.5-2.5a.665.665 0 0 1 0-.94l2.5-2.5c.26-.26.68-.26.94 0m3.556 6.94a.665.665 0 1 1 .94-.94l2.5 2.5a.665.665 0 0 1 0 .94l-2.5 2.5a.665.665 0 1 1-.94-.94l1.365-1.365H9.83a.665.665 0 1 1 0-1.33h7.395z" clipRule="evenodd"></path>
-                      </svg>
-                    )}
-                  </div>
-                  <div className="asset-transaction-info">
-                    <div className="asset-transaction-title">{item.title}</div>
-                    <div className="asset-transaction-time">{item.time}</div>
-                  </div>
-                </div>
-                <div className="asset-transaction-right">
-                  <div className={`asset-transaction-amount ${item.tone === 'success' ? 'positive' : ''}`}>
-                    {item.value}
-                  </div>
-                  <div className={`asset-transaction-status ${item.tone === 'success' ? 'positive' : ''}`}>
-                    {item.tone === 'success' ? 'Получено' : 'Отправлено'}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="asset-transaction-show-all">
-            <span>Показать все</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" fill="none" viewBox="0 0 7 12" preserveAspectRatio="xMidYMid meet">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 5 5-5 5"></path>
-            </svg>
-          </div>
-        </div>
-      </section>
+      <div className="section-gap" aria-hidden="true" />
 
       <section className="asset-section">
         <div className="asset-section-header">
@@ -195,11 +157,13 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
         </div>
       </section>
 
-      <section className="asset-section">
+      <div className="section-gap" aria-hidden="true" />
+
+      <section className="asset-section overview-section">
         <div className="asset-section-header">
           <div className="asset-section-title">Обзор</div>
         </div>
-        <div className="asset-section-content">
+        <div className="asset-section-content overview-content">
           <div className="asset-overview-list">
             <div className="asset-overview-item">
               <div className="asset-overview-label">Капитализация</div>
@@ -234,6 +198,48 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
           </div>
         </div>
       </section>
+
+      <div className="asset-bottom-area">
+        {selectedAsset.id === 'major' && (
+          <section className="asset-section links-section">
+            <div className="asset-section-header">
+              <div className="asset-section-title">Ссылки</div>
+            </div>
+            <div className="asset-section-content">
+              <div className="asset-link-row">
+                <div className="asset-link-left">
+                  <div className={`asset-icon ${selectedAsset.styleClass}`}>{selectedAsset.icon}</div>
+                  <div className="asset-link-info">
+                    <div className="asset-link-title">{selectedAsset.name}</div>
+                    <div className="asset-link-subtitle">мини-приложение</div>
+                  </div>
+                </div>
+                <div className="asset-link-chevron">›</div>
+              </div>
+              <div className="asset-link-row">
+                <div className="asset-link-left">
+                  <div className={`asset-icon ${selectedAsset.styleClass}`}>{selectedAsset.icon}</div>
+                  <div className="asset-link-info">
+                    <div className="asset-link-title">Сообщество {selectedAsset.name}</div>
+                    <div className="asset-link-subtitle">Более 28 млн подписчиков</div>
+                  </div>
+                </div>
+                <div className="asset-link-chevron">›</div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        <div className="asset-scroll-tail" aria-hidden="true" />
+        <div className="asset-action-bar">
+          <button className="asset-action-button buy" type="button">
+            Купить
+          </button>
+          <button className="asset-action-button sell" type="button">
+            Продать
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
