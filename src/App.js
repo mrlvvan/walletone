@@ -1992,7 +1992,11 @@ function App() {
 
   return (
     <div className="app">
-      <main className={`content ${screen === 'history' ? 'screen-history' : ''} ${screen === 'bonus' ? 'screen-bonus' : ''} ${screen === 'asset' ? 'screen-asset' : ''}`}>
+      <main
+        className={`content ${screen === 'history' ? 'screen-history' : ''} ${
+          screen === 'bonus' ? 'screen-bonus' : ''
+        } ${screen === 'asset' ? 'screen-asset' : ''} ${screen === 'home' ? 'screen-home' : ''}`}
+      >
         {screen === 'home' && (
           <HomeScreen
             assets={assets}
