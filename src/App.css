@@ -123,8 +123,8 @@
   min-height: 200px;
   padding-top: 0;
   padding-bottom: 0;
-  /* Общий фон баланса — белый (как основной фон приложения), не серый */
-  background: var(--tg-theme-bg-color);
+  /* Общий фон баланса — как общий фон экрана */
+  background: var(--tg-theme-secondary-bg-color);
   margin: 0;
 }
 
@@ -1276,19 +1276,21 @@
 
 /* История: общий фон списка транзакций — как основной фон приложения, чтобы в светлой теме не быть чёрным */
 .PKleQ .oJKLh {
-  background: var(--tg-theme-bg-color, #ffffff);
+  background: var(--tg-theme-section-bg-color, #212121);
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 /* История: без боковых отступов, фон как у списка — убрать полосу сверху */
 .content.screen-history {
   padding-left: 0;
   padding-right: 0;
-  background: var(--tg-theme-bg-color, #ffffff);
+  background: var(--tg-theme-secondary-bg-color, #0f0f0f);
 }
 
 .content.screen-history .PKleQ {
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 /* История: убрать разделительную линию и отдельный фон у заголовка — без полосы сверху */

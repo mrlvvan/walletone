@@ -1,0 +1,30 @@
+/* iOS-специфичные стили — только подсветка кнопок кошелька */
+[data-tg-platform="ios"] .content.screen-home .wallet-actions .action-item {
+  background: var(--second-button-color);
+}
+
+/* iOS: экран "Торговля" — карточки как в кошельке */
+[data-tg-platform="ios"] .content.screen-trade .FhO5I,
+[data-tg-platform="ios"] .content.screen-trade .oJKLh {
+  background: transparent;
+}
+
+[data-tg-platform="ios"] .content.screen-trade .JNQMw .ydmxJ.tf4r_ {
+  background: var(--tg-theme-section-bg-color);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+[data-tg-platform="ios"] .content.screen-trade .JNQMw .pPd9Y.nsMB8 {
+  padding: 12px 16px;
+}
+
+[data-tg-platform="ios"] .content.screen-trade .market-section {
+  background: var(--tg-theme-section-bg-color);
+  border-radius: 16px;
+  padding: 12px 16px;
+}
+
+[data-tg-platform="ios"] .content.screen-trade .market-section .PReSx {
+  padding-inline: 0;
+}

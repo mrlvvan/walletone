@@ -1995,7 +1995,9 @@ function App() {
       <main
         className={`content ${screen === 'history' ? 'screen-history' : ''} ${
           screen === 'bonus' ? 'screen-bonus' : ''
-        } ${screen === 'asset' ? 'screen-asset' : ''} ${screen === 'home' ? 'screen-home' : ''}`}
+        } ${screen === 'asset' ? 'screen-asset' : ''} ${screen === 'home' ? 'screen-home' : ''} ${
+          screen === 'trade' ? 'screen-trade' : ''
+        }`}
       >
         {screen === 'home' && (
           <HomeScreen
