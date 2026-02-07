@@ -251,7 +251,7 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
             <div
               className="TsSEl TRjCi uuakV"
               style={{
-                transform: usMarketTab === 'stocks' ? 'translateX(0)' : 'translateX(192px)',
+                transform: usMarketTab === 'stocks' ? 'translateX(0)' : 'translateX(190px)',
                 width: '190px',
               }}
             />
@@ -585,7 +585,7 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
                 <div
                   className="TsSEl TRjCi uuakV"
                   style={{
-                    transform: topDayTab === 'gain' ? 'translateX(0)' : 'translateX(192px)',
+                    transform: topDayTab === 'gain' ? 'translateX(0)' : 'translateX(190px)',
                     width: '190px',
                   }}
                 />

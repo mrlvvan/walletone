@@ -135,6 +135,7 @@
   --quick-menu-background: #f3f3f5;
   --quick-menu-foreground: #000000;
   --tooltip-background: #3a3a3c;
+  --second-button-color: rgb(135 116 225 / 0.12);
 }
 
 html {

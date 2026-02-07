@@ -101,12 +101,11 @@
 .content {
   flex: 1;
   padding: 16px 24px 20px;
-  background: var(--tg-theme-section-bg-color);
+  /* Общий фон контента (в светлой теме — белый, в тёмной — тёмный) */
+  background: var(--tg-theme-bg-color);
   display: flex;
   flex-direction: column;
   gap: 0;
-  /* Внизу всегда есть отступ не меньше высоты нижнего навбара + safe area,
-     чтобы TabBar не перекрывал последний контент при скролле до конца */
   padding-bottom: var(
     --content-safe-area-inset-bottom,
     calc(var(--tabbar-current-height, var(--tabbar-height, 74px)) + 16px)
@@ -1794,19 +1793,6 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 4px;
-}
-
-.asset-sparkline {
-  width: 56px;
-  height: 24px;
-  flex-shrink: 0;
-  margin-bottom: 2px;
-}
-
-.asset-sparkline svg {
-  display: block;
-  width: 100%;
-  height: 100%;
 }
 
 .asset-amount {

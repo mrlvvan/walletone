@@ -42,9 +42,63 @@ function App() {
       ),
       styleClass: 'major',
     },
-    { id: 'btc', name: 'Bitcoin', code: 'BTC · 4 979 195 ₽', amount: '0,0002039 BTC', value: '1 014,38 ₽', delta: '-80,92 ₽', price: '4 979 195 ₽', change: '-7,38%', icon: <span className="asset-icon bitcoin">₿</span>, styleClass: 'bitcoin' },
-    { id: 'ton', name: 'Toncoin', code: 'TON · 684,50 ₽', amount: '0,018 TON', value: '12,32 ₽', delta: '+0,22 ₽', price: '684,50 ₽', change: '+1,83%', icon: <span className="asset-icon ton">T</span>, styleClass: 'ton' },
-    { id: 'usdt', name: 'Tether', code: 'USDT · 75,98 ₽', amount: '0,00 USDT', value: '0,00 ₽', delta: '+0,00 ₽', price: '75,98 ₽', change: '+0,16%', icon: <span className="asset-icon usdt">₮</span>, styleClass: 'usdt' },
+    {
+      id: 'btc',
+      name: 'Bitcoin',
+      code: 'BTC · 4 979 195 ₽',
+      amount: '0,0002039 BTC',
+      value: '1 014,38 ₽',
+      delta: '-80,92 ₽',
+      price: '4 979 195 ₽',
+      change: '-7,38%',
+      icon: (
+        <span className="asset-icon bitcoin" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="18" fill="#f7931a" />
+            <path fill="#fff" fillRule="evenodd" d="M23.19 14.27c.36-2.26-1.15-3.54-3.73-4.1l.76-3.06-1.51-.38-.78 2.94c-.4-.1-.8-.2-1.22-.29l.78-3.01-1.51-.38-.76 3.04c-.33-.07-.66-.15-.99-.24l-2.18-.55.42-1.67s1.17.3 1.15.3c.65.14.85.54.79.93l-.87 3.49c.05.02.12.03.17.05l-.02.12 3.27.83.45-1.8-2.25-.57c.17.12.33.26.48.41.23.24.45.51.63.82.36.61.5 1.36.36 2.13-.2 1.06-.89 1.77-1.92 2.14 1.14.22 2.01.85 2.33 1.75.4 1.17.18 2.43-.64 3.32-.6.64-1.48 1.04-2.48 1.18-.32.05-.63.07-.95.07-1.87 0-3.28-.88-3.87-2.48l-1.52.39.39-1.55 1.48-.38c.31-1.24.62-2.47.92-3.7l-1.49-.38-.4 1.58-1.51-.38.4-1.6c-.27-.07-.54-.14-.82-.23l.41-1.63 1.5.38c.27-1.11.53-2.22.8-3.32l-1.56-.4-.43 1.7z" clipRule="evenodd" />
+          </svg>
+        </span>
+      ),
+      styleClass: 'bitcoin',
+    },
+    {
+      id: 'ton',
+      name: 'Toncoin',
+      code: 'TON · 684,50 ₽',
+      amount: '0,018 TON',
+      value: '12,32 ₽',
+      delta: '+0,22 ₽',
+      price: '684,50 ₽',
+      change: '+1,83%',
+      icon: (
+        <span className="asset-icon ton" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="18" fill="#0088CC" />
+            <path fill="#fff" fillRule="evenodd" d="M25.58 12.23L18 21.77l-3.5-5.42 1.95-3.02h3.1l.85 1.32 2.08-1.32h2.92l-5.9 9.54 4.05 6.23h-2.94l-2.6-4.02-2.6 4.02h-2.94l4.05-6.23-5.9-9.54h2.92l2.08 1.32.85-1.32h3.1l1.95 3.02z" clipRule="evenodd" />
+          </svg>
+        </span>
+      ),
+      styleClass: 'ton',
+    },
+    {
+      id: 'usdt',
+      name: 'Tether',
+      code: 'USDT · 75,98 ₽',
+      amount: '0,00 USDT',
+      value: '0,00 ₽',
+      delta: '+0,00 ₽',
+      price: '75,98 ₽',
+      change: '+0,16%',
+      icon: (
+        <span className="asset-icon usdt" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="18" fill="#26a17a" />
+            <path fill="#fff" fillRule="evenodd" d="M18 8v3.2h6.6v2.4H18v12h-3.6v-12H7.8v-2.4h6.6V8H18z" clipRule="evenodd" />
+          </svg>
+        </span>
+      ),
+      styleClass: 'usdt',
+    },
   ];
 
   const activity = [
@@ -123,35 +177,10 @@ function App() {
 
   const [screen, setScreen] = useState('home');
   const [selectedAsset, setSelectedAsset] = useState(assets[0]);
-  const [walletSparklines, setWalletSparklines] = useState({});
-
-  const COINGECKO_IDS = { btc: 'bitcoin', bitcoin: 'bitcoin', ton: 'the-open-network', usdt: 'tether', tether: 'tether', major: null };
 
   useEffect(() => {
     const cleanup = initTelegramThemeSync();
     return cleanup;
-  }, []);
-
-  useEffect(() => {
-    const fetchSparklines = async () => {
-      const next = {};
-      for (const asset of assets) {
-        const id = asset.id?.toLowerCase() || '';
-        const cgId = COINGECKO_IDS[id];
-        if (!cgId) continue;
-        try {
-          const res = await fetch(`https://api.coingecko.com/api/v3/coins/${cgId}/market_chart?vs_currency=rub&days=7`);
-          if (!res.ok) continue;
-          const data = await res.json();
-          const prices = (data.prices || []).map((p) => p[1]);
-          if (prices.length) next[asset.id] = prices;
-        } catch (_) {}
-      }
-      setWalletSparklines((prev) => ({ ...prev, ...next }));
-    };
-    fetchSparklines();
-    const t = setInterval(fetchSparklines, 60000);
-    return () => clearInterval(t);
   }, []);
 
   const walletStats = {
@@ -2168,7 +2197,6 @@ function App() {
         {screen === 'home' && (
           <HomeScreen
             assets={assets}
-            walletSparklines={walletSparklines}
             walletStats={walletStats}
             cashAsset={cashAsset}
             cryptoTotal={cryptoTotal}

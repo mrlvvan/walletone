@@ -1,250 +1,15 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState } from 'react';
 import ActivityList from './ActivityList';
 import './AssetScreen.css';
 
-// Маппинг id монет на CoinGecko id
-const COINGECKO_IDS = {
-  btc: 'bitcoin',
-  bitcoin: 'bitcoin',
-  ton: 'the-open-network',
-  usdt: 'tether',
-  tether: 'tether',
-  major: null, // major может не быть в CoinGecko, используем fallback
-};
-
-// Преобразование периода в дни для API
-const PERIOD_TO_DAYS = {
-  '1Д': 1,
-  '7Д': 7,
-  '1М': 30,
-  '1Г': 365,
-  'Все': 'max',
-};
-
 function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
   const [selectedPeriod, setSelectedPeriod] = useState('1Д');
-  const [chartData, setChartData] = useState(null);
-  const [chartLoading, setChartLoading] = useState(true);
-  const [chartError, setChartError] = useState(null);
-  const [currentPrice, setCurrentPrice] = useState(null);
-  const [priceChange24h, setPriceChange24h] = useState(null);
 
   const periods = ['1Д', '7Д', '1М', '1Г', 'Все'];
 
-  // Получение CoinGecko id для монеты
-  const coinGeckoId = useMemo(() => {
-    const symbol = (selectedAsset.code && selectedAsset.code.split(' · ')[0]?.toLowerCase()) || '';
-    const id = selectedAsset.id?.toLowerCase() || '';
-    
-    // Проверяем по символу и id
-    if (COINGECKO_IDS[symbol]) return COINGECKO_IDS[symbol];
-    if (COINGECKO_IDS[id]) return COINGECKO_IDS[id];
-    
-    // Если major или неизвестная монета, возвращаем null (не загружаем график)
-    if (id === 'major' || !symbol) return null;
-    
-    // Fallback на bitcoin для других монет
-    return 'bitcoin';
-  }, [selectedAsset]);
-
-  // Загрузка текущей цены и изменения за 24ч
-  useEffect(() => {
-    if (!coinGeckoId) return;
-
-    const fetchCurrentPrice = async () => {
-      try {
-        const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coinGeckoId}&vs_currencies=rub&include_24hr_change=true`;
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Failed to fetch price');
-        
-        const data = await response.json();
-        const coinData = data[coinGeckoId];
-        if (coinData) {
-          setCurrentPrice(coinData.rub);
-          setPriceChange24h(coinData.rub_24h_change);
-        }
-      } catch (error) {
-        console.error('Error fetching current price:', error);
-      }
-    };
-
-    fetchCurrentPrice();
-    // Обновляем цену каждые 30 секунд
-    const interval = setInterval(fetchCurrentPrice, 30000);
-    return () => clearInterval(interval);
-  }, [coinGeckoId]);
-
-  // Загрузка данных графика
-  useEffect(() => {
-    // Если нет coinGeckoId (например, для major), не загружаем данные
-    if (!coinGeckoId) {
-      setChartLoading(false);
-      setChartData(null);
-      return;
-    }
-
-    const fetchChartData = async () => {
-      setChartLoading(true);
-      setChartError(null);
-
-      try {
-        const days = PERIOD_TO_DAYS[selectedPeriod];
-        const url = `https://api.coingecko.com/api/v3/coins/${coinGeckoId}/market_chart?vs_currency=rub&days=${days}`;
-        
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Failed to fetch chart data');
-        
-        const data = await response.json();
-        setChartData(data.prices || []);
-      } catch (error) {
-        console.error('Error fetching chart data:', error);
-        setChartError(error.message);
-        setChartData(null);
-      } finally {
-        setChartLoading(false);
-      }
-    };
-
-    fetchChartData();
-  }, [coinGeckoId, selectedPeriod]);
-
-  // Генерация SVG path из данных с плавными кривыми
-  const generateChartPath = (prices) => {
-    if (!prices || prices.length === 0) return '';
-
-    const width = 814.114;
-    const height = 456;
-    const padding = 30;
-    const chartWidth = width - padding * 2;
-    const chartHeight = height - padding * 2;
-
-    // Находим min и max значения
-    const values = prices.map(([, price]) => price);
-    const minValue = Math.min(...values);
-    const maxValue = Math.max(...values);
-    const range = maxValue - minValue || 1;
-
-    // Генерируем точки
-    const points = prices.map(([timestamp, price], index) => {
-      const x = padding + (index / (prices.length - 1)) * chartWidth;
-      const y = padding + chartHeight - ((price - minValue) / range) * chartHeight;
-      return { x, y };
-    });
-
-    if (points.length === 0) return '';
-    if (points.length === 1) return `M ${points[0].x},${points[0].y}`;
-
-    // Используем кубические кривые Безье для плавности
-    let path = `M ${points[0].x},${points[0].y}`;
-
-    for (let i = 0; i < points.length - 1; i++) {
-      const current = points[i];
-      const next = points[i + 1];
-      
-      // Вычисляем контрольные точки для плавной кривой
-      let cp1x, cp1y, cp2x, cp2y;
-
-      if (i === 0) {
-        // Первая точка: контрольная точка вправо от текущей
-        cp1x = current.x + (next.x - current.x) / 3;
-        cp1y = current.y;
-        cp2x = current.x + (next.x - current.x) * 2 / 3;
-        cp2y = next.y;
-      } else if (i === points.length - 2) {
-        // Последняя точка: контрольная точка влево от следующей
-        const prev = points[i - 1];
-        cp1x = current.x + (next.x - prev.x) / 6;
-        cp1y = current.y;
-        cp2x = next.x - (next.x - current.x) / 3;
-        cp2y = next.y;
-      } else {
-        // Средние точки: используем соседние точки для плавности
-        const prev = points[i - 1];
-        const nextNext = points[i + 2];
-        const dx1 = (next.x - prev.x) / 6;
-        const dy1 = (next.y - prev.y) / 6;
-        const dx2 = (nextNext.x - current.x) / 6;
-        const dy2 = (nextNext.y - current.y) / 6;
-        
-        cp1x = current.x + dx1;
-        cp1y = current.y + dy1;
-        cp2x = next.x - dx2;
-        cp2y = next.y - dy2;
-      }
-
-      path += ` C ${cp1x},${cp1y} ${cp2x},${cp2y} ${next.x},${next.y}`;
-    }
-
-    return path;
-  };
-
-  // Вычисление значений для оси Y
-  const getYAxisValues = (prices) => {
-    if (!prices || prices.length === 0) return ['4.66M', '4.93M', '5.20M', '5.48M'];
-
-    const values = prices.map(([, price]) => price);
-    const minValue = Math.min(...values);
-    const maxValue = Math.max(...values);
-    const range = maxValue - minValue;
-
-    const formatValue = (val) => {
-      if (val >= 1000000) return `${(val / 1000000).toFixed(2)}M`;
-      if (val >= 1000) return `${(val / 1000).toFixed(2)}K`;
-      return val.toFixed(2);
-    };
-
-    return [
-      formatValue(minValue + range * 0.75),
-      formatValue(minValue + range * 0.5),
-      formatValue(minValue + range * 0.25),
-      formatValue(maxValue),
-    ];
-  };
-
-  const chartPath = useMemo(() => {
-    if (!chartData) return '';
-    return generateChartPath(chartData);
-  }, [chartData]);
-
-  const yAxisValues = useMemo(() => {
-    if (!chartData) return ['4.66M', '4.93M', '5.20M', '5.48M'];
-    return getYAxisValues(chartData);
-  }, [chartData]);
-
   const symbol = (selectedAsset.code && selectedAsset.code.split(' · ')[0]) || selectedAsset.name || '—';
 
-  // Форматирование цены
-  const formatPrice = (price) => {
-    if (!price) return null;
-    return new Intl.NumberFormat('ru-RU', {
-      style: 'currency',
-      currency: 'RUB',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(price);
-  };
-
-  // Форматирование изменения в процентах
-  const formatPercent = (change) => {
-    if (change === null || change === undefined) return null;
-    const sign = change >= 0 ? '+' : '';
-    return `${sign}${change.toFixed(2)}%`;
-  };
-
-  // Форматирование дельты
-  const formatDelta = (price, change) => {
-    if (!price || change === null || change === undefined) return null;
-    const delta = (price * change) / 100;
-    const sign = delta >= 0 ? '+' : '';
-    return `${sign}${new Intl.NumberFormat('ru-RU', {
-      style: 'currency',
-      currency: 'RUB',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(delta)}`;
-  };
-
-  const baseCoinData = assetDetails[selectedAsset.id] || {
+  const coinData = assetDetails[selectedAsset.id] || {
     price: selectedAsset.price || '— ₽',
     delta: selectedAsset.delta || '—',
     percent: selectedAsset.change || '—%',
@@ -261,22 +26,10 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
     },
   };
 
-  // Обновляем данные из реальных цен, если доступны
-  const coinData = useMemo(() => {
-    if (currentPrice !== null && priceChange24h !== null) {
-      return {
-        ...baseCoinData,
-        price: formatPrice(currentPrice) || baseCoinData.price,
-        percent: formatPercent(priceChange24h) || baseCoinData.percent,
-        delta: formatDelta(currentPrice, priceChange24h) || baseCoinData.delta,
-      };
-    }
-    return baseCoinData;
-  }, [currentPrice, priceChange24h, baseCoinData]);
+  const isNegative = coinData.percent && (coinData.percent.startsWith('-') || parseFloat(coinData.percent) < 0);
 
   return (
     <div className="asset-screen">
-      {/* Заголовок с логотипом и названием */}
       <section className="asset-header-section">
         <div className="asset-header-content">
           <div className="asset-logo-container">
@@ -292,19 +45,17 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
           </div>
         </div>
 
-        {/* Цена */}
         <div className="asset-price-container">
           <div className="asset-price-value">{coinData.price}</div>
         </div>
 
-        {/* Изменение цены */}
         <div className="asset-delta-container">
           <div className="asset-delta-group">
-            <div className={`asset-delta-value ${coinData.percent && (coinData.percent.startsWith('-') || parseFloat(coinData.percent) < 0) ? 'negative' : 'positive'}`}>
+            <div className={`asset-delta-value ${isNegative ? 'negative' : 'positive'}`}>
               {coinData.delta}
             </div>
-            <div className={`asset-delta-percent ${coinData.percent && (coinData.percent.startsWith('-') || parseFloat(coinData.percent) < 0) ? 'negative' : 'positive'}`}>
-              {coinData.percent && (coinData.percent.startsWith('-') || parseFloat(coinData.percent) < 0) ? (
+            <div className={`asset-delta-percent ${isNegative ? 'negative' : 'positive'}`}>
+              {isNegative ? (
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="none" viewBox="0 0 12 16" preserveAspectRatio="xMidYMid meet">
                   <path fill="currentColor" stroke="currentColor" strokeLinejoin="round" strokeWidth="1.25" d="M6 3v9.5m0 0 4-4m-4 4-4-4"></path>
                 </svg>
@@ -320,58 +71,47 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
         </div>
       </section>
 
-      {/* График */}
       <section className="asset-chart-section">
         <div className="asset-chart-container">
           <div className="asset-chart-wrapper">
-            {!coinGeckoId ? (
-              <div className="asset-chart-loading">График недоступен для этой монеты</div>
-            ) : chartLoading ? (
-              <div className="asset-chart-loading">Загрузка графика...</div>
-            ) : chartError ? (
-              <div className="asset-chart-error">Не удалось загрузить график</div>
-            ) : (
-              <svg className="asset-chart-svg" viewBox="0 0 930 456" preserveAspectRatio="xMidYMid meet">
-                <defs>
-                  <mask id={`mouseMaskMainPath-${selectedAsset.id}`}>
-                    <rect x="0" y="0" width="930" height="456" fill="white"></rect>
-                  </mask>
-                </defs>
-                <g className="visx-group visx-rows" transform="translate(0, 0)">
-                  <line className="visx-line" x1="0" y1="426" x2="814.114" y2="426" fill="transparent" stroke="#eaf0f6" strokeWidth="1"></line>
-                  <line className="visx-line" x1="0" y1="294" x2="814.114" y2="294" fill="transparent" stroke="#eaf0f6" strokeWidth="1"></line>
-                  <line className="visx-line" x1="0" y1="162" x2="814.114" y2="162" fill="transparent" stroke="#eaf0f6" strokeWidth="1"></line>
-                  <line className="visx-line" x1="0" y1="30" x2="814.114" y2="30" fill="transparent" stroke="#eaf0f6" strokeWidth="1"></line>
+            <svg className="asset-chart-svg" viewBox="0 0 930 456" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <mask id={`mouseMaskMainPath-${selectedAsset.id}`}>
+                  <rect x="0" y="0" width="930" height="456" fill="white"></rect>
+                </mask>
+              </defs>
+              <g className="visx-group visx-rows" transform="translate(0, 0)">
+                <line className="visx-line" x1="0" y1="426" x2="814.114" y2="426" fill="transparent" stroke="#eaf0f6" strokeWidth="1"></line>
+                <line className="visx-line" x1="0" y1="294" x2="814.114" y2="294" fill="transparent" stroke="#eaf0f6" strokeWidth="1"></line>
+                <line className="visx-line" x1="0" y1="162" x2="814.114" y2="162" fill="transparent" stroke="#eaf0f6" strokeWidth="1"></line>
+                <line className="visx-line" x1="0" y1="30" x2="814.114" y2="30" fill="transparent" stroke="#eaf0f6" strokeWidth="1"></line>
+              </g>
+              <g className="visx-group visx-axis visx-axis-right" transform="translate(920, 0)">
+                <g className="visx-group visx-axis-tick" transform="translate(0, 0)">
+                  <text y="426" x="0" textAnchor="end" fontSize="12">4.66M</text>
                 </g>
-                <g className="visx-group visx-axis visx-axis-right" transform="translate(920, 0)">
-                  <g className="visx-group visx-axis-tick" transform="translate(0, 0)">
-                    <text y="426" x="0" textAnchor="end" fontSize="12">{yAxisValues[0]}</text>
-                  </g>
-                  <g className="visx-group visx-axis-tick" transform="translate(0, 0)">
-                    <text y="294" x="0" textAnchor="end" fontSize="12">{yAxisValues[1]}</text>
-                  </g>
-                  <g className="visx-group visx-axis-tick" transform="translate(0, 0)">
-                    <text y="162" x="0" textAnchor="end" fontSize="12">{yAxisValues[2]}</text>
-                  </g>
-                  <g className="visx-group visx-axis-tick" transform="translate(0, 0)">
-                    <text y="30" x="0" textAnchor="end" fontSize="12">{yAxisValues[3]}</text>
-                  </g>
+                <g className="visx-group visx-axis-tick" transform="translate(0, 0)">
+                  <text y="294" x="0" textAnchor="end" fontSize="12">4.93M</text>
                 </g>
-                {chartPath && (
-                  <path
-                    d={chartPath}
-                    fill="transparent"
-                    stroke={coinData.percent && (coinData.percent.startsWith('-') || parseFloat(coinData.percent) < 0) ? '#ff4444' : '#4caf50'}
-                    strokeWidth="6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    mask={`url(#mouseMaskMainPath-${selectedAsset.id})`}
-                    className="asset-chart-path"
-                  ></path>
-                )}
-                <rect x="0" y="0" width="814.114" height="456" fill="transparent" rx="14"></rect>
-              </svg>
-            )}
+                <g className="visx-group visx-axis-tick" transform="translate(0, 0)">
+                  <text y="162" x="0" textAnchor="end" fontSize="12">5.20M</text>
+                </g>
+                <g className="visx-group visx-axis-tick" transform="translate(0, 0)">
+                  <text y="30" x="0" textAnchor="end" fontSize="12">5.48M</text>
+                </g>
+              </g>
+              <path
+                d="M 44 380 C 120 360 200 200 280 180 C 360 160 440 120 520 100 C 600 80 680 60 770 30"
+                fill="transparent"
+                stroke={isNegative ? '#ff4444' : '#4caf50'}
+                strokeWidth="6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                mask={`url(#mouseMaskMainPath-${selectedAsset.id})`}
+                className="asset-chart-path"
+              />
+              <rect x="0" y="0" width="814.114" height="456" fill="transparent" rx="14"></rect>
+            </svg>
           </div>
           <div className="asset-chart-periods">
             <div className="asset-period-selector" role="radiogroup">
@@ -391,7 +131,6 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
         </div>
       </section>
 
-      {/* История транзакций */}
       <section className="asset-section">
         <div className="asset-section-header">
           <div className="asset-section-title">История транзакций</div>
@@ -437,7 +176,6 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
         </div>
       </section>
 
-      {/* О криптовалюте */}
       <section className="asset-section">
         <div className="asset-section-header">
           <div className="asset-section-title">О криптовалюте</div>
@@ -457,7 +195,6 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
         </div>
       </section>
 
-      {/* Обзор */}
       <section className="asset-section">
         <div className="asset-section-header">
           <div className="asset-section-title">Обзор</div>

@@ -7,7 +7,6 @@ import WalletHero from './WalletHero';
 
 function HomeScreen({
   assets,
-  walletSparklines = {},
   walletStats,
   cashAsset,
   cryptoTotal,
@@ -27,7 +26,7 @@ function HomeScreen({
         <ListRow item={cashAsset} />
       </section>
       <div className="section-gap" aria-hidden="true" />
-      <AssetsSection assets={assets} sparklines={walletSparklines} totalLabel={cryptoTotal} onOpenAsset={onOpenAsset} />
+      <AssetsSection assets={assets} totalLabel={cryptoTotal} onOpenAsset={onOpenAsset} />
       <div className="section-gap" aria-hidden="true" />
       <button className="section-button" type="button" onClick={onOpenTrade}>
         <span className="section-button-left">
