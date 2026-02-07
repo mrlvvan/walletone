@@ -23,7 +23,7 @@
 
 .app {
   min-height: 100vh;
-  background: var(--tg-theme-bg-color);
+  background: var(--tg-theme-secondary-bg-color);
   color: var(--tg-theme-text-color);
   display: flex;
   flex-direction: column;
@@ -102,7 +102,7 @@
   flex: 1;
   padding: 16px 24px 20px;
   /* Общий фон контента (в светлой теме — белый, в тёмной — тёмный) */
-  background: var(--tg-theme-bg-color);
+  background: transparent;
   display: flex;
   flex-direction: column;
   gap: 0;
