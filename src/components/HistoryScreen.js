@@ -24,33 +24,35 @@ function HistoryScreen({ items }) {
                                       {isIncoming ? (
                                         <svg
                                           xmlns="http://www.w3.org/2000/svg"
-                                          width="28"
-                                          height="28"
+                                          width="20"
+                                          height="20"
                                           fill="none"
-                                          viewBox="0 0 28 28"
+                                          viewBox="0 0 24 24"
                                           preserveAspectRatio="xMidYMid meet"
                                         >
                                           <path
-                                            fill="currentColor"
-                                            fillRule="evenodd"
-                                            d="M14 25c6.075 0 11-4.925 11-11S20.075 3 14 3 3 7.925 3 14s4.925 11 11 11m-3.434-10.566a.8.8 0 0 0-1.132 1.132l4 4a.8.8 0 0 0 1.132 0l4-4a.8.8 0 0 0-1.132-1.132L14.8 17.07V9.5a.8.8 0 0 0-1.6 0v7.569z"
-                                            clipRule="evenodd"
+                                            d="M12 6v12m0 0 4-4m-4 4-4-4"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
                                           />
                                         </svg>
                                       ) : (
                                         <svg
                                           xmlns="http://www.w3.org/2000/svg"
-                                          width="28"
-                                          height="28"
+                                          width="20"
+                                          height="20"
                                           fill="none"
-                                          viewBox="0 0 28 28"
+                                          viewBox="0 0 24 24"
                                           preserveAspectRatio="xMidYMid meet"
                                         >
                                           <path
-                                            fill="currentColor"
-                                            fillRule="evenodd"
-                                            d="M14 3C7.925 3 3 7.925 3 14s4.925 11 11 11 11-4.925 11-11S20.075 3 14 3m4.53 9.47-4-4a.75.75 0 0 0-1.06 0l-4 4a.75.75 0 1 0 1.06 1.06l2.72-2.72V19a.75.75 0 0 0 1.5 0v-8.19l2.72 2.72a.75.75 0 1 0 1.06-1.06"
-                                            clipRule="evenodd"
+                                            d="M12 18V6m0 0 4 4m-4-4-4 4"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
                                           />
                                         </svg>
                                       )}

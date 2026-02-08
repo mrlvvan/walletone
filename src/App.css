@@ -1276,9 +1276,7 @@
 
 /* История: общий фон списка транзакций — как основной фон приложения, чтобы в светлой теме не быть чёрным */
 .PKleQ .oJKLh {
-  background: var(--tg-theme-section-bg-color, #212121);
-  border-radius: 16px;
-  overflow: hidden;
+  background: transparent;
 }
 
 /* История: без боковых отступов, фон как у списка — убрать полосу сверху */
@@ -1302,6 +1300,9 @@
 
 .PKleQ .ydmxJ.tf4r_ {
   border-top: none;
+  background: var(--tg-theme-section-bg-color, #212121);
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 /* Разделитель под каждой строкой истории — чёрный (не серый темы) */
@@ -1432,8 +1433,8 @@
   min-width: 42px;
   min-height: 42px;
   border-radius: 50%;
-  background: #ffffff;
-  border: 2px solid var(--tg-theme-accent-text-color, #7ea3ff);
+  background: var(--tg-theme-accent-text-color, #7ea3ff);
+  border: none;
   color: var(--tg-theme-accent-text-color, #7ea3ff);
   display: flex;
   align-items: center;
@@ -1442,14 +1443,12 @@
 }
 
 .vilvX.PuF7l.is-in {
-  background: #ffffff;
-  border-color: var(--tg-theme-accent-text-color, #7ea3ff);
+  background: var(--tg-theme-accent-text-color, #7ea3ff);
   color: var(--tg-theme-accent-text-color, #7ea3ff);
 }
 
 .vilvX.PuF7l.is-out {
-  background: #ffffff;
-  border-color: var(--tg-theme-accent-text-color, #7ea3ff);
+  background: var(--tg-theme-accent-text-color, #7ea3ff);
   color: var(--tg-theme-accent-text-color, #7ea3ff);
 }
 
@@ -1459,6 +1458,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #ffffff;
+  border-radius: 50%;
+  color: var(--tg-theme-accent-text-color, #7ea3ff);
 }
 
 .f5GTj.Wv9yg {
