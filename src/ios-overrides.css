@@ -3,6 +3,22 @@
   background: var(--second-button-color);
 }
 
+[data-tg-platform="ios"] body {
+  background: var(--tg-theme-secondary-bg-color);
+}
+
+[data-tg-platform="ios"] .app {
+  background: var(--tg-theme-secondary-bg-color);
+}
+
+[data-tg-platform="ios"] .content {
+  background: transparent;
+}
+
+[data-tg-platform="ios"] .wallet-hero {
+  background: var(--tg-theme-secondary-bg-color);
+}
+
 /* iOS: экран "Торговля" — карточки как в кошельке */
 [data-tg-platform="ios"] .content.screen-trade .FhO5I,
 [data-tg-platform="ios"] .content.screen-trade .oJKLh {

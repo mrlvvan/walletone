@@ -23,7 +23,7 @@
 
 .app {
   min-height: 100vh;
-  background: var(--tg-theme-secondary-bg-color);
+  background: var(--tg-theme-bg-color);
   color: var(--tg-theme-text-color);
   display: flex;
   flex-direction: column;
@@ -102,7 +102,7 @@
   flex: 1;
   padding: 16px 24px 20px;
   /* Общий фон контента (в светлой теме — белый, в тёмной — тёмный) */
-  background: transparent;
+  background: var(--tg-theme-bg-color);
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -124,7 +124,7 @@
   padding-top: 0;
   padding-bottom: 0;
   /* Общий фон баланса — как общий фон экрана */
-  background: var(--tg-theme-secondary-bg-color);
+  background: var(--tg-theme-bg-color);
   margin: 0;
 }
 
@@ -1269,36 +1269,36 @@
   opacity: 0.7;
 }
 
-.PKleQ {
+[data-tg-platform="ios"] .PKleQ {
   width: 100%;
   padding: 0 16px;
 }
 
 /* История: общий фон списка транзакций — как основной фон приложения, чтобы в светлой теме не быть чёрным */
-.PKleQ .oJKLh {
+[data-tg-platform="ios"] .PKleQ .oJKLh {
   background: transparent;
 }
 
 /* История: без боковых отступов, фон как у списка — убрать полосу сверху */
-.content.screen-history {
+[data-tg-platform="ios"] .content.screen-history {
   padding-left: 0;
   padding-right: 0;
   background: var(--tg-theme-secondary-bg-color, #0f0f0f);
 }
 
-.content.screen-history .PKleQ {
+[data-tg-platform="ios"] .content.screen-history .PKleQ {
   padding-left: 16px;
   padding-right: 16px;
 }
 
 /* История: убрать разделительную линию и отдельный фон у заголовка — без полосы сверху */
-.PKleQ .hCZ1A,
-.PKleQ .Rfm73 {
+[data-tg-platform="ios"] .PKleQ .hCZ1A,
+[data-tg-platform="ios"] .PKleQ .Rfm73 {
   border-bottom: none;
   background: transparent;
 }
 
-.PKleQ .ydmxJ.tf4r_ {
+[data-tg-platform="ios"] .PKleQ .ydmxJ.tf4r_ {
   border-top: none;
   background: var(--tg-theme-section-bg-color, #212121);
   border-radius: 16px;
@@ -1306,30 +1306,30 @@
 }
 
 /* Разделитель под каждой строкой истории — чёрный (не серый темы) */
-.PKleQ .Wv9yg::after {
+[data-tg-platform="ios"] .PKleQ .Wv9yg::after {
   /* Убираем лишнюю чёрную полоску — используем прозрачный фон */
   background: transparent;
 }
 
 /* У последнего элемента списка чёрную полосу не показывать */
-.PKleQ .mjigr.LQUdc > *:last-child .Wv9yg::after {
+[data-tg-platform="ios"] .PKleQ .mjigr.LQUdc > *:last-child .Wv9yg::after {
   display: none;
 }
 
-.wtAUk.gEZt4 {
+[data-tg-platform="ios"] .wtAUk.gEZt4 {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.oJKLh.LySHd.iXSn4 {
+[data-tg-platform="ios"] .oJKLh.LySHd.iXSn4 {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
 /* Блок заголовка секции (Рынок США, Продукты и т.д.) — референс hCZ1A */
-.hCZ1A {
+[data-tg-platform="ios"] .hCZ1A {
   background: var(--tg-theme-section-bg-color);
   padding-block: 20px 4px;
   padding-inline: 20px;
@@ -1422,12 +1422,12 @@
 }
 
 /* История: отступы контейнера иконки (SVG) — компактно, текст рядом с иконкой */
-.PKleQ .XeMWN {
+[data-tg-platform="ios"] .PKleQ .XeMWN {
   margin: 0 10px 0 12px;
 }
 
 /* ref 33331: icon circle 28px; 25042 WKcXc 42px; ref purple #5E4DBE for history */
-.vilvX.PuF7l {
+[data-tg-platform="ios"] .vilvX.PuF7l {
   width: 42px;
   height: 42px;
   min-width: 42px;
@@ -1442,17 +1442,17 @@
   flex-shrink: 0;
 }
 
-.vilvX.PuF7l.is-in {
+[data-tg-platform="ios"] .vilvX.PuF7l.is-in {
   background: var(--tg-theme-accent-text-color, #7ea3ff);
   color: var(--tg-theme-accent-text-color, #7ea3ff);
 }
 
-.vilvX.PuF7l.is-out {
+[data-tg-platform="ios"] .vilvX.PuF7l.is-out {
   background: var(--tg-theme-accent-text-color, #7ea3ff);
   color: var(--tg-theme-accent-text-color, #7ea3ff);
 }
 
-.history-arrow {
+[data-tg-platform="ios"] .history-arrow {
   width: 28px;
   height: 28px;
   display: flex;
