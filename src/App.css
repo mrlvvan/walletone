@@ -497,29 +497,29 @@
   font-size: 18px;
 }
 
-/* Главный экран: карточки не должны липнуть к краям */
-.content.screen-home .list-card,
-.content.screen-home .section.crypto-section,
-.content.screen-home .section-button {
+/* iOS: карточки не должны липнуть к краям */
+[data-tg-platform="ios"] .content.screen-home .list-card,
+[data-tg-platform="ios"] .content.screen-home .section.crypto-section,
+[data-tg-platform="ios"] .content.screen-home .section-button {
   margin-left: 10px;
   margin-right: 10px;
 }
 
-.content.screen-home .section-button {
+[data-tg-platform="ios"] .content.screen-home .section-button {
   width: auto;
 }
 
-/* Единые боковые отступы секционных блоков (везде, кроме Бонусов) */
-.content:not(.screen-bonus) .list-card,
-.content:not(.screen-bonus) .section,
-.content:not(.screen-bonus) .section-button,
-.content:not(.screen-bonus) .market-section,
-.content:not(.screen-bonus) .oJKLh.LySHd.iXSn4 {
+/* iOS: единые боковые отступы секционных блоков (везде, кроме Бонусов) */
+[data-tg-platform="ios"] .content:not(.screen-bonus) .list-card,
+[data-tg-platform="ios"] .content:not(.screen-bonus) .section,
+[data-tg-platform="ios"] .content:not(.screen-bonus) .section-button,
+[data-tg-platform="ios"] .content:not(.screen-bonus) .market-section,
+[data-tg-platform="ios"] .content:not(.screen-bonus) .oJKLh.LySHd.iXSn4 {
   margin-left: 10px;
   margin-right: 10px;
 }
 
-.content.screen-history .PKleQ {
+[data-tg-platform="ios"] .content.screen-history .PKleQ {
   padding-left: 10px;
   padding-right: 10px;
 }

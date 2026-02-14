@@ -1,20 +1,15 @@
-/* iOS-специфичные стили — только подсветка кнопок кошелька */
+/* iOS: на референсе отступы формируются карточками, не контейнером */
+[data-tg-platform="ios"] .content {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* iOS: подсветка под кнопками действий на главном */
 [data-tg-platform="ios"] .content.screen-home .wallet-actions .action-item {
   background: var(--second-button-color);
 }
 
-/* iOS: общий горизонтальный ритм ~10px */
-[data-tg-platform="ios"] .content {
-  padding-left: 10px !important;
-  padding-right: 10px !important;
-}
-
-[data-tg-platform="ios"] .content.screen-history .PKleQ {
-  padding-left: 10px !important;
-  padding-right: 10px !important;
-}
-
-/* iOS: чуть более круглые края у блоков */
+/* iOS: единые более круглые карточки */
 [data-tg-platform="ios"] .list-card,
 [data-tg-platform="ios"] .section,
 [data-tg-platform="ios"] .section-button,
@@ -26,7 +21,29 @@
   border-radius: 18px !important;
 }
 
-/* iOS: экран "Торговля" — карточки как в кошельке */
+/* iOS: кошелек как в референсе — секции с одинаковым полем по бокам */
+[data-tg-platform="ios"] .content.screen-home .wallet-hero,
+[data-tg-platform="ios"] .content.screen-home .wallet-actions,
+[data-tg-platform="ios"] .content.screen-home .promo-slider,
+[data-tg-platform="ios"] .content.screen-home .list-card,
+[data-tg-platform="ios"] .content.screen-home .section,
+[data-tg-platform="ios"] .content.screen-home .section-button {
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+
+/* iOS: контейнер кнопок без фона-плашки, как на скрине */
+[data-tg-platform="ios"] .content.screen-home .wallet-actions {
+  background: transparent;
+}
+
+/* iOS: история с тем же горизонтальным ритмом */
+[data-tg-platform="ios"] .content.screen-history .PKleQ {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+/* iOS: экран "Торговля" — карточная геометрия как на главном */
 [data-tg-platform="ios"] .content.screen-trade .FhO5I,
 [data-tg-platform="ios"] .content.screen-trade .oJKLh {
   background: transparent;
