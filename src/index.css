@@ -157,7 +157,7 @@ body {
 
 body {
   font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--tg-theme-bg-color, #212121);
+  background: var(--tg-theme-secondary-bg-color, #0f1117);
   color: var(--tg-theme-text-color, #ffffff);
   font-size: 16px;
   line-height: 1.25;

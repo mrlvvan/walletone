@@ -3,20 +3,27 @@
   background: var(--second-button-color);
 }
 
-[data-tg-platform="ios"] body {
-  background: var(--tg-theme-secondary-bg-color);
-}
-
-[data-tg-platform="ios"] .app {
-  background: var(--tg-theme-secondary-bg-color);
-}
-
+/* iOS: общий горизонтальный ритм ~10px */
 [data-tg-platform="ios"] .content {
-  background: transparent;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
 }
 
-[data-tg-platform="ios"] .wallet-hero {
-  background: var(--tg-theme-secondary-bg-color);
+[data-tg-platform="ios"] .content.screen-history .PKleQ {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+/* iOS: чуть более круглые края у блоков */
+[data-tg-platform="ios"] .list-card,
+[data-tg-platform="ios"] .section,
+[data-tg-platform="ios"] .section-button,
+[data-tg-platform="ios"] .asset-section-content,
+[data-tg-platform="ios"] .bonus-card,
+[data-tg-platform="ios"] .market-section,
+[data-tg-platform="ios"] .content.screen-trade .JNQMw .ydmxJ.tf4r_,
+[data-tg-platform="ios"] .content.screen-history .PKleQ .ydmxJ.tf4r_ {
+  border-radius: 18px !important;
 }
 
 /* iOS: экран "Торговля" — карточки как в кошельке */
