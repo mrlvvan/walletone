@@ -1,15 +1,46 @@
-/* iOS: на референсе отступы формируются карточками, не контейнером */
+/* ========== iOS: единый файл всех оверрайдов ========== */
+
+/* --- Контент: без бокового паддинга, отступы дают сами карточки --- */
 [data-tg-platform="ios"] .content {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
 
-/* iOS: подсветка под кнопками действий на главном */
+/* --- Главный экран (Кошелёк) --- */
+[data-tg-platform="ios"] .content.screen-home .wallet-hero,
+[data-tg-platform="ios"] .content.screen-home .wallet-actions,
+[data-tg-platform="ios"] .content.screen-home .promo-slider,
+[data-tg-platform="ios"] .content.screen-home .list-card,
+[data-tg-platform="ios"] .content.screen-home .section,
+[data-tg-platform="ios"] .content.screen-home .section.crypto-section,
+[data-tg-platform="ios"] .content.screen-home .section-button {
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+
+[data-tg-platform="ios"] .content.screen-home .section-button {
+  width: auto;
+}
+
+[data-tg-platform="ios"] .content.screen-home .wallet-actions {
+  background: transparent;
+}
+
 [data-tg-platform="ios"] .content.screen-home .wallet-actions .action-item {
   background: var(--second-button-color);
 }
 
-/* iOS: единые более круглые карточки */
+/* --- Торговля, История (кроме Бонусов): боковые отступы у секций --- */
+[data-tg-platform="ios"] .content:not(.screen-bonus) .list-card,
+[data-tg-platform="ios"] .content:not(.screen-bonus) .section,
+[data-tg-platform="ios"] .content:not(.screen-bonus) .section-button,
+[data-tg-platform="ios"] .content:not(.screen-bonus) .market-section,
+[data-tg-platform="ios"] .content:not(.screen-bonus) .oJKLh.LySHd.iXSn4 {
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+
+/* --- Закругления карточек --- */
 [data-tg-platform="ios"] .list-card,
 [data-tg-platform="ios"] .section,
 [data-tg-platform="ios"] .section-button,
@@ -21,29 +52,7 @@
   border-radius: 18px !important;
 }
 
-/* iOS: кошелек как в референсе — секции с одинаковым полем по бокам */
-[data-tg-platform="ios"] .content.screen-home .wallet-hero,
-[data-tg-platform="ios"] .content.screen-home .wallet-actions,
-[data-tg-platform="ios"] .content.screen-home .promo-slider,
-[data-tg-platform="ios"] .content.screen-home .list-card,
-[data-tg-platform="ios"] .content.screen-home .section,
-[data-tg-platform="ios"] .content.screen-home .section-button {
-  margin-left: 10px !important;
-  margin-right: 10px !important;
-}
-
-/* iOS: контейнер кнопок без фона-плашки, как на скрине */
-[data-tg-platform="ios"] .content.screen-home .wallet-actions {
-  background: transparent;
-}
-
-/* iOS: история с тем же горизонтальным ритмом */
-[data-tg-platform="ios"] .content.screen-history .PKleQ {
-  padding-left: 10px !important;
-  padding-right: 10px !important;
-}
-
-/* iOS: экран "Торговля" — карточная геометрия как на главном */
+/* --- Экран Торговля --- */
 [data-tg-platform="ios"] .content.screen-trade .FhO5I,
 [data-tg-platform="ios"] .content.screen-trade .oJKLh {
   background: transparent;
@@ -67,4 +76,102 @@
 
 [data-tg-platform="ios"] .content.screen-trade .market-section .PReSx {
   padding-inline: 0;
+}
+
+/* --- Экран История --- */
+[data-tg-platform="ios"] .content.screen-history {
+  padding-left: 0;
+  padding-right: 0;
+  background: var(--tg-theme-secondary-bg-color, #0f0f0f);
+}
+
+[data-tg-platform="ios"] .content.screen-history .PKleQ {
+  width: 100%;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+[data-tg-platform="ios"] .PKleQ .oJKLh {
+  background: transparent;
+}
+
+[data-tg-platform="ios"] .PKleQ .hCZ1A,
+[data-tg-platform="ios"] .PKleQ .Rfm73 {
+  border-bottom: none;
+  background: transparent;
+}
+
+[data-tg-platform="ios"] .PKleQ .ydmxJ.tf4r_ {
+  border-top: none;
+  background: var(--tg-theme-section-bg-color, #212121);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+[data-tg-platform="ios"] .PKleQ .Wv9yg::after {
+  background: transparent;
+}
+
+[data-tg-platform="ios"] .PKleQ .mjigr.LQUdc > *:last-child .Wv9yg::after {
+  display: none;
+}
+
+[data-tg-platform="ios"] .wtAUk.gEZt4 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+[data-tg-platform="ios"] .oJKLh.LySHd.iXSn4 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+[data-tg-platform="ios"] .hCZ1A {
+  background: var(--tg-theme-section-bg-color);
+  padding-block: 20px 4px;
+  padding-inline: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+[data-tg-platform="ios"] .PKleQ .XeMWN {
+  margin: 0 10px 0 12px;
+}
+
+[data-tg-platform="ios"] .vilvX.PuF7l {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+  border-radius: 50%;
+  background: var(--tg-theme-accent-text-color, #7ea3ff);
+  border: none;
+  color: var(--tg-theme-accent-text-color, #7ea3ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+[data-tg-platform="ios"] .vilvX.PuF7l.is-in {
+  background: var(--tg-theme-accent-text-color, #7ea3ff);
+  color: var(--tg-theme-accent-text-color, #7ea3ff);
+}
+
+[data-tg-platform="ios"] .vilvX.PuF7l.is-out {
+  background: var(--tg-theme-accent-text-color, #7ea3ff);
+  color: var(--tg-theme-accent-text-color, #7ea3ff);
+}
+
+[data-tg-platform="ios"] .history-arrow {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: 50%;
+  color: var(--tg-theme-accent-text-color, #7ea3ff);
 }
