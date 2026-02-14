@@ -1990,6 +1990,13 @@ function App() {
     setScreen(tab);
   };
 
+  // Сброс скролла при переключении разделов — страница всегда сверху
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [screen]);
+
   return (
     <div className="app">
       <main
@@ -2014,7 +2021,6 @@ function App() {
         {screen === 'asset' && <AssetScreen selectedAsset={selectedAsset} activity={activity} assetDetails={assetDetails} />}
         {screen === 'trade' && (
           <MarketScreen
-            promoSlides={promoSlides}
             marketTickers={marketTickers}
             fundTickers={fundTickers}
             topDay={topDay}

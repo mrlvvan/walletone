@@ -934,45 +934,45 @@
   overflow: initial;
 }
 
-/* Вся форма поиска — отступ 14px слева и справа, форма заканчивается по отступу */
+/* Вся форма поиска — компактный отступ 6–8px вокруг поля */
 .JNQMw .pPd9Y.nsMB8 {
   width: 100%;
   margin: 0;
   border: 0;
-  padding: 14px;
+  padding: 8px 12px;
   box-sizing: border-box;
 }
 
 /* Лейбл поиска — иконка слева, поле справа в одну строку (не колонкой) */
 .JNQMw label.YrFt1.DIb0V,
 .JNQMw .YrFt1 {
-  --icon-size: 24px;
-  --icon-padding: 8px;
+  --icon-size: 20px;
+  --icon-padding: 6px;
   display: flex !important;
   flex-direction: row !important;
   flex-wrap: nowrap;
   align-items: center;
   position: relative;
   width: 100%;
-  height: 50px;
-  min-height: 50px;
+  height: 40px;
+  min-height: 40px;
   background: var(--tg-theme-section-bg-color);
   color: var(--tg-theme-text-color);
   box-sizing: border-box;
 }
 
 .JNQMw .YrFt1.DIb0V {
-  --input-text-padding: 14px;
-  --close-icon-padding: 12px;
-  --reserved-space-for-animated-label: 6px;
-  --search-label-padding-inline: 14px;
+  --input-text-padding: 8px;
+  --close-icon-padding: 8px;
+  --reserved-space-for-animated-label: 4px;
+  --search-label-padding-inline: 10px;
   --search-label-translate-x: calc(var(--search-label-padding-inline) + var(--icon-size));
   --search-label-translate-x-focused: -4px;
   --search-label-translate-y-focused: calc(var(--input-text-padding) * -1 - 9px);
   --border-color: oklch(from #aaaaaa l c h / 40%);
-  gap: 8px;
+  gap: 6px;
   border: 0.5px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 22px;
   margin-block-start: var(--reserved-space-for-animated-label);
   outline: 1.5px solid transparent;
   transition: border 0.2s linear, outline 0.2s linear;
@@ -1046,8 +1046,8 @@
 /* Плейсхолдер «Поиск» — в одну линию с инпутом: тот же отступ, что и начало текста в поле */
 .JNQMw .TlsKl {
   position: absolute;
-  /* лейбл 14px + иконка + gap + padding инпута = начало текста в инпуте */
-  left: calc(var(--search-label-padding-inline) + var(--icon-size) + 8px + var(--icon-padding));
+  /* лейбл padding + иконка + gap + padding инпута = начало текста в инпуте */
+  left: calc(var(--search-label-padding-inline) + var(--icon-size) + 6px + var(--icon-padding));
   right: auto;
   width: auto;
   top: 50%;

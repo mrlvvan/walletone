@@ -1,8 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
-import PromoSlider from './PromoSlider';
 import './MarketScreen.css';
 
-function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, topDayFall = [], assets, searchAssets, tonAssets, onOpenAsset }) {
+function MarketScreen({ marketTickers, fundTickers = [], topDay, topDayFall = [], assets, searchAssets, tonAssets, onOpenAsset }) {
   const searchInputRef = useRef(null);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [searchFilterTab, setSearchFilterTab] = useState('all'); // 'all' | 'crypto' | 'stocks' | 'funds'
@@ -349,8 +348,6 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
         </div>
         </section>
       </div>
-      <div className="section-gap" aria-hidden="true" />
-      <PromoSlider slides={promoSlides} />
       <div className="section-gap" aria-hidden="true" />
 
       <section className="market-section">

@@ -1,9 +1,16 @@
 /* ========== iOS: единый файл всех оверрайдов ========== */
 
-/* --- Контент: без бокового паддинга, отступы дают сами карточки --- */
+/* --- Контент: без бокового паддинга на Home/History, отступы дают карточки --- */
 [data-tg-platform="ios"] .content {
   padding-left: 0 !important;
   padding-right: 0 !important;
+}
+
+/* Торговля: padding контейнера вместо margin секций — корректная ширина и отступы */
+[data-tg-platform="ios"] .content.screen-trade {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  box-sizing: border-box;
 }
 
 /* --- Главный экран (Кошелёк) --- */
@@ -30,14 +37,14 @@
   background: var(--second-button-color);
 }
 
-/* --- Торговля, История (кроме Бонусов): боковые отступы у секций --- */
-[data-tg-platform="ios"] .content:not(.screen-bonus) .list-card,
-[data-tg-platform="ios"] .content:not(.screen-bonus) .section,
-[data-tg-platform="ios"] .content:not(.screen-bonus) .section-button,
-[data-tg-platform="ios"] .content:not(.screen-bonus) .market-section,
-[data-tg-platform="ios"] .content:not(.screen-bonus) .oJKLh.LySHd.iXSn4 {
-  margin-left: 10px !important;
-  margin-right: 10px !important;
+/* Торговля: секции без margin — отступы идут от padding content */
+[data-tg-platform="ios"] .content.screen-trade .market-section,
+[data-tg-platform="ios"] .content.screen-trade .oJKLh.LySHd.iXSn4,
+[data-tg-platform="ios"] .content.screen-trade .market-us-row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* --- Закругления карточек --- */
@@ -47,9 +54,17 @@
 [data-tg-platform="ios"] .asset-section-content,
 [data-tg-platform="ios"] .bonus-card,
 [data-tg-platform="ios"] .market-section,
+[data-tg-platform="ios"] .promo-slider,
+[data-tg-platform="ios"] .promo-slide,
 [data-tg-platform="ios"] .content.screen-trade .JNQMw .ydmxJ.tf4r_,
 [data-tg-platform="ios"] .content.screen-history .PKleQ .ydmxJ.tf4r_ {
   border-radius: 18px !important;
+}
+
+/* Промо в Кошельке: закругление и overflow для слайдов */
+[data-tg-platform="ios"] .promo-slider,
+[data-tg-platform="ios"] .promo-slide {
+  overflow: hidden;
 }
 
 /* --- Экран Торговля --- */
@@ -58,28 +73,32 @@
   background: transparent;
 }
 
-/* Поиск: закруглённый блок, общий стиль */
+/* Поиск: компактная высота, 5–8px вокруг надписи, сильнее закруглён */
 [data-tg-platform="ios"] .content.screen-trade .JNQMw .ydmxJ.tf4r_.search-input-wrap,
 [data-tg-platform="ios"] .content.screen-trade .JNQMw .ydmxJ.tf4r_ {
   background: var(--tg-theme-section-bg-color) !important;
-  border-radius: 18px !important;
+  border-radius: 24px !important;
   overflow: hidden;
 }
 
 [data-tg-platform="ios"] .content.screen-trade .JNQMw .YrFt1.DIb0V,
 [data-tg-platform="ios"] .content.screen-trade .JNQMw label.YrFt1.DIb0V {
-  border-radius: 18px !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  border-radius: 24px !important;
   border: none !important;
+  --icon-size: 18px !important;
+  --icon-padding: 5px !important;
+  --input-text-padding: 6px !important;
+  --search-label-padding-inline: 8px !important;
 }
 
 [data-tg-platform="ios"] .content.screen-trade .JNQMw .pPd9Y.nsMB8 {
-  padding: 12px 16px;
+  padding: 6px 10px !important;
 }
 
 /* Рынок США: надписи «Рынок США» и «Посмотреть всё» вынесены на фон (вне секции) */
 [data-tg-platform="ios"] .content.screen-trade .market-us-row {
-  margin-left: 10px !important;
-  margin-right: 10px !important;
   gap: 8px;
   display: flex;
   flex-direction: column;
@@ -124,23 +143,20 @@
   padding-inline: 0;
 }
 
-/* Отступы в секции Торговля: поиск и блоки с 10px по бокам */
-[data-tg-platform="ios"] .content.screen-trade .oJKLh.LySHd.iXSn4.KIbKh {
-  margin-left: 10px !important;
-  margin-right: 10px !important;
-}
-
 [data-tg-platform="ios"] .content.screen-trade .FhO5I {
-  padding-inline: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-/* Торговля: убрать отдельный фон у заголовков (Топ дня, Все активы, Активы TON, Посмотреть все) — фон только у самих надписей/контента */
+/* Торговля: заголовки (Топ дня, Все активы, Активы TON, Продукты, Посмотреть все) на общем фоне */
 [data-tg-platform="ios"] .content.screen-trade .Rfm73,
 [data-tg-platform="ios"] .content.screen-trade .Rfm73.Jn71M.hCZ1A,
 [data-tg-platform="ios"] .content.screen-trade .market-section .Rfm73,
+[data-tg-platform="ios"] .content.screen-trade .market-section .JNQMw > .Rfm73,
 [data-tg-platform="ios"] .content.screen-trade .CgUOn .Rfm73,
 [data-tg-platform="ios"] .content.screen-trade .Rfm73.ZR_ns.umRMK.kJf7o {
-  background: transparent !important;
+  background: var(--tg-theme-secondary-bg-color) !important;
 }
 
 /* --- Экран История --- */
