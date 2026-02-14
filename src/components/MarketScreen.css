@@ -627,6 +627,9 @@
 .CgUOn.pmioA .Rfm73.Jn71M.hCZ1A {
   justify-content: space-between;
   width: 100%;
+  padding-block: 20px 4px;
+  padding-inline: 20px;
+  box-sizing: border-box;
 }
 
 /* Текст заголовка секции «Рынок США» и др. — референс KbDJo, eqZCR */
@@ -1504,6 +1507,10 @@
 /* Секция «Все активы» — размер заголовка как у «Продукты», «Посмотреть все» — цвет как в «Топ дня» */
 .CgUOn.lKYcT .Rfm73 {
   justify-content: space-between;
+  width: 100%;
+  padding-block: 20px 4px;
+  padding-inline: 20px;
+  box-sizing: border-box;
 }
 
 .CgUOn.lKYcT .Rfm73 .section-title-subtitle {
