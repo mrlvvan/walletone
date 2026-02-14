@@ -58,24 +58,89 @@
   background: transparent;
 }
 
+/* Поиск: закруглённый блок, общий стиль */
+[data-tg-platform="ios"] .content.screen-trade .JNQMw .ydmxJ.tf4r_.search-input-wrap,
 [data-tg-platform="ios"] .content.screen-trade .JNQMw .ydmxJ.tf4r_ {
-  background: var(--tg-theme-section-bg-color);
-  border-radius: 16px;
+  background: var(--tg-theme-section-bg-color) !important;
+  border-radius: 18px !important;
   overflow: hidden;
+}
+
+[data-tg-platform="ios"] .content.screen-trade .JNQMw .YrFt1.DIb0V,
+[data-tg-platform="ios"] .content.screen-trade .JNQMw label.YrFt1.DIb0V {
+  border-radius: 18px !important;
+  border: none !important;
 }
 
 [data-tg-platform="ios"] .content.screen-trade .JNQMw .pPd9Y.nsMB8 {
   padding: 12px 16px;
 }
 
+/* Рынок США: надписи «Рынок США» и «Посмотреть всё» вынесены на фон (вне секции) */
+[data-tg-platform="ios"] .content.screen-trade .market-us-row {
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+[data-tg-platform="ios"] .content.screen-trade .market-section-header {
+  background: transparent !important;
+  padding-inline: 0;
+  padding-block: 0;
+}
+
+[data-tg-platform="ios"] .content.screen-trade .market-section-header .Rfm73 {
+  padding-inline: 0;
+  padding-block: 16px 4px;
+}
+
+/* Секция Рынок США: начинается чуть выше «Акции/Фонды», общий стиль с закруглениями */
+[data-tg-platform="ios"] .content.screen-trade .market-section-card {
+  background: var(--tg-theme-section-bg-color) !important;
+  border-radius: 18px !important;
+  padding: 12px 16px 16px !important;
+  margin: 0;
+  overflow: hidden;
+}
+
+[data-tg-platform="ios"] .content.screen-trade .market-section-card .Ofdvj.PReSx {
+  padding-inline: 0;
+  padding-block: 0 12px;
+}
+
+[data-tg-platform="ios"] .content.screen-trade .market-section-card .mFYy9.IPADx {
+  background-color: var(--tg-theme-secondary-bg-color);
+}
+
 [data-tg-platform="ios"] .content.screen-trade .market-section {
   background: var(--tg-theme-section-bg-color);
-  border-radius: 16px;
+  border-radius: 18px !important;
   padding: 12px 16px;
 }
 
 [data-tg-platform="ios"] .content.screen-trade .market-section .PReSx {
   padding-inline: 0;
+}
+
+/* Отступы в секции Торговля: поиск и блоки с 10px по бокам */
+[data-tg-platform="ios"] .content.screen-trade .oJKLh.LySHd.iXSn4.KIbKh {
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+
+[data-tg-platform="ios"] .content.screen-trade .FhO5I {
+  padding-inline: 0;
+}
+
+/* Торговля: убрать отдельный фон у заголовков (Топ дня, Все активы, Активы TON, Посмотреть все) — фон только у самих надписей/контента */
+[data-tg-platform="ios"] .content.screen-trade .Rfm73,
+[data-tg-platform="ios"] .content.screen-trade .Rfm73.Jn71M.hCZ1A,
+[data-tg-platform="ios"] .content.screen-trade .market-section .Rfm73,
+[data-tg-platform="ios"] .content.screen-trade .CgUOn .Rfm73,
+[data-tg-platform="ios"] .content.screen-trade .Rfm73.ZR_ns.umRMK.kJf7o {
+  background: transparent !important;
 }
 
 /* --- Экран История --- */

@@ -61,7 +61,7 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
       <div className={`FhO5I ${isSearchFocused ? 'search-overlay-open' : ''}`}>
         <section className="oJKLh LySHd iXSn4 KIbKh">
           <div className="JNQMw">
-            <div className="ydmxJ tf4r_" style={{ borderRadius: 0, overflow: 'initial' }}>
+            <div className="ydmxJ tf4r_ search-input-wrap">
               <form className="pPd9Y nsMB8" action=".">
                 <label className="cpHhd IqPae PmUAN Ka5fP YrFt1 DIb0V XTiUr l_jV4">
                   <div className="KKBuo">
@@ -235,17 +235,20 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
 
       {!isSearchFocused && (
       <>
-      <section className="market-section">
-        <div className="Rfm73 Jn71M hCZ1A">
-          <div className="cpHhd KbDJo eqZCR">Рынок США</div>
-          <div className="cpHhd KbDJo eqZCR z5Bkg z5Bkg">
-            <div className="cpHhd UBSxc t6rva">
-              <button type="button" className="cpHhd uzQIE SqDwU hQlED" onClick={() => openSearchWithFilter('stocks')}>
-                Посмотреть все
-              </button>
+      <div className="market-us-row">
+        <div className="market-section-header">
+          <div className="Rfm73 Jn71M hCZ1A">
+            <div className="cpHhd KbDJo eqZCR">Рынок США</div>
+            <div className="cpHhd KbDJo eqZCR z5Bkg z5Bkg">
+              <div className="cpHhd UBSxc t6rva">
+                <button type="button" className="cpHhd uzQIE SqDwU hQlED" onClick={() => openSearchWithFilter('stocks')}>
+                  Посмотреть все
+                </button>
+              </div>
             </div>
           </div>
         </div>
+        <section className="market-section market-section-card">
         <div className="Ofdvj PReSx">
           <div className="Zwf9p mFYy9 IPADx" role="radiogroup">
             <div
@@ -344,7 +347,8 @@ function MarketScreen({ promoSlides, marketTickers, fundTickers = [], topDay, to
             ))}
           </div>
         </div>
-      </section>
+        </section>
+      </div>
       <div className="section-gap" aria-hidden="true" />
       <PromoSlider slides={promoSlides} />
       <div className="section-gap" aria-hidden="true" />

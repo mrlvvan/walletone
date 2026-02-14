@@ -24,7 +24,18 @@
   opacity: 0.7;
 }
 
-.market-section {
+.market-us-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.market-section-header {
+  /* заголовок «Рынок США» + «Посмотреть все» — на десктопе внутри, на iOS вынесен на фон */
+}
+
+.market-section,
+.market-section-card {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -623,6 +634,7 @@
 }
 
 /* «Рынок США» и «Топ дня» — «Посмотреть все» справа */
+.market-section-header .Rfm73.Jn71M.hCZ1A,
 .market-section .Rfm73.Jn71M.hCZ1A,
 .CgUOn.pmioA .Rfm73.Jn71M.hCZ1A {
   justify-content: space-between;
@@ -916,6 +928,7 @@
 }
 
 /* Поиск — всё для блока поиска по референсу (YrFt1, DIb0V, IqPae, PmUAN, cpHhd, Ka5fP) */
+.JNQMw .ydmxJ.tf4r_.search-input-wrap,
 .JNQMw .ydmxJ.tf4r_ {
   border-radius: 0;
   overflow: initial;
@@ -1385,9 +1398,6 @@
 
 [data-tg-theme="light"] .mFYy9.IPADx {
   background-color: var(--tg-theme-secondary-bg-color);
-}
-[data-tg-theme="light"] .TsSEl {
-  background-color: var(--segmented-control-active-background);
 }
 [data-tg-theme="light"] .p_KOn.r3qNc .SNkiP {
   color: var(--tg-theme-text-color);
