@@ -927,62 +927,62 @@
   justify-content: center;
 }
 
-/* Поиск — всё для блока поиска по референсу (YrFt1, DIb0V, IqPae, PmUAN, cpHhd, Ka5fP) */
+/* Обёртка поиска — pill-форма, закруглённый блок */
 .JNQMw .ydmxJ.tf4r_.search-input-wrap,
 .JNQMw .ydmxJ.tf4r_ {
-  border-radius: 0;
-  overflow: initial;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--tg-theme-section-bg-color);
 }
 
-/* Вся форма поиска — компактный отступ 6–8px вокруг поля */
+/* Поиск — компактный, pill-форма как в референсе */
 .JNQMw .pPd9Y.nsMB8 {
   width: 100%;
   margin: 0;
   border: 0;
-  padding: 8px 12px;
+  padding: 6px 10px;
   box-sizing: border-box;
 }
 
-/* Лейбл поиска — иконка слева, поле справа в одну строку (не колонкой) */
+/* Лейбл поиска — иконка слева, поле справа, компактная высота */
 .JNQMw label.YrFt1.DIb0V,
 .JNQMw .YrFt1 {
-  --icon-size: 20px;
-  --icon-padding: 6px;
+  --icon-size: 18px;
+  --icon-padding: 5px;
   display: flex !important;
   flex-direction: row !important;
   flex-wrap: nowrap;
   align-items: center;
   position: relative;
   width: 100%;
-  height: 40px;
-  min-height: 40px;
+  height: 36px;
+  min-height: 36px;
   background: var(--tg-theme-section-bg-color);
   color: var(--tg-theme-text-color);
   box-sizing: border-box;
 }
 
 .JNQMw .YrFt1.DIb0V {
-  --input-text-padding: 8px;
-  --close-icon-padding: 8px;
-  --reserved-space-for-animated-label: 4px;
-  --search-label-padding-inline: 10px;
+  --input-text-padding: 6px;
+  --close-icon-padding: 6px;
+  --reserved-space-for-animated-label: 2px;
+  --search-label-padding-inline: 8px;
   --search-label-translate-x: calc(var(--search-label-padding-inline) + var(--icon-size));
   --search-label-translate-x-focused: -4px;
-  --search-label-translate-y-focused: calc(var(--input-text-padding) * -1 - 9px);
+  --search-label-translate-y-focused: calc(var(--input-text-padding) * -1 - 8px);
   --border-color: oklch(from #aaaaaa l c h / 40%);
-  gap: 6px;
-  border: 0.5px solid var(--border-color);
-  border-radius: 22px;
+  gap: 5px;
+  border: none;
+  border-radius: 999px;
   margin-block-start: var(--reserved-space-for-animated-label);
-  outline: 1.5px solid transparent;
-  transition: border 0.2s linear, outline 0.2s linear;
+  outline: none;
+  transition: box-shadow 0.2s linear;
   padding: 0 var(--search-label-padding-inline);
 }
 
-/* При фокусе: обводка поиска и иконка — акцентный цвет */
+/* При фокусе: лёгкая обводка и иконка — акцентный цвет */
 .JNQMw .DIb0V:focus-within {
-  border-color: var(--tg-theme-accent-text-color);
-  outline: 1.5px solid var(--tg-theme-accent-text-color);
+  box-shadow: 0 0 0 1.5px var(--tg-theme-accent-text-color);
 }
 
 .JNQMw .DIb0V:focus-within .KKBuo .cqybA {
@@ -1043,11 +1043,10 @@
   padding-inline-end: var(--icon-padding);
 }
 
-/* Плейсхолдер «Поиск» — в одну линию с инпутом: тот же отступ, что и начало текста в поле */
+/* Плейсхолдер «Поиск» — в одну линию с инпутом */
 .JNQMw .TlsKl {
   position: absolute;
-  /* лейбл padding + иконка + gap + padding инпута = начало текста в инпуте */
-  left: calc(var(--search-label-padding-inline) + var(--icon-size) + 6px + var(--icon-padding));
+  left: calc(var(--search-label-padding-inline) + var(--icon-size) + 5px + var(--icon-padding));
   right: auto;
   width: auto;
   top: 50%;

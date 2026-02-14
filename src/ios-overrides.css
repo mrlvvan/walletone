@@ -73,24 +73,15 @@
   background: transparent;
 }
 
-/* Поиск: компактная высота, 5–8px вокруг надписи, сильнее закруглён */
+/* Поиск на iOS: как в референсе — pill, компактный */
 [data-tg-platform="ios"] .content.screen-trade .JNQMw .ydmxJ.tf4r_.search-input-wrap,
 [data-tg-platform="ios"] .content.screen-trade .JNQMw .ydmxJ.tf4r_ {
-  background: var(--tg-theme-section-bg-color) !important;
-  border-radius: 24px !important;
-  overflow: hidden;
+  border-radius: 999px !important;
 }
 
 [data-tg-platform="ios"] .content.screen-trade .JNQMw .YrFt1.DIb0V,
 [data-tg-platform="ios"] .content.screen-trade .JNQMw label.YrFt1.DIb0V {
-  height: 36px !important;
-  min-height: 36px !important;
-  border-radius: 24px !important;
-  border: none !important;
-  --icon-size: 18px !important;
-  --icon-padding: 5px !important;
-  --input-text-padding: 6px !important;
-  --search-label-padding-inline: 8px !important;
+  border-radius: 999px !important;
 }
 
 [data-tg-platform="ios"] .content.screen-trade .JNQMw .pPd9Y.nsMB8 {

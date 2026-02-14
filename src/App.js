@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import AssetScreen from './components/AssetScreen';
 import BonusScreen from './components/BonusScreen';
@@ -122,6 +122,7 @@ function App() {
 
   const [screen, setScreen] = useState('home');
   const [prevScreen, setPrevScreen] = useState('home');
+  const mainRef = useRef(null);
   const [selectedAsset, setSelectedAsset] = useState(assets[0]);
 
   useEffect(() => {
@@ -1990,6 +1991,14 @@ function App() {
     setScreen(tab);
   };
 
+  // Сброс скролла при переключении вкладок — страница всегда с верха
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    mainRef.current?.scrollTo?.(0, 0);
+  }, [screen]);
+
   // Сброс скролла при переключении разделов — страница всегда сверху
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -2000,6 +2009,7 @@ function App() {
   return (
     <div className="app">
       <main
+        ref={mainRef}
         className={`content ${screen === 'history' ? 'screen-history' : ''} ${
           screen === 'bonus' ? 'screen-bonus' : ''
         } ${screen === 'asset' ? 'screen-asset' : ''} ${screen === 'home' ? 'screen-home' : ''} ${
