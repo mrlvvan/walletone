@@ -59,11 +59,11 @@
   border-radius: 18px !important;
 }
 
-/* Торговля: умеренные закругления (10px) — без перебора */
+/* Торговля: закругления секций (18px — как на главной) */
 [data-tg-platform="ios"] .content.screen-trade .market-section,
 [data-tg-platform="ios"] .content.screen-trade .market-section-card,
 [data-tg-platform="ios"] .content.screen-trade .JNQMw .ydmxJ.tf4r_:not(.search-input-wrap) {
-  border-radius: 10px !important;
+  border-radius: 18px !important;
 }
 
 /* Промо в Кошельке: закругление и overflow для слайдов */
@@ -111,7 +111,7 @@
 /* Секция Рынок США */
 [data-tg-platform="ios"] .content.screen-trade .market-section-card {
   background: var(--tg-theme-section-bg-color) !important;
-  border-radius: 10px !important;
+  border-radius: 18px !important;
   padding: 12px 16px 16px !important;
   margin: 0;
   overflow: hidden;
@@ -127,17 +127,24 @@
 }
 
 [data-tg-platform="ios"] .content.screen-trade .Zwf9p {
-  border-radius: 10px !important;
+  border-radius: 18px !important;
 }
 
 [data-tg-platform="ios"] .content.screen-trade .TsSEl {
-  border-radius: 8px !important;
+  border-radius: 999px !important;
 }
 
-[data-tg-platform="ios"] .content.screen-trade .market-section {
-  background: var(--tg-theme-section-bg-color);
-  border-radius: 10px !important;
-  padding: 12px 16px;
+/* Только секция «Продукты» на iOS — карточка (фон, закругление, отступы) */
+[data-tg-platform="ios"] .content.screen-trade .market-section:not(.market-section-card) {
+  background: var(--tg-theme-section-bg-color) !important;
+  border-radius: 18px !important;
+  padding: 16px !important;
+  overflow: hidden;
+}
+
+[data-tg-platform="ios"] .content.screen-trade .market-section:not(.market-section-card) .Rfm73,
+[data-tg-platform="ios"] .content.screen-trade .market-section:not(.market-section-card) .JNQMw > .Rfm73 {
+  background: transparent !important;
 }
 
 [data-tg-platform="ios"] .content.screen-trade .market-section .PReSx {
@@ -150,11 +157,9 @@
   box-sizing: border-box;
 }
 
-/* Торговля: заголовки (Топ дня, Все активы, Активы TON, Продукты, Посмотреть все) на общем фоне */
-[data-tg-platform="ios"] .content.screen-trade .Rfm73,
+/* Торговля: заголовки вынесенных секций (Рынок США и т.д.) на общем фоне; внутри карточки — без своего фона */
+[data-tg-platform="ios"] .content.screen-trade .market-section-header .Rfm73,
 [data-tg-platform="ios"] .content.screen-trade .Rfm73.Jn71M.hCZ1A,
-[data-tg-platform="ios"] .content.screen-trade .market-section .Rfm73,
-[data-tg-platform="ios"] .content.screen-trade .market-section .JNQMw > .Rfm73,
 [data-tg-platform="ios"] .content.screen-trade .CgUOn .Rfm73,
 [data-tg-platform="ios"] .content.screen-trade .Rfm73.ZR_ns.umRMK.kJf7o {
   background: var(--tg-theme-secondary-bg-color) !important;
