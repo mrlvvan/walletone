@@ -927,10 +927,10 @@
   justify-content: center;
 }
 
-/* Обёртка поиска — pill-форма, закруглённый блок */
+/* Обёртка поиска — умеренное закругление */
 .JNQMw .ydmxJ.tf4r_.search-input-wrap,
 .JNQMw .ydmxJ.tf4r_ {
-  border-radius: 999px;
+  border-radius: 12px;
   overflow: hidden;
   background: var(--tg-theme-section-bg-color);
 }
@@ -973,7 +973,7 @@
   --border-color: oklch(from #aaaaaa l c h / 40%);
   gap: 5px;
   border: none;
-  border-radius: 999px;
+  border-radius: 12px;
   margin-block-start: var(--reserved-space-for-animated-label);
   outline: none;
   transition: box-shadow 0.2s linear;

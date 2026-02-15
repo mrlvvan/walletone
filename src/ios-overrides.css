@@ -47,18 +47,23 @@
   box-sizing: border-box;
 }
 
-/* --- Закругления карточек --- */
+/* --- Закругления карточек (Home, History) --- */
 [data-tg-platform="ios"] .list-card,
 [data-tg-platform="ios"] .section,
 [data-tg-platform="ios"] .section-button,
 [data-tg-platform="ios"] .asset-section-content,
 [data-tg-platform="ios"] .bonus-card,
-[data-tg-platform="ios"] .market-section,
 [data-tg-platform="ios"] .promo-slider,
 [data-tg-platform="ios"] .promo-slide,
-[data-tg-platform="ios"] .content.screen-trade .JNQMw .ydmxJ.tf4r_,
 [data-tg-platform="ios"] .content.screen-history .PKleQ .ydmxJ.tf4r_ {
   border-radius: 18px !important;
+}
+
+/* Торговля: умеренные закругления (10px) — без перебора */
+[data-tg-platform="ios"] .content.screen-trade .market-section,
+[data-tg-platform="ios"] .content.screen-trade .market-section-card,
+[data-tg-platform="ios"] .content.screen-trade .JNQMw .ydmxJ.tf4r_:not(.search-input-wrap) {
+  border-radius: 10px !important;
 }
 
 /* Промо в Кошельке: закругление и overflow для слайдов */
@@ -73,15 +78,12 @@
   background: transparent;
 }
 
-/* Поиск на iOS: как в референсе — pill, компактный */
+/* Поиск на iOS: умеренное закругление (10px) */
 [data-tg-platform="ios"] .content.screen-trade .JNQMw .ydmxJ.tf4r_.search-input-wrap,
-[data-tg-platform="ios"] .content.screen-trade .JNQMw .ydmxJ.tf4r_ {
-  border-radius: 999px !important;
-}
-
+[data-tg-platform="ios"] .content.screen-trade .JNQMw .ydmxJ.tf4r_,
 [data-tg-platform="ios"] .content.screen-trade .JNQMw .YrFt1.DIb0V,
 [data-tg-platform="ios"] .content.screen-trade .JNQMw label.YrFt1.DIb0V {
-  border-radius: 999px !important;
+  border-radius: 10px !important;
 }
 
 [data-tg-platform="ios"] .content.screen-trade .JNQMw .pPd9Y.nsMB8 {
@@ -106,10 +108,10 @@
   padding-block: 16px 4px;
 }
 
-/* Секция Рынок США: начинается чуть выше «Акции/Фонды», общий стиль с закруглениями */
+/* Секция Рынок США */
 [data-tg-platform="ios"] .content.screen-trade .market-section-card {
   background: var(--tg-theme-section-bg-color) !important;
-  border-radius: 18px !important;
+  border-radius: 10px !important;
   padding: 12px 16px 16px !important;
   margin: 0;
   overflow: hidden;
@@ -124,9 +126,17 @@
   background-color: var(--tg-theme-secondary-bg-color);
 }
 
+[data-tg-platform="ios"] .content.screen-trade .Zwf9p {
+  border-radius: 10px !important;
+}
+
+[data-tg-platform="ios"] .content.screen-trade .TsSEl {
+  border-radius: 8px !important;
+}
+
 [data-tg-platform="ios"] .content.screen-trade .market-section {
   background: var(--tg-theme-section-bg-color);
-  border-radius: 18px !important;
+  border-radius: 10px !important;
   padding: 12px 16px;
 }
 
