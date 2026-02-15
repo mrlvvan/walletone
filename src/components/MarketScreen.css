@@ -935,6 +935,12 @@
   background: var(--tg-theme-section-bg-color);
 }
 
+/* PC: секция «Продукты» без карточки — контент на общем фоне (на iOS карточка задаётся в ios-overrides) */
+.content.screen-trade .market-section:not(.market-section-card) .JNQMw .ydmxJ.tf4r_ {
+  background: transparent;
+  border-radius: 0;
+}
+
 /* Поиск — компактный, pill-форма как в референсе */
 .JNQMw .pPd9Y.nsMB8 {
   width: 100%;
