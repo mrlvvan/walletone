@@ -93,7 +93,7 @@
     var(--active-index, 0) * (var(--pill-width) + var(--tab-spacing))
   );
   border-radius: 100px;
-  /* выделение активной секции — акцент полупрозрачный (светлая и тёмная тема) */
+  /* выделение активной секции — акцент полупрозрачный */
   background: color-mix(in srgb, var(--tg-theme-button-color, #8774e1) 28%, transparent);
   pointer-events: none;
   transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1);

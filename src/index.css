@@ -87,9 +87,8 @@
   /* fallback для фонового цвета разделителей, если нет Telegram theme params */
   --secondary-bg-color-fallback: #0f0f0f;
   --accent-orange: #e58943;
-  /* Слайдеры: активная вкладка реагирует на bg и accent темы (fallback для старых браузеров) */
-  --segmented-control-active-background: var(--tg-theme-bg-color);
-  --segmented-control-active-background: color-mix(in srgb, var(--tg-theme-button-color) 12%, var(--tg-theme-bg-color));
+  /* Слайдеры: активная вкладка — серый светлее трека, без акцента */
+  --segmented-control-active-background: #5e5e5e;
   --tooltip-background: #3a3a3c;
   --border-color: rgba(170, 170, 170, 0.4);
   --accent-cyan: #64d2ff;
