@@ -1,3 +1,6 @@
+/* ========== App.css — главный layout приложения ==========
+ * :root — переменные темы; .app — корень; .topbar — шапка; .content — контент; .wallet-* — кошелёк; .bonus-* — бонусы; .section-* — секции; .history-* — история. */
+
 /* Локальные переменные (дублируют index.css для совместимости). Основная палитра темы — в index.css и telegramTheme.js. */
 :root {
   --tg-theme-bg-color: #212121;
@@ -21,6 +24,7 @@
   --text-confirm-color: #4CAF50;
 }
 
+/* Корневой контейнер приложения */
 .app {
   min-height: 100vh;
   background: var(--tg-theme-secondary-bg-color);
@@ -30,6 +34,7 @@
   font-family: 'Roboto', system-ui, -apple-system, sans-serif;
 }
 
+/* Шапка (заголовок + аватар + кнопки) */
 /* ref 65907: header padding-block 16px 10px, padding-inline 16px */
 .topbar {
   display: flex;
@@ -41,6 +46,7 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  
 }
 
 .topbar-left {
@@ -86,7 +92,6 @@
   border: none;
   border-radius: 10px;
   padding: 8px 10px;
-  cursor: pointer;
 }
 
 .back-button {
@@ -94,15 +99,15 @@
   border: none;
   color: #7ea3ff;
   font-weight: 600;
-  cursor: pointer;
 }
 
 /* Без хедера: верхний отступ уменьшен */
+/* Область контента (под шапкой, над таббаром) */
 .content {
   flex: 1;
-  padding: 16px 24px 20px;
+  padding: 16px 24px 0px;
   /* Общий фон контента (в светлой теме — белый, в тёмной — тёмный) */
-  background: var(--tg-theme-secondary-bg-color);
+  background: var(--tg-theme-bg-color);
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -118,8 +123,10 @@
     --content-safe-area-inset-bottom,
     calc(var(--tabbar-current-height, var(--tabbar-height, 74px)) + 16px)
   );
+  
 }
 
+/* Блок баланса на главном экране кошелька */
 .wallet-hero {
   display: flex;
   flex-direction: column;
@@ -132,42 +139,45 @@
   /* Общий фон баланса — как общий фон экрана */
   background: var(--tg-theme-secondary-bg-color);
   margin: 0;
+  background-color: var(--tg-theme-bg-color);
 }
 
-/* ref 25042: gap 8px, border-radius 14px; ref 65907 button padding 8px 10px */
+/* Вкладки «Крипто» / «TON» над балансом — pill-слайдер */
 .wallet-tabs {
   display: inline-flex;
-  gap: 8px;
-  padding: 4px;
-  border-radius: 22px;
-  background: var(--tg-theme-secondary-bg-color);
+  gap: 0;
+  padding: 2px;
+  border-radius: 999px;
+  background: #ffffff0f;
+  margin-top: 24px;
+  overflow: hidden;
+  width: 152px;
+  height: 36px;
 }
 
 .tab-chip {
+  flex: 1;
+  min-width: 0;
   background: transparent;
   border: none;
   color: var(--tg-theme-hint-color, #8e8e93);
-  padding: 6px 14px;
+  padding: 6px 12px;
   border-radius: 999px;
-  cursor: pointer;
   font-family: Roboto, system-ui, sans-serif;
   font-weight: 600;
-  font-size: 13px;
-  line-height: 14px;
+  font-size: 14px;
+  line-height: 18px;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Активная таблетка: контрастная к треку, цвет от темы */
+/* Активная таблетка: отступ 3px от краёв контейнера */
 .tab-chip.active {
-  background: var(--segmented-control-active-background);
+  background: var(--segmented-control-active-background, rgba(255, 255, 255, 0.12));
   color: var(--tg-theme-text-color);
-}
-
-[data-tg-theme="light"] .tab-chip {
-  color: var(--tg-theme-subtitle-text-color);
-}
-
-[data-tg-theme="light"] .tab-chip.active {
-  color: var(--tg-theme-text-color);
+  margin: 0;
 }
 
 .wallet-balance {
@@ -176,6 +186,7 @@
   gap: 6px;
   align-items: center;
   margin-top: 0;
+  background-color: var(--tg-theme-bg-color);
 }
 
 .balance-amount.large {
@@ -255,6 +266,7 @@
 }
 
 /* ref 59171/22990: padding 14px 16px; border-radius 16px */
+/* Промо-баннер (оранжевый градиент) */
 .promo-banner {
   background: linear-gradient(90deg, #ff9f1c, #ffb52e);
   color: #201100;
@@ -343,7 +355,6 @@
   border: none;
   color: rgba(255, 236, 209, 0.95);
   font-weight: 500;
-  cursor: pointer;
   padding: 0;
   display: inline-flex;
   align-items: center;
@@ -394,7 +405,6 @@
   border-radius: 50%;
   width: 28px;
   height: 28px;
-  cursor: pointer;
   position: absolute;
   top: 10px;
   right: 10px;
@@ -427,6 +437,7 @@
 }
 
 /* ref 84314 sNA1B: padding-block 16px, padding-inline 24px; 73105 border-radius 26px → 12px */
+/* Карточка списка (секция с фоном) */
 .list-card {
   background: var(--tg-theme-section-bg-color);
   border-radius: var(--border-radius-regular);
@@ -445,17 +456,17 @@
 }
 
 /* ref 84314 KNS_0: padding-block 16px, padding-inline 20px 16px; 33331 min-height 56px */
-.section-button {
+/* Кнопка секции (строка с иконкой и шевроном) */
+/* секция акции и фонды с кнопкой */
+.section-button { 
   width: 100%;
   background: var(--tg-theme-section-bg-color);
   border: none;
-  border-radius: 14px;
-  padding: 16px 20px 16px 16px;
+  border-radius: 0px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: var(--tg-theme-text-color);
-  cursor: pointer;
   min-height: 56px;
   box-sizing: border-box;
 }
@@ -466,9 +477,12 @@
   align-items: center;
   gap: 8px;
   font-family: Roboto, system-ui, sans-serif;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 18px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  min-height: 58px;
+  padding: 10px 0;
+
 }
 
 /* ref 25042 WKcXc: 42px; 33331 tmSjk 28px icon circle */
@@ -484,6 +498,8 @@
   justify-content: center;
   color: #ffffff;
   flex-shrink: 0;
+  margin-right: 8px;
+  margin-left: 10px;
 }
 
 .section-button-icon svg {
@@ -525,6 +541,7 @@
 
 .list-icon.dollar {
   background: #3cc57b;
+  margin-right: 8px;
 }
 
 /* ref 73105 p9Tgo: 16px/500/20px; ref A63Pj subtitle 14px/400/18px */
@@ -589,7 +606,6 @@
   padding: 10px 16px;
   border: none;
   font-weight: 600;
-  cursor: pointer;
 }
 
 .primary-button {
@@ -619,7 +635,6 @@
   flex-direction: column;
   gap: 6px;
   align-items: center;
-  cursor: pointer;
 }
 
 .quick-icon {
@@ -639,23 +654,34 @@
   overflow: hidden;
   margin: 0;
 }
-
+.section-title
+.section-title {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+}
 /* ref 84314: gap 8px; ref 22990 margin-block 12px */
 .section-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 2px;
   gap: 8px;
 }
 
 /* ref 73105: font 13px/400, line-height 14px */
 .section-note {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: Roboto, system-ui, sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   line-height: 14px;
-  color: var(--tg-theme-section-header-text-color);
+  background-color: #8774e11a;
+  border-radius: 6px;
+  padding-block: 2px;
+  padding-inline: 4px;
+  color: var(--tg-theme-section-header-text-color,#8774e1);
 }
 
 .asset-icon.eth {
@@ -682,6 +708,7 @@
   background: #7cb342;
 }
 
+/* Блок «Получайте бонусы» с иконкой мешка */
 .bonus-hero,
 .bonus-hero.nluVg.qf2Gj {
   background: var(--tg-theme-section-bg-color);
@@ -784,7 +811,6 @@
 
 .wHOsr {
   align-items: center;
-  cursor: pointer;
   display: inline-flex;
   text-align: center;
 }
@@ -800,7 +826,6 @@
   padding: 0;
   border: none;
   background: transparent;
-  cursor: pointer;
 }
 
 /* Общий фон экрана бонусов: в тёмной теме — из темы, в светлой — светлый по референсу */
@@ -810,6 +835,7 @@
   flex: 1;
 }
 
+/* Вкладки «Активные» / «Завершённые» на экране бонусов */
 .bonus-tabs {
   display: flex;
   flex-wrap: nowrap;
@@ -845,7 +871,6 @@
   font-size: 14px;
   line-height: 20px;
   font-family: Roboto, system-ui, sans-serif;
-  cursor: pointer;
   width: auto;
 }
 
@@ -858,25 +883,8 @@
   padding-inline: 12px;
 }
 
-[data-tg-theme="light"] .bonus-screen-wrap {
-  background: var(--tg-theme-secondary-bg-color);
-}
-[data-tg-theme="light"] .bonus-hero,
-[data-tg-theme="light"] .bonus-hero.nluVg.qf2Gj {
-  background: var(--tg-theme-secondary-bg-color);
-}
-[data-tg-theme="light"] .bonus-tabs .pill-tab.active,
-[data-tg-theme="light"] .rquXm .pill-tab.active {
-  background: var(--segmented-control-active-background);
-  color: var(--tg-theme-text-color);
-}
-
 .content.screen-bonus {
   background: var(--tg-theme-secondary-bg-color);
-}
-
-[data-tg-theme="light"] .bonus-card {
-  background: var(--tg-theme-bg-color);
 }
 
 .bonus-grid {
@@ -886,6 +894,7 @@
 }
 
 /* Карточки бонусов — фон секции (реагирует на тему) */
+/* Карточка бонуса (MON, TON, Доллары и т.д.) */
 .bonus-card {
   background: var(--tg-theme-bg-color);
   border-radius: 16px;
@@ -932,7 +941,6 @@
   font-weight: 700;
   padding: 4px 8px;
   border-radius: 999px;
-  text-transform: uppercase;
 }
 
 .bonus-card-icon.mon {
@@ -1191,6 +1199,7 @@
   display: none;
 }
 
+/* Заголовок «История транзакций» */
 .history-header {
   margin-top: 4px;
 }
@@ -1211,6 +1220,7 @@
   gap: 12px;
 }
 
+/* Одна строка в истории (иконка + описание + сумма) */
 .history-row {
   display: flex;
   align-items: center;
@@ -1504,23 +1514,29 @@
   background: transparent;
   width: 100%;
 }
+
+
 .section-header h2 {
   font-family: Roboto, system-ui, sans-serif;
   font-size: 15px;
   font-weight: 500;
   line-height: 18px;
   color: var(--tg-theme-section-header-text-color);
-  margin: 0;
+  padding: 0;
+  margin-left: 5px;
 }
 
 .link-button {
   background: transparent;
   border: none;
   color: var(--tg-theme-link-color, #7ea3ff);
-  font-weight: 600;
-  cursor: pointer;
+  font-weight: 400;
+  margin-inline-start: auto;
+  font-size: 15px;
+  line-height: 18px;
 }
 
+/* Список активов на экране кошелька */
 .asset-list {
   display: flex;
   flex-direction: column;
@@ -1531,7 +1547,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0;
+  padding: 0px 0;
   border-bottom: none;
   color: var(--tg-theme-text-color);
 }
@@ -1541,7 +1557,6 @@
   border: none;
   width: 100%;
   text-align: left;
-  cursor: pointer;
   color: inherit;
 }
 
@@ -1566,6 +1581,7 @@
   font-size: 18px;
   font-weight: 700;
   color: #0f1117;
+  margin-right: 8px;
 }
 
 .asset-icon svg {
@@ -1606,61 +1622,166 @@
   display: block;
 }
 
-.trend-grid {
+/* Сетка карточек «В тренде» — выходим за padding секции для полных линий */
+.trending-section .trend-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
+  position: relative;
+  margin: 0 -16px -16px -16px;
+  padding: 0 16px 16px 16px;
+}
+
+/* Вертикальная чёрная полоса 100% высоты, 1px — до краёв секции */
+.trend-grid::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  bottom: -16px;
+  left: 50%;
+  width: 1px;
+  background: #000;
+  transform: translateX(-50%) scaleX(calc(1 / var(--dpr, 1)));
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Горизонтальная чёрная полоса 100% ширины, 1px — не зависит от padding */
+.trend-grid::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 1px;
+  background: #000;
+  transform: translateY(-50%) scaleY(calc(1 / var(--dpr, 1)));
+  transform-origin: center;
+  pointer-events: none;
 }
 
 .trend-card {
-  background: var(--tg-theme-secondary-bg-color);
-  border-radius: 0;
+  background: var(--tg-theme-section-bg-color);
+  border-radius: 14px;
   padding: 12px;
   border: none;
   display: flex;
   flex-direction: column;
   gap: 6px;
+  overflow: hidden;
 }
 
 .trend-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 8px;
 }
 
 .trend-icon {
-  width: 32px;
-  height: 32px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
   background: #24324d;
+  flex-shrink: 0;
 }
 
-.trend-change {
-  font-size: 12px;
-  font-weight: 600;
+.trend-sparkline {
+  width: 80px;
+  height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-.trend-change.negative {
-  color: #ff6b6b;
+.trend-sparkline svg {
+  width: 100%;
+  height: 100%;
+}
+
+.trend-sparkline-up {
+  color: #61bd67;
+}
+
+.trend-sparkline-down {
+  color: #e53935;
+}
+
+.trend-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+.trend-row{
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .trend-name {
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--tg-theme-text-color);
+}
+
+.trend-change-badge {
+  font-size: 12px;
   font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.trend-change-badge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: 0.1;
+  border-radius: inherit;
+  pointer-events: none;
+  width: 100%;
+  display: block;
+}
+
+.trend-change-badge-icon {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.trend-change-badge-icon svg {
+  width: 12px;
+  height: 14px;
+  display: block;
+}
+
+.trend-change-badge.positive {
+  color: #61bd67;
+}
+
+.trend-change-badge.negative {
+  color: #e53935;
 }
 
 .trend-price {
-  font-size: 12px;
-  opacity: 0.7;
-}
-
-.trend-line {
-  height: 22px;
-  border-radius: 6px;
-  background: linear-gradient(90deg, rgba(255, 107, 107, 0.3), rgba(255, 107, 107, 0.9));
+  font-size: 15px;
+  color: var(--tg-theme-subtitle-text-color);
+  font-weight: 400;
 }
 
 .trend-icon.adi {
@@ -1677,6 +1798,10 @@
 
 .trend-icon.apt {
   background: #2c2c2c;
+}
+
+.trend-icon.doge {
+  background: #24324d;
 }
 .asset-name {
   font-family: Roboto, system-ui, sans-serif;
@@ -1824,7 +1949,7 @@
 
 @media (max-width: 640px) {
   .content {
-    padding: 20px 0;
+    padding: 0px 0;
   }
 
   .balance-amount {

@@ -1,7 +1,13 @@
+/* ========== MarketScreen.css — экран «Рынок» ==========
+ * Структура: поиск, вкладки (Акции/Фонды), карточки тикеров, продукты, TON, слайдеры «Топ дня», панель поиска «Все активы».
+ * Классы вида nR3tb, LPWUW — хеш-имена из референса (минимизация). */
+
+/* ---------- Поиск (строка ввода) ---------- */
 .market-search {
   margin-top: 4px;
 }
 
+/* Контейнер поля поиска */
 .search-input {
   background: transparent;
   border: none;
@@ -12,28 +18,27 @@
   padding: 10px 12px;
 }
 
+/* Само поле ввода */
 .search-input input {
   background: transparent;
   border: none;
-  outline: none;
   color: #f4f6fb;
   width: 100%;
 }
 
+/* Иконка лупы слева */
 .search-icon {
   opacity: 0.7;
 }
 
+/* ---------- Ряд «Рынок США» (обёртка секции) ---------- */
 .market-us-row {
   display: flex;
   flex-direction: column;
   gap: 0;
 }
 
-.market-section-header {
-  /* заголовок «Рынок США» + «Посмотреть все» — на десктопе внутри, на iOS вынесен на фон */
-}
-
+/* Секция рынка (Рынок США, Продукты и т.д.) */
 .market-section,
 .market-section-card {
   display: flex;
@@ -41,6 +46,7 @@
   gap: 12px;
 }
 
+/* Вкладки «Акции» / «Фонды» — переключатель pill-стиль */
 .pill-tabs {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -50,6 +56,7 @@
   border-radius: 999px;
 }
 
+/* Одна вкладка (Акции или Фонды) */
 .pill-tab {
   background: transparent;
   border: none;
@@ -57,20 +64,22 @@
   padding: 8px 12px;
   border-radius: 999px;
   font-weight: 600;
-  cursor: pointer;
 }
 
+/* Активная вкладка */
 .pill-tab.active {
   background: #2b3142;
   color: #f4f6fb;
 }
 
+/* Сетка карточек тикеров (TSLA, GOOG, NVDA и т.д.) */
 .ticker-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
 
+/* Одна карточка тикера */
 .ticker-card {
   background: transparent;
   border-radius: 14px;
@@ -83,6 +92,7 @@
   text-align: center;
 }
 
+/* Круглая иконка тикера (логотип компании) */
 .ticker-icon {
   width: 36px;
   height: 36px;
@@ -95,30 +105,36 @@
   font-weight: 700;
 }
 
+/* Название тикера (TSLA, GOOG) */
 .ticker-name {
   font-weight: 600;
   font-size: 12px;
 }
 
+/* Изменение цены в % (зелёный/красный) */
 .ticker-change {
   font-size: 12px;
   font-weight: 600;
 }
 
+/* Падение — красный */
 .ticker-change.neg {
   color: #ff6b6b;
 }
 
+/* Рост — зелёный */
 .ticker-change.pos {
   color: #3ccf91;
 }
 
+/* ---------- Секция «Продукты» (Крипто, Акции, Фонды) ---------- */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 }
 
+/* Карточка продукта (иконка + название) */
 .product-card {
   background: transparent;
   border-radius: 14px;
@@ -126,13 +142,13 @@
   border: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 2px;
   align-items: center;
   color: #f4f6fb;
   font-weight: 600;
-  cursor: pointer;
 }
 
+/* Иконка продукта (круглая) */
 .product-icon {
   width: 44px;
   height: 44px;
@@ -144,6 +160,7 @@
   justify-content: center;
 }
 
+/* Цвета фона иконок тикеров по бренду */
 .ticker-icon.tsla {
   background: #d32f2f;
 }
@@ -193,12 +210,14 @@
   background: #2e3b55;
 }
 
+/* ---------- Секция TON (SPYX, QQQ, AMZN и т.д.) ---------- */
 .ton-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
 
+/* Карточка TON-тикера */
 .ton-card {
   background: transparent;
   border-radius: 14px;
@@ -271,10 +290,13 @@
   color: #0f1117;
 }
 
+/* ---------- Разделители и layout-обёртки (хеш-классы) ---------- */
+/* nR3tb — обёртка с position relative */
 .nR3tb {
   position: relative;
 }
 
+/* LPWUW — горизонтальная линия-разделитель */
 .LPWUW {
   border: none;
   height: 1px;
@@ -283,6 +305,7 @@
   background: rgba(255, 255, 255, 0.06);
 }
 
+/* a0Knu — полоска-разделитель между секциями (12px высота) */
 .a0Knu {
   margin-top: 12px;
   /* Разделительная полоска: фон как secondary bg из темы Telegram, 12px высотой */
@@ -290,6 +313,7 @@
   height: 12px;
 }
 
+/* LxOPn — flex-колонка, stretch */
 .LxOPn {
   align-items: flex-start;
   align-self: stretch;
@@ -297,16 +321,19 @@
   flex-direction: column;
 }
 
+/* okTpb — padding по вертикали */
 .okTpb {
   padding-block: 4px;
 }
 
+/* aVY7i — flex row, center */
 .aVY7i {
   align-items: center;
   align-self: stretch;
   display: flex;
 }
 
+/* r2DGg — flex-ячейка, min-width 0 */
 .r2DGg {
   align-self: flex-start;
   box-sizing: border-box;
@@ -314,19 +341,18 @@
   min-width: 0;
 }
 
+/* Z3c2A — flex-ячейка */
 .Z3c2A {
   align-self: flex-start;
   flex: 1;
 }
 
+/* Syue2 — скругление углов */
 .Syue2 {
   border-radius: 6px;
 }
 
-.market-section .r2DGg.Z3c2A.Syue2 {
-  cursor: pointer;
-}
-
+/* P13QV — кнопка/карточка (flex column, center) */
 .P13QV {
   background: transparent;
   border: none;
@@ -337,6 +363,7 @@
   justify-content: center;
 }
 
+/* DV0WS — контейнер иконки + текста */
 .DV0WS {
   align-items: center;
   display: flex;
@@ -345,11 +372,13 @@
   padding-inline: 10px;
 }
 
+/* _0g3V — gap и padding для карточки */
 ._0g3V {
   gap: 8px;
   padding-block: 12px 8px;
 }
 
+/* mUVUv — колонка с gap 1px */
 .mUVUv {
   align-items: center;
   display: flex;
@@ -426,16 +455,19 @@
   color: #61bd67;
 }
 
+/* gtBIz — скрытый элемент */
 .gtBIz {
   display: none;
 }
 
+/* JNQMw — контейнер панели поиска (вкладки + список) */
 .JNQMw {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
+/* ---------- Панель поиска (wtAUk) — вкладки Все/Крипто/Акции/Фонды + список «Все активы» ---------- */
 /* Панель поиска при фокусе: вкладки + «Все активы» + список */
 .wtAUk.Rmex8 {
   display: flex;
@@ -445,6 +477,7 @@
   background: var(--tg-theme-bg-color);
 }
 
+/* qMqm9 — горизонтальный скролл вкладок */
 .wtAUk .qMqm9 {
   overflow-x: auto;
   overflow-y: hidden;
@@ -476,7 +509,6 @@
 
 .wtAUk .AY7Xx {
   --separator-height: -1px;
-  box-shadow: inset 0 var(--separator-height) 0 var(--tg-theme-section-separator-color);
 }
 
 .wtAUk .cJa9x {
@@ -485,7 +517,6 @@
   scrollbar-width: none;
   touch-action: pan-x pan-y;
   white-space: nowrap;
-  will-change: transform, scroll-position;
 }
 
 .wtAUk .yPhAq.xjd0r {
@@ -542,7 +573,6 @@
 
 .wtAUk .yaBp6 {
   color: var(--tg-theme-subtitle-text-color);
-  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   align-items: center;
   display: flex;
   height: 100%;
@@ -556,7 +586,6 @@
   color: var(--tg-theme-text-color);
   font-size: 15px;
   font-weight: 500;
-  cursor: pointer;
   border-radius: 8px;
 }
 
@@ -574,7 +603,6 @@
   padding-block: 9px 7px;
   position: relative;
   border-top: none;
-  box-shadow: none;
 }
 
 /* Надпись «Все активы» в поиске */
@@ -625,6 +653,7 @@
   flex-shrink: 0;
 }
 
+/* ---------- Заголовки секций (Rfm73, KbDJo, eqZCR) ---------- */
 /* Заголовок секции: заголовок + «Посмотреть все» — референс Rfm73 */
 .Rfm73 {
   display: flex;
@@ -671,19 +700,23 @@
   color: var(--tg-theme-section-header-text-color);
 }
 
+/* ydmxJ — flex-колонка */
 .ydmxJ {
   display: flex;
   flex-direction: column;
 }
 
+/* tf4r_ — full width */
 .tf4r_ {
   width: 100%;
 }
 
+/* aJFEC — padding */
 .aJFEC {
   padding-block: 4px;
 }
 
+/* vilvX — контейнер иконки 52×52 */
 .vilvX {
   width: 52px;
   height: 52px;
@@ -720,16 +753,20 @@
   background: rgba(217, 190, 255, 0.12);
 }
 
+/* ---------- Секции рынка (oJKLh, lKYcT, FhO5I) ---------- */
+/* oJKLh — блок секции (Рынок США, Продукты, Все активы) */
 .oJKLh {
   width: 100%;
   /* Фон секции рынка: зависит от темы Telegram */
   background: var(--tg-theme-section-bg-color, #212121);
 }
 
+/* lKYcT — секция «Все активы» (список) */
 .lKYcT {
   width: 100%;
 }
 
+/* LySHd — flex column gap 12 */
 .LySHd {
   display: flex;
   flex-direction: column;
@@ -767,6 +804,7 @@
   padding-block-start: 12px;
 }
 
+/* HoRrY — горизонтальный скролл слайдов (Акции/Фонды, Топ роста/падения) */
 .HoRrY {
   display: flex;
   overflow-x: scroll;
@@ -843,10 +881,13 @@
   max-height: none;
 }
 
+/* ---------- Поле поиска (KIbKh, Kndc7, TlsKl, V2GJs) ---------- */
+/* KIbKh — full width */
 .KIbKh {
   width: 100%;
 }
 
+/* pPd9Y — обёртка инпута */
 .pPd9Y {
   width: 100%;
 }
@@ -863,6 +904,7 @@
   box-sizing: border-box;
 }
 
+/* KKBuo — иконка поиска слева */
 .KKBuo {
   display: flex;
   align-items: center;
@@ -874,6 +916,7 @@
   display: block;
 }
 
+/* Kndc7 — само поле ввода поиска */
 .Kndc7 {
   flex: 1;
   min-width: 0;
@@ -882,7 +925,6 @@
   color: var(--tg-theme-text-color);
   font-size: 15px;
   line-height: 20px;
-  outline: none;
 }
 
 .Kndc7::-webkit-search-decoration,
@@ -892,12 +934,12 @@
   display: none;
 }
 
+/* TlsKl — плейсхолдер «Поиск» (скрывается при фокусе/вводе) */
 .TlsKl {
   position: absolute;
   left: 44px;
   color: var(--tg-theme-subtitle-text-color);
   pointer-events: none;
-  transition: opacity 0.15s ease;
 }
 
 .Kndc7:focus + .TlsKl,
@@ -905,6 +947,7 @@
   opacity: 0;
 }
 
+/* V2GJs — кнопка очистки (крестик) */
 /* Крестик скрыт, когда поле пустое */
 .V2GJs {
   display: none;
@@ -920,7 +963,6 @@
   background: transparent;
   border: none;
   color: var(--tg-theme-subtitle-text-color);
-  cursor: pointer;
   padding: 0;
   display: flex;
   align-items: center;
@@ -981,15 +1023,9 @@
   border: none;
   border-radius: 12px;
   margin-block-start: var(--reserved-space-for-animated-label);
-  outline: none;
-  transition: box-shadow 0.2s linear;
   padding: 0 var(--search-label-padding-inline);
 }
 
-/* При фокусе: лёгкая обводка и иконка — акцентный цвет */
-.JNQMw .DIb0V:focus-within {
-  box-shadow: 0 0 0 1.5px var(--tg-theme-accent-text-color);
-}
 
 .JNQMw .DIb0V:focus-within .KKBuo .cqybA {
   color: var(--tg-theme-accent-text-color);
@@ -1014,7 +1050,6 @@
   height: var(--icon-size);
   flex-shrink: 0;
   color: var(--tg-theme-subtitle-text-color);
-  transition: color 0.2s linear;
 }
 
 .JNQMw .Kndc7 {
@@ -1023,7 +1058,6 @@
   color: var(--tg-theme-text-color);
   font: inherit;
   line-height: inherit;
-  outline: none;
   width: 100%;
   flex: 1;
   min-width: 0;
@@ -1063,7 +1097,6 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
-  transition: opacity 0.15s ease;
 }
 
 .CgUOn.lKYcT .ydmxJ {
@@ -1092,23 +1125,29 @@
   margin: 0 auto;
 }
 
+/* ---------- Список активов (mjigr, tSWgK, dAgC8, f5GTj, Wv9yg) — строки «Все активы» ---------- */
+/* mjigr — контейнер списка строк */
 .mjigr {
   width: 100%;
 }
 
+/* ODmGt — flex column */
 .ODmGt {
   display: flex;
   flex-direction: column;
 }
 
+/* LQUdc — gap 0 */
 .LQUdc {
   gap: 0;
 }
 
+/* lIhZN — верхняя граница списка */
 .lIhZN {
   border-top: 1px solid rgba(255, 255, 255, 0.04);
 }
 
+/* tSWgK — одна строка актива (иконка + название + цена + %) */
 .tSWgK {
   height: 56px;
   display: flex;
@@ -1263,7 +1302,6 @@
   border-radius: 6px;
   padding-block: 2px;
   padding-inline: 4px;
-  text-transform: uppercase;
 }
 
 .VbUp4 {
@@ -1271,6 +1309,7 @@
   letter-spacing: 0.2px;
 }
 
+/* tej97 — бейдж «9% годовых» рядом с тикером */
 .tej97 {
   background-color: var(--quaternary-fill-background, rgba(255, 255, 255, 0.08));
   color: var(--tg-theme-subtitle-text-color);
@@ -1288,6 +1327,7 @@
   padding-inline: 20px;
 }
 
+/* ---------- Слайдер вкладок (Акции/Фонды, Топ роста/Топ падения) — Zwf9p, mFYy9, p_KOn, TsSEl ---------- */
 /* Слайды (Акции/Фонды, Топ роста/Топ падения) — нормальный вид: скруглённая подложка, активная вкладка светлая */
 .Zwf9p {
   border-radius: 18px;
@@ -1300,11 +1340,10 @@
   min-width: 0;
   overflow: hidden;
   position: relative;
-  transition: background-color 0.2s ease;
   width: 100%;
-  will-change: transform;
 }
 
+/* mFYy9 — обёртка слайдера, padding 2px */
 /* Отступы слайдера: 2px слева и справа (эталон) */
 .mFYy9 {
   width: 100%;
@@ -1313,6 +1352,7 @@
   box-sizing: border-box;
 }
 
+/* IPADx — тёмный фон трека слайдера */
 .mFYy9.IPADx {
   background-color: #3a3a3a;
 }
@@ -1321,6 +1361,7 @@
   width: 100%;
 }
 
+/* TsSEl — скользящий индикатор (подсветка активной вкладки) */
 .TsSEl {
   position: absolute;
   top: 2px;
@@ -1328,21 +1369,17 @@
   left: 2px;
   border-radius: 999px;
   background-color: #5e5e5e;
-  transition: transform 0.2s ease;
 }
 
-.TRjCi {
-  transition: transform 0.2s ease;
-}
 
 .uuakV {
   width: calc(50% - 2px);
 }
 
+/* p_KOn — кнопка слайдера (Акции, Фонды, Топ роста, Топ падения) */
 /* Пункты слайдера (Акции/Фонды, Топ роста/Топ падения) — макс. ширина 212px, высота 36px, паддинг 10px сверху/снизу от текста */
 .p_KOn {
   align-items: center;
-  cursor: pointer;
   display: flex;
   height: 36px;
   max-height: 36px;
@@ -1350,7 +1387,6 @@
   padding: 10px 0;
   justify-content: center;
   position: relative;
-  transform: translateZ(0);
   white-space: nowrap;
   z-index: 2;
   border: none;
@@ -1364,6 +1400,7 @@
 }
 
 /* Выбранный пункт во всех слайдерах — активный стиль (светлый сегмент = тёмный текст в светлой теме) */
+/* r3qNc — активная кнопка слайдера (светлый текст) */
 .r3qNc {
   color: var(--tg-theme-text-color);
 }
@@ -1376,7 +1413,6 @@
   margin: auto;
   width: fit-content;
   height: fit-content;
-  transition: color 0.2s ease;
   font-family: Roboto, system-ui, sans-serif;
   --skeleton-height: 10px;
   font-size: 14px;
@@ -1397,21 +1433,9 @@
   color: var(--tg-theme-hint-color);
 }
 
+/* SNkiP — текст внутри кнопки слайдера */
 .SNkiP {
   font-size: 12px;
-}
-
-[data-tg-theme="light"] .mFYy9.IPADx {
-  background-color: #e5e5ea;
-}
-[data-tg-theme="light"] .TsSEl {
-  background-color: #ffffff;
-}
-[data-tg-theme="light"] .p_KOn.r3qNc .SNkiP {
-  color: #000000;
-}
-[data-tg-theme="light"] .p_KOn:not(.r3qNc) .SNkiP {
-  color: var(--tg-theme-hint-color);
 }
 
 /* Кнопки «Топ роста» / «Топ падения» — компактный текст, не слишком жирный */
@@ -1484,6 +1508,7 @@
   display: flex;
 }
 
+/* ---------- Кнопка «Посмотреть все» (UBSxc, uzQIE, SqDwU) ---------- */
 /* Обёртка «Посмотреть все» — референс UBSxc */
 .UBSxc {
   display: inline-flex;
@@ -1503,15 +1528,12 @@
   background: transparent;
   border: none;
   margin: 0;
-  outline: none;
   padding: 0;
-  cursor: pointer;
   color: inherit;
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
   line-height: inherit;
-  text-transform: inherit;
 }
 
 .SqDwU {
@@ -1556,10 +1578,6 @@
 }
 
 /* Светлая тема: разделители между строками «Все активы» — серые, не чёрные */
-[data-tg-theme="light"] .CgUOn.lKYcT .mjigr.LQUdc.lIhZN > * {
-  --cell-separator-color: rgba(0, 0, 0, 0.12);
-}
-
 .CgUOn.lKYcT .Wv9yg::after {
   background: var(--cell-separator-color, #000);
   bottom: 0;
@@ -1697,31 +1715,3 @@
   gap: 4px;
 }
 
-/* ========== Светлая тема: текст в секциях поиска и «Все активы» — чёрный ========== */
-[data-tg-theme="light"] .CgUOn.lKYcT .cpHhd.IqPae.CF5m5.Ka5fP.kzP3J,
-[data-tg-theme="light"] .CgUOn.lKYcT .cpHhd.IqPae.PmUAN.Ka5fP.kzP3J.VyspS {
-  color: #000000;
-}
-
-[data-tg-theme="light"] .CgUOn.lKYcT .cpHhd.YLSRc.PmUAN.Fx5Cf.Bgj6A {
-  color: rgba(0, 0, 0, 0.6);
-}
-
-[data-tg-theme="light"] .CgUOn.lKYcT .Rfm73 .section-title-subtitle,
-[data-tg-theme="light"] .CgUOn.lKYcT .cpHhd.KbDJo.eqZCR {
-  color: #000000;
-}
-
-[data-tg-theme="light"] .tej97 {
-  background-color: rgba(0, 0, 0, 0.06);
-  color: #000000;
-}
-
-[data-tg-theme="light"] .wtAUk .yaBp6 .cpHhd {
-  color: rgba(0, 0, 0, 0.6);
-}
-
-[data-tg-theme="light"] .wtAUk .ecfXP .cpHhd,
-[data-tg-theme="light"] .wtAUk .BDWMw:has(.ecfXP) .cpHhd {
-  color: #000000;
-}

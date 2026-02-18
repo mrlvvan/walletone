@@ -1,3 +1,6 @@
+/* ========== AssetScreen.css — экран детали актива ==========
+ * Структура: asset-header (название, цена, дельта), asset-chart (график), asset-period-selector (1D/1W/1M), asset-action-bar (Купить/Продать), asset-section (Обзор, История, О криптовалюте). */
+
 /* Стили заголовка актива по разметке ref (78486: tTQWa, l0Izn, iRQp9, ryZ28, VMysj, jskoB, AyH8M, q1b9y) */
 
 .asset-screen {
@@ -160,7 +163,7 @@
   color: var(--tg-theme-subtitle-text-color, rgba(60, 60, 67, 0.6));
 }
 
-/* График */
+/* Секция графика цены */
 .asset-chart-section {
   padding: 0 16px 24px;
 }
@@ -239,6 +242,7 @@
   justify-content: center;
 }
 
+/* Селектор периода (1D, 1W, 1M, 3M, 1Y) */
 .asset-period-selector {
   --period-count: 5;
   --period-index: 0;
@@ -268,7 +272,6 @@
   border-radius: 999px;
   background: var(--segmented-control-active-background, var(--tg-theme-section-bg-color, #3a3a3a));
   transform: translateX(calc(var(--period-index) * 100%));
-  transition: transform 0.2s ease;
 }
 
 .asset-period-button {
@@ -285,7 +288,6 @@
   background: transparent;
   border: none;
   border-radius: 999px;
-  cursor: pointer;
   position: relative;
   z-index: 1;
 }
@@ -313,6 +315,7 @@
   background: transparent;
 }
 
+/* Кнопки «Купить» / «Продать» внизу экрана */
 .asset-action-button {
   border: none;
   border-radius: 24px;
@@ -321,7 +324,6 @@
   font-size: 16px;
   font-weight: 600;
   line-height: 20px;
-  cursor: pointer;
   background: var(--tg-theme-button-color, #8774e1);
   color: var(--tg-theme-button-text-color, #ffffff);
 }
@@ -347,6 +349,7 @@
   transform: scaleY(calc(1 / var(--dpr, 1)));
   transform-origin: bottom left;
   width: 100%;
+  width: 1px;
 }
 
 .links-section::after {
@@ -398,7 +401,7 @@
 }
 
 
-/* История транзакций */
+/* Список транзакций по активу */
 .asset-transaction-list {
   display: flex;
   flex-direction: column;
@@ -411,7 +414,6 @@
   justify-content: space-between;
   padding: 12px 0;
   position: relative;
-  cursor: pointer;
 }
 
 .asset-transaction-item:not(:last-child):after {
@@ -518,7 +520,6 @@
   font-weight: 400;
   line-height: 20px;
   color: var(--tg-theme-text-color, #ffffff);
-  cursor: pointer;
 }
 
 .asset-transaction-show-all svg {
@@ -527,7 +528,7 @@
   flex-shrink: 0;
 }
 
-/* О криптовалюте */
+/* Текстовое описание актива */
 .asset-description {
   display: flex;
   flex-direction: column;
@@ -575,7 +576,7 @@
   flex: 1;
 }
 
-/* Обзор */
+/* Секция «Обзор» (Рыночная капитализация, Объём и т.д.) */
 .asset-overview-list {
   display: flex;
   flex-direction: column;

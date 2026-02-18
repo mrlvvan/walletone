@@ -94,6 +94,13 @@ function HistoryScreen({ items }) {
             </div>
           </div>
         </section>
+        <div className="section-gap" />
+        <div className="section-gap" />
+        <div className="section-gap" />
+        <div className="section-gap" />
+        <div className="section-gap" />
+        <div className="section-gap" />
+        <div className="section-gap" />
       </div>
     </div>
   );

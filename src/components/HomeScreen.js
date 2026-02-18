@@ -1,9 +1,9 @@
-import AssetsSection from './AssetsSection';
-import ListRow from './ListRow';
-import PromoSlider from './PromoSlider';
-import TrendingSection from './TrendingSection';
-import WalletActions from './WalletActions';
-import WalletHero from './WalletHero';
+import AssetsSection from "./AssetsSection";
+import ListRow from "./ListRow";
+import PromoSlider from "./PromoSlider";
+import TrendingSection from "./TrendingSection";
+import WalletActions from "./WalletActions";
+import WalletHero from "./WalletHero";
 
 function HomeScreen({
   assets,
@@ -26,7 +26,11 @@ function HomeScreen({
         <ListRow item={cashAsset} />
       </section>
       <div className="section-gap" aria-hidden="true" />
-      <AssetsSection assets={assets} totalLabel={cryptoTotal} onOpenAsset={onOpenAsset} />
+      <AssetsSection
+        assets={assets}
+        totalLabel={cryptoTotal}
+        onOpenAsset={onOpenAsset}
+      />
       <div className="section-gap" aria-hidden="true" />
       <button className="section-button" type="button" onClick={onOpenTrade}>
         <span className="section-button-left">
@@ -134,10 +138,33 @@ function HomeScreen({
           </span>
           Акции и фонды
         </span>
-        <span className="section-button-chevron">›</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="7"
+          height="12"
+          fill="none"
+          viewBox="0 0 7 12"
+          preserveAspectRatio="xMidYMid meet"
+          className="section-button-chevron"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m1 1 5 5-5 5"
+          ></path>
+        </svg>
       </button>
       <div className="section-gap" aria-hidden="true" />
       <TrendingSection items={trendingItems} onOpenAsset={onOpenAsset} />
+      <div className="section-gap" />
+      <div className="section-gap" />
+      <div className="section-gap" />
+      <div className="section-gap" />
+      <div className="section-gap" />
+      <div className="section-gap" />
+      <div className="section-gap" />
     </>
   );
 }

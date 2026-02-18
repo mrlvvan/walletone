@@ -363,6 +363,11 @@ function BonusScreen({ activeItems, completedItems }) {
           );
         })}
       </section>
+      <div className="section-gap" />
+      <div className="section-gap" />
+      <div className="section-gap" />
+      <div className="section-gap" />
+      <div className="section-gap" />
     </div>
   );
 }

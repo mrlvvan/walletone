@@ -1,13 +1,7 @@
+/* ========== index.css — глобальные стили ==========
+ * Шрифты Roboto, :root переменные темы, body, scrollbar, общие reset. */
+
 /* Локальные шрифты Roboto из папки public/fonts */
-/*
-  Платформа/ОС задаётся в telegramTheme.js на <html>:
-  data-tg-theme: "light" | "dark"
-  data-tg-platform: "ios" | "android" | "web" | "tdesktop" | "macos" | "windows" | "linux" и др.
-  Примеры в CSS:
-    [data-tg-platform="ios"] .some-class { ... }
-    [data-tg-platform="android"] .nav { padding-bottom: 8px; }
-    [data-tg-theme="light"][data-tg-platform="android"] .header { ... }
-*/
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
@@ -40,9 +34,8 @@
   src: url('/fonts/Roboto-Bold.woff2') format('woff2');
 }
 
+/* Переменные темы (цвета, радиусы, высота таббара) */
 :root {
-  /* Значения по умолчанию (если не в Telegram) */
-  --tg-color-scheme: dark;
   --tg-theme-bg-color: #212121;
   --tg-theme-text-color: #ffffff;
   --tg-theme-hint-color: #aaaaaa;
@@ -56,86 +49,10 @@
   --tg-theme-section-header-text-color: #aaaaaa;
   --tg-theme-subtitle-text-color: #aaaaaa;
   --tg-theme-destructive-text-color: #e53935;
-  /* Акцентный цвет пользователя в Telegram (если есть themeParams.accent_color) */
-  --tg-theme-accent-color: #8774e1;
-  --tg-viewport-height: 854px;
-  --tg-viewport-stable-height: 854px;
-  --tg-safe-area-inset-top: 0px;
-  --tg-safe-area-inset-bottom: 0px;
-  --tg-safe-area-inset-left: 0px;
-  --tg-safe-area-inset-right: 0px;
-  --tg-content-safe-area-inset-top: 0px;
-  --tg-content-safe-area-inset-bottom: 0px;
-  --tg-content-safe-area-inset-left: 0px;
-  --tg-content-safe-area-inset-right: 0px;
-  --deprecated-separator-color: #000000;
-  --second-button-color: rgb(135 116 225 / 10%);
+  --tg-theme-section-separator-color: rgba(255, 255, 255, 0.06);
   --text-confirm-color: #61bd67;
-  --button-confirm-color: #61bd67;
-  --button-main-disabled-color: #3c3c3e;
-  --text-main-disabled-color: #606060;
-  --button-destructive-color: rgb(229 57 53 / 10%);
-  --highlight-default: rgba(255, 255, 255, 0.05);
-  --quick-menu-background: #282829;
-  --quick-menu-foreground: #ffffff;
-  --toast-background: rgba(40, 40, 40, 0.96);
-  --text-overlay: #ffffff;
-  --toast-link: #6cb7ff;
-  --tertiary-fill-background: rgba(123, 123, 123, 0.24);
-  --quaternary-fill-background: rgba(122, 122, 122, 0.18);
-  --separator-non-opaque-color: #000000;
-  /* fallback для фонового цвета разделителей, если нет Telegram theme params */
-  --secondary-bg-color-fallback: #0f0f0f;
-  --accent-orange: #e58943;
-  /* Слайдеры: активная вкладка — серый светлее трека, без акцента */
-  --segmented-control-active-background: #5e5e5e;
-  --tooltip-background: #3a3a3c;
-  --border-color: rgba(170, 170, 170, 0.4);
-  --accent-cyan: #64d2ff;
-  --dpr: 1;
-  --main-card-content-height: 186px;
   --tabbar-height: 74px;
-  --tabbar-current-height: var(--tabbar-height);
-  --tabbar-bottom-offset: 16px;
-  --tabbar-z-index: 1000;
-  --has-tabbar: 1;
-  /* Bottom bar / tab bar */
-  --tg-theme-bottom-bar-bg-color: #2c2c2e;
-  /* Viewport / safe area for content above tab bar */
-  --min-viewport-height: min(100vh, var(--tg-viewport-height, 100vh));
-  --viewport-safe-area-inset-bottom: calc(100vh - var(--min-viewport-height, 100vh) + var(--tg-safe-area-inset-bottom, 0px));
-  --content-safe-area-inset-bottom: calc(var(--viewport-safe-area-inset-bottom, 0px) + var(--tabbar-current-height, 0px));
-  --content-safe-area: calc(100vh - var(--content-safe-area-inset-bottom, 0px));
-  /* Radii */
-  --border-radius-small: 16px;
-  --border-radius-regular: 26px;
-  --border-radius-large: 34px;
-  /* Tab bar UX */
-  --apple-inactive-tab-opacity: 0.8;
-  --section-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-}
-
-/* Светлая тема: fallback-значения, если Telegram не передал themeParams (тему задаёт data-tg-theme из telegramTheme.js) */
-[data-tg-theme="light"] {
-  /* Общий фон приложения — белый */
-  --tg-theme-bg-color: #ffffff;
-  --tg-theme-text-color: #000000;
-  --tg-theme-hint-color: #8e8e93;
-  /* Сероватые фоны для секций и карточек */
-  --tg-theme-secondary-bg-color: #f3f3f5;
-  --tg-theme-section-bg-color: #f3f3f5;
-  --tg-theme-section-header-text-color: #8e8e93;
-  --tg-theme-section-separator-color: rgba(0, 0, 0, 0.06);
-  --tg-theme-subtitle-text-color: #8e8e93;
-  /* Нижняя панель тоже на белом фоне */
-  --tg-theme-bottom-bar-bg-color: #ffffff;
-  /* Дополнительные серые фоны/подсветки */
-  --tertiary-fill-background: rgba(120, 120, 128, 0.12);
-  --highlight-default: rgba(0, 0, 0, 0.04);
-  --quick-menu-background: #f3f3f5;
-  --quick-menu-foreground: #000000;
-  --tooltip-background: #3a3a3c;
-  --second-button-color: rgb(135 116 225 / 0.12);
+  --segmented-control-active-background: rgba(255, 255, 255, 0.12);
 }
 
 html {
@@ -144,7 +61,7 @@ html {
 
 html,
 body {
-  color: var(--tg-theme-text-color, #ffffff);
+  color: var(--tg-theme-text-color);
   margin: 0;
   padding: 0;
   -ms-overflow-style: none;
@@ -157,8 +74,8 @@ body {
 
 body {
   font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--tg-theme-secondary-bg-color, #0f1117);
-  color: var(--tg-theme-text-color, #ffffff);
+  background: var(--tg-theme-secondary-bg-color);
+  color: var(--tg-theme-text-color);
   font-size: 16px;
   line-height: 1.25;
 }

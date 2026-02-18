@@ -1,4 +1,6 @@
-/* ========== Нижний бар (референс: TG-style tab bar) ========== */
+/* ========== TabBar.css — нижняя навигация (4 вкладки) ==========
+ * Zr9ao — корень; KaTw3 — сам бар; nK_WK — скользящий индикатор; o7k40 — кнопка таба; LcPDp/FJOWj — иконка. */
+
 /* Корень: фиксирован внизу экрана, только контейнер для центрирования */
 .tab-bar-root.Zr9ao {
   position: fixed;
@@ -53,33 +55,6 @@
   border-radius: 100px;
   box-sizing: border-box;
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-}
-
-/* Светлая тема: нижний навбар — светлый liquid glass, чёрные иконки и подписи */
-[data-tg-theme="light"] .KaTw3 {
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-}
-
-/* Светлая тема: иконки и подписи всегда чёрные (и в активной, и в неактивной секции) */
-[data-tg-theme="light"] .o7k40 {
-  color: #000000;
-}
-
-[data-tg-theme="light"] .o7k40.active {
-  color: #000000;
-}
-
-/* Shine-анимация для пилла (TG MainButton-style) */
-@-webkit-keyframes tab-bar-shine {
-  0% { left: -100%; }
-  12%, 100% { left: 100%; }
-}
-@keyframes tab-bar-shine {
-  0% { left: -100%; }
-  12%, 100% { left: 100%; }
 }
 
 /* Скользящий индикатор: 4px от краёв навигатора (сверху, снизу, слева, справа) */
@@ -96,7 +71,6 @@
   /* выделение активной секции — акцент полупрозрачный */
   background: color-mix(in srgb, var(--tg-theme-button-color, #8774e1) 28%, transparent);
   pointer-events: none;
-  transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 0;
 }
 
@@ -117,7 +91,6 @@
     rgba(255, 255, 255, 0.1),
     transparent
   );
-  animation: tab-bar-shine 5s ease-in-out infinite;
   pointer-events: none;
 }
 
@@ -143,7 +116,6 @@
   gap: 4px;
   padding: 6px 0;
   color: var(--tg-theme-hint-color, #8e8e93);
-  cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   border-radius: 100px;

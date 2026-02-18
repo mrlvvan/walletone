@@ -1,0 +1,172 @@
+/* ========== Section.css — универсальные секции ==========
+ * Блоки: Продукты, Топ дня, В тренде. section__header, section__title, section-tabs, section__card. */
+
+/* BEM: section — унифицированный блок для Продукты, Топ дня, В тренде */
+.section {
+  background: var(--tg-theme-section-bg-color);
+  border-radius: var(--border-radius-regular);
+  padding: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 8px;
+}
+
+.section__title {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--tg-theme-section-header-text-color);
+}
+
+.section__link {
+  font-size: 14px;
+  color: var(--tg-theme-link-color);
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Табы секции (Топ роста / Топ падения) */
+.section-tabs {
+  position: relative;
+  display: flex;
+  margin-bottom: 12px;
+  padding: 0 20px;
+}
+
+.section-tabs__slider {
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  width: 50%;
+  height: 2px;
+  background: var(--tg-theme-button-color);
+}
+
+.section-tabs__btn {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--tg-theme-subtitle-text-color);
+  background: none;
+  border: none;
+}
+
+.section-tabs__btn--active {
+  color: var(--tg-theme-text-color);
+}
+
+.section__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.section__grid--cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); }
+.section__grid--cols-4 { display: grid; grid-template-columns: repeat(4, 1fr); }
+
+.section__card {
+  background: transparent;
+  border-radius: 8px;
+  padding: 12px 10px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  min-width: 0;
+  flex: 1;
+}
+
+.section__card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 4px;
+}
+
+.section__card-row--center {
+  justify-content: center;
+}
+
+.section__card-top {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.section__card-top--with-sparkline {
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.section__card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.section__card-icon svg {
+  width: 42px;
+  height: 42px;
+  display: block;
+}
+
+.section__card-icon--crypto { background: rgba(251, 242, 208, 0.12); }
+.section__card-icon--stocks { background: rgba(199, 229, 247, 0.12); }
+.section__card-icon--funds { background: rgba(217, 190, 255, 0.12); }
+.section__card-icon--default { background: #24324d; }
+
+.section__card-name {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--tg-theme-text-color);
+  text-align: center;
+}
+
+.section__card-change {
+  font-size: 14px;
+  font-weight: 400;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.section__card-change--up {
+  color: var(--text-confirm-color, #61bd67);
+}
+
+.section__card-change--down {
+  color: var(--tg-theme-destructive-text-color, #e53935);
+}
+
+.section__card-price {
+  font-size: 14px;
+  color: var(--tg-theme-subtitle-text-color);
+}
+
+.section__card-sparkline {
+  width: 80px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+.section__card-sparkline--up { color: var(--text-confirm-color); }
+.section__card-sparkline--down { color: var(--tg-theme-destructive-text-color); }

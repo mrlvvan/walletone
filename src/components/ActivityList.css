@@ -1,3 +1,6 @@
+/* ========== ActivityList.css — список активностей ==========
+ * activity-row — строка; activity-dot — индикатор статуса; activity-title, activity-time, activity-value. */
+
 .activity-list {
   display: flex;
   flex-direction: column;
