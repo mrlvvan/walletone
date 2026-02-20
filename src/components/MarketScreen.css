@@ -977,7 +977,7 @@
   background: var(--tg-theme-section-bg-color);
 }
 
-/* PC: секция «Продукты» без карточки — контент на общем фоне (на iOS карточка задаётся в ios-overrides) */
+/* Секция «Продукты» без карточки — контент на общем фоне */
 .content.screen-trade .market-section:not(.market-section-card) .JNQMw .ydmxJ.tf4r_ {
   background: transparent;
   border-radius: 0;
@@ -1648,8 +1648,8 @@
 }
 
 .CgUOn.lKYcT .RkvKd .asset-icon {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1657,6 +1657,8 @@
 
 .CgUOn.lKYcT .RkvKd .asset-icon svg {
   display: block;
+  width: 42px;
+  height: 42px;
 }
 
 /* высота строки 58px задана выше (стиль как у транзакций) */

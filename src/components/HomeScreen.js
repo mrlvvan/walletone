@@ -14,11 +14,12 @@ function HomeScreen({
   trendingItems,
   onOpenAsset,
   onOpenTrade,
+  onTransfer,
 }) {
   return (
     <>
       <WalletHero stats={walletStats} />
-      <WalletActions />
+      <WalletActions onTransfer={onTransfer} />
       <div className="section-gap" aria-hidden="true" />
       <PromoSlider slides={promoSlides} />
       <div className="section-gap" aria-hidden="true" />

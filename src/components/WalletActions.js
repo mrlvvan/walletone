@@ -1,6 +1,6 @@
 import './WalletActions.css';
 
-function WalletActions() {
+function WalletActions({ onTransfer }) {
   const actions = [
     {
       id: 'send',
@@ -89,7 +89,12 @@ function WalletActions() {
   return (
     <section className="wallet-actions actions-section">
       {actions.map((action) => (
-        <button className="action-item" type="button" key={action.id}>
+        <button
+          className="action-item"
+          type="button"
+          key={action.id}
+          onClick={action.id === 'send' ? onTransfer : undefined}
+        >
           <span className="action-icon">{action.icon}</span>
           <span className="action-label">{action.label}</span>
         </button>

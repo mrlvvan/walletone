@@ -2,7 +2,7 @@ function AssetsSection({ assets, totalLabel, onOpenAsset }) {
   return (
     <section className="section crypto-section">
       <div className="section-header">
-        <h2>Крипто</h2>
+        <h2 className="section-title">Крипто</h2>
         <div className="section-note">{totalLabel}</div>
       </div>
       <div className="asset-list">

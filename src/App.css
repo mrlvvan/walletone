@@ -22,6 +22,7 @@
   --accent-orange: #e58943;
   --button-confirm-color: #4CAF50;
   --text-confirm-color: #4CAF50;
+  --tertiary-fill-background: rgba(123 123 123 / 24%);
 }
 
 /* Корневой контейнер приложения */
@@ -111,18 +112,12 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding-bottom: var(
-    --content-safe-area-inset-bottom,
-    calc(var(--tabbar-current-height, var(--tabbar-height, 74px)) + 16px)
-  );
+  padding-bottom: calc(var(--tabbar-height, 74px) + 16px);
   box-sizing: border-box;
 }
 
 .content.screen-asset {
-  padding-bottom: var(
-    --content-safe-area-inset-bottom,
-    calc(var(--tabbar-current-height, var(--tabbar-height, 74px)) + 16px)
-  );
+  padding-bottom: calc(var(--tabbar-height, 74px) + 16px);
   
 }
 
@@ -540,6 +535,8 @@
 }
 
 .list-icon.dollar {
+  width: 42px;
+  height: 42px;
   background: #3cc57b;
   margin-right: 8px;
 }

@@ -12,7 +12,7 @@
   align-items: flex-end;
   pointer-events: none;
   z-index: var(--tabbar-z-index, 1000);
-  padding-bottom: calc(var(--tabbar-bottom-offset, 16px) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: 16px;
   padding-inline: 16px;
   isolation: isolate;
   backface-visibility: hidden;

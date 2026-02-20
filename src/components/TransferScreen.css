@@ -1,0 +1,98 @@
+/* TransferScreen — экран перевода криптовалюты через Telegram */
+
+.transfer-screen {
+  min-height: 100vh;
+  min-height: 100dvh; /* динамический viewport для мобильных */
+  padding: 44px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  background: var(--tg-theme-bg-color, #212121);
+  color: var(--tg-theme-text-color, #ffffff);
+}
+
+.transfer-title {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 28px;
+  margin: 0;
+  color: var(--tg-theme-text-color, #ffffff);
+  text-align: center;
+  margin-bottom: 40px;
+  white-space: pre-line;
+}
+
+.transfer-points {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.transfer-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.transfer-point-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--tg-theme-button-color, #8774e1);
+}
+
+.transfer-point-icon svg {
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+
+.transfer-point-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.transfer-point-content strong {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--tg-theme-text-color, #ffffff);
+  line-height: 20px;
+}
+
+.transfer-point-content span {
+  font-size: 18px;
+  line-height: 20px;
+  color: var(--tg-theme-text-color, #ffffff);
+  font-weight: 400;
+}
+
+.transfer-cta {
+  margin-top: auto;
+  width: 380px;
+  max-width: 100%;
+  align-self: center;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(90deg, #a78bfa, #7c3aed);
+  border: none;
+  border-radius: 28px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.transfer-cta:hover {
+  opacity: 0.9;
+}
+
+.transfer-cta:active {
+  opacity: 0.85;
+}

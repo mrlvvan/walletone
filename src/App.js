@@ -3,10 +3,12 @@ import './App.css';
 import AssetScreen from './components/AssetScreen';
 import BonusScreen from './components/BonusScreen';
 import HomeScreen from './components/HomeScreen';
+import TransferScreen from './components/TransferScreen';
 import HistoryScreen from './components/HistoryScreen';
 import MarketScreen from './components/MarketScreen';
 import TabBar from './components/TabBar';
 import { initTelegramThemeSync } from './telegramTheme';
+import { fetchAllPrices } from './services/priceService';
 import { IconDollar, SearchAssetIcon, IconBtc, IconEth, IconXrp, IconSol, IconTrx, IconDoge, IconBch } from './components/Icons';
 
 function App() {
@@ -43,7 +45,18 @@ function App() {
       ),
       styleClass: 'major',
     },
-    // Оставляем в кошельке только Major
+    {
+      id: 'btc',
+      name: 'Bitcoin',
+      code: 'BTC',
+      amount: '0,0001 BTC',
+      value: '—',
+      delta: '—',
+      price: '—',
+      change: '—',
+      icon: <IconBtc size={42} />,
+      styleClass: 'bitcoin',
+    },
   ];
 
   const activity = [
@@ -118,12 +131,152 @@ function App() {
         inCirculation: { value: '120B USDT' },
       },
     },
+    tsla: {
+      price: '— ₽',
+      delta: '—',
+      percent: '-2,13%',
+      period: '24 ч',
+      description: 'Tesla (TSLAx) — токенизированная акция Tesla для переводов и расчётов.',
+      features: [
+        'Получайте и отправляйте TSLAx кому угодно (с комиссией).',
+        'Подходит для расчётов в сети.',
+      ],
+      overview: {
+        capitalization: { value: '—', change: '-2,13%', isPositive: false },
+        volume: { value: '—', change: '—', isPositive: true },
+        inCirculation: { value: '—' },
+      },
+    },
+    goog: {
+      price: '— ₽',
+      delta: '—',
+      percent: '-1,19%',
+      period: '24 ч',
+      description: 'Alphabet (GOOGLx) — токенизированная акция Google для переводов и расчётов.',
+      features: [
+        'Получайте и отправляйте GOOGLx кому угодно (с комиссией).',
+        'Подходит для расчётов в сети.',
+      ],
+      overview: {
+        capitalization: { value: '—', change: '-1,19%', isPositive: false },
+        volume: { value: '—', change: '—', isPositive: true },
+        inCirculation: { value: '—' },
+      },
+    },
+    nvda: {
+      price: '— ₽',
+      delta: '—',
+      percent: '-1,71%',
+      period: '24 ч',
+      description: 'NVIDIA (NVDAx) — токенизированная акция NVIDIA для переводов и расчётов.',
+      features: [
+        'Получайте и отправляйте NVDAx кому угодно (с комиссией).',
+        'Подходит для расчётов в сети.',
+      ],
+      overview: {
+        capitalization: { value: '—', change: '-1,71%', isPositive: false },
+        volume: { value: '—', change: '—', isPositive: true },
+        inCirculation: { value: '—' },
+      },
+    },
+    aapl: {
+      price: '— ₽',
+      delta: '—',
+      percent: '-1,17%',
+      period: '24 ч',
+      description: 'Apple (AAPLx) — токенизированная акция Apple для переводов и расчётов.',
+      features: [
+        'Получайте и отправляйте AAPLx кому угодно (с комиссией).',
+        'Подходит для расчётов в сети.',
+      ],
+      overview: {
+        capitalization: { value: '—', change: '-1,17%', isPositive: false },
+        volume: { value: '—', change: '—', isPositive: true },
+        inCirculation: { value: '—' },
+      },
+    },
+    coin: {
+      price: '— ₽',
+      delta: '—',
+      percent: '-2,12%',
+      period: '24 ч',
+      description: 'Coinbase (COINx) — токенизированная акция Coinbase для переводов и расчётов.',
+      features: [
+        'Получайте и отправляйте COINx кому угодно (с комиссией).',
+        'Подходит для расчётов в сети.',
+      ],
+      overview: {
+        capitalization: { value: '—', change: '-2,12%', isPositive: false },
+        volume: { value: '—', change: '—', isPositive: true },
+        inCirculation: { value: '—' },
+      },
+    },
+    hood: {
+      price: '— ₽',
+      delta: '—',
+      percent: '-2,96%',
+      period: '24 ч',
+      description: 'Robinhood (HOODx) — токенизированная акция Robinhood для переводов и расчётов.',
+      features: [
+        'Получайте и отправляйте HOODx кому угодно (с комиссией).',
+        'Подходит для расчётов в сети.',
+      ],
+      overview: {
+        capitalization: { value: '—', change: '-2,96%', isPositive: false },
+        volume: { value: '—', change: '—', isPositive: true },
+        inCirculation: { value: '—' },
+      },
+    },
+    mcd: {
+      price: '— ₽',
+      delta: '—',
+      percent: '—%',
+      period: '24 ч',
+      description: 'McDonald\'s (MCD) — токенизированная акция для переводов и расчётов.',
+      features: ['Получайте и отправляйте MCD кому угодно (с комиссией).', 'Подходит для расчётов в сети.'],
+      overview: { capitalization: { value: '—', change: '—', isPositive: false }, volume: { value: '—', change: '—', isPositive: true }, inCirculation: { value: '—' } },
+    },
+    cisco: {
+      price: '— ₽',
+      delta: '—',
+      percent: '—%',
+      period: '24 ч',
+      description: 'Cisco (CSCO) — токенизированная акция Cisco для переводов и расчётов.',
+      features: ['Получайте и отправляйте CSCO кому угодно (с комиссией).', 'Подходит для расчётов в сети.'],
+      overview: { capitalization: { value: '—', change: '—', isPositive: false }, volume: { value: '—', change: '—', isPositive: true }, inCirculation: { value: '—' } },
+    },
+    amzn: {
+      price: '— ₽',
+      delta: '—',
+      percent: '—%',
+      period: '24 ч',
+      description: 'Amazon (AMZNx) — токенизированная акция Amazon для переводов и расчётов.',
+      features: ['Получайте и отправляйте AMZNx кому угодно (с комиссией).', 'Подходит для расчётов в сети.'],
+      overview: { capitalization: { value: '—', change: '—', isPositive: false }, volume: { value: '—', change: '—', isPositive: true }, inCirculation: { value: '—' } },
+    },
   };
 
   const [screen, setScreen] = useState('home');
   const [prevScreen, setPrevScreen] = useState('home');
   const mainRef = useRef(null);
   const [selectedAsset, setSelectedAsset] = useState(assets[0]);
+  const [livePrices, setLivePrices] = useState({});
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = () =>
+      fetchAllPrices()
+        .then((prices) => {
+          if (!cancelled && prices && Object.keys(prices).length > 0) setLivePrices(prices);
+        })
+        .catch(() => {});
+    load();
+    const interval = setInterval(load, 60000);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, []);
 
   useEffect(() => {
     const cleanup = initTelegramThemeSync();
@@ -146,7 +299,7 @@ function App() {
       setScreen(prevScreen || 'home');
     };
 
-    if (screen === 'asset') {
+    if (screen === 'asset' || screen === 'transfer') {
       backButton.show();
       backButton.onClick(handleBack);
     } else if (screen !== 'trade') {
@@ -156,7 +309,7 @@ function App() {
 
     return () => {
       backButton.offClick(handleBack);
-      if (screen === 'asset') {
+      if (screen === 'asset' || screen === 'transfer') {
         backButton.hide();
       }
     };
@@ -1194,6 +1347,7 @@ function App() {
   const marketTickers = [
     {
       id: 'tsla',
+      name: 'Tesla',
       code: 'TSLAx',
       change: '-2,13%',
       styleClass: 'tsla',
@@ -1214,6 +1368,7 @@ function App() {
     },
     {
       id: 'goog',
+      name: 'Alphabet',
       code: 'GOOGLx',
       change: '-1,19%',
       styleClass: 'goog',
@@ -1261,6 +1416,7 @@ function App() {
     },
     {
       id: 'nvda',
+      name: 'NVIDIA',
       code: 'NVDAx',
       change: '-1,71%',
       styleClass: 'nvda',
@@ -1284,6 +1440,7 @@ function App() {
     },
     {
       id: 'aapl',
+      name: 'Apple',
       code: 'AAPLx',
       change: '-1,17%',
       styleClass: 'aapl',
@@ -1310,6 +1467,7 @@ function App() {
     },
     {
       id: 'coin',
+      name: 'Coinbase',
       code: 'COINx',
       change: '-2,12%',
       styleClass: 'coin',
@@ -1329,6 +1487,7 @@ function App() {
     },
     {
       id: 'hood',
+      name: 'Robinhood',
       code: 'HOODx',
       change: '-2,96%',
       styleClass: 'hood',
@@ -2012,7 +2171,7 @@ function App() {
         ref={mainRef}
         className={`content ${screen === 'history' ? 'screen-history' : ''} ${
           screen === 'bonus' ? 'screen-bonus' : ''
-        } ${screen === 'asset' ? 'screen-asset' : ''} ${screen === 'home' ? 'screen-home' : ''} ${
+        } ${screen === 'asset' ? 'screen-asset' : ''} ${screen === 'transfer' ? 'screen-transfer' : ''} ${screen === 'home' ? 'screen-home' : ''} ${
           screen === 'trade' ? 'screen-trade' : ''
         }`}
       >
@@ -2026,9 +2185,31 @@ function App() {
             trendingItems={trendingItems}
             onOpenAsset={openAsset}
             onOpenTrade={() => setScreen('trade')}
+            onTransfer={() => {
+              setPrevScreen(screen);
+              setScreen('transfer');
+            }}
           />
         )}
-        {screen === 'asset' && <AssetScreen selectedAsset={selectedAsset} activity={activity} assetDetails={assetDetails} />}
+        {screen === 'asset' && (
+          <AssetScreen
+            selectedAsset={selectedAsset}
+            activity={activity}
+            assetDetails={(() => {
+              const merged = {};
+              for (const [id, d] of Object.entries(assetDetails)) {
+                merged[id] = { ...d, ...(livePrices[id] || {}) };
+              }
+              for (const [id, p] of Object.entries(livePrices)) {
+                if (!merged[id]) {
+                  const desc = (id in { tsla:1, goog:1, nvda:1, aapl:1, coin:1, hood:1, mcd:1, cisco:1, amzn:1 }) ? 'токенизированная акция для переводов и расчётов.' : 'криптовалюта для переводов и расчётов.';
+                  merged[id] = { ...p, description: `${id.toUpperCase()} — ${desc}`, features: ['Получайте и отправляйте кому угодно (с комиссией).', 'Подходит для расчётов в сети.'], overview: { capitalization: { value: '—', change: p.percent || '—', isPositive: !String(p.percent || '').startsWith('-') }, volume: { value: '—', change: '—', isPositive: true }, inCirculation: { value: '—' } } };
+                }
+              }
+              return merged;
+            })()}
+          />
+        )}
         {screen === 'trade' && (
           <MarketScreen
             marketTickers={marketTickers}
@@ -2045,9 +2226,16 @@ function App() {
           <BonusScreen activeItems={bonusItems} completedItems={completedBonusItems} />
         )}
         {screen === 'history' && <HistoryScreen items={historyItems} />}
+        {screen === 'transfer' && (
+          <TransferScreen
+            onSelectContact={() => {
+              /* TODO: интеграция с Telegram для выбора контакта */
+            }}
+          />
+        )}
       </main>
 
-      {screen !== 'asset' && (
+      {screen !== 'asset' && screen !== 'transfer' && (
         <TabBar
           activeTab={
             screen === 'trade'
