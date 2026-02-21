@@ -372,13 +372,14 @@
 }
 
 /* Нижняя панель действий */
+/* safe-area + запас для скруглений Telegram Mini App (иначе 3-точки обрезаются справа) */
 .asset-action-bar {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 12px;
+  bottom: calc(12px + var(--safe-area-inset-bottom, 0px));
   margin: 0;
-  padding: 8px 16px 12px;
+  padding: 8px max(40px, calc(24px + var(--safe-area-inset-right, 0px))) 12px max(24px, calc(16px + var(--safe-area-inset-left, 0px)));
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -553,7 +554,7 @@
 }
 
 .asset-bottom-area {
-  background: #000000;
+  background: var(--tg-theme-bg-color, #212121);
   padding-bottom: 0;
   padding-top: 0;
 }
@@ -790,7 +791,7 @@
   right: 0;
   bottom: 0;
   height: 1px;
-  background: #000000;
+  background: var(--tg-theme-section-separator-color, rgba(255, 255, 255, 0.06));
 }
 
 .asset-overview-item:last-child::after {
@@ -843,7 +844,7 @@
   right: 16px;
   bottom: 0;
   height: 1px;
-  background: #000000;
+  background: var(--tg-theme-section-separator-color, rgba(255, 255, 255, 0.06));
 }
 
 .asset-link-left {

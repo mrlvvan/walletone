@@ -73,7 +73,7 @@
   gap: 14px;
   width: 100%;
   padding: 14px 16px;
-  background: #282828;
+  background: var(--tg-theme-secondary-bg-color, rgba(255, 255, 255, 0.06));
   border: none;
   border-radius: 16px;
   cursor: pointer;
@@ -83,11 +83,11 @@
 }
 
 .buy-crypto-item:hover {
-  background: #333333;
+  background: var(--tg-theme-secondary-bg-color, rgba(255, 255, 255, 0.1));
 }
 
 .buy-crypto-item:active {
-  background: #2a2a2a;
+  background: var(--tg-theme-secondary-bg-color, rgba(255, 255, 255, 0.08));
 }
 
 .buy-crypto-item-icon {

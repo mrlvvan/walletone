@@ -28,6 +28,7 @@
 /* Корневой контейнер приложения */
 .app {
   min-height: 100vh;
+  min-height: 100dvh; /* динамический viewport на мобильных (адресная строка) */
   background: var(--tg-theme-secondary-bg-color);
   color: var(--tg-theme-text-color);
   display: flex;
@@ -37,17 +38,19 @@
 
 /* Шапка (заголовок + аватар + кнопки) */
 /* ref 65907: header padding-block 16px 10px, padding-inline 16px */
+/* safe-area для iPhone (вырез, статус-бар) */
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 16px 10px;
+  padding-top: calc(16px + var(--safe-area-inset-top, 0px));
+  padding-bottom: 10px;
+  padding-inline: calc(16px + var(--safe-area-inset-left, 0px)) calc(16px + var(--safe-area-inset-right, 0px));
   background: var(--tg-theme-header-bg-color);
   border-bottom: none;
   position: sticky;
   top: 0;
   z-index: 10;
-  
 }
 
 .topbar-left {
@@ -112,13 +115,12 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding-bottom: calc(var(--tabbar-height, 74px) + 16px);
+  padding-bottom: calc(var(--tabbar-height, 74px) + 16px + var(--safe-area-inset-bottom, 0px));
   box-sizing: border-box;
 }
 
 .content.screen-asset {
-  padding-bottom: calc(var(--tabbar-height, 74px) + 16px);
-  
+  padding-bottom: calc(var(--tabbar-height, 74px) + 16px + var(--safe-area-inset-bottom, 0px));
 }
 
 /* Блок баланса на главном экране кошелька */
@@ -396,7 +398,7 @@
 
 .promo-close {
   border: none;
-  background: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
   width: 28px;
   height: 28px;
@@ -407,8 +409,14 @@
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .promo-close {
+    background: rgba(255, 255, 255, 0.32);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
 }
 
 .promo-dots {
@@ -432,11 +440,11 @@
 }
 
 /* ref 84314 sNA1B: padding-block 16px, padding-inline 16px (как у .section для выравнивания с Крипто/Акции) */
-/* Карточка списка (секция с фоном) */
+/* Карточка списка (секция с фоном) — padding 16px как у .section для выравнивания значений с asset-row */
 .list-card {
   background: var(--tg-theme-section-bg-color);
   border-radius: var(--border-radius-regular);
-  padding: 16px 16px;
+  padding: 16px;
   border: none;
   overflow: hidden;
   margin: 0;

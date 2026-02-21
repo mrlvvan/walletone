@@ -2,6 +2,7 @@
  * Zr9ao — корень; KaTw3 — сам бар; nK_WK — скользящий индикатор; o7k40 — кнопка таба; LcPDp/FJOWj — иконка. */
 
 /* Корень: фиксирован внизу экрана, только контейнер для центрирования */
+/* safe-area + запас для скруглений Telegram Mini App (иначе правый таб обрезается) */
 .tab-bar-root.Zr9ao {
   position: fixed;
   bottom: 0;
@@ -12,8 +13,8 @@
   align-items: flex-end;
   pointer-events: none;
   z-index: var(--tabbar-z-index, 1000);
-  padding-bottom: 16px;
-  padding-inline: 16px;
+  padding-bottom: calc(16px + var(--safe-area-inset-bottom, 0px));
+  padding-inline: calc(12px + var(--safe-area-inset-left, 0px)) max(24px, calc(12px + var(--safe-area-inset-right, 0px)));
   isolation: isolate;
   backface-visibility: hidden;
 }
@@ -35,6 +36,7 @@
 }
 
 /* Сам бар — адаптивная ширина, отступы 16px по бокам (у корня), жидкое стекло */
+/* Fallback: на мобильных backdrop-filter и color-mix могут ломать фон — сначала твёрдый цвет */
 .KaTw3 {
   --tab-spacing: 8px;
   --container-padding: 4px;
@@ -48,13 +50,20 @@
   height: 57px;
   min-height: 57px;
   padding: var(--container-padding);
-  background: color-mix(in srgb, var(--tg-theme-secondary-bg-color, #2c2c2e) 85%, transparent);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid color-mix(in srgb, var(--tg-theme-text-color, #fff) 8%, transparent);
+  background: var(--tg-theme-secondary-bg-color);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 100px;
   box-sizing: border-box;
   overflow: hidden;
+}
+
+@supports (backdrop-filter: blur(1px)) and (color: color-mix(in srgb, red, blue 50%)) {
+  .KaTw3 {
+    background: color-mix(in srgb, var(--tg-theme-secondary-bg-color, #2c2c2e) 85%, transparent);
+    border-color: color-mix(in srgb, var(--tg-theme-text-color, #fff) 8%, transparent);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+  }
 }
 
 /* Скользящий индикатор: 4px от краёв навигатора (сверху, снизу, слева, справа) */
@@ -68,10 +77,16 @@
     var(--active-index, 0) * (var(--pill-width) + var(--tab-spacing))
   );
   border-radius: 100px;
-  /* выделение активной секции — акцент полупрозрачный */
-  background: color-mix(in srgb, var(--tg-theme-button-color, #8774e1) 28%, transparent);
+  /* выделение активной секции — fallback для мобильных без color-mix */
+  background: rgba(135, 116, 225, 0.28);
   pointer-events: none;
   z-index: 0;
+}
+
+@supports (color: color-mix(in srgb, red, blue 50%)) {
+  .nK_WK.tab-bar-pill {
+    background: color-mix(in srgb, var(--tg-theme-button-color, #8774e1) 28%, transparent);
+  }
 }
 
 /* Shine на пилле — бегущий блик */
@@ -95,11 +110,12 @@
 }
 
 /* Ряд табов: 4px от краёв навигатора, 4 равные ячейки с gap 8px */
+/* minmax(0,1fr) — позволяет колонкам сжиматься на узких экранах (История не обрезается) */
 .yEKB7 {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1fr 8px 1fr 8px 1fr 8px 1fr;
+  grid-template-columns: minmax(0, 1fr) 8px minmax(0, 1fr) 8px minmax(0, 1fr) 8px minmax(0, 1fr);
   width: 100%;
   min-width: 0;
 }
@@ -160,6 +176,10 @@
   line-height: 14px;
   font-weight: 500;
   letter-spacing: 0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 /* Иконки наследуют цвет текста */
