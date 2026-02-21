@@ -124,6 +124,7 @@
 }
 
 /* Блок баланса на главном экране кошелька */
+/* Твёрдый фон без shorthand — на мобильных backdrop/background shorthand могут ломать рендер */
 .wallet-hero {
   display: flex;
   flex-direction: column;
@@ -133,10 +134,8 @@
   min-height: 200px;
   padding-top: 0;
   padding-bottom: 0;
-  /* Общий фон баланса — как общий фон экрана */
-  background: var(--tg-theme-secondary-bg-color);
+  background-color: var(--tg-theme-bg-color, #212121);
   margin: 0;
-  background-color: var(--tg-theme-bg-color);
 }
 
 /* Вкладки «Крипто» / «TON» над балансом — pill-слайдер */
@@ -183,7 +182,7 @@
   gap: 6px;
   align-items: center;
   margin-top: 0;
-  background-color: var(--tg-theme-bg-color);
+  background-color: var(--tg-theme-bg-color, #212121);
 }
 
 .balance-amount.large {
@@ -442,7 +441,7 @@
 /* ref 84314 sNA1B: padding-block 16px, padding-inline 16px (как у .section для выравнивания с Крипто/Акции) */
 /* Карточка списка (секция с фоном) — padding 16px как у .section для выравнивания значений с asset-row */
 .list-card {
-  background: var(--tg-theme-section-bg-color);
+  background-color: var(--tg-theme-section-bg-color, #212121);
   border-radius: var(--border-radius-regular);
   padding: 16px;
   border: none;

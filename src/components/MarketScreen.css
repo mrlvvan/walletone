@@ -68,7 +68,7 @@
 
 /* Активная вкладка */
 .pill-tab.active {
-  background: var(--tg-theme-section-bg-color);
+  background-color: var(--tg-theme-section-bg-color, #212121);
   color: var(--tg-theme-text-color);
 }
 
@@ -81,7 +81,7 @@
 
 /* Одна карточка тикера */
 .ticker-card {
-  background: transparent;
+  background-color: var(--tg-theme-section-bg-color, #212121);
   border-radius: 14px;
   padding: 10px;
   border: none;
@@ -136,7 +136,7 @@
 
 /* Карточка продукта (иконка + название) */
 .product-card {
-  background: transparent;
+  background-color: var(--tg-theme-section-bg-color, #212121);
   border-radius: 14px;
   padding: 12px;
   border: none;
@@ -474,7 +474,7 @@
   flex-direction: column;
   width: 100%;
   margin-top: 8px;
-  background: var(--tg-theme-bg-color);
+  background-color: var(--tg-theme-bg-color, #212121);
 }
 
 /* qMqm9 — горизонтальный скролл вкладок */
@@ -493,7 +493,7 @@
 }
 
 .wtAUk .M3D51 {
-  background-color: var(--tg-theme-section-bg-color);
+  background-color: var(--tg-theme-section-bg-color, #212121);
   margin-block-start: -12px;
 }
 
@@ -598,7 +598,7 @@
 }
 
 .wtAUk .kJf7o {
-  background-color: var(--tg-theme-secondary-bg-color);
+  background-color: var(--tg-theme-secondary-bg-color, #0f0f0f);
   opacity: 0.5;
   padding-block: 9px 7px;
   position: relative;
@@ -755,10 +755,10 @@
 
 /* ---------- Секции рынка (oJKLh, lKYcT, FhO5I) ---------- */
 /* oJKLh — блок секции (Рынок США, Продукты, Все активы) */
+/* Твёрдый background-color — на мобильных shorthand может ломать рендер */
 .oJKLh {
   width: 100%;
-  /* Фон секции рынка: зависит от темы Telegram */
-  background: var(--tg-theme-section-bg-color, #212121);
+  background-color: var(--tg-theme-section-bg-color, #212121);
 }
 
 /* lKYcT — секция «Все активы» (список) */
@@ -841,8 +841,7 @@
 
 .FhO5I {
   width: 100%;
-  /* Общий фон рынка: зависит от темы Telegram */
-  background: var(--tg-theme-section-bg-color, #212121);
+  background-color: var(--tg-theme-section-bg-color, #212121);
 }
 
 /* Полноэкранный оверлей поиска: перекрывает весь контент */
@@ -850,7 +849,7 @@
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: var(--tg-theme-bg-color);
+  background-color: var(--tg-theme-bg-color, #212121);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -979,7 +978,7 @@
 .JNQMw .ydmxJ.tf4r_ {
   border-radius: 12px;
   overflow: hidden;
-  background: var(--tg-theme-section-bg-color);
+  background-color: var(--tg-theme-section-bg-color, #212121);
 }
 
 .JNQMw .ydmxJ.tf4r_.search-input-wrap {
@@ -1014,7 +1013,7 @@
   width: 100%;
   height: 36px;
   min-height: 36px;
-  background: var(--tg-theme-section-bg-color);
+  background-color: var(--tg-theme-section-bg-color, #212121);
   color: var(--tg-theme-text-color);
   box-sizing: border-box;
 }
