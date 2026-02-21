@@ -308,24 +308,24 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 0;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
-/* Селектор периода (1D, 1W, 1M, 3M, 1Y) */
+/* Селектор периода (1Д, 7Д, 1М, 1Г, Все) — адаптивный */
 .asset-period-selector {
   --period-count: 5;
   --period-index: 0;
-  --period-btn-width: 102px;
   --period-btn-height: 36px;
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: var(--period-btn-width);
+  grid-template-columns: repeat(var(--period-count), minmax(0, 1fr));
   gap: 0;
   background: var(--tertiary-fill-background, rgba(123 123 123 / 24%));
   border-radius: 18px;
   padding: 2px;
   position: relative;
-  width: fit-content;
+  width: 100%;
+  max-width: 514px;
   height: calc(var(--period-btn-height) + 4px);
   align-items: center;
   overflow: hidden;
@@ -336,15 +336,16 @@
   content: "";
   position: absolute;
   top: 2px;
-  left: calc(2px + var(--period-index) * var(--period-btn-width));
-  width: var(--period-btn-width);
+  left: calc(2px + var(--period-index) * ((100% - 4px) / var(--period-count)));
+  width: calc((100% - 4px) / var(--period-count));
   height: var(--period-btn-height);
   border-radius: 999px;
   background: var(--segmented-control-active-background, var(--tg-theme-section-bg-color, #3a3a3a));
+  transition: left 0.2s ease;
 }
 
 .asset-period-button {
-  width: var(--period-btn-width);
+  min-width: 0;
   height: var(--period-btn-height);
   padding: 0;
   display: flex;

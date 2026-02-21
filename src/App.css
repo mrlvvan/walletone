@@ -431,12 +431,12 @@
   background: #ffffff;
 }
 
-/* ref 84314 sNA1B: padding-block 16px, padding-inline 24px; 73105 border-radius 26px → 12px */
+/* ref 84314 sNA1B: padding-block 16px, padding-inline 16px (как у .section для выравнивания с Крипто/Акции) */
 /* Карточка списка (секция с фоном) */
 .list-card {
   background: var(--tg-theme-section-bg-color);
   border-radius: var(--border-radius-regular);
-  padding: 16px 24px;
+  padding: 16px 16px;
   border: none;
   overflow: hidden;
   margin: 0;
@@ -514,11 +514,11 @@
   justify-content: space-between;
 }
 
-/* ref 33331 j1Ymf: gap 8px */
+/* ref 33331 j1Ymf: gap 6px — как у asset-left для выравнивания с Major */
 .list-left {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   max-width: 100%;
 }
 
@@ -532,6 +532,7 @@
   font-weight: 700;
   color: #0f1117;
   background: #3b6bff;
+  margin-right: 8px;
 }
 
 .list-icon.dollar {

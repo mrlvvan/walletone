@@ -48,10 +48,10 @@
   height: 57px;
   min-height: 57px;
   padding: var(--container-padding);
-  background: rgba(44, 44, 46, 0.72);
+  background: color-mix(in srgb, var(--tg-theme-secondary-bg-color, #2c2c2e) 85%, transparent);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid color-mix(in srgb, var(--tg-theme-text-color, #fff) 8%, transparent);
   border-radius: 100px;
   box-sizing: border-box;
   overflow: hidden;

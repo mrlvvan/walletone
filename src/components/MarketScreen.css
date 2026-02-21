@@ -22,7 +22,7 @@
 .search-input input {
   background: transparent;
   border: none;
-  color: #f4f6fb;
+  color: var(--tg-theme-text-color);
   width: 100%;
 }
 
@@ -60,7 +60,7 @@
 .pill-tab {
   background: transparent;
   border: none;
-  color: #c6d0e0;
+  color: var(--tg-theme-subtitle-text-color);
   padding: 8px 12px;
   border-radius: 999px;
   font-weight: 600;
@@ -68,8 +68,8 @@
 
 /* Активная вкладка */
 .pill-tab.active {
-  background: #2b3142;
-  color: #f4f6fb;
+  background: var(--tg-theme-section-bg-color);
+  color: var(--tg-theme-text-color);
 }
 
 /* Сетка карточек тикеров (TSLA, GOOG, NVDA и т.д.) */
@@ -942,6 +942,11 @@
   pointer-events: none;
 }
 
+/* Светлая тема: плейсхолдер «Поиск» — читаемый контраст */
+[data-color-scheme='light'] .TlsKl {
+  color: #6d6d72;
+}
+
 .Kndc7:focus + .TlsKl,
 .Kndc7:not(:placeholder-shown) + .TlsKl {
   opacity: 0;
@@ -1101,6 +1106,11 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
+}
+
+/* Светлая тема: плейсхолдер «Поиск» в модалке — читаемый контраст */
+[data-color-scheme='light'] .JNQMw .TlsKl {
+  color: #6d6d72;
 }
 
 .CgUOn.lKYcT .ydmxJ {
@@ -1319,6 +1329,12 @@
   color: var(--tg-theme-subtitle-text-color);
 }
 
+/* Светлая тема: бейдж «9% годовых» — читаемый контраст */
+[data-color-scheme='light'] .tej97 {
+  background-color: rgba(0, 0, 0, 0.08);
+  color: #6d6d72;
+}
+
 
 .Ofdvj {
   display: flex;
@@ -1356,23 +1372,23 @@
   box-sizing: border-box;
 }
 
-/* IPADx — тёмный фон трека слайдера */
+/* IPADx — фон трека слайдера (адаптивность под светлую/тёмную тему) */
 .mFYy9.IPADx {
-  background-color: #3a3a3a;
+  background-color: var(--tg-theme-secondary-bg-color, rgba(123, 123, 123, 0.24));
 }
 
 .IPADx {
   width: 100%;
 }
 
-/* TsSEl — скользящий индикатор (подсветка активной вкладки) */
+/* TsSEl — скользящий индикатор (подсветка активной вкладки, адаптивность под тему) */
 .TsSEl {
   position: absolute;
   top: 2px;
   bottom: 2px;
   left: 2px;
   border-radius: 999px;
-  background-color: #5e5e5e;
+  background-color: var(--tg-theme-section-bg-color, rgba(255, 255, 255, 0.12));
 }
 
 
@@ -1435,6 +1451,11 @@
 
 .p_KOn:not(.r3qNc) .SNkiP {
   color: var(--tg-theme-hint-color);
+}
+
+/* Светлая тема: неактивные вкладки — тёмный текст на светлом фоне */
+[data-color-scheme='light'] .p_KOn:not(.r3qNc) .SNkiP {
+  color: #6d6d72;
 }
 
 /* SNkiP — текст внутри кнопки слайдера */
@@ -1577,7 +1598,7 @@
 
 /* «Все активы» — стиль как у транзакций: разделитель через псевдоэлемент .Wv9yg::after, высота строки 58px */
 .CgUOn.lKYcT .mjigr.LQUdc.lIhZN > * {
-  --cell-separator-color: #000;
+  --cell-separator-color: var(--tg-theme-section-separator-color, rgba(0, 0, 0, 0.12));
   --cell-separator-height: 1px;
 }
 
@@ -1603,10 +1624,10 @@
   box-sizing: border-box;
 }
 
-/* Имена и суммы активов — белый; тикер и % — серый/зелёный/красный; увеличенные надписи */
+/* Имена и суммы активов — основной текст; тикер и % — подзаголовок/зелёный/красный; увеличенные надписи */
 /* Верхнее название монет в «Все активы» — как в референсе: 16px, font-weight 500 */
 .CgUOn.lKYcT .cpHhd.IqPae.CF5m5.Ka5fP.kzP3J {
-  color: #ffffff;
+  color: var(--tg-theme-text-color);
   --skeleton-height: 12px;
   font-size: 16px;
   font-weight: 500;
@@ -1614,7 +1635,7 @@
 
 /* Ценник справа — увеличенный текст */
 .CgUOn.lKYcT .cpHhd.IqPae.PmUAN.Ka5fP.kzP3J.VyspS {
-  color: #ffffff;
+  color: var(--tg-theme-text-color);
   font-weight: 400;
   display: flex;
   align-items: center;
@@ -1625,7 +1646,7 @@
 
 /* Нижнее название (тикер BTC, ETH) в «Все активы» — 14px, font-weight 400, ellipsis */
 .CgUOn.lKYcT .cpHhd.YLSRc.PmUAN.Fx5Cf.Bgj6A {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--tg-theme-subtitle-text-color);
   --skeleton-height: 10px;
   font-size: 14px;
   font-weight: 400;
@@ -1636,11 +1657,11 @@
 }
 
 .CgUOn.lKYcT .cpHhd.YLSRc.PmUAN.ku6Sb.G5Dxc.WXss8 {
-  color: #61bd67;
+  color: var(--text-confirm-color);
 }
 
 .CgUOn.lKYcT .cpHhd.YLSRc.PmUAN.ku6Sb.G5Dxc.pPUsT {
-  color: #e53935;
+  color: var(--tg-theme-destructive-text-color);
 }
 
 /* Контейнер иконки и центрирование в «Все активы» (размеры — по умолчанию) */
