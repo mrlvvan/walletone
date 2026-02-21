@@ -1,0 +1,87 @@
+/* ========== ios-overrides.css — стили только для iOS ==========
+ * Подключается после index.css. Селекторы с [data-platform="ios"] применяются
+ * когда приложение открыто в Telegram на iPhone/iPad. */
+
+/* --- Шрифты --- */
+[data-platform="ios"] body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', system-ui, sans-serif;
+}
+
+/* --- Плавный скролл (momentum) --- */
+[data-platform="ios"] .content,
+[data-platform="ios"] .asset-scroll,
+[data-platform="ios"] [class*="scroll"],
+[data-platform="ios"] .HoRrY,
+[data-platform="ios"] .Kndc7 {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* --- Неактивные табы (как в нативном iOS) --- */
+[data-platform="ios"] {
+  --apple-inactive-tab-opacity: 0.85;
+}
+
+/* --- Скругления в стиле iOS --- */
+[data-platform="ios"] .list-card,
+[data-platform="ios"] .section-button,
+[data-platform="ios"] .asset-section {
+  border-radius: 12px;
+}
+
+[data-platform="ios"] .tab-chip.active,
+[data-platform="ios"] [class*="segmented"] [class*="active"] {
+  border-radius: 999px;
+}
+
+/* --- Кнопки: минимум 44px (Apple HIG) --- */
+[data-platform="ios"] button:not([class*="icon"]),
+[data-platform="ios"] .asset-action-button,
+[data-platform="ios"] .section-button {
+  min-height: 44px;
+}
+
+/* --- Safe area: доп. отступы для выреза и home indicator --- */
+[data-platform="ios"] .app {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+[data-platform="ios"] .tab-bar-root.Zr9ao {
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+}
+
+[data-platform="ios"] .topbar {
+  padding-top: calc(16px + env(safe-area-inset-top, 0px));
+}
+
+/* --- Viewport: стабильная высота на iOS (адресная строка) --- */
+[data-platform="ios"] .app {
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
+}
+
+/* --- Инпуты: 16px минимум — иначе iOS зумит при фокусе --- */
+[data-platform="ios"] input,
+[data-platform="ios"] textarea,
+[data-platform="ios"] select {
+  font-size: 16px !important;
+}
+
+/* --- Убираем тень/подсветку у инпутов iOS --- */
+[data-platform="ios"] input,
+[data-platform="ios"] textarea {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* --- Фикс для position: fixed (GPU layer) --- */
+[data-platform="ios"] .tab-bar-root.Zr9ao,
+[data-platform="ios"] .asset-action-bar {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* --- Ограничение bounce при overscroll --- */
+[data-platform="ios"] body {
+  overscroll-behavior-y: contain;
+}

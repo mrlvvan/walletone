@@ -38,10 +38,32 @@ export function applyTelegramTheme(themeParams, colorScheme) {
   }
 }
 
+/** Определяет платформу (ios/android/...) и добавляет data-platform на html */
+function detectPlatform() {
+  if (typeof document === 'undefined') return;
+
+  const root = document.documentElement;
+  let platform = '';
+
+  if (window.Telegram?.WebApp?.platform) {
+    platform = String(window.Telegram.WebApp.platform).toLowerCase();
+  } else {
+    const ua = navigator.userAgent || '';
+    if (/iPhone|iPad|iPod/.test(ua)) platform = 'ios';
+    else if (/Android/.test(ua)) platform = 'android';
+  }
+
+  if (platform) {
+    root.setAttribute('data-platform', platform);
+  }
+}
+
 export function initTelegramThemeSync() {
   if (typeof window === 'undefined') return;
 
   const tg = window.Telegram && window.Telegram.WebApp;
+
+  detectPlatform();
 
   if (!tg) return;
 
