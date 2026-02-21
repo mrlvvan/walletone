@@ -242,7 +242,7 @@
 .asset-chart-axis .asset-chart-axis-label {
   position: absolute;
   right: 0;
-  transform: translateY(-50%);
+    transform: translateY(-50%);
   font-family: Roboto, system-ui, sans-serif;
   font-size: 16px;
   font-variant-numeric: tabular-nums;

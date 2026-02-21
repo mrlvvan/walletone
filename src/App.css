@@ -1294,6 +1294,10 @@
 }
 
 /* Секция истории транзакций — структура по ref (JNQMw, Rfm73, ydmxJ, mjigr, GEGJU, Wv9yg и др.) */
+.PKleQ .Rfm73.Jn71M.hCZ1A {
+  padding: 20px 20px 4px 20px;
+}
+
 .JNQMw {
   display: flex;
   flex-direction: column;
@@ -1349,13 +1353,14 @@
   padding: 0;
   height: 58px;
   min-height: 58px;
-  gap: 0;
+  gap: 12px;
   box-sizing: border-box;
 }
 
 .t1CPG.Bcb3I {
   display: flex;
   align-items: center;
+  align-self: center;
 }
 
 .XeMWN {
@@ -1365,7 +1370,43 @@
   justify-content: center;
 }
 
+.PKleQ .XeMWN {
+  margin: 0 15px 0 20px;
+}
+
 /* ref 33331: icon circle 28px; 25042 WKcXc 42px; ref purple #5E4DBE for history */
+
+/* История: круги 42×42, SVG 28×28, цвет по акценту */
+.PKleQ .vilvX.history-tx-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.PKleQ .vilvX.history-tx-icon .history-tx-icon-inner {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.PKleQ .vilvX.history-tx-icon svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+.PKleQ .vilvX.history-tx-icon.history-accent-out,
+.PKleQ .vilvX.history-tx-icon.history-accent-in,
+.PKleQ .vilvX.history-tx-icon.history-accent-exchange {
+  background: var(--tg-theme-button-color, #5E4DBE);
+  color: var(--tg-theme-button-text-color, #ffffff);
+}
 
 .f5GTj.Wv9yg {
   position: relative;

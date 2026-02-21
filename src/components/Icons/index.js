@@ -9,7 +9,7 @@ export { IconUsdt } from './IconUsdt';
 export { IconDollar } from './IconDollar';
 export { SearchAssetIcon } from './SearchAssetIcon';
 
-export { IconBtc, IconEth, IconXrp, IconSol, IconTrx, IconDoge, IconBch } from './MarketIcons';
+export { IconBtc, IconEth, IconXrp, IconSol, IconTrx, IconDoge, IconBch, IconCati, IconLink, IconApt } from './MarketIcons';
 export { default as IconProductCrypto } from './IconProductCrypto';
 export { default as IconProductStocks } from './IconProductStocks';
 export { default as IconProductFunds } from './IconProductFunds';

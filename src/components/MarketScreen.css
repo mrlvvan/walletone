@@ -977,6 +977,10 @@
   background: var(--tg-theme-section-bg-color);
 }
 
+.JNQMw .ydmxJ.tf4r_.search-input-wrap {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 /* Секция «Продукты» без карточки — контент на общем фоне */
 .content.screen-trade .market-section:not(.market-section-card) .JNQMw .ydmxJ.tf4r_ {
   background: transparent;

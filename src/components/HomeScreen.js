@@ -15,11 +15,13 @@ function HomeScreen({
   onOpenAsset,
   onOpenTrade,
   onTransfer,
+  onAddDeposit,
+  onWithdraw,
 }) {
   return (
     <>
       <WalletHero stats={walletStats} />
-      <WalletActions onTransfer={onTransfer} />
+      <WalletActions onTransfer={onTransfer} onAddDeposit={onAddDeposit} onWithdraw={onWithdraw} />
       <div className="section-gap" aria-hidden="true" />
       <PromoSlider slides={promoSlides} />
       <div className="section-gap" aria-hidden="true" />

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
+  <circle cx="10" cy="10" r="10" fill="none" />
+  <clipPath id="ru-circle">
+    <circle cx="10" cy="10" r="10" />
+  </clipPath>
+  <g clipPath="url(#ru-circle)">
+    <rect width="20" height="6.67" y="0" fill="#fff" />
+    <rect width="20" height="6.67" y="6.67" fill="#0039A6" />
+    <rect width="20" height="6.67" y="13.33" fill="#D52B1E" />
+  </g>
+</svg>
