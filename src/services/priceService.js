@@ -130,6 +130,7 @@ async function fetchCryptoPricesFromCMC() {
 
       result[ourId] = {
         price: formatPriceRub(price),
+        priceRaw: price,
         percent: `${change >= 0 ? '+' : ''}${change.toFixed(2)}%`,
         delta: formatDelta(price, change),
         period: '24 ч',
@@ -161,6 +162,7 @@ async function fetchCryptoPricesFromCoinGecko() {
 
       result[ourId] = {
         price: formatPriceRub(price),
+        priceRaw: price,
         percent: `${change >= 0 ? '+' : ''}${change.toFixed(2)}%`,
         delta: formatDelta(price, change),
         period: '24 ч',
@@ -209,6 +211,7 @@ async function fetchStockPrices(usdRub) {
 
       result[ourId] = {
         price: formatPriceRub(priceRub),
+        priceRaw: priceRub,
         percent: `${change >= 0 ? '+' : ''}${change.toFixed(2)}%`,
         delta: formatDelta(priceRub, change),
         period: '24 ч',

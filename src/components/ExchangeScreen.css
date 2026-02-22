@@ -1,0 +1,209 @@
+/* ExchangeScreen — экран обмена (Вы платите / Вы получите) */
+
+.exchange-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 24px 24px 0;
+  padding-bottom: calc(80px + var(--safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  background: var(--tg-theme-section-bg-color, #212121);
+  color: var(--tg-theme-text-color, #ffffff);
+}
+
+.exchange-form {
+  flex: 1;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 24px;
+}
+
+.exchange-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.exchange-row-pay {
+  padding-bottom: 16px;
+}
+
+.exchange-row-receive {
+  padding-top: 16px;
+}
+
+.exchange-row-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.exchange-row-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  color: #ffffff;
+}
+
+.exchange-row-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.exchange-row-icon--green,
+.exchange-row-icon--blue {
+  background: transparent;
+}
+
+.exchange-row-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.exchange-balance-wrap {
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.exchange-balance-link {
+  color: var(--tg-theme-link-color, #8774e1);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.exchange-balance-value {
+  color: var(--tg-theme-subtitle-text-color, #aaaaaa);
+}
+
+.exchange-row-input-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.exchange-input {
+  flex: 1;
+  min-width: 0;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 40px;
+  color: var(--tg-theme-text-color, #ffffff);
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.exchange-input::placeholder {
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+
+.exchange-currency-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: Roboto, sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 40px;
+  color: var(--tg-theme-subtitle-text-color, #aaaaaa);
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.exchange-currency-chevron {
+  color: var(--tg-theme-subtitle-text-color, #aaaaaa);
+}
+
+.exchange-divider {
+  position: relative;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin-left: -24px;
+  margin-right: -24px;
+}
+
+.exchange-divider::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 66px;
+  top: 50%;
+  margin-top: -0.5px;
+  height: 1px;
+  background: #000;
+}
+
+.exchange-divider::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: calc(100% - 22px);
+  top: 50%;
+  margin-top: -0.5px;
+  height: 1px;
+  background: #000;
+}
+
+.exchange-swap-btn {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(135, 116, 225, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--tg-theme-link-color, #8774e1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.exchange-swap-btn svg {
+  width: 28px;
+  height: 28px;
+}
+
+.exchange-submit-btn {
+  position: fixed;
+  bottom: calc(16px + var(--safe-area-inset-bottom, 0px));
+  left: 24px;
+  right: 24px;
+  width: calc(100% - 48px);
+  padding: 16px 24px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--tg-theme-button-text-color, #ffffff);
+  background: var(--tg-theme-button-color, #8774e1);
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.exchange-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

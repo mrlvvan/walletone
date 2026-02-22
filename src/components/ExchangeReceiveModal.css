@@ -1,0 +1,174 @@
+/* ExchangeReceiveModal — модальное окно выбора криптовалюты «Вы получите» */
+
+.exchange-receive-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--tg-theme-bg-color, #212121);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.exchange-receive-modal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.exchange-receive-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.exchange-receive-modal-back {
+  background: none;
+  border: none;
+  padding: 8px;
+  margin: -8px 0 -8px -8px;
+  color: var(--tg-theme-link-color, #8774e1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exchange-receive-modal-title {
+  margin: 0;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--tg-theme-text-color, #ffffff);
+}
+
+.exchange-receive-modal-search {
+  padding: 12px 20px;
+  flex-shrink: 0;
+}
+
+.exchange-receive-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--tg-theme-section-bg-color, #2d2d2d);
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.exchange-receive-search-icon {
+  color: var(--tg-theme-subtitle-text-color, #888);
+  flex-shrink: 0;
+}
+
+.exchange-receive-search-input {
+  flex: 1;
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: var(--tg-theme-text-color, #ffffff);
+  outline: none;
+}
+
+.exchange-receive-search-input::placeholder {
+  color: var(--tg-theme-subtitle-text-color, #888);
+}
+
+.exchange-receive-modal-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 20px 24px;
+}
+
+.exchange-receive-modal-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 14px 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+}
+
+.exchange-receive-modal-row:last-child {
+  border-bottom: none;
+}
+
+.exchange-receive-modal-row:active {
+  opacity: 0.8;
+}
+
+.exchange-receive-row-icon-wrap {
+  flex-shrink: 0;
+}
+
+.exchange-receive-row-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.exchange-receive-row-icon svg {
+  width: 42px;
+  height: 42px;
+}
+
+.exchange-receive-row-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.exchange-receive-row-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--tg-theme-text-color, #ffffff);
+}
+
+.exchange-receive-row-code {
+  font-size: 13px;
+  color: var(--tg-theme-subtitle-text-color, #aaaaaa);
+  margin-top: 2px;
+}
+
+.exchange-receive-row-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.exchange-receive-row-price {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--tg-theme-text-color, #ffffff);
+}
+
+.exchange-receive-row-change {
+  font-size: 13px;
+  color: #4caf50;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.exchange-receive-row-change.negative {
+  color: #f44336;
+}
+
+.exchange-receive-row-change-icon {
+  display: flex;
+  align-items: center;
+}

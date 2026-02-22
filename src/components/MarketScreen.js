@@ -89,7 +89,8 @@ function MarketScreen({ marketTickers, fundTickers = [], topDay, topDayFall = []
       <div className={`FhO5I ${isSearchFocused ? 'search-overlay-open' : ''}`}>
         <section className="oJKLh LySHd iXSn4 KIbKh">
           <div className="JNQMw">
-            <div className="ydmxJ tf4r_ search-input-wrap">
+            <div className="market-search-input-wrap">
+              <div className="ydmxJ tf4r_ search-input-wrap">
               <form className="pPd9Y nsMB8" action=".">
                 <label className="cpHhd IqPae PmUAN Ka5fP YrFt1 DIb0V XTiUr l_jV4">
                   <div className="KKBuo">
@@ -138,6 +139,7 @@ function MarketScreen({ marketTickers, fundTickers = [], topDay, topDayFall = []
                   </div>
                 </label>
               </form>
+              </div>
             </div>
 
             {isSearchFocused && (

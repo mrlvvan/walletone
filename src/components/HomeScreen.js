@@ -17,11 +17,12 @@ function HomeScreen({
   onTransfer,
   onAddDeposit,
   onWithdraw,
+  onSwap,
 }) {
   return (
     <>
       <WalletHero stats={walletStats} />
-      <WalletActions onTransfer={onTransfer} onAddDeposit={onAddDeposit} onWithdraw={onWithdraw} />
+      <WalletActions onTransfer={onTransfer} onAddDeposit={onAddDeposit} onWithdraw={onWithdraw} onSwap={onSwap} />
       <div className="section-gap" aria-hidden="true" />
       <PromoSlider slides={promoSlides} />
       <div className="section-gap" aria-hidden="true" />

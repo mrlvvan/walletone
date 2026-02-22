@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import './App.css';
 import AssetScreen from './components/AssetScreen';
 import BonusScreen from './components/BonusScreen';
@@ -6,12 +6,59 @@ import HomeScreen from './components/HomeScreen';
 import TransferScreen from './components/TransferScreen';
 import BuyCryptoScreen from './components/BuyCryptoScreen';
 import WithdrawScreen from './components/WithdrawScreen';
+import ExchangeScreen from './components/ExchangeScreen';
 import HistoryScreen from './components/HistoryScreen';
 import MarketScreen from './components/MarketScreen';
 import TabBar from './components/TabBar';
 import { initTelegramThemeSync } from './telegramTheme';
 import { fetchAllPrices } from './services/priceService';
-import { IconDollar, SearchAssetIcon, IconBtc, IconEth, IconXrp, IconSol, IconTrx, IconDoge, IconBch, IconCati, IconLink, IconApt } from './components/Icons';
+import { useRates } from './context/RatesContext';
+import {
+  IconDollar,
+  IconBtc,
+  IconEth,
+  IconXrp,
+  IconSol,
+  IconTrx,
+  IconDoge,
+  IconBch,
+  IconCati,
+  IconLink,
+  IconApt,
+  IconCardano,
+  IconStellar,
+  IconLitecoin,
+  IconSui,
+  IconAvalanche,
+  IconShibaInu,
+  IconHedera,
+  IconWorldLibertyFinancial,
+  IconToncoin,
+  IconPolkadot,
+  IconUniswap,
+  IconGold,
+  IconMantle,
+  IconAave,
+  IconPepe,
+  IconNearProtocol,
+  IconAster,
+  IconEtheriumClassic,
+  IconInternetComputer,
+  IconSky,
+  IconPi,
+  IconOnd,
+  IconPol,
+  IconWorldCoin,
+  IconEthena,
+  IconTslax,
+  IconNvdaX,
+  IconGooglX,
+  IconAaplX,
+  IconCoinX,
+  IconHoodX,
+  IconMcdX,
+  IconCscoX,
+} from './components/Icons';
 
 function App() {
   const assets = [
@@ -251,6 +298,15 @@ function App() {
   const mainRef = useRef(null);
   const [selectedAsset, setSelectedAsset] = useState(assets[0]);
   const [livePrices, setLivePrices] = useState({});
+  const { updateRates } = useRates();
+
+  const refreshPrices = useCallback(() => {
+    fetchAllPrices()
+      .then((prices) => {
+        if (prices && Object.keys(prices).length > 0) setLivePrices(prices);
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -261,12 +317,42 @@ function App() {
         })
         .catch(() => {});
     load();
-    const interval = setInterval(load, 60000);
+    const interval = setInterval(load, 30000);
     return () => {
       cancelled = true;
       clearInterval(interval);
     };
   }, []);
+
+  useEffect(() => {
+    if (screen === 'asset' || screen === 'trade' || screen === 'exchange') refreshPrices();
+  }, [screen, selectedAsset?.id]);
+
+  useEffect(() => {
+    const prices = livePrices;
+    const idsWithPrice = Object.keys(prices).filter((id) => prices[id]?.priceRaw != null && prices[id].priceRaw > 0);
+    if (idsWithPrice.length < 2) return;
+    const codeById = {
+      btc: 'BTC', eth: 'ETH', ton: 'TON', usdt: 'USDT', xrp: 'XRP', sol: 'SOL', trx: 'TRX', doge: 'DOGE',
+      bch: 'BCH', link: 'LINK', apt: 'APT', ada: 'ADA', xlm: 'XLM', ltc: 'LTC', sui: 'SUI', avax: 'AVAX',
+      shib: 'SHIB', hbar: 'HBAR', dot: 'DOT', uni: 'UNI', xaut: 'XAUT', mnt: 'MNT', aave: 'AAVE', pepe: 'PEPE',
+      near: 'NEAR', etc: 'ETC', icp: 'ICP', sky: 'SKY', pi: 'PI', ondo: 'ONDO', pol: 'POL', wld: 'WLD', ena: 'ENA',
+    };
+    const newRates = {};
+    for (const id1 of idsWithPrice) {
+      for (const id2 of idsWithPrice) {
+        if (id1 === id2) continue;
+        const code1 = codeById[id1];
+        const code2 = codeById[id2];
+        if (!code1 || !code2) continue;
+        const p1 = prices[id1].priceRaw;
+        const p2 = prices[id2].priceRaw;
+        /* code1_to_code2 = сколько code2 за 1 code2. 1 from = p1 RUB, 1 to = p2 RUB => 1 from = p1/p2 to */
+        if (p2 > 0) newRates[`${code1}_${code2}`] = p1 / p2;
+      }
+    }
+    if (Object.keys(newRates).length > 0) updateRates(newRates);
+  }, [livePrices, updateRates]);
 
   useEffect(() => {
     const cleanup = initTelegramThemeSync();
@@ -1335,211 +1421,25 @@ function App() {
   ];
 
   const marketTickers = [
-    {
-      id: 'tsla',
-      name: 'Tesla',
-      code: 'TSLAx',
-      change: '-2,13%',
-      styleClass: 'tsla',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="none" viewBox="0 0 56 56" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <g clipPath="url(#TSLAX_clip0_4293_530)">
-            <path fill="#E82127" d="M0 28C0 12.536 12.536 0 28 0s28 12.536 28 28-12.536 28-28 28S0 43.464 0 28" />
-            <path fill="#fff" d="m28 46 4.5-25c4.267 0 5.594.072 5.788 1.99 0 0 2.863-1.072 4.306-3.25C36.961 17.12 31.3 17 31.3 17L28 21l-3.3-4s-5.66.118-11.293 2.74c1.442 2.177 4.306 3.25 4.306 3.25.195-1.92 1.549-1.987 5.787-1.99z" />
-            <path fill="#fff" d="M28 15.947c4.554-.035 9.664.717 15 3.053.713-1.29 1-2 1-2-5.833-2.318-11.296-2.98-16-3-4.705.02-10.167.682-16 3 0 0 .364.843 1 2 5.335-2.336 10.446-3.088 15-3.053" />
-          </g>
-          <defs>
-            <clipPath id="TSLAX_clip0_4293_530">
-              <path fill="#fff" d="M0 0h56v56H0z" />
-            </clipPath>
-          </defs>
-        </svg>
-      ),
-    },
-    {
-      id: 'goog',
-      name: 'Alphabet',
-      code: 'GOOGLx',
-      change: '-1,19%',
-      styleClass: 'goog',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="none" viewBox="0 0 56 56" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <g clipPath="url(#GOOGLX_clip0_4293_456)">
-            <path fill="#F0F3FA" d="M0 28C0 12.536 12.536 0 28 0s28 12.536 28 28-12.536 28-28 28S0 43.464 0 28" />
-            <path fill="#F71603" d="M23.47 18.43c-.5-1.04-.9-1.86-1.21-2.47a27 27 0 0 0-1.37-2.32 16.07 16.07 0 0 1 13.75-.14q2.475 1.17 4.47 3.12c.05.05.05.09 0 .13l-3.74 3.77h-.05a10.41 10.41 0 0 0-8.75-2.99c-1.08.14-2.11.44-3.1.9" />
-            <path fill="url(#GOOGLX_paint0_linear_4293_456)" d="M20.89 13.63c.46.7.92 1.48 1.37 2.33.31.6.72 1.43 1.2 2.46a10.64 10.64 0 0 0-5.32 5.67c-1.68-.63-3.35-1.31-5.01-2.03a15.94 15.94 0 0 1 7.76-8.43" />
-            <path fill="url(#GOOGLX_paint1_linear_4293_456)" d="M18.14 24.1a10.67 10.67 0 0 0-.14 7.4c-1.68.66-3.39 1.25-5.12 1.77a16.06 16.06 0 0 1 .25-11.2c1.66.7 3.33 1.39 5.01 2.02z" />
-            <path fill="#108CED" d="M43.81 28.13c-1.32.62-2.64 1.24-3.96 1.88-.63.3-1.26.8-1.87.99H28v-5h15.97c.02 0 .03.02.03.04l-.19 2.1z" />
-            <path fill="url(#GOOGLX_paint2_linear_4293_456)" d="M43.81 28.13c-.1 2.37-.62 4.59-1.58 6.66a16.1 16.1 0 0 1-4.1 5.46 20 20 0 0 0-2.4-2.94l-1.16-1.16a10.77 10.77 0 0 0 3.17-4.77c.06-.18.04-.14.14-.38.61-.18 1.34-.69 1.97-1a316 316 0 0 1 3.96-1.87" />
-            <path fill="url(#GOOGLX_paint3_linear_4293_456)" d="M18 31.5a10.6 10.6 0 0 0 3.7 5.01c-.6.66-1.44 1.67-2.53 3.02l-.95 1.17a15.9 15.9 0 0 1-5.34-7.43c1.73-.52 3.44-1.11 5.12-1.76z" />
-            <path fill="url(#GOOGLX_paint4_linear_4293_456)" d="m34.57 36.15 1.15 1.16c.9.9 1.7 1.88 2.42 2.94a15.83 15.83 0 0 1-19.91.45l.94-1.17a64 64 0 0 1 2.54-3.02 10.67 10.67 0 0 0 6.5 2.04 10.27 10.27 0 0 0 6.36-2.4" />
-            <path fill="#000" d="M17.16 39.13c-.03 0-.06.01-.06.04 0 .02.02.05.05.05s.06-.01.07-.04c0-.02-.02-.05-.06-.05" />
-          </g>
-          <defs>
-            <linearGradient id="GOOGLX_paint0_linear_4293_456" x1="23.9" x2="20.18" y1="18.38" y2="25.45" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#F71603" />
-              <stop offset="0.47" stopColor="#FA6702" />
-              <stop offset="1" stopColor="#FFA001" />
-            </linearGradient>
-            <linearGradient id="GOOGLX_paint1_linear_4293_456" x1="16.62" x2="15.05" y1="23.67" y2="33.26" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#FFA001" />
-              <stop offset="0.99" stopColor="#FBCC07" />
-            </linearGradient>
-            <linearGradient id="GOOGLX_paint2_linear_4293_456" x1="36.27" x2="38.96" y1="37.35" y2="30.68" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#03B58F" />
-              <stop offset="1" stopColor="#108CED" />
-            </linearGradient>
-            <linearGradient id="GOOGLX_paint3_linear_4293_456" x1="14.31" x2="17.33" y1="33.31" y2="40.68" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#FBC205" />
-              <stop offset="1" stopColor="#00BC43" />
-            </linearGradient>
-            <linearGradient id="GOOGLX_paint4_linear_4293_456" x1="28.6" x2="37.46" y1="40.75" y2="38.61" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#00BC43" />
-              <stop offset="1" stopColor="#03B58F" />
-            </linearGradient>
-            <clipPath id="GOOGLX_clip0_4293_456">
-              <path fill="#fff" d="M0 0h56v56H0z" />
-            </clipPath>
-          </defs>
-        </svg>
-      ),
-    },
-    {
-      id: 'nvda',
-      name: 'NVIDIA',
-      code: 'NVDAx',
-      change: '-1,71%',
-      styleClass: 'nvda',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="none" viewBox="0 0 56 56" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <g clipPath="url(#NVDAX_clip0_4293_510)">
-            <path fill="url(#NVDAX_paint0_linear_4293_510)" d="M0 28C0 12.536 12.536 0 28 0s28 12.536 28 28-12.536 28-28 28S0 43.464 0 28" />
-            <path fill="#76B900" d="M12.087 26.332s3.692-4.799 10.913-5.3v-1.994C15.002 19.62 8 26 8 26s3.998 10.245 15 11.187V35.32c-8.073-.921-10.913-8.99-10.913-8.99zM23 31.61v1.709c-6.102-.986-7.871-6.738-7.871-6.738S18.134 23.477 23 23v2.035c-.004 0 .003 0 0 0-2.554-.278-4.634 1.886-4.634 1.886S19.56 30.562 23 31.61M23 16v3.038c.235-.017.394-.03.63-.038 9.093-.278 15.018 6.962 15.018 6.962s-6.805 7.503-13.894 7.503c-.65 0-1.183-.054-1.754-.146v2.001c.489.056.92.091 1.448.091 6.597 0 11.368-3.056 15.988-6.672.766.557 3.902 1.91 4.546 2.502-4.392 3.335-14.63 6.023-20.433 6.023-.56 0-1.02-.031-1.549-.077V40h25V16zm0 7v-1.967c.232-.015.391-.026.63-.033 6.539-.186 10.829 5.055 10.829 5.055S29.969 32 25 32c-.715 0-1.423-.214-2-.39v-6.575c2.546.28 2.982 1.3 4.513 3.613l3.403-2.602S28.19 23 24 23c-.455 0-.572-.041-1 0" />
-          </g>
-          <defs>
-            <linearGradient id="NVDAX_paint0_linear_4293_510" x1="10.418" x2="68.147" y1="9.712" y2="76.017" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#1A1E21" />
-              <stop offset="1" stopColor="#06060A" />
-            </linearGradient>
-            <clipPath id="NVDAX_clip0_4293_510">
-              <path fill="#fff" d="M0 0h56v56H0z" />
-            </clipPath>
-          </defs>
-        </svg>
-      ),
-    },
-    {
-      id: 'aapl',
-      name: 'Apple',
-      code: 'AAPLx',
-      change: '-1,17%',
-      styleClass: 'aapl',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="none" viewBox="0 0 56 56" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <g clipPath="url(#AAPLX_clip0_4293_401)">
-            <path fill="url(#AAPLX_paint0_linear_4293_401)" d="M0 28C0 12.536 12.536 0 28 0s28 12.536 28 28-12.536 28-28 28S0 43.464 0 28" />
-            <path
-              fill="#fff"
-              d="M41 32.988q-.258.727-.544 1.392a16.2 16.2 0 0 1-1.661 2.9q-1.309 1.815-2.137 2.51-1.279 1.145-2.748 1.176-1.055.002-2.538-.588-1.484-.588-2.732-.587-1.308-.001-2.81.587-1.502.59-2.427.62-1.409.06-2.81-1.207-.894-.76-2.236-2.6-1.438-1.965-2.364-4.566Q15 29.817 15 27.185q0-3.016 1.342-5.197a7.77 7.77 0 0 1 2.812-2.764 7.7 7.7 0 0 1 3.8-1.043c.746 0 1.724.225 2.94.665q1.818.666 2.332.667c.255 0 1.12-.262 2.585-.785q2.078-.727 3.515-.607 3.897.305 5.845 2.992-3.482 2.053-3.448 5.74c.021 1.915.735 3.509 2.139 4.774A7.1 7.1 0 0 0 41 32.988M34.468 11q.03.3.03.6c0 1.5-.563 2.902-1.686 4.198-1.357 1.542-2.998 2.432-4.778 2.292a5 5 0 0 1-.036-.569c0-1.44.645-2.982 1.791-4.242q.859-.957 2.18-1.592 1.324-.626 2.499-.687"
-            />
-          </g>
-          <defs>
-            <linearGradient id="AAPLX_paint0_linear_4293_401" x1="10.418" x2="68.147" y1="9.712" y2="76.017" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#1A1E21" />
-              <stop offset="1" stopColor="#06060A" />
-            </linearGradient>
-            <clipPath id="AAPLX_clip0_4293_401">
-              <path fill="#fff" d="M0 0h56v56H0z" />
-            </clipPath>
-          </defs>
-        </svg>
-      ),
-    },
-    {
-      id: 'coin',
-      name: 'Coinbase',
-      code: 'COINx',
-      change: '-2,12%',
-      styleClass: 'coin',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="none" viewBox="0 0 56 56" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <g clipPath="url(#COINX_clip0_4293_435)">
-            <path fill="#0052FF" d="M0 28C0 12.536 12.536 0 28 0s28 12.536 28 28-12.536 28-28 28S0 43.464 0 28" />
-            <path fill="#fff" d="M43.88 26h-8.13a8 8 0 1 0 0 4h8.13a16 16 0 1 1 0-4" />
-          </g>
-          <defs>
-            <clipPath id="COINX_clip0_4293_435">
-              <path fill="#fff" d="M0 0h56v56H0z" />
-            </clipPath>
-          </defs>
-        </svg>
-      ),
-    },
-    {
-      id: 'hood',
-      name: 'Robinhood',
-      code: 'HOODx',
-      change: '-2,96%',
-      styleClass: 'hood',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="none" viewBox="0 0 56 56" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <g clipPath="url(#HOODX_clip0_4293_475)">
-            <path fill="#00C805" d="M0 28C0 12.536 12.536 0 28 0s28 12.536 28 28-12.536 28-28 28S0 43.464 0 28" />
-            <path
-              fill="#fff"
-              d="M35.89 14c1.4.05 2.32.31 2.93.84.75.62 1.53 3.09 1.01 6.3-.04.18-.1.32-.26.54a147 147 0 0 0-4.93 6.2 82 82 0 0 1-.29-7.93c0-.38-.3-.57-.65-.57a69 69 0 0 0-7.72 1.24l-.17.04c-.05.04-.1 0-.14-.04-.04-.05-.04-.09 0-.14l.14-.13a81 81 0 0 1 5-5.16c.21-.17.39-.3.65-.4 1.7-.52 3.2-.83 4.43-.79m-9.25 24.34-.22.09h-.01c-1.32.45-3.28 1.1-4.98 1.94-.1.04-.18.17-.18.17-.04.1-.1.18-.13.27l-.16.38c-.16.38-.34.8-.41 1.03l-.08.22v.09l.03.04h.05l.21-.08c.28-.13.59-.3.92-.47l.8-.41h.04c1.13-.53 2.25-1.08 3.37-1.64 0 0 .13-.08.22-.21l.62-1.24v-.09c0-.09-.05-.13-.09-.09m-4.9-1.94c.08-.18.47-.93.57-1.1v-.04a78.2 78.2 0 0 1 9.63-14.2l.09-.13c.05-.05.05-.1 0-.14s-.1-.09-.13-.04h-.17c-2.46.35-4.96.8-7.4 1.41-.25.08-.38.2-.44.25l-.01.01a90 90 0 0 0-5.18 6.93c.05.13.05.4.05.4s.4 3.08.97 5.37C18.32 39.32 17 45 17 45h1.02a51 51 0 0 1 3.71-8.6zM33.2 22v-.18c0-.04-.03-.08-.07-.12l-.01-.01c-.05 0-.1 0-.14.04l-.08.13A74.8 74.8 0 0 0 22 38.61l-.1.13v.13l.04.04h.09l.13-.04a79 79 0 0 1 7.45-2.65.68.68 0 0 0 .35-.26c1.1-2.11 3.63-6.26 3.63-6.26.1-.13.05-.27.05-.27s-.44-4.93-.44-7.44z"
-            />
-          </g>
-          <defs>
-            <clipPath id="HOODX_clip0_4293_475">
-              <path fill="#fff" d="M0 0h56v56H0z" />
-            </clipPath>
-          </defs>
-        </svg>
-      ),
-    },
+    { id: 'tsla', name: 'Tesla', code: 'TSLAx', change: '-2,13%', styleClass: 'tsla', icon: <IconTslax size={52} /> },
+    { id: 'goog', name: 'Alphabet', code: 'GOOGLx', change: '-1,19%', styleClass: 'goog', icon: <IconGooglX size={52} /> },
+    { id: 'nvda', name: 'NVIDIA', code: 'NVDAx', change: '-1,71%', styleClass: 'nvda', icon: <IconNvdaX size={52} /> },
+    { id: 'aapl', name: 'Apple', code: 'AAPLx', change: '-1,17%', styleClass: 'aapl', icon: <IconAaplX size={52} /> },
+    { id: 'coin', name: 'Coinbase', code: 'COINx', change: '-2,12%', styleClass: 'coin', icon: <IconCoinX size={52} /> },
+    { id: 'hood', name: 'Robinhood', code: 'HOODx', change: '-2,96%', styleClass: 'hood', icon: <IconHoodX size={52} /> },
     {
       id: 'mcd',
       code: 'MCDx',
       change: '+0,02%',
       styleClass: 'mcd',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="none" viewBox="0 0 56 56" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <g clipPath="url(#MCDX_clip0_4293_489)">
-            <path fill="#BD0017" d="M0 28C0 12.536 12.536 0 28 0s28 12.536 28 28-12.536 28-28 28S0 43.464 0 28" />
-            <path fill="#FC0" d="M34.992 12.273c2.755 0 4.989 13.3 4.989 29.727H44c0-17.685-4.055-32-9.02-32-2.837 0-5.343 4.29-6.998 11.027C26.327 14.29 23.822 10 21.008 10 16.043 10 12 24.302 12 41.986h4.02c0-16.426 2.21-29.713 4.964-29.713S26 24.846 26 40h4c0-15.154 2.214-27.727 4.969-27.727" />
-          </g>
-          <defs>
-            <clipPath id="MCDX_clip0_4293_489">
-              <path fill="#fff" d="M0 0h56v56H0z" />
-            </clipPath>
-          </defs>
-        </svg>
-      ),
+      icon: <IconMcdX size={52} />,
     },
     {
       id: 'cisco',
       code: 'CSCOx',
       change: '+0,12%',
       styleClass: 'cisco',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="none" viewBox="0 0 56 56" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <g clipPath="url(#CSCOX_clip0_4293_445)">
-            <path fill="#1BA0D7" d="M0 28C0 12.536 12.536 0 28 0s28 12.536 28 28-12.536 28-28 28S0 43.464 0 28" />
-            <path
-              fill="#fff"
-              d="M18.579 31.323h1.929v7.495h-1.93v-7.495zm17.371 2.101c-.062-.06-.67-.424-1.645-.424-1.219 0-2.132.849-2.132 2s.852 2 2.132 2c.913 0 1.523-.364 1.644-.424v2.06c-.243.061-.913.243-1.766.243-2.193 0-4.081-1.455-4.081-3.94 0-2.242 1.705-3.939 4.08-3.939.914 0 1.584.242 1.767.242zm-20.102 0c-.061-.06-.67-.424-1.645-.424-1.218 0-2.132.849-2.132 2s.853 2 2.132 2c.914 0 1.523-.364 1.645-.424v2.06c-.244.061-.914.243-1.767.243-2.132 0-4.081-1.455-4.081-3.94C10 32.697 11.706 31 14.081 31c.914 0 1.584.242 1.767.242zM46 35.06c0 2.182-1.706 3.94-4.02 3.94-2.315 0-4.02-1.758-4.02-3.94s1.705-3.939 4.02-3.939c2.375 0 4.02 1.757 4.02 3.939m-4.02-2c-1.158 0-2.01.91-2.01 2 0 1.091.852 2 2.01 2s2.01-.909 2.01-2-.853-2-2.01-2M27.726 33s-.853-.242-1.523-.242c-.792 0-1.218.242-1.218.606 0 .485.548.606.853.727l.548.182c1.218.424 1.827 1.272 1.827 2.181 0 1.88-1.705 2.546-3.167 2.546-1.036 0-2.01-.182-2.071-.182v-1.757c.182.06.974.303 1.827.303.975 0 1.401-.303 1.401-.728 0-.363-.365-.606-.853-.727a1.1 1.1 0 0 0-.426-.121c-1.096-.364-1.95-.97-1.95-2.242 0-1.395 1.097-2.364 2.864-2.364.913 0 1.827.242 1.888.242z"
-            />
-            <path fill="#000" d="M18 18v10zm20 0v10zm-5 3v5zm-10 0v5zm20 0v5zm-30 0v5zm-5 3v2zm40 0v2zm-20 0v2z" />
-            <path stroke="#fff" strokeLinecap="round" strokeWidth="2" d="M18 18v10m20-10v10m-5-7v5m-10-5v5m20-5v5m-30-5v5m-5-2v2m40-2v2m-20-2v2" />
-          </g>
-          <defs>
-            <clipPath id="CSCOX_clip0_4293_445">
-              <path fill="#fff" d="M0 0h56v56H0z" />
-            </clipPath>
-          </defs>
-        </svg>
-      ),
+      icon: <IconCscoX size={52} />,
     },
   ];
 
@@ -1833,32 +1733,32 @@ function App() {
   ];
 
   const additionalMarketAssetsForSearch = [
-    { id: 'ada', name: 'Cardano', code: 'ADA', price: '22,78 ₽', change: '↑ 1,35%', icon: <SearchAssetIcon letter="A" bg="#0033ad" />, styleClass: 'ada' },
+    { id: 'ada', name: 'Cardano', code: 'ADA', price: '22,78 ₽', change: '↑ 1,35%', icon: <IconCardano size={42} />, styleClass: 'ada' },
     { id: 'link', name: 'Chainlink', code: 'LINK', price: '738,28 ₽', change: '↓ 0,17%', icon: <IconLink size={42} />, styleClass: 'link' },
-    { id: 'xlm', name: 'Stellar', code: 'XLM', badge: '333% годовых', price: '13,57 ₽', change: '↓ 0,37%', icon: <SearchAssetIcon letter="S" bg="#030303" />, styleClass: 'xlm' },
-    { id: 'ltc', name: 'Litecoin', code: 'LTC', price: '4 592,02 ₽', change: '↑ 0,66%', icon: <SearchAssetIcon letter="L" bg="#345d9d" />, styleClass: 'ltc' },
-    { id: 'sui', name: 'Sui', code: 'SUI', price: '87,28 ₽', change: '↑ 0,65%', icon: <SearchAssetIcon letter="S" bg="#4DA2FF" />, styleClass: 'sui' },
-    { id: 'avax', name: 'Avalanche', code: 'AVAX', price: '773,39 ₽', change: '↑ 0,18%', icon: <SearchAssetIcon letter="A" bg="#E84142" />, styleClass: 'avax' },
-    { id: 'shib', name: 'Shiba Inu', code: 'SHIB', price: '0,000523 ₽', change: '↑ 0,93%', icon: <SearchAssetIcon letter="S" bg="#CF1324" />, styleClass: 'shib' },
-    { id: 'hbar', name: 'Hedera', code: 'HBAR', price: '6,99 ₽', change: '↓ 0,40%', icon: <SearchAssetIcon letter="H" bg="#000" />, styleClass: 'hbar' },
-    { id: 'wlfi', name: 'World Liberty Financial', code: 'WLFI', price: '9,85 ₽', change: '↓ 0,47%', icon: <SearchAssetIcon letter="W" bg="#1C1917" />, styleClass: 'wlfi' },
-    { id: 'ton', name: 'Toncoin', code: 'TON', badge: '7.75% годовых', price: '105,03 ₽', change: '↑ 1,23%', icon: <SearchAssetIcon letter="T" bg="#0098EA" />, styleClass: 'ton' },
-    { id: 'dot', name: 'Polkadot', code: 'DOT', price: '116,69 ₽', change: '↓ 0,61%', icon: <SearchAssetIcon letter="P" bg="#E6007A" />, styleClass: 'dot' },
-    { id: 'uni', name: 'Uniswap', code: 'UNI', price: '298,23 ₽', change: '↓ 1,06%', icon: <SearchAssetIcon letter="U" bg="#FF007A" />, styleClass: 'uni' },
-    { id: 'xaut', name: 'Золото', code: 'XAUT', badge: '25% годовых', price: '378 576,60 ₽', change: '↑ 4,46%', icon: <SearchAssetIcon letter="G" bg="#D6A535" />, styleClass: 'xaut' },
-    { id: 'mnt', name: 'Mantle', code: 'MNT', price: '55,66 ₽', change: '↑ 1,98%', icon: <SearchAssetIcon letter="M" bg="#000" />, styleClass: 'mnt' },
-    { id: 'aave', name: 'Aave', code: 'AAVE', price: '9 761,38 ₽', change: '↓ 0,01%', icon: <SearchAssetIcon letter="A" bg="#9391f7" />, styleClass: 'aave' },
-    { id: 'pepe', name: 'Pepe', code: 'PEPE', price: '0,000321 ₽', change: '↑ 0,21%', icon: <SearchAssetIcon letter="P" bg="#3B8339" />, styleClass: 'pepe' },
-    { id: 'near', name: 'NEAR Protocol', code: 'NEAR', price: '91,59 ₽', change: '↑ 0,38%', icon: <SearchAssetIcon letter="N" bg="#00EC97" />, styleClass: 'near' },
-    { id: 'aster', name: 'Aster', code: 'ASTER', price: '45,54 ₽', change: '↑ 6,24%', icon: <SearchAssetIcon letter="A" bg="#EFBE84" />, styleClass: 'aster' },
-    { id: 'etc', name: 'Ethereum Classic', code: 'ETC', price: '744,56 ₽', change: '↑ 0,88%', icon: <SearchAssetIcon letter="E" bg="#3AB83A" />, styleClass: 'etc' },
-    { id: 'icp', name: 'Internet Computer', code: 'ICP', price: '205,47 ₽', change: '↓ 0,19%', icon: <SearchAssetIcon letter="I" bg="#29ABE2" />, styleClass: 'icp' },
-    { id: 'sky', name: 'Sky', code: 'SKY', price: '4,76 ₽', change: '↑ 2,00%', icon: <SearchAssetIcon letter="S" bg="#25E2FC" />, styleClass: 'sky' },
-    { id: 'pi', name: 'Pi', code: 'PI', price: '12,17 ₽', change: '↑ 1,34%', icon: <SearchAssetIcon letter="P" bg="#572878" />, styleClass: 'pi' },
-    { id: 'ondo', name: 'Ondo', code: 'ONDO', price: '21,61 ₽', change: '↑ 0,51%', icon: <SearchAssetIcon letter="O" bg="#06070A" />, styleClass: 'ondo' },
-    { id: 'pol', name: 'POL (prev. MATIC)', code: 'POL', price: '8,96 ₽', change: '↑ 12,64%', icon: <SearchAssetIcon letter="P" bg="#6C00F6" />, styleClass: 'pol' },
-    { id: 'wld', name: 'Worldcoin', code: 'WLD', price: '31,12 ₽', change: '↑ 0,75%', icon: <SearchAssetIcon letter="W" bg="#1a1a1a" />, styleClass: 'wld' },
-    { id: 'ena', name: 'Ethena', code: 'ENA', price: '10,59 ₽', change: '↓ 0,95%', icon: <SearchAssetIcon letter="E" bg="#1C1917" />, styleClass: 'ena' },
+    { id: 'xlm', name: 'Stellar', code: 'XLM', badge: '333% годовых', price: '13,57 ₽', change: '↓ 0,37%', icon: <IconStellar size={42} />, styleClass: 'xlm' },
+    { id: 'ltc', name: 'Litecoin', code: 'LTC', price: '4 592,02 ₽', change: '↑ 0,66%', icon: <IconLitecoin size={42} />, styleClass: 'ltc' },
+    { id: 'sui', name: 'Sui', code: 'SUI', price: '87,28 ₽', change: '↑ 0,65%', icon: <IconSui size={42} />, styleClass: 'sui' },
+    { id: 'avax', name: 'Avalanche', code: 'AVAX', price: '773,39 ₽', change: '↑ 0,18%', icon: <IconAvalanche size={42} />, styleClass: 'avax' },
+    { id: 'shib', name: 'Shiba Inu', code: 'SHIB', price: '0,000523 ₽', change: '↑ 0,93%', icon: <IconShibaInu size={42} />, styleClass: 'shib' },
+    { id: 'hbar', name: 'Hedera', code: 'HBAR', price: '6,99 ₽', change: '↓ 0,40%', icon: <IconHedera size={42} />, styleClass: 'hbar' },
+    { id: 'wlfi', name: 'World Liberty Financial', code: 'WLFI', price: '9,85 ₽', change: '↓ 0,47%', icon: <IconWorldLibertyFinancial size={42} />, styleClass: 'wlfi' },
+    { id: 'ton', name: 'Toncoin', code: 'TON', badge: '7.75% годовых', price: '105,03 ₽', change: '↑ 1,23%', icon: <IconToncoin size={42} />, styleClass: 'ton' },
+    { id: 'dot', name: 'Polkadot', code: 'DOT', price: '116,69 ₽', change: '↓ 0,61%', icon: <IconPolkadot size={42} />, styleClass: 'dot' },
+    { id: 'uni', name: 'Uniswap', code: 'UNI', price: '298,23 ₽', change: '↓ 1,06%', icon: <IconUniswap size={42} />, styleClass: 'uni' },
+    { id: 'xaut', name: 'Золото', code: 'XAUT', badge: '25% годовых', price: '378 576,60 ₽', change: '↑ 4,46%', icon: <IconGold size={42} />, styleClass: 'xaut' },
+    { id: 'mnt', name: 'Mantle', code: 'MNT', price: '55,66 ₽', change: '↑ 1,98%', icon: <IconMantle size={42} />, styleClass: 'mnt' },
+    { id: 'aave', name: 'Aave', code: 'AAVE', price: '9 761,38 ₽', change: '↓ 0,01%', icon: <IconAave size={42} />, styleClass: 'aave' },
+    { id: 'pepe', name: 'Pepe', code: 'PEPE', price: '0,000321 ₽', change: '↑ 0,21%', icon: <IconPepe size={42} />, styleClass: 'pepe' },
+    { id: 'near', name: 'NEAR Protocol', code: 'NEAR', price: '91,59 ₽', change: '↑ 0,38%', icon: <IconNearProtocol size={42} />, styleClass: 'near' },
+    { id: 'aster', name: 'Aster', code: 'ASTER', price: '45,54 ₽', change: '↑ 6,24%', icon: <IconAster size={42} />, styleClass: 'aster' },
+    { id: 'etc', name: 'Ethereum Classic', code: 'ETC', price: '744,56 ₽', change: '↑ 0,88%', icon: <IconEtheriumClassic size={42} />, styleClass: 'etc' },
+    { id: 'icp', name: 'Internet Computer', code: 'ICP', price: '205,47 ₽', change: '↓ 0,19%', icon: <IconInternetComputer size={42} />, styleClass: 'icp' },
+    { id: 'sky', name: 'Sky', code: 'SKY', price: '4,76 ₽', change: '↑ 2,00%', icon: <IconSky size={42} />, styleClass: 'sky' },
+    { id: 'pi', name: 'Pi', code: 'PI', price: '12,17 ₽', change: '↑ 1,34%', icon: <IconPi size={42} />, styleClass: 'pi' },
+    { id: 'ondo', name: 'Ondo', code: 'ONDO', price: '21,61 ₽', change: '↑ 0,51%', icon: <IconOnd size={42} />, styleClass: 'ondo' },
+    { id: 'pol', name: 'POL (prev. MATIC)', code: 'POL', price: '8,96 ₽', change: '↑ 12,64%', icon: <IconPol size={42} />, styleClass: 'pol' },
+    { id: 'wld', name: 'Worldcoin', code: 'WLD', price: '31,12 ₽', change: '↑ 0,75%', icon: <IconWorldCoin size={42} />, styleClass: 'wld' },
+    { id: 'ena', name: 'Ethena', code: 'ENA', price: '10,59 ₽', change: '↓ 0,95%', icon: <IconEthena size={42} />, styleClass: 'ena' },
   ];
   const searchStocks = marketTickers.map((t) => ({
     ...t,
@@ -1872,9 +1772,25 @@ function App() {
     price: '—',
     category: 'funds',
   }));
+  const mergeAssetWithLive = (asset) => {
+    const live = livePrices[asset.id];
+    if (!live) return asset;
+    const pct = live.percent || '';
+    const arrow = pct.startsWith('-') ? '↓' : '↑';
+    const changeVal = pct.replace(/^[+-]/, '').replace('.', ',');
+    return {
+      ...asset,
+      price: live.price ?? asset.price,
+      change: changeVal ? `${arrow} ${changeVal}` : asset.change,
+    };
+  };
+
+  const marketAssetsWithLive = marketAssets.map(mergeAssetWithLive);
+  const additionalMarketAssetsWithLive = additionalMarketAssetsForSearch.map(mergeAssetWithLive);
+
   const allMarketAssetsForSearch = [
-    ...marketAssets.map((a) => ({ ...a, category: 'crypto' })),
-    ...additionalMarketAssetsForSearch.map((a) => ({ ...a, category: 'crypto' })),
+    ...marketAssetsWithLive.map((a) => ({ ...a, category: 'crypto' })),
+    ...additionalMarketAssetsWithLive.map((a) => ({ ...a, category: 'crypto' })),
     ...searchStocks,
     ...searchFunds,
   ];
@@ -2187,6 +2103,10 @@ function App() {
               setPrevScreen(screen);
               setScreen('withdraw');
             }}
+            onSwap={() => {
+              setPrevScreen(screen);
+              setScreen('exchange');
+            }}
           />
         )}
         {screen === 'asset' && (
@@ -2196,7 +2116,21 @@ function App() {
             assetDetails={(() => {
               const merged = {};
               for (const [id, d] of Object.entries(assetDetails)) {
-                merged[id] = { ...d, ...(livePrices[id] || {}) };
+                const live = livePrices[id] || {};
+                merged[id] = { ...d, ...live };
+                if (live.percent != null && merged[id].overview?.capitalization) {
+                  merged[id] = {
+                    ...merged[id],
+                    overview: {
+                      ...merged[id].overview,
+                      capitalization: {
+                        ...merged[id].overview.capitalization,
+                        change: live.percent,
+                        isPositive: !String(live.percent).startsWith('-'),
+                      },
+                    },
+                  };
+                }
               }
               for (const [id, p] of Object.entries(livePrices)) {
                 if (!merged[id]) {
@@ -2214,7 +2148,7 @@ function App() {
             fundTickers={fundTickers}
             topDay={topDay}
             topDayFall={topDayFall}
-            assets={marketAssets}
+            assets={marketAssetsWithLive}
             searchAssets={allMarketAssetsForSearch}
             tonAssets={tonAssets}
             onOpenAsset={openAsset}
@@ -2233,9 +2167,16 @@ function App() {
         )}
         {screen === 'buyCrypto' && <BuyCryptoScreen />}
         {screen === 'withdraw' && <WithdrawScreen />}
+        {screen === 'exchange' && (
+          <ExchangeScreen
+            onNavigateToDeposit={() => setScreen('buyCrypto')}
+            onBack={() => setScreen(prevScreen || 'home')}
+            cryptoAssets={allMarketAssetsForSearch.filter((a) => a.category === 'crypto')}
+          />
+        )}
       </main>
 
-      {screen !== 'asset' && screen !== 'transfer' && screen !== 'buyCrypto' && screen !== 'withdraw' && (
+      {screen !== 'asset' && screen !== 'transfer' && screen !== 'buyCrypto' && screen !== 'withdraw' && screen !== 'exchange' && (
         <TabBar
           activeTab={
             screen === 'trade'

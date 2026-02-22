@@ -1,6 +1,6 @@
 import './WalletActions.css';
 
-function WalletActions({ onTransfer, onAddDeposit, onWithdraw }) {
+function WalletActions({ onTransfer, onAddDeposit, onWithdraw, onSwap }) {
   const actions = [
     {
       id: 'send',
@@ -100,7 +100,9 @@ function WalletActions({ onTransfer, onAddDeposit, onWithdraw }) {
                 ? onAddDeposit
                 : action.id === 'withdraw'
                   ? onWithdraw
-                  : undefined
+                  : action.id === 'swap'
+                    ? onSwap
+                    : undefined
           }
         >
           <span className="action-icon">{action.icon}</span>
