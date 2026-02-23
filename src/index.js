@@ -5,6 +5,10 @@ import './ios-overrides.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RatesProvider } from './context/RatesContext';
+import { setDebugPlatform } from './telegramTheme';
+
+/* Сразу при загрузке: ?platform=ios или localStorage.debugPlatform — для отладки iOS в браузере */
+setDebugPlatform();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

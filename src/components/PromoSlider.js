@@ -64,15 +64,17 @@ function PromoSlider({ slides, autoMs = 3500 }) {
             />
           </svg>
         </button>
-        <div className="promo-dots">
-          {slides.map((slide, idx) => (
-            <span
-              key={slide.id}
-              className={`promo-dot ${idx === index ? 'active' : ''}`}
-              aria-hidden="true"
-            />
-          ))}
-        </div>
+        {slides.length > 1 && (
+          <div className="promo-dots">
+            {slides.map((slide, idx) => (
+              <span
+                key={slide.id}
+                className={`promo-dot ${idx === index ? 'active' : ''}`}
+                aria-hidden="true"
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -45,7 +45,14 @@ function detectPlatform() {
   const root = document.documentElement;
   let platform = '';
 
-  if (window.Telegram?.WebApp?.platform) {
+  /* Отладка: ?platform=ios или localStorage.debugPlatform=ios — показывать как на iOS */
+  const search = (typeof window !== 'undefined' && (window.location?.search || (window.location?.hash?.includes('?') ? window.location.hash.split('?')[1] : ''))) || '';
+  const urlPlatform = new URLSearchParams(search).get('platform');
+  const storedPlatform = typeof localStorage !== 'undefined' && localStorage.getItem('debugPlatform');
+  const debugPlatform = urlPlatform || storedPlatform;
+  if (debugPlatform) {
+    platform = String(debugPlatform).toLowerCase();
+  } else if (window.Telegram?.WebApp?.platform) {
     platform = String(window.Telegram.WebApp.platform).toLowerCase();
   } else {
     const ua = navigator.userAgent || '';
@@ -56,6 +63,19 @@ function detectPlatform() {
   if (platform) {
     root.setAttribute('data-platform', platform);
   }
+
+  /* Отладка: ?theme=dark или localStorage.debugTheme=dark — принудительно тёмная тема */
+  const urlTheme = new URLSearchParams(search).get('theme');
+  const storedTheme = typeof localStorage !== 'undefined' && localStorage.getItem('debugTheme');
+  const debugTheme = urlTheme || storedTheme;
+  if (debugTheme && platform) {
+    root.setAttribute('data-color-scheme', String(debugTheme).toLowerCase());
+  }
+}
+
+/** Вызвать при загрузке (index.js) — ставит data-platform до рендера React */
+export function setDebugPlatform() {
+  detectPlatform();
 }
 
 export function initTelegramThemeSync() {
@@ -69,6 +89,8 @@ export function initTelegramThemeSync() {
 
   const apply = () => {
     applyTelegramTheme(tg.themeParams, tg.colorScheme);
+    /* После apply — вернуть debug-тему из URL, если задана (?theme=dark) */
+    detectPlatform();
   };
 
   apply();

@@ -2,6 +2,351 @@
  * Подключается после index.css. Селекторы с [data-platform="ios"] применяются
  * когда приложение открыто в Telegram на iPhone/iPad. */
 
+/* --- Тёмная тема: общий бг #1c1c1c, элементы #2c2c2e, разделители --- */
+[data-platform="ios"]:not([data-color-scheme="light"]) {
+  --tg-theme-bg-color: #1c1c1c;
+  --tg-theme-secondary-bg-color: #1c1c1c;
+  --tg-theme-header-bg-color: #1c1c1c;
+  --tg-theme-section-bg-color: #2c2c2e;
+  --tg-theme-section-separator-color: rgba(255, 255, 255, 0.06);
+}
+
+/* --- Кнопки действий: каждая — отдельная карточка (#2c2c2e), вокруг — #1c1c1c --- */
+html[data-platform="ios"] .wallet-actions {
+  background: transparent !important;
+  gap: 8px;
+  padding-inline: 16px;
+}
+
+html[data-platform="ios"] .wallet-actions .action-item {
+  background: var(--tg-theme-section-bg-color) !important;
+  border-radius: 18px !important;
+  justify-content: flex-start;
+  padding-top: 0;
+  height: 62px;
+}
+
+html[data-platform="ios"] .wallet-actions .action-icon {
+  position: relative;
+  top: -4px;
+}
+
+html[data-platform="ios"] .wallet-actions .action-label {
+  margin-top: 0;
+  position: relative;
+  top: -12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* SVG в кнопках действий — 28x28 на iOS */
+html[data-platform="ios"] .wallet-actions .action-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* --- Отступы от боков как у кнопок --- */
+html[data-platform="ios"] .promo-wrapper {
+  margin-inline: 0;
+}
+
+html[data-platform="ios"] .promo-slider {
+  padding-inline: 16px;
+  box-sizing: border-box;
+}
+
+html[data-platform="ios"] .list-card,
+html[data-platform="ios"] .section {
+  margin-inline: 16px;
+}
+
+/* «Акции и фонды»: отступы от боков без обрезки */
+html[data-platform="ios"] .section-button {
+  margin-inline: 16px;
+  width: calc(100% - 32px);
+}
+
+/* Акции и фонды: сдвинуть стрелку чуть левее */
+html[data-platform="ios"] .section-button-chevron {
+  margin-right: 6px;
+}
+
+/* В тренде: убрать вылет сетки за края на iOS */
+html[data-platform="ios"] .trending-section .trend-grid {
+  margin: 0;
+  padding: 0;
+}
+
+/* Крипто / В тренде: фон только под карточками, заголовок на фоне страницы */
+html[data-platform="ios"] .crypto-section,
+html[data-platform="ios"] .trending-section {
+  background: transparent;
+  padding: 0;
+}
+
+html[data-platform="ios"] .crypto-section .asset-list,
+html[data-platform="ios"] .trending-section .trend-grid {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html[data-platform="ios"] .trending-section .trend-grid {
+  margin-top: 8px;
+  gap: 12px;
+}
+
+/* В тренде: убрать черные полоски */
+html[data-platform="ios"] .trending-section .trend-grid::before,
+html[data-platform="ios"] .trending-section .trend-grid::after {
+  display: none !important;
+}
+
+/* В тренде: карточки с отдельным фоном */
+html[data-platform="ios"] .trending-section .trend-card {
+  background: var(--tg-theme-section-bg-color);
+  border-radius: 28px;
+}
+
+/* Крипто: вернуть серый фон каждой строке */
+html[data-platform="ios"] .crypto-section .asset-row {
+  background: var(--tg-theme-section-bg-color);
+  border-radius: 24px;
+  padding: 8px 12px;
+}
+
+/* Доллары / Крипто / Акции и фонды: более лёгкий вес текста */
+html[data-platform="ios"] .list-title,
+html[data-platform="ios"] .list-subtitle,
+html[data-platform="ios"] .list-value,
+html[data-platform="ios"] .asset-name,
+html[data-platform="ios"] .asset-code,
+html[data-platform="ios"] .asset-amount,
+html[data-platform="ios"] .asset-value,
+html[data-platform="ios"] .section-button-left {
+  font-weight: 400;
+}
+
+/* Числа справа: чуть меньше размер */
+html[data-platform="ios"] .list-value,
+html[data-platform="ios"] .asset-amount,
+html[data-platform="ios"] .asset-value {
+  font-size: 16px;
+}
+
+/* Крипто: "ВСЕГО" справа — без акцентного фона и в конец строки */
+html[data-platform="ios"] .crypto-section .section-note {
+  background: transparent;
+  color: var(--tg-theme-subtitle-text-color);
+  padding: 0;
+  margin-left: auto;
+  margin-right: 6px;
+}
+
+/* ===== Торговля (Market): единые карточки секций ===== */
+/* Минимальный отступ между заголовками и контентом секций */
+html[data-platform="ios"] .market-section-header,
+html[data-platform="ios"] .Rfm73.Jn71M.hCZ1A {
+  margin-inline: 16px;
+  margin-bottom: 2px;
+}
+
+/* Минимальный gap между заголовком и контентом внутри секций */
+html[data-platform="ios"] .products-section .JNQMw,
+html[data-platform="ios"] .topday-section .JNQMw,
+html[data-platform="ios"] .allassets-section .JNQMw,
+html[data-platform="ios"] .ton-section .JNQMw {
+  gap: 2px;
+}
+
+/* Минимальное расстояние между секциями (Рынок США, Продукты, Топ дня и т.д.) */
+html[data-platform="ios"] .section-gap {
+  height: 4px;
+}
+
+
+html[data-platform="ios"] .market-section-card,
+html[data-platform="ios"] .market-section,
+html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn {
+  background: var(--tg-theme-section-bg-color);
+  border-radius: 24px;
+  padding: 12px 16px;
+  margin-inline: 16px;
+  width: calc(100% - 32px);
+  box-sizing: border-box;
+}
+
+/* Продукты: заголовок на фоне страницы, серый фон ниже */
+html[data-platform="ios"] .products-section {
+  background: transparent;
+  padding: 0;
+  margin-inline: 0;
+  width: auto;
+}
+
+html[data-platform="ios"] .products-section .Rfm73.Jn71M.hCZ1A {
+  margin-inline: 16px;
+  margin-bottom: 2px;
+}
+
+html[data-platform="ios"] .products-section .ydmxJ.tf4r_ {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  transform: none;
+  box-sizing: border-box;
+}
+
+/* Продукты: убрать внутренний padding справа/слева */
+html[data-platform="ios"] .products-section .aVY7i {
+  padding-inline: 0 !important;
+}
+
+/* Продукты: компенсировать inline padding у строки карточек */
+html[data-platform="ios"] .products-section .LxOPn.aJFEC {
+  margin-inline: 0;
+}
+
+
+html[data-platform="ios"] .market-section .ydmxJ.tf4r_,
+html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn .ydmxJ.tf4r_,
+html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn .Ofdvj.PReSx,
+html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn .nR3tb,
+html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn .mjigr.ODmGt.LQUdc {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+/* Продукты: общий фон на группу, а не на каждую карточку */
+html[data-platform="ios"] .products-section .products-cards {
+  background: var(--tg-theme-section-bg-color);
+  border-radius: 24px;
+  padding-block: 12px;
+  padding-inline: 16px !important;
+  margin-left: 18px;
+  margin-right: 14px;
+  width: calc(100% - 32px);
+  box-sizing: border-box;
+}
+
+html[data-platform="ios"] .products-section .products-cards .r2DGg.Z3c2A.Syue2 {
+  background: transparent;
+}
+
+/* ===== Торговля: заголовки снаружи (Топ дня / Все активы / Активы TON) ===== */
+html[data-platform="ios"] .topday-section,
+html[data-platform="ios"] .allassets-section,
+html[data-platform="ios"] .ton-section {
+  background: transparent;
+  padding: 0;
+}
+
+/* Топ дня / Все активы / Активы TON: заголовок снаружи, контент в сером блоке, чуть левее */
+html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn.topday-section,
+html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn.allassets-section,
+html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn.ton-section {
+  background: transparent !important;
+  padding: 0 !important;
+  margin-inline: 12px;
+  width: calc(100% - 24px);
+  box-sizing: border-box;
+}
+
+/* Серый фон под контентом — переопределяем общее правило .ydmxJ { transparent } */
+html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn.topday-section .ydmxJ.tf4r_,
+html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn.allassets-section .ydmxJ.tf4r_,
+html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn.ton-section .ydmxJ.tf4r_ {
+  background: var(--tg-theme-section-bg-color) !important;
+  border-radius: 24px;
+  padding: 12px 16px;
+  margin-inline: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Заголовки выровнены по левому краю контента секций (padding 16px как у ydmxJ) */
+html[data-platform="ios"] .topday-section .Rfm73.Jn71M.hCZ1A,
+html[data-platform="ios"] .allassets-section .Rfm73.Jn71M.hCZ1A,
+html[data-platform="ios"] .ton-section .Rfm73.Jn71M.hCZ1A {
+  margin-inline: 0;
+  padding-inline: 16px 0;
+  margin-bottom: 2px;
+}
+
+html[data-platform="ios"] .topday-section .ydmxJ.tf4r_,
+html[data-platform="ios"] .allassets-section .ydmxJ.tf4r_,
+html[data-platform="ios"] .ton-section .ydmxJ.tf4r_ {
+  background: var(--tg-theme-section-bg-color);
+  border-radius: 24px;
+  padding: 12px 16px;
+  margin-inline: 16px;
+  width: calc(100% - 32px);
+  box-sizing: border-box;
+}
+
+/* Внутренние обёртки — без своих отступов/фона */
+html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn .Ofdvj.PReSx,
+html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn .nR3tb,
+html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn .mjigr.ODmGt.LQUdc {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+/* Цифры справа — принудительно 400 */
+html[data-platform="ios"] .list-value,
+html[data-platform="ios"] .asset-amount,
+html[data-platform="ios"] .asset-value {
+  font-weight: 400 !important;
+}
+
+html[data-platform="ios"] .crypto-section .asset-list {
+  gap: 10px;
+}
+
+/* Доллары (list-card) — ниже высота серого блока */
+html[data-platform="ios"] .list-card {
+  padding: 10px 12px;
+}
+
+/* Акции и фонды — ниже высота серого блока */
+html[data-platform="ios"] .section-button {
+  min-height: 48px;
+}
+
+html[data-platform="ios"] .section-button-left {
+  padding-block: 6px;
+}
+
+/* Бейдж %: меньше отступы и компактнее фон */
+html[data-platform="ios"] .trending-section .trend-change-badge {
+  padding: 2px 6px;
+  gap: 2px;
+}
+
+html[data-platform="ios"] .trending-section .trend-change-badge-icon {
+  margin-right: 0;
+}
+
+/* Меньше расстояние между названием и ценой */
+html[data-platform="ios"] .trending-section .trend-price {
+  margin-top: -2px;
+}
+
+/* Промо: скрыть крестик на iOS */
+html[data-platform="ios"] .promo-close {
+  display: none !important;
+}
+
+/* Отступы внутри карточек на главном экране */
+[data-platform="ios"] .list-card,
+[data-platform="ios"] .section {
+  padding: 14px 16px;
+}
+
 /* --- Шрифты --- */
 [data-platform="ios"] body {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', system-ui, sans-serif;
@@ -23,9 +368,12 @@
 
 /* --- Скругления в стиле iOS --- */
 [data-platform="ios"] .list-card,
+[data-platform="ios"] .section,
 [data-platform="ios"] .section-button,
-[data-platform="ios"] .asset-section {
-  border-radius: 12px;
+[data-platform="ios"] .asset-section,
+[data-platform="ios"] .promo-banner,
+[data-platform="ios"] .promo-slide {
+  border-radius: 26px;
 }
 
 [data-platform="ios"] .tab-chip.active,
@@ -34,7 +382,7 @@
 }
 
 /* --- Кнопки: минимум 44px (Apple HIG) --- */
-[data-platform="ios"] button:not([class*="icon"]),
+[data-platform="ios"] button:not([class*="icon"]):not(.tab-chip),
 [data-platform="ios"] .asset-action-button,
 [data-platform="ios"] .section-button {
   min-height: 44px;
@@ -76,7 +424,10 @@
 
 /* --- Фикс для position: fixed (GPU layer) --- */
 [data-platform="ios"] .tab-bar-root.Zr9ao,
-[data-platform="ios"] .asset-action-bar {
+[data-platform="ios"] .asset-action-bar,
+[data-platform="ios"] .exchange-submit-btn,
+[data-platform="ios"] .FhO5I.search-overlay-open,
+[data-platform="ios"] .exchange-receive-modal-overlay {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
 }
@@ -84,4 +435,151 @@
 /* --- Ограничение bounce при overscroll --- */
 [data-platform="ios"] body {
   overscroll-behavior-y: contain;
+}
+
+/* ========== Экраны без topbar (fullscreen) — safe-area ========== */
+
+/* BuyCryptoScreen — пополнить */
+[data-platform="ios"] .buy-crypto-screen {
+  padding-top: calc(44px + env(safe-area-inset-top, 0px));
+  padding-inline: calc(24px + env(safe-area-inset-left, 0px)) calc(24px + env(safe-area-inset-right, 0px));
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  min-height: -webkit-fill-available;
+}
+
+[data-platform="ios"] .buy-crypto-item {
+  min-height: 44px;
+}
+
+/* WithdrawScreen — вывести */
+[data-platform="ios"] .withdraw-screen {
+  padding-top: calc(44px + env(safe-area-inset-top, 0px));
+  padding-inline: calc(24px + env(safe-area-inset-left, 0px)) calc(24px + env(safe-area-inset-right, 0px));
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  min-height: -webkit-fill-available;
+}
+
+[data-platform="ios"] .withdraw-item {
+  min-height: 44px;
+}
+
+/* TransferScreen — перевод */
+[data-platform="ios"] .transfer-screen {
+  padding-top: calc(44px + env(safe-area-inset-top, 0px));
+  padding-inline: calc(24px + env(safe-area-inset-left, 0px)) calc(24px + env(safe-area-inset-right, 0px));
+  padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  min-height: -webkit-fill-available;
+}
+
+/* ExchangeScreen — обмен (уже есть safe-area в базе, доп. фиксы) */
+[data-platform="ios"] .exchange-screen {
+  padding-top: calc(24px + env(safe-area-inset-top, 0px));
+  padding-inline: calc(24px + env(safe-area-inset-left, 0px)) calc(24px + env(safe-area-inset-right, 0px));
+  min-height: -webkit-fill-available;
+}
+
+[data-platform="ios"] .exchange-submit-btn {
+  left: calc(24px + env(safe-area-inset-left, 0px));
+  right: calc(24px + env(safe-area-inset-right, 0px));
+  width: auto;
+}
+
+/* ExchangeCurrencyPicker / FhO5I — полноэкранный оверлей поиска */
+[data-platform="ios"] .FhO5I.search-overlay-open {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-inline: env(safe-area-inset-left, 0px) env(safe-area-inset-right, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  box-sizing: border-box;
+}
+
+/* ExchangeReceiveModal — модалка выбора валюты */
+[data-platform="ios"] .exchange-receive-modal-overlay {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-inline: env(safe-area-inset-left, 0px) env(safe-area-inset-right, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  box-sizing: border-box;
+}
+
+[data-platform="ios"] .exchange-receive-modal-row {
+  min-height: 44px;
+}
+
+/* Плавный скролл в модалках и оверлеях */
+[data-platform="ios"] .exchange-receive-modal-list,
+[data-platform="ios"] .FhO5I .wtAUk .DTT0W.yPGCL,
+[data-platform="ios"] .FhO5I .DTT0W.yPGCL {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Карточки и кнопки в стиле iOS (дополнительные селекторы) */
+[data-platform="ios"] .buy-crypto-item,
+[data-platform="ios"] .withdraw-item,
+[data-platform="ios"] .ticker-card,
+[data-platform="ios"] .product-card {
+  border-radius: 12px;
+}
+
+/* --- Фикс «съехавших» надписей на iOS (Крипто/ТОН, промо) --- */
+
+/* Вкладки Крипто/ТОН — фикс выравнивания текста в Safari */
+[data-platform="ios"] .wallet-tabs {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-platform="ios"] .tab-chip {
+  text-align: center;
+  min-height: 0;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* Промо «Зарабатывайте до 25% годовых» — фикс выравнивания на iOS */
+[data-platform="ios"] .promo-copy {
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 6px;
+}
+
+[data-platform="ios"] .promo-title {
+  margin-bottom: -3px;
+}
+
+[data-platform="ios"] .promo-link {
+  margin-top: -12px;
+}
+
+/* Промо: увеличить стрелку в CTA */
+html[data-platform="ios"] .promo-link svg {
+  width: 10px;
+  height: 20px;
+}
+
+/* Промо: чуть меньше высота */
+[data-platform="ios"] .promo-slide {
+  min-height: 88px;
+  height: 88px;
+}
+
+/* Промо: увеличить SVG-арт справа */
+html[data-platform="ios"] .promo-art {
+  width: 140px !important;
+  height: 88px !important;
+}
+
+html[data-platform="ios"] .promo-slide.promo-orange .promo-art {
+  width: 240px !important;
+  height: 88px !important;
+  right: 8px;
+}
+
+html[data-platform="ios"] .promo-slide.promo-orange .promo-art svg {
+  transform: scale(1.3);
+  transform-origin: right center;
+}
+[data-platform="ios"] .promo-title {
+  text-align: left;
+  flex-shrink: 0;
+  -webkit-font-smoothing: antialiased;
 }

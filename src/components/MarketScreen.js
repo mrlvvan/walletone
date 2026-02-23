@@ -299,14 +299,14 @@ function MarketScreen({ marketTickers, fundTickers = [], topDay, topDayFall = []
       </div>
       <div className="section-gap" aria-hidden="true" />
 
-      <section className="market-section">
+      <section className="market-section products-section">
         <div className="JNQMw">
           <div className="Rfm73 Jn71M hCZ1A">
             <div className="cpHhd KbDJo eqZCR section-title-subtitle">Продукты</div>
           </div>
           <div className="ydmxJ tf4r_">
             <div className="LxOPn aJFEC">
-              <div className="aVY7i" style={{ paddingInline: '4px' }}>
+              <div className="aVY7i products-cards" style={{ paddingInline: '4px' }}>
                 <div className="r2DGg Z3c2A Syue2" role="button" tabIndex={0} onClick={() => openSearchWithFilter('crypto')} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openSearchWithFilter('crypto'); } }}>
                   <div className="P13QV DV0WS _0g3V">
                     <div className="vilvX product-icon-crypto">
@@ -353,7 +353,7 @@ function MarketScreen({ marketTickers, fundTickers = [], topDay, topDayFall = []
       </section>
 
       <div className="section-gap" aria-hidden="true" />
-      <section className="oJKLh LySHd iXSn4 CgUOn pmioA">
+      <section className="oJKLh LySHd iXSn4 CgUOn pmioA topday-section">
         <div className="JNQMw">
           <div className="Rfm73 Jn71M hCZ1A">
             <div className="cpHhd KbDJo eqZCR section-title-subtitle">Топ дня</div>
@@ -399,7 +399,7 @@ function MarketScreen({ marketTickers, fundTickers = [], topDay, topDayFall = []
       </section>
 
       <div className="section-gap" aria-hidden="true" />
-      <section className="oJKLh LySHd iXSn4 CgUOn lKYcT">
+      <section className="oJKLh LySHd iXSn4 CgUOn lKYcT allassets-section">
         <div className="JNQMw">
           <div className="Rfm73 Jn71M hCZ1A">
             <div className="cpHhd KbDJo eqZCR section-title-subtitle">Все активы</div>
@@ -473,7 +473,7 @@ function MarketScreen({ marketTickers, fundTickers = [], topDay, topDayFall = []
       </section>
 
       <div className="section-gap" aria-hidden="true" />
-      <section className="oJKLh LySHd iXSn4 CgUOn pmioA">
+      <section className="oJKLh LySHd iXSn4 CgUOn pmioA ton-section">
         <div className="JNQMw">
           <div className="Rfm73 Jn71M hCZ1A">
             <div className="cpHhd KbDJo eqZCR section-title-subtitle">Активы TON</div>

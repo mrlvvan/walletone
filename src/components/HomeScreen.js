@@ -24,7 +24,7 @@ function HomeScreen({
       <WalletHero stats={walletStats} />
       <WalletActions onTransfer={onTransfer} onAddDeposit={onAddDeposit} onWithdraw={onWithdraw} onSwap={onSwap} />
       <div className="section-gap" aria-hidden="true" />
-      <PromoSlider slides={promoSlides} />
+      <PromoSlider slides={promoSlides.slice(0, 1)} />
       <div className="section-gap" aria-hidden="true" />
       <section className="list-card">
         <ListRow item={cashAsset} />
