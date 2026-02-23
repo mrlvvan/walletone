@@ -149,7 +149,7 @@ html[data-platform="ios"] .crypto-section .section-note {
 html[data-platform="ios"] .market-section-header,
 html[data-platform="ios"] .Rfm73.Jn71M.hCZ1A {
   margin-inline: 16px;
-  margin-bottom: 2px;
+  margin-bottom: 0;
 }
 
 /* Минимальный gap между заголовком и контентом внутри секций */
@@ -157,12 +157,13 @@ html[data-platform="ios"] .products-section .JNQMw,
 html[data-platform="ios"] .topday-section .JNQMw,
 html[data-platform="ios"] .allassets-section .JNQMw,
 html[data-platform="ios"] .ton-section .JNQMw {
-  gap: 2px;
+  gap: 0;
 }
 
-/* Минимальное расстояние между секциями (Рынок США, Продукты, Топ дня и т.д.) */
+/* Минимальное расстояние между секциями, без видимых полосок */
 html[data-platform="ios"] .section-gap {
   height: 4px;
+  background: transparent;
 }
 
 
@@ -187,7 +188,7 @@ html[data-platform="ios"] .products-section {
 
 html[data-platform="ios"] .products-section .Rfm73.Jn71M.hCZ1A {
   margin-inline: 16px;
-  margin-bottom: 2px;
+  margin-bottom: 0;
 }
 
 html[data-platform="ios"] .products-section .ydmxJ.tf4r_ {
@@ -267,13 +268,13 @@ html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn.ton-section .ydmxJ.tf4r_ {
   box-sizing: border-box;
 }
 
-/* Заголовки выровнены по левому краю контента секций (padding 16px как у ydmxJ) */
+/* Заголовки выровнены по левому краю контента секций (padding 16px как у ydmxJ), ближе к секциям */
 html[data-platform="ios"] .topday-section .Rfm73.Jn71M.hCZ1A,
 html[data-platform="ios"] .allassets-section .Rfm73.Jn71M.hCZ1A,
 html[data-platform="ios"] .ton-section .Rfm73.Jn71M.hCZ1A {
   margin-inline: 0;
   padding-inline: 16px 0;
-  margin-bottom: 2px;
+  margin-bottom: 0;
 }
 
 html[data-platform="ios"] .topday-section .ydmxJ.tf4r_,
@@ -307,14 +308,16 @@ html[data-platform="ios"] .crypto-section .asset-list {
   gap: 10px;
 }
 
-/* Доллары (list-card) — ниже высота серого блока */
+/* Доллары (list-card) — ниже высота серого блока, отступ сверху после промо */
 html[data-platform="ios"] .list-card {
   padding: 10px 12px;
+  margin-top: 12px;
 }
 
-/* Акции и фонды — ниже высота серого блока */
+/* Акции и фонды — ниже высота серого блока, отступ сверху после Major */
 html[data-platform="ios"] .section-button {
   min-height: 48px;
+  margin-top: 12px;
 }
 
 html[data-platform="ios"] .section-button-left {
