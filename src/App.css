@@ -890,6 +890,8 @@
 
 .content.screen-bonus {
   background: var(--tg-theme-secondary-bg-color);
+  /* Отступ снизу, чтобы карточки не уходили под навбар при скролле */
+  padding-bottom: calc(var(--tabbar-height, 90px) + 24px + var(--safe-area-inset-bottom, 0px)) !important;
 }
 
 .bonus-grid {

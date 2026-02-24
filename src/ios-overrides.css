@@ -2,20 +2,70 @@
  * Подключается после index.css. Селекторы с [data-platform="ios"] применяются
  * когда приложение открыто в Telegram на iPhone/iPad. */
 
-/* --- Тёмная тема: общий бг #1c1c1c, элементы #2c2c2e, разделители --- */
+/* --- Фикс навбара: фиксированная обёртка + скролл в .content ---
+ * Без этого при скролле body viewport меняется (адресная строка) и position:fixed съезжает. */
+html[data-platform="ios"],
+html[data-platform="ios"] body {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+html[data-platform="ios"] .ios-scroll-root {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: calc(100 * var(--ios-vh, 1vh));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  -webkit-overflow-scrolling: touch;
+}
+
+html[data-platform="ios"] .ios-scroll-root .app {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+html[data-platform="ios"] .ios-scroll-root .content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Дети .content не должны сжиматься — иначе секции (Крипто и др.) схлопываются в полоску */
+html[data-platform="ios"] .ios-scroll-root .content > * {
+  flex-shrink: 0;
+}
+
+/* --- Тёмная тема iOS: общий бг #1c1c1c, элементы #2c2c2e.
+ * !important нужен, чтобы перебить themeParams из Telegram на телефоне --- */
 [data-platform="ios"]:not([data-color-scheme="light"]) {
-  --tg-theme-bg-color: #1c1c1c;
-  --tg-theme-secondary-bg-color: #1c1c1c;
-  --tg-theme-header-bg-color: #1c1c1c;
-  --tg-theme-section-bg-color: #2c2c2e;
-  --tg-theme-section-separator-color: rgba(255, 255, 255, 0.06);
+  --tg-theme-bg-color: #1c1c1c !important;
+  --tg-theme-secondary-bg-color: #1c1c1c !important;
+  --tg-theme-header-bg-color: #1c1c1c !important;
+  --tg-theme-section-bg-color: #2c2c2e !important;
+  --tg-theme-section-separator-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* --- Баланс: меньше отступ между «Баланс» и цифрами --- */
+html[data-platform="ios"] .wallet-balance {
+  gap: 2px;
 }
 
 /* --- Кнопки действий: каждая — отдельная карточка (#2c2c2e), вокруг — #1c1c1c --- */
+/* Отступ сверху — между нижней надписью баланса (-0,06 ₽, 24 ч) и кнопками */
+/* Отступ снизу — между кнопками и промо */
 html[data-platform="ios"] .wallet-actions {
   background: transparent !important;
   gap: 8px;
   padding-inline: 16px;
+  margin-top: 40px;
+  margin-bottom: 16px;
 }
 
 html[data-platform="ios"] .wallet-actions .action-item {
@@ -23,7 +73,7 @@ html[data-platform="ios"] .wallet-actions .action-item {
   border-radius: 18px !important;
   justify-content: flex-start;
   padding-top: 0;
-  height: 62px;
+  height: 68px;
 }
 
 html[data-platform="ios"] .wallet-actions .action-icon {
@@ -32,7 +82,7 @@ html[data-platform="ios"] .wallet-actions .action-icon {
 }
 
 html[data-platform="ios"] .wallet-actions .action-label {
-  margin-top: 0;
+  margin-top: -6px;
   position: relative;
   top: -12px;
   font-size: 14px;
@@ -145,10 +195,24 @@ html[data-platform="ios"] .crypto-section .section-note {
 }
 
 /* ===== Торговля (Market): единые карточки секций ===== */
-/* Минимальный отступ между заголовками и контентом секций */
-html[data-platform="ios"] .market-section-header,
-html[data-platform="ios"] .Rfm73.Jn71M.hCZ1A {
+/* Все заголовки (Рынок США, Продукты, Топ дня и др.) — единый отступ 16px слева */
+html[data-platform="ios"] .market-us-row,
+html[data-platform="ios"] .products-section,
+html[data-platform="ios"] .topday-section,
+html[data-platform="ios"] .allassets-section,
+html[data-platform="ios"] .ton-section {
   margin-inline: 16px;
+  width: calc(100% - 32px);
+  box-sizing: border-box;
+}
+
+html[data-platform="ios"] .market-section-header .Rfm73.Jn71M.hCZ1A,
+html[data-platform="ios"] .products-section .Rfm73.Jn71M.hCZ1A,
+html[data-platform="ios"] .topday-section .Rfm73.Jn71M.hCZ1A,
+html[data-platform="ios"] .allassets-section .Rfm73.Jn71M.hCZ1A,
+html[data-platform="ios"] .ton-section .Rfm73.Jn71M.hCZ1A {
+  margin-inline: 0;
+  padding-inline: 16px 0;
   margin-bottom: 0;
 }
 
@@ -167,8 +231,8 @@ html[data-platform="ios"] .section-gap {
 }
 
 
-html[data-platform="ios"] .market-section-card,
-html[data-platform="ios"] .market-section,
+/* Карточки секций (кроме products — у неё свой products-cards) */
+html[data-platform="ios"] .market-section:not(.products-section),
 html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn {
   background: var(--tg-theme-section-bg-color);
   border-radius: 24px;
@@ -178,18 +242,42 @@ html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn {
   box-sizing: border-box;
 }
 
+/* Рынок США: карточка внутри market-us-row — без доп. margin, row уже имеет 16px */
+html[data-platform="ios"] .market-us-row .market-section-card {
+  margin-inline: 0;
+  width: 100%;
+}
+
+/* Рынок США: как Продукты — единый padding 12px 16px, слайдер и сетка на всю ширину */
+html[data-platform="ios"] .market-us-row .market-section-card .Ofdvj.PReSx {
+  padding-inline: 0;
+  padding-block: 12px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+html[data-platform="ios"] .market-us-row .market-section-card .nR3tb {
+  padding-inline: 0;
+}
+
+html[data-platform="ios"] .market-us-row .market-section-card .aVY7i {
+  padding-inline: 0 !important;
+}
+
+html[data-platform="ios"] .market-us-row .market-section-card .Zwf9p,
+html[data-platform="ios"] .market-us-row .market-section-card .mFYy9.IPADx {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
 /* Продукты: заголовок на фоне страницы, серый фон ниже */
 html[data-platform="ios"] .products-section {
   background: transparent;
   padding: 0;
-  margin-inline: 0;
-  width: auto;
 }
 
-html[data-platform="ios"] .products-section .Rfm73.Jn71M.hCZ1A {
-  margin-inline: 16px;
-  margin-bottom: 0;
-}
 
 html[data-platform="ios"] .products-section .ydmxJ.tf4r_ {
   background: transparent;
@@ -221,15 +309,14 @@ html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn .mjigr.ODmGt.LQUdc {
   margin: 0;
 }
 
-/* Продукты: общий фон на группу, а не на каждую карточку */
+/* Продукты: общий фон на группу (секция уже с margin 16px) */
 html[data-platform="ios"] .products-section .products-cards {
   background: var(--tg-theme-section-bg-color);
   border-radius: 24px;
   padding-block: 12px;
   padding-inline: 16px !important;
-  margin-left: 18px;
-  margin-right: 14px;
-  width: calc(100% - 32px);
+  margin-inline: 0;
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -245,14 +332,14 @@ html[data-platform="ios"] .ton-section {
   padding: 0;
 }
 
-/* Топ дня / Все активы / Активы TON: заголовок снаружи, контент в сером блоке, чуть левее */
+/* Топ дня / Все активы / Активы TON: заголовок снаружи, контент в сером блоке, отступы 16px */
 html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn.topday-section,
 html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn.allassets-section,
 html[data-platform="ios"] .oJKLh.LySHd.iXSn4.CgUOn.ton-section {
   background: transparent !important;
   padding: 0 !important;
-  margin-inline: 12px;
-  width: calc(100% - 24px);
+  margin-inline: 16px;
+  width: calc(100% - 32px);
   box-sizing: border-box;
 }
 
@@ -314,6 +401,23 @@ html[data-platform="ios"] .list-card {
   margin-top: 12px;
 }
 
+/* Слайдеры (Акции/Фонды, Топ роста/Топ падения): фон трека #39393b, активная вкладка #636365 */
+html[data-platform="ios"] .mFYy9.IPADx {
+  background-color: #39393b !important;
+}
+html[data-platform="ios"] .TsSEl {
+  background-color: #636365 !important;
+}
+
+/* Текст в кнопках слайдера — по центру по вертикали (Safari прижимает к низу) */
+html[data-platform="ios"] .p_KOn {
+  line-height: 36px !important;
+  padding: 0 !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+
 /* Акции и фонды — ниже высота серого блока, отступ сверху после Major */
 html[data-platform="ios"] .section-button {
   min-height: 48px;
@@ -350,9 +454,19 @@ html[data-platform="ios"] .promo-close {
   padding: 14px 16px;
 }
 
-/* --- Шрифты --- */
-[data-platform="ios"] body {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', system-ui, sans-serif;
+/* --- Шрифты: дефолтный системный iPhone (SF Pro) вместо Roboto --- */
+html[data-platform="ios"],
+html[data-platform="ios"] *,
+html[data-platform="ios"] body,
+html[data-platform="ios"] .app,
+html[data-platform="ios"] input,
+html[data-platform="ios"] textarea,
+html[data-platform="ios"] select,
+html[data-platform="ios"] button,
+html[data-platform="ios"] [class*="section"],
+html[data-platform="ios"] [class*="card"],
+html[data-platform="ios"] [class*="modal"] {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', system-ui, sans-serif !important;
 }
 
 /* --- Плавный скролл (momentum) --- */
@@ -384,12 +498,7 @@ html[data-platform="ios"] .promo-close {
   border-radius: 999px;
 }
 
-/* --- Кнопки: минимум 44px (Apple HIG) --- */
-[data-platform="ios"] button:not([class*="icon"]):not(.tab-chip),
-[data-platform="ios"] .asset-action-button,
-[data-platform="ios"] .section-button {
-  min-height: 44px;
-}
+
 
 /* --- Safe area: доп. отступы для выреза и home indicator --- */
 [data-platform="ios"] .app {
@@ -398,6 +507,13 @@ html[data-platform="ios"] .promo-close {
 
 [data-platform="ios"] .tab-bar-root.Zr9ao {
   padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  /* Фикс: navbar не уезжает при скролле на iOS (position:fixed + отдельный слой) */
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 [data-platform="ios"] .topbar {
@@ -409,6 +525,18 @@ html[data-platform="ios"] .promo-close {
   min-height: 100vh;
   min-height: 100dvh;
   min-height: -webkit-fill-available;
+}
+
+/* --- Нижний отступ на каждой странице: навбар не перекрывает контент при скролле --- */
+html[data-platform="ios"] .content {
+  padding-bottom: calc(var(--tabbar-height, 90px) + 24px + env(safe-area-inset-bottom, 0px)) !important;
+  background-color: var(--tg-theme-bg-color);
+}
+
+/* Экран бонусов: отступ снизу для навбара */
+html[data-platform="ios"] .content.screen-bonus .bonus-screen-wrap {
+  padding-bottom: calc(var(--tabbar-height, 90px) + 32px + env(safe-area-inset-bottom, 0px)) !important;
+  box-sizing: border-box;
 }
 
 /* --- Инпуты: 16px минимум — иначе iOS зумит при фокусе --- */
@@ -559,21 +687,21 @@ html[data-platform="ios"] .promo-link svg {
   height: 20px;
 }
 
-/* Промо: чуть меньше высота */
+/* Промо: высота блока */
 [data-platform="ios"] .promo-slide {
-  min-height: 88px;
-  height: 88px;
+  min-height: 100px;
+  height: 100px;
 }
 
 /* Промо: увеличить SVG-арт справа */
 html[data-platform="ios"] .promo-art {
   width: 140px !important;
-  height: 88px !important;
+  height: 100px !important;
 }
 
 html[data-platform="ios"] .promo-slide.promo-orange .promo-art {
   width: 240px !important;
-  height: 88px !important;
+  height: 100px !important;
   right: 8px;
 }
 
@@ -585,4 +713,8 @@ html[data-platform="ios"] .promo-slide.promo-orange .promo-art svg {
   text-align: left;
   flex-shrink: 0;
   -webkit-font-smoothing: antialiased;
+}
+
+html[data-platform=ios].JNQMw .ydmxJ.tf4r_.search-input-wrap {
+  border-radius:999px !important;
 }

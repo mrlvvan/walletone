@@ -19,11 +19,27 @@ const THEME_VAR_MAP = {
   accent_color: '--tg-theme-accent-color',
 };
 
+/** iOS тёмная тема: бг #1c1c1c, секции #2c2c2e (HIG-style) — приоритет над темой Telegram на телефоне */
+const IOS_DARK_OVERRIDES = {
+  bg_color: '#1c1c1c',
+  secondary_bg_color: '#1c1c1c',
+  header_bg_color: '#1c1c1c',
+  section_bg_color: '#2c2c2e',
+  section_separator_color: 'rgba(255, 255, 255, 0.06)',
+};
+
 export function applyTelegramTheme(themeParams, colorScheme) {
   if (typeof document === 'undefined') return;
 
   const root = document.documentElement;
-  const params = themeParams || {};
+  let params = themeParams ? { ...themeParams } : {};
+
+  /* На iOS в тёмной теме — переопределяем фон, чтобы совпадало с ios-overrides.css */
+  const platform = root.getAttribute('data-platform') || '';
+  const scheme = (colorScheme || '').toLowerCase();
+  if (platform === 'ios' && scheme !== 'light') {
+    params = { ...params, ...IOS_DARK_OVERRIDES };
+  }
 
   Object.entries(THEME_VAR_MAP).forEach(([tgKey, cssVar]) => {
     const value = params[tgKey];
@@ -73,9 +89,24 @@ function detectPlatform() {
   }
 }
 
+/** iOS: стабильная высота viewport (фикс для position:fixed при скролле) */
+function setIOSViewportHeight() {
+  if (typeof document === 'undefined') return;
+  const root = document.documentElement;
+  const platform = root.getAttribute('data-platform') || '';
+  if (platform !== 'ios') return;
+  const vh = window.innerHeight * 0.01;
+  root.style.setProperty('--ios-vh', `${vh}px`);
+}
+
 /** Вызвать при загрузке (index.js) — ставит data-platform до рендера React */
 export function setDebugPlatform() {
   detectPlatform();
+  setIOSViewportHeight();
+  if (typeof window !== 'undefined' && /iPhone|iPad|iPod/.test(navigator.userAgent || '')) {
+    window.addEventListener('resize', setIOSViewportHeight);
+    window.addEventListener('visualViewport', setIOSViewportHeight);
+  }
 }
 
 export function initTelegramThemeSync() {

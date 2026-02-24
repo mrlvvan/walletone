@@ -347,6 +347,17 @@
   flex: 1;
 }
 
+/* Карточки продуктов и тикеров — текст и иконка строго по центру */
+.products-section .r2DGg.Z3c2A.Syue2,
+.market-section-card .r2DGg.Z3c2A.Syue2,
+.topday-section .r2DGg.Z3c2A.Syue2 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Syue2 — скругление углов */
 .Syue2 {
   border-radius: 6px;
@@ -378,12 +389,33 @@
   padding-block: 12px 8px;
 }
 
-/* mUVUv — колонка с gap 1px */
+/* mUVUv — колонка с gap 1px, текст по центру (карточки тикеров и продуктов) */
 .mUVUv {
   align-items: center;
   display: flex;
   flex-direction: column;
   gap: 1px;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Карточки продуктов/тикеров: контент по центру по горизонтали и вертикали */
+.products-section .mUVUv,
+.market-section .mUVUv,
+.topday-section .mUVUv {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.products-section .mUVUv .caBg6,
+.market-section .mUVUv .caBg6,
+.topday-section .mUVUv .caBg6,
+.products-section .mUVUv .cpHhd,
+.market-section .mUVUv .cpHhd,
+.topday-section .mUVUv .cpHhd {
+  text-align: center;
+  width: 100%;
 }
 
 .ticker-svg {
@@ -404,6 +436,7 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
+  text-align: center;
 }
 
 /* Тикер / изменение (TSLA, Акции и т.д.) — референс YLSRc, PmUAN, ku6Sb */
@@ -424,6 +457,7 @@
   display: flex;
   flex-wrap: nowrap;
   white-space: nowrap;
+  justify-content: center;
 }
 
 .G5Dxc {
@@ -1369,6 +1403,7 @@
   display: grid;
   grid-auto-columns: 1fr;
   grid-auto-flow: column;
+  align-items: center;
   height: 36px;
   max-height: 36px;
   max-width: 388px;
@@ -1411,6 +1446,16 @@
   width: calc(50% - 2px);
 }
 
+/* p_KOn-inner — обёртка текста внутри кнопки (flex на span работает в Safari, на button — нет) */
+.p_KOn-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
 /* p_KOn — кнопка слайдера (Акции, Фонды, Топ роста, Топ падения) */
 /* Пункты слайдера (Акции/Фонды, Топ роста/Топ падения) — макс. ширина 212px, высота 36px, паддинг 10px сверху/снизу от текста */
 .p_KOn {
@@ -1419,7 +1464,7 @@
   height: 36px;
   max-height: 36px;
   max-width: 212px;
-  padding: 10px 0;
+  padding: 0;
   justify-content: center;
   position: relative;
   white-space: nowrap;
@@ -1428,6 +1473,7 @@
   background: none;
   font: inherit;
   color: inherit;
+  width: 100%;
 }
 
 .CF5m5 {
@@ -1440,49 +1486,39 @@
   color: var(--tg-theme-text-color);
 }
 
-/* Надпись внутри кнопок слайдера (Акции/Фонды, Топ роста/Топ падения) — позиционирование как в референсе */
-.p_KOn .SNkiP {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  width: fit-content;
-  height: fit-content;
+/* Надпись в кнопках слайдера (Акции/Фонды, Топ роста/Топ падения) — текст в .p_KOn-inner */
+.p_KOn,
+.p_KOn .p_KOn-inner {
   font-family: Roboto, system-ui, sans-serif;
-  --skeleton-height: 10px;
   font-size: 14px;
   font-weight: 500;
-  line-height: 16px;
+  line-height: 1;
+  text-align: center;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-/* Цвет текста: зависит и от темы (через переменные), и от активного состояния вкладки */
-.p_KOn:not(.r3qNc) .SNkiP {
+/* Цвет текста: зависит от активного состояния вкладки */
+.p_KOn:not(.r3qNc) {
   color: var(--tg-theme-hint-color, #8e8e93);
 }
 
-.p_KOn.r3qNc .SNkiP {
+.p_KOn.r3qNc {
   color: var(--tg-theme-text-color);
 }
 
-.p_KOn:not(.r3qNc) .SNkiP {
-  color: var(--tg-theme-hint-color);
-}
-
-/* Светлая тема: неактивные вкладки — тёмный текст на светлом фоне */
-[data-color-scheme='light'] .p_KOn:not(.r3qNc) .SNkiP {
+/* Светлая тема: неактивные вкладки */
+[data-color-scheme='light'] .p_KOn:not(.r3qNc) {
   color: #6d6d72;
 }
 
-/* SNkiP — текст внутри кнопки слайдера */
-.SNkiP {
-  font-size: 12px;
-}
-
-/* Кнопки «Топ роста» / «Топ падения» — компактный текст, не слишком жирный */
-.CgUOn.pmioA .SNkiP {
+/* Кнопки «Топ роста» / «Топ падения» */
+.CgUOn.pmioA .p_KOn,
+.CgUOn.pmioA .p_KOn .p_KOn-inner {
   font-size: 14px;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 1;
 }
 
 /* Заголовок «Топ дня» — размер как у «Продукты» (15px / 18px) */

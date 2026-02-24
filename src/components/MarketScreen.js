@@ -87,10 +87,10 @@ function MarketScreen({ marketTickers, fundTickers = [], topDay, topDayFall = []
   return (
     <>
       <div className={`FhO5I ${isSearchFocused ? 'search-overlay-open' : ''}`}>
-        <section className="oJKLh LySHd iXSn4 KIbKh">
+        <section className="oJKLh LySHd iXSn4 KIbKh ">
           <div className="JNQMw">
             <div className="market-search-input-wrap">
-              <div className="ydmxJ tf4r_ search-input-wrap">
+              <div className="ydmxJ tf4r_ search-input-wrap ioskrug">
               <form className="pPd9Y nsMB8" action=".">
                 <label className="cpHhd IqPae PmUAN Ka5fP YrFt1 DIb0V XTiUr l_jV4">
                   <div className="KKBuo">
@@ -275,12 +275,10 @@ function MarketScreen({ marketTickers, fundTickers = [], topDay, topDayFall = []
             <div className="Zwf9p mFYy9 IPADx" role="radiogroup">
               <div className="TsSEl TRjCi uuakV" style={{ transform: usMarketTab === 'stocks' ? 'translateX(0)' : 'translateX(100%)' }} />
               <button type="button" className={`cpHhd YLSRc CF5m5 p_KOn ${usMarketTab === 'stocks' ? 'r3qNc' : ''}`} role="radio" aria-checked={usMarketTab === 'stocks'} onClick={() => setUsMarketTab('stocks')}>
-                <div className="SNkiP">Акции</div>
-                <div aria-hidden="true" className="_BP0C">Акции</div>
+                <span className="p_KOn-inner">Акции</span>
               </button>
               <button type="button" className={`cpHhd YLSRc CF5m5 p_KOn ${usMarketTab === 'funds' ? 'r3qNc' : ''}`} role="radio" aria-checked={usMarketTab === 'funds'} onClick={() => setUsMarketTab('funds')}>
-                <div className="SNkiP">Фонды</div>
-                <div aria-hidden="true" className="_BP0C">Фонды</div>
+                <span className="p_KOn-inner">Фонды</span>
               </button>
             </div>
           </div>
@@ -370,12 +368,10 @@ function MarketScreen({ marketTickers, fundTickers = [], topDay, topDayFall = []
               <div className="Zwf9p mFYy9 IPADx" role="radiogroup">
                 <div className="TsSEl TRjCi uuakV" style={{ transform: topDayTab === 'gain' ? 'translateX(0)' : 'translateX(100%)' }} />
                 <button type="button" className={`cpHhd YLSRc CF5m5 p_KOn ${topDayTab === 'gain' ? 'r3qNc' : ''}`} role="radio" aria-checked={topDayTab === 'gain'} onClick={() => setTopDayTab('gain')}>
-                  <div className="SNkiP">Топ роста</div>
-                  <div className="_BP0C" aria-hidden="true">Топ роста</div>
+                  <span className="p_KOn-inner">Топ роста</span>
                 </button>
                 <button type="button" className={`cpHhd YLSRc CF5m5 p_KOn ${topDayTab === 'fall' ? 'r3qNc' : ''}`} role="radio" aria-checked={topDayTab === 'fall'} onClick={() => setTopDayTab('fall')}>
-                  <div className="SNkiP">Топ падения</div>
-                  <div className="_BP0C" aria-hidden="true">Топ падения</div>
+                  <span className="p_KOn-inner">Топ падения</span>
                 </button>
               </div>
             </div>

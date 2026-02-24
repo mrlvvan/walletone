@@ -2072,7 +2072,8 @@ function App() {
   }, [screen]);
 
   return (
-    <div className="app">
+    <div className="ios-scroll-root">
+      <div className="app">
       <main
         ref={mainRef}
         className={`content ${screen === 'history' ? 'screen-history' : ''} ${
@@ -2190,6 +2191,7 @@ function App() {
           onChange={handleTabChange}
         />
       )}
+      </div>
     </div>
   );
 }
