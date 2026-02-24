@@ -9350,12 +9350,12 @@ export function IconSwap({ size = 24, className, ...props }) {
       {...props}
     >
       <path
-        stroke="#8D7AEF"
+        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
         fill="none"
-        d="M6 17V3m0 0L2 7m4-4 4 4M18 3v14m0 0 4-4m-4 4-4-4"
+        d="M7 18V6m0 0L4 9m3-3 3 3M17 6v12m0 0 3-3m-3 3-3-3"
       />
     </svg>
   );

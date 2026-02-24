@@ -2078,7 +2078,9 @@ function App() {
         ref={mainRef}
         className={`content ${screen === 'history' ? 'screen-history' : ''} ${
           screen === 'bonus' ? 'screen-bonus' : ''
-        } ${screen === 'asset' ? 'screen-asset' : ''} ${screen === 'transfer' ? 'screen-transfer' : ''} ${screen === 'home' ? 'screen-home' : ''} ${
+        } ${screen === 'asset' ? 'screen-asset' : ''} ${screen === 'transfer' ? 'screen-transfer' : ''} ${
+          screen === 'buyCrypto' ? 'screen-buy-crypto' : ''
+        } ${screen === 'withdraw' ? 'screen-withdraw' : ''} ${screen === 'home' ? 'screen-home' : ''} ${
           screen === 'trade' ? 'screen-trade' : ''
         }`}
       >
