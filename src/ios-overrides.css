@@ -217,6 +217,13 @@ html[data-platform="ios"] .section-button-left {
   font-weight: 400;
 }
 
+/* iOS: ключевые названия немного плотнее (Доллары / Major / Акции и фонды) */
+html[data-platform="ios"] .list-title,
+html[data-platform="ios"] .asset-name,
+html[data-platform="ios"] .section-button-left {
+  font-weight: 500;
+}
+
 /* Числа справа: чуть меньше размер */
 html[data-platform="ios"] .list-value,
 html[data-platform="ios"] .asset-amount,
@@ -252,6 +259,7 @@ html[data-platform="ios"] .allassets-section .Rfm73.Jn71M.hCZ1A,
 html[data-platform="ios"] .ton-section .Rfm73.Jn71M.hCZ1A {
   margin-inline: 0;
   padding-inline: 16px 12px;
+  padding-block: 0 6px;
   margin-bottom: 0;
 }
 
@@ -260,7 +268,7 @@ html[data-platform="ios"] .products-section .JNQMw,
 html[data-platform="ios"] .topday-section .JNQMw,
 html[data-platform="ios"] .allassets-section .JNQMw,
 html[data-platform="ios"] .ton-section .JNQMw {
-  gap: 0;
+  gap: 6px;
 }
 
 /* Минимальное расстояние между секциями, без видимых полосок */
@@ -400,7 +408,14 @@ html[data-platform="ios"] .allassets-section .Rfm73.Jn71M.hCZ1A,
 html[data-platform="ios"] .ton-section .Rfm73.Jn71M.hCZ1A {
   margin-inline: 0;
   padding-inline: 16px 12px;
+  padding-block: 0 6px;
   margin-bottom: 0;
+}
+
+/* iOS: активное выделение в навбаре чуть крупнее */
+html[data-platform="ios"] .tab-bar-root.Zr9ao .nK_WK.tab-bar-pill {
+  top: 2px;
+  bottom: 2px;
 }
 
 html[data-platform="ios"] .topday-section .ydmxJ.tf4r_,
@@ -461,10 +476,19 @@ html[data-platform="ios"] .p_KOn {
 html[data-platform="ios"] .section-button {
   min-height: 48px;
   margin-top: 12px;
+  padding-inline: 12px;
 }
 
 html[data-platform="ios"] .section-button-left {
-  padding-block: 6px;
+  padding-block: 0;
+  min-height: 0;
+  gap: 10px;
+  align-items: center;
+}
+
+html[data-platform="ios"] .section-button-icon {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 /* Бейдж %: меньше отступы и компактнее фон */
@@ -848,6 +872,15 @@ html[data-platform="ios"] .content.screen-asset .asset-period-button.active {
   color: #ffffff !important;
 }
 
+/* Светлая тема iOS: селектор периода в монете */
+html[data-platform="ios"][data-color-scheme="light"] .content.screen-asset .asset-period-selector {
+  background: #f4f4f4 !important;
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .content.screen-asset .asset-period-selector::before {
+  background: #ffffff !important;
+}
+
 /* Asset iOS: после кнопок все карточки секций с более круглыми углами */
 html[data-platform="ios"] .content.screen-asset .asset-section .asset-section-content {
   border-radius: 28px !important;
@@ -1219,5 +1252,37 @@ html[data-platform="ios"] .FhO5I.search-overlay-open .JNQMw .DIb0V:focus-within 
 
 html[data-platform="ios"] .FhO5I.search-overlay-open .JNQMw .Kndc7:focus + .TlsKl {
   opacity: 1 !important;
+}
+
+/* Home iOS: чуть больше вес у Доллары / Major / Акции и фонды */
+html[data-platform="ios"] .list-title,
+html[data-platform="ios"] .section-button-left {
+  font-weight: 500 !important;
+}
+
+/* Trade iOS: одинаковые отступы заголовков и одинаковый зазор до блоков */
+html[data-platform="ios"] .market-us-row .market-section-header .Rfm73.Jn71M.hCZ1A,
+html[data-platform="ios"] .products-section .Rfm73.Jn71M.hCZ1A,
+html[data-platform="ios"] .topday-section .Rfm73.Jn71M.hCZ1A,
+html[data-platform="ios"] .allassets-section .Rfm73.Jn71M.hCZ1A,
+html[data-platform="ios"] .ton-section .Rfm73.Jn71M.hCZ1A {
+  padding-inline: 16px 12px !important;
+  margin-bottom: 4px !important;
+}
+
+html[data-platform="ios"] .products-section .JNQMw,
+html[data-platform="ios"] .topday-section .JNQMw,
+html[data-platform="ios"] .allassets-section .JNQMw,
+html[data-platform="ios"] .ton-section .JNQMw {
+  gap: 4px !important;
+}
+
+html[data-platform="ios"] .market-us-row .market-section-header {
+  margin-bottom: 4px;
+}
+
+/* iOS: активная плашка навбара больше по площади */
+html[data-platform="ios"] .tab-bar-root.Zr9ao .KaTw3 {
+  --container-padding: 2px;
 }
 
