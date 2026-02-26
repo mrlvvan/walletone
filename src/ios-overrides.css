@@ -128,6 +128,27 @@ html[data-platform="ios"] .wallet-actions .action-label {
   font-weight: 700;
 }
 
+/* iOS: общий шаг вверх по насыщенности текста */
+html[data-platform="ios"] .cpHhd {
+  font-weight: 500 !important;
+}
+
+/* iOS: цифры баланса сделать заметно крупнее */
+html[data-platform="ios"] .balance-amount.large,
+html[data-platform="ios"] .balance-int {
+  font-size: 48px !important;
+  line-height: 58px !important;
+  font-weight: 600 !important;
+}
+
+html[data-platform="ios"] .balance-sep,
+html[data-platform="ios"] .balance-dec,
+html[data-platform="ios"] .balance-currency {
+  font-size: 34px !important;
+  line-height: 42px !important;
+  font-weight: 600 !important;
+}
+
 /* SVG в кнопках действий — 28x28 на iOS */
 html[data-platform="ios"] .wallet-actions .action-icon svg {
   width: 28px;
@@ -259,7 +280,7 @@ html[data-platform="ios"] .allassets-section .Rfm73.Jn71M.hCZ1A,
 html[data-platform="ios"] .ton-section .Rfm73.Jn71M.hCZ1A {
   margin-inline: 0;
   padding-inline: 16px 12px;
-  padding-block: 0 6px;
+  padding-block: 4px 6px;
   margin-bottom: 0;
 }
 
@@ -408,7 +429,7 @@ html[data-platform="ios"] .allassets-section .Rfm73.Jn71M.hCZ1A,
 html[data-platform="ios"] .ton-section .Rfm73.Jn71M.hCZ1A {
   margin-inline: 0;
   padding-inline: 16px 12px;
-  padding-block: 0 6px;
+  padding-block: 4px 6px;
   margin-bottom: 0;
 }
 
@@ -474,14 +495,14 @@ html[data-platform="ios"] .p_KOn {
 
 /* Акции и фонды — ниже высота серого блока, отступ сверху после Major */
 html[data-platform="ios"] .section-button {
-  min-height: 48px;
+  min-height: 56px;
   margin-top: 12px;
   padding-inline: 12px;
 }
 
 html[data-platform="ios"] .section-button-left {
-  padding-block: 0;
-  min-height: 0;
+  padding-block: 6px;
+  min-height: 56px;
   gap: 10px;
   align-items: center;
 }
@@ -1123,24 +1144,131 @@ html[data-platform="ios"] .JNQMw .TlsKl {
   line-height: 20px;
 }
 
-/* iOS: поиск в Торговле как в референсе (пилюли табов + плоский список) */
-html[data-platform="ios"] .FhO5I.search-overlay-open,
-html[data-platform="ios"] .FhO5I.search-overlay-open .oJKLh.LySHd.iXSn4.KIbKh,
-html[data-platform="ios"] .FhO5I.search-overlay-open .JNQMw,
-html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk.Rmex8 {
+/* Home iOS: чуть больше вес у Доллары / Major / Акции и фонды */
+html[data-platform="ios"] .list-title,
+html[data-platform="ios"] .section-button-left {
+  font-weight: 500 !important;
+}
+
+/* Trade iOS: одинаковые отступы заголовков и одинаковый зазор до блоков */
+html[data-platform="ios"] .market-us-row .market-section-header .Rfm73.Jn71M.hCZ1A,
+html[data-platform="ios"] .products-section .Rfm73.Jn71M.hCZ1A,
+html[data-platform="ios"] .topday-section .Rfm73.Jn71M.hCZ1A,
+html[data-platform="ios"] .allassets-section .Rfm73.Jn71M.hCZ1A,
+html[data-platform="ios"] .ton-section .Rfm73.Jn71M.hCZ1A {
+  padding-inline: 16px 12px !important;
+  padding-top: 4px !important;
+  padding-bottom: 2px !important;
+  margin-bottom: 0 !important;
+}
+
+/* Trade iOS: единый вид заголовков (Продукты/Топ дня и др.) */
+html[data-platform="ios"] .market-us-row .section-title-subtitle,
+html[data-platform="ios"] .products-section .section-title-subtitle,
+html[data-platform="ios"] .topday-section .section-title-subtitle,
+html[data-platform="ios"] .allassets-section .section-title-subtitle,
+html[data-platform="ios"] .ton-section .section-title-subtitle {
+  font-size: 15px !important;
+  line-height: 18px !important;
+  font-weight: 500 !important;
+  color: var(--tg-theme-section-header-text-color) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif !important;
+  letter-spacing: 0 !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Trade iOS: Продукты и Топ дня должны выглядеть абсолютно одинаково */
+html[data-platform="ios"] .products-section .Rfm73.Jn71M.hCZ1A .section-title-subtitle,
+html[data-platform="ios"] .topday-section .Rfm73.Jn71M.hCZ1A .section-title-subtitle {
+  font-size: 15px !important;
+  line-height: 18px !important;
+  font-weight: 500 !important;
+  color: var(--tg-theme-section-header-text-color) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif !important;
+  letter-spacing: 0 !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html[data-platform="ios"] .products-section .JNQMw,
+html[data-platform="ios"] .topday-section .JNQMw,
+html[data-platform="ios"] .allassets-section .JNQMw,
+html[data-platform="ios"] .ton-section .JNQMw {
+  gap: 2px !important;
+}
+
+html[data-platform="ios"] .market-us-row .market-section-header {
+  margin-bottom: 2px !important;
+}
+
+/* Trade iOS: каноничный стиль слайдеров (Акции/Фонды, Топ роста/Топ падения) */
+html[data-platform="ios"] .market-us-row .mFYy9.IPADx,
+html[data-platform="ios"] .topday-section .mFYy9.IPADx {
+  min-height: 40px !important;
+  padding: 2px !important;
+  border-radius: 999px !important;
+}
+
+html[data-platform="ios"] .market-us-row .p_KOn,
+html[data-platform="ios"] .topday-section .p_KOn {
+  display: block !important;
+  position: relative !important;
+  min-height: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  line-height: normal !important;
+}
+
+html[data-platform="ios"] .market-us-row .p_KOn .p_KOn-inner,
+html[data-platform="ios"] .topday-section .p_KOn .p_KOn-inner {
+  position: absolute !important;
+  inset: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  line-height: 1.2 !important;
+  text-align: center !important;
+}
+
+html[data-platform="ios"] .market-us-row .p_KOn:not(.r3qNc),
+html[data-platform="ios"] .topday-section .p_KOn:not(.r3qNc) {
+  color: var(--tg-theme-hint-color, #8e8e93) !important;
+}
+
+/* iOS: активная плашка навбара больше по площади */
+html[data-platform="ios"] .tab-bar-root.Zr9ao .KaTw3 {
+  --container-padding: 2px;
+  height: 62px !important;
+  min-height: 62px !important;
+}
+
+/* Home iOS: +1 к шрифту кнопок действий */
+html[data-platform="ios"] .wallet-actions .action-label {
+  font-size: 13px !important;
+}
+
+/* iOS: чуть ниже высота самого бара, без смещения по вертикали */
+html[data-platform="ios"] .tab-bar-root.Zr9ao .o7k40 {
+  min-height: 58px !important;
+}
+
+/* iOS Search (final): unified background, pills, and list edge-to-edge */
+html[data-platform="ios"] .FhO5I.search-overlay-open {
   background: var(--tg-theme-bg-color) !important;
 }
 
-/* Подтянуть табы ближе к полю поиска */
-html[data-platform="ios"] .FhO5I.search-overlay-open .market-search-input-wrap {
-  padding-bottom: 4px !important;
+html[data-platform="ios"] .FhO5I.search-overlay-open .JNQMw,
+html[data-platform="ios"] .FhO5I.search-overlay-open .DTT0W,
+html[data-platform="ios"] .FhO5I.search-overlay-open .xjN3V,
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk,
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .qMqm9,
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .Rfm73.ZR_ns.umRMK.kJf7o {
+  background: var(--tg-theme-bg-color) !important;
 }
 
-html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk.Rmex8 {
-  margin-top: 0 !important;
-}
-
-/* Критично для скролла: растягиваем контейнер поиска на высоту оверлея */
 html[data-platform="ios"] .FhO5I.search-overlay-open .JNQMw {
   flex: 1 1 auto !important;
   min-height: 0 !important;
@@ -1152,23 +1280,30 @@ html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .Rfm73.ZR_ns.umRMK.k
   flex-shrink: 0 !important;
 }
 
-html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk.Rmex8 {
-  flex: 1 1 auto !important;
-  min-height: 0 !important;
-  height: 100% !important;
+html[data-platform="ios"] .FhO5I.search-overlay-open .JNQMw .ydmxJ.tf4r_.search-input-wrap {
+  background: var(--tg-theme-bg-color) !important;
+  padding-bottom: 4px !important;
 }
 
-/* Подложка под строкой поиска, табами и заголовком "Все активы" */
-html[data-platform="ios"] .FhO5I.search-overlay-open .qMqm9,
-html[data-platform="ios"] .FhO5I.search-overlay-open .yPhAq.xjd0r.cJa9x.AY7Xx.hHy4V.M3D51,
-html[data-platform="ios"] .FhO5I.search-overlay-open .Rfm73.ZR_ns.umRMK.kJf7o {
+html[data-platform="ios"] .FhO5I.search-overlay-open .JNQMw .YrFt1.DIb0V {
+  border-radius: 999px !important;
+  background: var(--tg-theme-section-bg-color) !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk {
   background: var(--tg-theme-bg-color) !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 2px !important;
+  overflow: hidden !important;
 }
 
 html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .qMqm9 {
   margin-inline: 0 !important;
   padding-inline: 12px !important;
-  padding-block: 2px 2px !important;
+  padding-block: 2px !important;
   overflow-y: visible !important;
 }
 
@@ -1183,86 +1318,154 @@ html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .M3D51 {
   margin-block-start: 0 !important;
 }
 
-html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .Rfm73.ZR_ns.umRMK.kJf7o {
-  margin-top: 4px !important;
-  padding-top: 8px !important;
-  padding-bottom: 0 !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-
-/* Табы поиска: вместо нижней полосы — активная "пилюля" */
-html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .BDWMw:has(.ecfXP)::after {
-  display: none !important;
-}
-
 html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw {
-  height: auto !important;
   border-radius: 999px !important;
-  padding: 6px 14px !important;
   min-height: 34px !important;
+  padding: 6px 14px !important;
+  margin-top: 0 !important;
+  background: transparent !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw .cpHhd {
+  color: var(--tg-theme-hint-color, #8e8e93) !important;
 }
 
 html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw:has(.ecfXP) {
   background: rgba(170, 129, 255, 0.2) !important;
 }
 
-/* Табы поиска: неактивные серые, активный — акцентный */
-html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw .cpHhd {
-  color: var(--tg-theme-subtitle-text-color) !important;
-}
-
 html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw:has(.ecfXP) .cpHhd {
-  color: var(--tg-theme-accent-text-color) !important;
+  color: var(--tg-theme-accent-text-color, #8774e1) !important;
 }
 
-/* Заголовок "Все активы": немного крупнее */
-html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .Rfm73.ZR_ns.umRMK.kJf7o .cpHhd {
-  font-size: 16px !important;
-  line-height: 20px !important;
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw:has(.ecfXP)::after {
+  display: none !important;
 }
 
-/* Секция со списком монет: без карточных скруглений и отступов, от края до края */
-html[data-platform="ios"] .FhO5I.search-overlay-open .DTT0W.yPGCL .oJKLh.LySHd.iXSn4.CgUOn.lKYcT,
-html[data-platform="ios"] .FhO5I.search-overlay-open .DTT0W.yPGCL .oJKLh.CgUOn.lKYcT,
-html[data-platform="ios"] .FhO5I.search-overlay-open .DTT0W.yPGCL .oJKLh.CgUOn.lKYcT .ydmxJ.tf4r_ {
+html[data-platform="ios"] .FhO5I.search-overlay-open .DTT0W.yPGCL {
+  background: var(--tg-theme-bg-color) !important;
+  flex: 1 1 auto !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+  overscroll-behavior-y: contain !important;
+  min-height: 0 !important;
+  padding-bottom: calc(var(--tabbar-height, 90px) + 20px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .DTT0W.yPGCL .PKleQ.g6M0S {
+  background: var(--tg-theme-bg-color) !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .DTT0W.yPGCL .oJKLh.LySHd.iXSn4.CgUOn.lKYcT {
   margin: 0 !important;
   width: 100% !important;
   padding: 0 !important;
   border-radius: 0 !important;
   background: var(--tg-theme-section-bg-color) !important;
-  box-sizing: border-box;
 }
 
-/* Список активов в поиске: небольшой доп. отступ слева */
-html[data-platform="ios"] .FhO5I.search-overlay-open .lKYcT .dAgC8 {
+html[data-platform="ios"] .FhO5I.search-overlay-open .DTT0W.yPGCL .oJKLh.CgUOn.lKYcT {
+  margin: 0 !important;
+  width: 100% !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: var(--tg-theme-section-bg-color) !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .DTT0W.yPGCL .lKYcT .dAgC8 {
   padding-inline: 4px 0 !important;
 }
 
-/* Принудительный вертикальный скролл списка в iOS-оверлее поиска */
-html[data-platform="ios"] .FhO5I.search-overlay-open .DTT0W.yPGCL {
-  flex: 1 1 auto !important;
-  min-height: 0 !important;
-  height: auto !important;
-  max-height: none !important;
-  overflow-y: scroll !important;
-  overflow-x: hidden !important;
-  padding-bottom: calc(var(--tabbar-height, 90px) + 20px + env(safe-area-inset-bottom, 0px)) !important;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-y !important;
-  overscroll-behavior-y: contain;
+/* Home iOS lock (t5): баланс + actions + интервалы до промо/секций */
+html[data-platform="ios"] .wallet-balance {
+  gap: 2px !important;
 }
 
-html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk.Rmex8 {
-  min-height: 0 !important;
-  overflow: hidden !important;
+html[data-platform="ios"] .balance-amount.large,
+html[data-platform="ios"] .balance-int {
+  font-size: 48px !important;
+  line-height: 58px !important;
+  font-weight: 600 !important;
 }
 
-/* Под списком линия не нужна: она теперь над "Все активы" */
+html[data-platform="ios"] .balance-sep,
+html[data-platform="ios"] .balance-dec,
+html[data-platform="ios"] .balance-currency {
+  font-size: 34px !important;
+  line-height: 42px !important;
+  font-weight: 600 !important;
+}
+
+html[data-platform="ios"] .wallet-actions {
+  background: transparent !important;
+  margin-top: 28px !important;
+  margin-bottom: 14px !important;
+  padding-inline: 16px !important;
+  gap: 8px !important;
+}
+
+html[data-platform="ios"] .wallet-actions .action-item {
+  background: var(--tg-theme-section-bg-color) !important;
+  border-radius: 18px !important;
+  min-height: 68px !important;
+  height: 68px !important;
+}
+
+html[data-platform="ios"] .wallet-actions .action-label {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+html[data-platform="ios"] .promo-wrapper {
+  margin-inline: 0 !important;
+  padding-block-end: 8px !important;
+}
+
+html[data-platform="ios"] .promo-slider {
+  margin-block: 0 !important;
+  padding-block: 10px !important;
+  padding-inline: 16px !important;
+}
+
+html[data-platform="ios"] .list-card {
+  margin-inline: 16px !important;
+  width: calc(100% - 32px) !important;
+  margin-top: 10px !important;
+  padding: 10px 12px !important;
+  box-sizing: border-box !important;
+}
+
+html[data-platform="ios"] .section-button {
+  margin-inline: 16px !important;
+  width: calc(100% - 32px) !important;
+  min-height: 56px !important;
+}
+
+html[data-platform="ios"] .section-button-left {
+  min-height: 56px !important;
+  gap: 10px !important;
+  align-items: center !important;
+}
+
 html[data-platform="ios"] .FhO5I.search-overlay-open .mjigr.ODmGt.LQUdc.lIhZN {
   border-top: none !important;
 }
 
-/* Поиск в оверлее: серая иконка и читаемый плейсхолдер как в референсе */
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .Rfm73.ZR_ns.umRMK.kJf7o,
+html[data-platform="ios"] .FhO5I.search-overlay-open .DTT0W.yPGCL .Rfm73.Jn71M.hCZ1A {
+  background: var(--tg-theme-bg-color) !important;
+  font-size: 16px !important;
+  line-height: 20px !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  margin-top: 2px !important;
+  border-top: 1px solid var(--tg-theme-section-separator-color, rgba(255, 255, 255, 0.08)) !important;
+}
+
 html[data-platform="ios"] .FhO5I.search-overlay-open .JNQMw .DIb0V:focus-within .KKBuo .cqybA {
   color: var(--tg-theme-subtitle-text-color) !important;
 }
@@ -1271,35 +1474,164 @@ html[data-platform="ios"] .FhO5I.search-overlay-open .JNQMw .Kndc7:focus + .TlsK
   opacity: 1 !important;
 }
 
-/* Home iOS: чуть больше вес у Доллары / Major / Акции и фонды */
-html[data-platform="ios"] .list-title,
-html[data-platform="ios"] .section-button-left {
-  font-weight: 500 !important;
-}
-
-/* Trade iOS: одинаковые отступы заголовков и одинаковый зазор до блоков */
-html[data-platform="ios"] .market-us-row .market-section-header .Rfm73.Jn71M.hCZ1A,
+/* Trade iOS (final): Продукты и Топ дня выглядят одинаково */
 html[data-platform="ios"] .products-section .Rfm73.Jn71M.hCZ1A,
-html[data-platform="ios"] .topday-section .Rfm73.Jn71M.hCZ1A,
-html[data-platform="ios"] .allassets-section .Rfm73.Jn71M.hCZ1A,
-html[data-platform="ios"] .ton-section .Rfm73.Jn71M.hCZ1A {
+html[data-platform="ios"] .topday-section .Rfm73.Jn71M.hCZ1A {
+  align-items: center !important;
   padding-inline: 16px 12px !important;
-  margin-bottom: 4px !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  margin-bottom: 0 !important;
 }
 
-html[data-platform="ios"] .products-section .JNQMw,
-html[data-platform="ios"] .topday-section .JNQMw,
-html[data-platform="ios"] .allassets-section .JNQMw,
-html[data-platform="ios"] .ton-section .JNQMw {
-  gap: 4px !important;
+html[data-platform="ios"] .products-section .cpHhd.KbDJo.eqZCR.section-title-subtitle,
+html[data-platform="ios"] .topday-section .cpHhd.KbDJo.eqZCR.section-title-subtitle {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif !important;
+  font-size: 15px !important;
+  line-height: 18px !important;
+  font-weight: 600 !important;
+  font-style: normal !important;
+  letter-spacing: 0 !important;
+  color: var(--tg-theme-section-header-text-color) !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+  transform: none !important;
+  font-kerning: normal !important;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-html[data-platform="ios"] .market-us-row .market-section-header {
-  margin-bottom: 4px;
+/* Trade iOS (hard override): «Продукты» и «Топ дня» строго одинаковый рендер текста */
+html[data-platform="ios"] .products-section .Rfm73.Jn71M.hCZ1A .cpHhd.KbDJo.eqZCR,
+html[data-platform="ios"] .topday-section .Rfm73.Jn71M.hCZ1A .cpHhd.KbDJo.eqZCR,
+html[data-platform="ios"] .products-section .Rfm73.Jn71M.hCZ1A .section-title-subtitle,
+html[data-platform="ios"] .topday-section .Rfm73.Jn71M.hCZ1A .section-title-subtitle {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif !important;
+  font-size: 15px !important;
+  line-height: 18px !important;
+  font-weight: 600 !important;
+  font-style: normal !important;
+  letter-spacing: 0 !important;
+  color: var(--tg-theme-section-header-text-color) !important;
+  text-transform: none !important;
+  text-shadow: none !important;
+  transform: none !important;
+  font-kerning: normal !important;
+  font-feature-settings: "kern" 1 !important;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* iOS: активная плашка навбара больше по площади */
-html[data-platform="ios"] .tab-bar-root.Zr9ao .KaTw3 {
-  --container-padding: 2px;
+/* iOS Search lock (t4): единый фон + пилюли + стабильный скролл */
+html[data-platform="ios"] .FhO5I.search-overlay-open,
+html[data-platform="ios"] .FhO5I.search-overlay-open .oJKLh.LySHd,
+html[data-platform="ios"] .FhO5I.search-overlay-open .JNQMw,
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk.Rmex8,
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .qMqm9,
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .Rfm73.ZR_ns.umRMK.kJf7o {
+  background: var(--tg-theme-bg-color) !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .oJKLh.LySHd {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .JNQMw {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  gap: 0 !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .JNQMw .ydmxJ.tf4r_.search-input-wrap {
+  background: var(--tg-theme-bg-color) !important;
+  padding-bottom: 2px !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .JNQMw .YrFt1.DIb0V {
+  border-radius: 999px !important;
+  background: var(--tg-theme-section-bg-color) !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk.Rmex8 {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .qMqm9 {
+  margin-inline: 0 !important;
+  padding-inline: 12px !important;
+  padding-block: 2px !important;
+  overflow-y: visible !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .M3D51 {
+  margin-block-start: 0 !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw {
+  min-height: 34px !important;
+  padding: 6px 14px !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw .cpHhd {
+  color: var(--tg-theme-hint-color, #8e8e93) !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw:has(.ecfXP) {
+  background: rgba(170, 129, 255, 0.2) !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw:has(.ecfXP) .cpHhd {
+  color: var(--tg-theme-accent-text-color, #8774e1) !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw:has(.ecfXP)::after {
+  display: none !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .Rfm73.ZR_ns.umRMK.kJf7o {
+  margin-top: 2px !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  border-top: 1px solid var(--tg-theme-section-separator-color, rgba(255, 255, 255, 0.08)) !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .Rfm73.ZR_ns.umRMK.kJf7o .cpHhd {
+  font-size: 16px !important;
+  line-height: 20px !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .DTT0W.yPGCL {
+  flex: 1 1 0 !important;
+  min-height: 0 !important;
+  height: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+  overscroll-behavior-y: contain !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .DTT0W.yPGCL .oJKLh.LySHd.iXSn4.CgUOn.lKYcT,
+html[data-platform="ios"] .FhO5I.search-overlay-open .DTT0W.yPGCL .oJKLh.CgUOn.lKYcT,
+html[data-platform="ios"] .FhO5I.search-overlay-open .DTT0W.yPGCL .oJKLh.CgUOn.lKYcT .ydmxJ.tf4r_ {
+  margin: 0 !important;
+  width: 100% !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: var(--tg-theme-section-bg-color) !important;
+}
+
+html[data-platform="ios"] .FhO5I.search-overlay-open .DTT0W.yPGCL .lKYcT .dAgC8 {
+  padding-inline: 4px 0 !important;
 }
 
