@@ -14,6 +14,7 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
   const [chartPoints, setChartPoints] = useState(null);
   const [chartLoading, setChartLoading] = useState(true);
   const [actionPopupOpen, setActionPopupOpen] = useState(false);
+  const [descriptionExpanded, setDescriptionExpanded] = useState(false);
 
   const periods = ["1Д", "7Д", "1М", "1Г", "Все"];
 
@@ -39,6 +40,10 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
 
     return () => { cancelled = true; };
   }, [selectedAsset.id, selectedPeriod]);
+
+  useEffect(() => {
+    setDescriptionExpanded(false);
+  }, [selectedAsset.id]);
   const periodIndex = Math.max(0, periods.indexOf(selectedPeriod));
 
   const symbol =
@@ -79,6 +84,7 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
       : !chartLoading
         ? createFallbackChartPoints(coinData.percent || selectedAsset.change || 0)
         : null;
+  const canCollapseDescription = (coinData.description || "").length > 60;
 
   return (
     <div className="asset-screen">
@@ -245,7 +251,20 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
         </div>
         <div className="asset-section-content">
           <div className="asset-description">
-            <div className="asset-description-text">{coinData.description}</div>
+            <div className="asset-description-text-wrap">
+              <div className={`asset-description-text ${descriptionExpanded ? "expanded" : "collapsed"}`}>
+                {coinData.description}
+              </div>
+              {canCollapseDescription && (
+                <button
+                  type="button"
+                  className="asset-description-toggle"
+                  onClick={() => setDescriptionExpanded((prev) => !prev)}
+                >
+                  {descriptionExpanded ? "Скрыть" : "Подробнее"}
+                </button>
+              )}
+            </div>
             <ul className="asset-features-list">
               {coinData.features.map((feature, index) => (
                 <li key={index} className="asset-feature-item">

@@ -708,6 +708,34 @@
   color: var(--tg-theme-text-color, #ffffff);
 }
 
+.asset-description-text-wrap {
+  position: relative;
+}
+
+.asset-description-text.collapsed {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.asset-description-text.expanded {
+  display: block;
+}
+
+.asset-description-toggle {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin-top: 6px;
+  color: var(--tg-theme-link-color, #8774e1);
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
 .asset-features-list {
   list-style: none;
   padding: 0;

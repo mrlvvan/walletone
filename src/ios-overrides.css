@@ -52,6 +52,45 @@ html[data-platform="ios"] .ios-scroll-root .content > * {
   --tg-theme-section-separator-color: rgba(255, 255, 255, 0.06) !important;
 }
 
+/* --- Светлая тема iOS: кастомная палитра по референсу --- */
+[data-platform="ios"][data-color-scheme="light"] {
+  --tg-theme-bg-color: #efeef4 !important;
+  --tg-theme-secondary-bg-color: #efeef4 !important;
+  --tg-theme-header-bg-color: #efeef4 !important;
+  --tg-theme-section-bg-color: #ffffff !important;
+}
+
+/* Поиск в светлой теме: инпут чуть темнее общего фона */
+html[data-platform="ios"][data-color-scheme="light"] .JNQMw .ydmxJ.tf4r_.search-input-wrap,
+html[data-platform="ios"][data-color-scheme="light"] .JNQMw .YrFt1.DIb0V {
+  background: #e1e0e6 !important;
+}
+
+/* Слайдеры в светлой теме */
+html[data-platform="ios"][data-color-scheme="light"] .mFYy9.IPADx,
+html[data-platform="ios"][data-color-scheme="light"] .asset-period-selector {
+  background: #f4f4f4 !important;
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .TsSEl,
+html[data-platform="ios"][data-color-scheme="light"] .asset-period-selector::before {
+  background: #ffffff !important;
+}
+
+/* Навбар в светлой теме: SVG-иконки черные */
+html[data-platform="ios"][data-color-scheme="light"] .tab-bar-root.Zr9ao .FJOWj,
+html[data-platform="ios"][data-color-scheme="light"] .tab-bar-root.Zr9ao .FJOWj svg {
+  color: #000000 !important;
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .tab-bar-root.Zr9ao .wallet-lottie_fill-color path {
+  fill: #000000 !important;
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .tab-bar-root.Zr9ao .wallet-lottie_stroke-color path {
+  stroke: #000000 !important;
+}
+
 /* --- Баланс: меньше отступ между «Баланс» и цифрами --- */
 html[data-platform="ios"] .wallet-balance {
   gap: 2px;
@@ -85,8 +124,8 @@ html[data-platform="ios"] .wallet-actions .action-label {
   margin-top: -6px;
   position: relative;
   top: -12px;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 /* SVG в кнопках действий — 28x28 на iOS */
@@ -212,7 +251,7 @@ html[data-platform="ios"] .topday-section .Rfm73.Jn71M.hCZ1A,
 html[data-platform="ios"] .allassets-section .Rfm73.Jn71M.hCZ1A,
 html[data-platform="ios"] .ton-section .Rfm73.Jn71M.hCZ1A {
   margin-inline: 0;
-  padding-inline: 16px 0;
+  padding-inline: 16px 12px;
   margin-bottom: 0;
 }
 
@@ -360,7 +399,7 @@ html[data-platform="ios"] .topday-section .Rfm73.Jn71M.hCZ1A,
 html[data-platform="ios"] .allassets-section .Rfm73.Jn71M.hCZ1A,
 html[data-platform="ios"] .ton-section .Rfm73.Jn71M.hCZ1A {
   margin-inline: 0;
-  padding-inline: 16px 0;
+  padding-inline: 16px 12px;
   margin-bottom: 0;
 }
 
@@ -643,8 +682,9 @@ html[data-platform="ios"] .content.screen-withdraw {
 [data-platform="ios"] .exchange-screen {
   padding-top: calc(24px + env(safe-area-inset-top, 0px));
   padding-inline: calc(24px + env(safe-area-inset-left, 0px)) calc(24px + env(safe-area-inset-right, 0px));
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
   min-height: -webkit-fill-available;
-  background: var(--tg-theme-bg-color, #000) !important;
+  background: #000000 !important;
 }
 
 [data-platform="ios"] .exchange-submit-btn {
@@ -677,6 +717,162 @@ html[data-platform="ios"] .content.screen-withdraw {
   font-size: 44px !important;
   line-height: 44px !important;
 }
+
+/* Exchange: убрать избыточный нижний серый отступ у content */
+html[data-platform="ios"] .content:has(.exchange-screen) {
+  padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* History iOS: заголовок на общем фоне, список единым серым блоком */
+html[data-platform="ios"] .content.screen-history .PKleQ .oJKLh.LySHd.iXSn4 {
+  background: transparent !important;
+  margin-inline: 16px;
+  width: calc(100% - 32px);
+  padding-top: 16px;
+  box-sizing: border-box;
+}
+
+html[data-platform="ios"] .content.screen-history .PKleQ .Rfm73.Jn71M.hCZ1A {
+  padding: 0 0 2px 0 !important;
+  margin: 0;
+}
+
+html[data-platform="ios"] .content.screen-history .PKleQ .section-title-subtitle {
+  padding-left: 0;
+}
+
+html[data-platform="ios"] .content.screen-history .PKleQ .ydmxJ.tf4r_ {
+  background: var(--tg-theme-section-bg-color) !important;
+  border-radius: 24px;
+  overflow: hidden;
+  padding-top: 8px;
+}
+
+/* History iOS: справа не переносить некрасиво сумму/статус */
+html[data-platform="ios"] .content.screen-history .PKleQ .jOCse.TYgZR.Gihoq .cpHhd.IqPae.PmUAN.Ka5fP.kzP3J.VyspS,
+html[data-platform="ios"] .content.screen-history .PKleQ .jOCse.TYgZR.Gihoq .cpHhd.YLSRc.PmUAN.Fx5Cf.Bgj6A {
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  max-width: none;
+}
+
+html[data-platform="ios"] .content.screen-history .PKleQ .jOCse.TYgZR.Gihoq {
+  margin: 0 16px 0 8px !important;
+  min-width: max-content;
+}
+
+/* Asset iOS: верхний блок (заголовок + график + селектор) единым серым фоном без скругления */
+html[data-platform="ios"] .content.screen-asset .asset-header-section,
+html[data-platform="ios"] .content.screen-asset .asset-chart-section,
+html[data-platform="ios"] .content.screen-asset .asset-chart-container {
+  background: var(--tg-theme-section-bg-color, #2c2c2e) !important;
+  border-radius: 0 !important;
+}
+
+html[data-platform="ios"] .content.screen-asset .asset-main {
+  margin-inline-start: 0 !important;
+  padding-inline-end: 0 !important;
+}
+
+html[data-platform="ios"] .content.screen-asset .asset-header-section,
+html[data-platform="ios"] .content.screen-asset .asset-chart-section {
+  padding-inline: 0 !important;
+}
+
+html[data-platform="ios"] .content.screen-asset .asset-header-section {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 22px !important;
+}
+
+html[data-platform="ios"] .content.screen-asset .asset-chart-section {
+  padding: 0 0 10px 0 !important;
+}
+
+html[data-platform="ios"] .content.screen-asset .asset-chart-container {
+  margin-bottom: 0 !important;
+}
+
+/* Внутренние отступы контента, чтобы фон оставался цельным */
+html[data-platform="ios"] .content.screen-asset .asset-header-content,
+html[data-platform="ios"] .content.screen-asset .asset-price-container,
+html[data-platform="ios"] .content.screen-asset .asset-delta-container,
+html[data-platform="ios"] .content.screen-asset .asset-chart-periods {
+  padding-inline: 16px !important;
+  box-sizing: border-box;
+}
+
+html[data-platform="ios"] .content.screen-asset .asset-chart-wrapper {
+  padding-inline: 16px;
+  box-sizing: border-box;
+}
+
+/* Asset iOS: график ближе к правой шкале */
+html[data-platform="ios"] .content.screen-asset .asset-chart-axis {
+  width: 48px !important;
+  padding-left: 2px !important;
+}
+
+/* Asset iOS: подписи шкалы справа чуть меньше */
+html[data-platform="ios"] .content.screen-asset .asset-chart-axis .asset-chart-axis-label {
+  font-size: 14px !important;
+}
+
+/* Asset iOS: кнопки периода чуть крупнее */
+html[data-platform="ios"] .content.screen-asset .asset-period-selector {
+  --period-btn-height: 32px;
+  height: 40px !important;
+  padding: 4px !important;
+  border-radius: 999px !important;
+  background: #39393b !important;
+}
+
+html[data-platform="ios"] .content.screen-asset .asset-period-selector::before {
+  top: 4px !important;
+  left: calc(4px + var(--period-index) * ((100% - 8px) / var(--period-count))) !important;
+  width: calc((100% - 8px) / var(--period-count)) !important;
+  height: calc(100% - 8px) !important;
+  border-radius: 999px !important;
+  background: #636365 !important;
+}
+
+html[data-platform="ios"] .content.screen-asset .asset-period-button {
+  height: calc(100% - 8px) !important;
+  font-size: 14px !important;
+  line-height: 16px !important;
+  color: #ffffff !important;
+}
+
+html[data-platform="ios"] .content.screen-asset .asset-period-button.active {
+  color: #ffffff !important;
+}
+
+/* Asset iOS: после кнопок все карточки секций с более круглыми углами */
+html[data-platform="ios"] .content.screen-asset .asset-section .asset-section-content {
+  border-radius: 28px !important;
+}
+
+/* Asset iOS: немного крупнее цена монеты */
+html[data-platform="ios"] .content.screen-asset .asset-price-value {
+  font-size: 28px !important;
+  line-height: 32px !important;
+  font-variant-numeric: lining-nums proportional-nums !important;
+  font-feature-settings: "pnum" 1, "tnum" 0 !important;
+  letter-spacing: 0 !important;
+}
+
+/* Asset iOS: более светлый красный убытка и плашки процента */
+html[data-platform="ios"] .content.screen-asset .asset-delta-value.negative,
+html[data-platform="ios"] .content.screen-asset .asset-delta-percent.negative {
+  color: #ff6b66 !important;
+}
+
+html[data-platform="ios"] .content.screen-asset .asset-delta-percent.negative::before {
+  background: #ff6b66 !important;
+  opacity: 0.2 !important;
+}
+
 
 [data-platform="ios"] .exchange-screen .exchange-currency-chevron {
   display: inline-flex;
