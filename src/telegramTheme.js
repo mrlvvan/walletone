@@ -118,8 +118,29 @@ export function initTelegramThemeSync() {
 
   if (!tg) return;
 
+  const syncTelegramHeaderColor = (themeParams, colorScheme) => {
+    const platform = (document.documentElement.getAttribute('data-platform') || '').toLowerCase();
+    if (platform !== 'ios') return;
+    if (typeof tg.setHeaderColor !== 'function') return;
+
+    let headerColor = themeParams?.bg_color;
+    const scheme = String(colorScheme || '').toLowerCase();
+    if (scheme !== 'light' && !headerColor) {
+      headerColor = IOS_DARK_OVERRIDES.bg_color;
+    }
+
+    if (typeof headerColor === 'string' && headerColor.trim()) {
+      try {
+        tg.setHeaderColor(headerColor);
+      } catch (_) {
+        // No-op: some clients may ignore or reject the call.
+      }
+    }
+  };
+
   const apply = () => {
     applyTelegramTheme(tg.themeParams, tg.colorScheme);
+    syncTelegramHeaderColor(tg.themeParams, tg.colorScheme);
     /* После apply — вернуть debug-тему из URL, если задана (?theme=dark) */
     detectPlatform();
   };
