@@ -1428,14 +1428,23 @@ html[data-platform="ios"] .FhO5I.search-overlay-open .JNQMw {
   gap: 0 !important;
 }
 
+html[data-platform="ios"] .FhO5I.search-overlay-open .market-search-input-wrap {
+  padding: 16px !important;
+}
+
 html[data-platform="ios"] .FhO5I.search-overlay-open .JNQMw .ydmxJ.tf4r_.search-input-wrap {
-  background: var(--tg-theme-bg-color) !important;
-  padding-bottom: 2px !important;
+  background: var(--tg-theme-section-bg-color) !important;
+  border-radius: 999px !important;
+  border: none !important;
+  padding-bottom: 0 !important;
 }
 
 html[data-platform="ios"] .FhO5I.search-overlay-open .JNQMw .YrFt1.DIb0V {
   border-radius: 999px !important;
-  background: var(--tg-theme-section-bg-color) !important;
+  background: transparent !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  padding-inline: 8px !important;
 }
 
 html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk.Rmex8 {
@@ -1448,35 +1457,69 @@ html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk.Rmex8 {
 html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .qMqm9 {
   margin-inline: 0 !important;
   padding-inline: 12px !important;
-  padding-block: 2px !important;
+  padding-block: 0 2px !important;
   overflow-y: visible !important;
+  background: transparent !important;
 }
 
 html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .M3D51 {
   margin-block-start: 0 !important;
+  background: transparent !important;
 }
 
 html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw {
   min-height: 34px !important;
-  padding: 6px 14px !important;
+  height: auto !important;
+  padding: 5px 12px !important;
+  min-width: 0 !important;
   border-radius: 999px !important;
   background: transparent !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
 }
 
 html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw .cpHhd {
   color: var(--tg-theme-hint-color, #8e8e93) !important;
+  font-size: 16px !important;
+  line-height: 21px !important;
+  font-weight: 500 !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
 
-html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw:has(.ecfXP) {
-  background: rgba(170, 129, 255, 0.2) !important;
-}
-
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw .ecfXP .cpHhd,
 html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw:has(.ecfXP) .cpHhd {
   color: var(--tg-theme-accent-text-color, #8774e1) !important;
 }
 
-html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw:has(.ecfXP)::after {
+/* Выключаем базовую тонкую underline-полоску у активного таба */
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw::after {
   display: none !important;
+}
+
+/* Маленькая овальная подложка только вокруг активной надписи */
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw .ecfXP {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  z-index: 0 !important;
+}
+
+/* Подложка рисуется отдельно и не двигает текст */
+html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .r2DGg.BDWMw .ecfXP::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -11px !important;
+  right: -11px !important;
+  top: calc(50% + 1px) !important;
+  height: 28px !important;
+  transform: translateY(-50%) !important;
+  border-radius: 999px !important;
+  background: rgba(170, 129, 255, 0.22) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
 }
 
 html[data-platform="ios"] .FhO5I.search-overlay-open .wtAUk .Rfm73.ZR_ns.umRMK.kJf7o {
