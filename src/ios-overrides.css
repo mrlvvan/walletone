@@ -104,7 +104,7 @@ html[data-platform="ios"] .wallet-actions {
   gap: 8px;
   padding-inline: 16px;
   margin-top: 40px;
-  margin-bottom: 16px;
+  margin-bottom: 6px;
 }
 
 html[data-platform="ios"] .wallet-actions .action-item {
@@ -136,18 +136,11 @@ html[data-platform="ios"] .cpHhd {
 /* iOS: цифры баланса сделать заметно крупнее */
 html[data-platform="ios"] .balance-amount.large,
 html[data-platform="ios"] .balance-int {
-  font-size: 48px !important;
+  font-size: 52px !important;
   line-height: 58px !important;
   font-weight: 600 !important;
 }
 
-html[data-platform="ios"] .balance-sep,
-html[data-platform="ios"] .balance-dec,
-html[data-platform="ios"] .balance-currency {
-  font-size: 34px !important;
-  line-height: 42px !important;
-  font-weight: 600 !important;
-}
 
 /* SVG в кнопках действий — 28x28 на iOS */
 html[data-platform="ios"] .wallet-actions .action-icon svg {
@@ -235,7 +228,7 @@ html[data-platform="ios"] .asset-code,
 html[data-platform="ios"] .asset-amount,
 html[data-platform="ios"] .asset-value,
 html[data-platform="ios"] .section-button-left {
-  font-weight: 400;
+  font-weight: 500;
 }
 
 /* iOS: ключевые названия немного плотнее (Доллары / Major / Акции и фонды) */
@@ -259,6 +252,8 @@ html[data-platform="ios"] .crypto-section .section-note {
   padding: 0;
   margin-left: auto;
   margin-right: 6px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 /* ===== Торговля (Market): единые карточки секций ===== */
@@ -271,6 +266,7 @@ html[data-platform="ios"] .ton-section {
   margin-inline: 16px;
   width: calc(100% - 32px);
   box-sizing: border-box;
+  margin-bottom: 14px;
 }
 
 html[data-platform="ios"] .market-section-header .Rfm73.Jn71M.hCZ1A,
@@ -319,10 +315,21 @@ html[data-platform="ios"] .market-us-row .market-section-card {
 /* Рынок США: как Продукты — единый padding 12px 16px, слайдер и сетка на всю ширину */
 html[data-platform="ios"] .market-us-row .market-section-card .Ofdvj.PReSx {
   padding-inline: 0;
-  padding-block: 12px 0;
+  padding-block: 6px 0;
   width: 100%;
   box-sizing: border-box;
 }
+
+html[data-platform="ios"] .ticker-svg {
+  width: 60px !important;
+  height: 60px !important;
+}
+html[data-platform="ios"] .ticker-svg svg {
+  width: 60px !important;
+  height: 60px !important;
+}
+
+
 
 html[data-platform="ios"] .market-us-row .market-section-card .nR3tb {
   padding-inline: 0;
@@ -800,7 +807,7 @@ html[data-platform="ios"] .content.screen-history .PKleQ .Rfm73.Jn71M.hCZ1A {
 }
 
 html[data-platform="ios"] .content.screen-history .PKleQ .section-title-subtitle {
-  padding-left: 0;
+  padding-left: 16px;
 }
 
 html[data-platform="ios"] .content.screen-history .PKleQ .ydmxJ.tf4r_ {
@@ -1170,7 +1177,7 @@ html[data-platform="ios"] .allassets-section .section-title-subtitle,
 html[data-platform="ios"] .ton-section .section-title-subtitle {
   font-size: 15px !important;
   line-height: 18px !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   color: var(--tg-theme-section-header-text-color) !important;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif !important;
   letter-spacing: 0 !important;
@@ -1183,7 +1190,7 @@ html[data-platform="ios"] .products-section .Rfm73.Jn71M.hCZ1A .section-title-su
 html[data-platform="ios"] .topday-section .Rfm73.Jn71M.hCZ1A .section-title-subtitle {
   font-size: 15px !important;
   line-height: 18px !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   color: var(--tg-theme-section-header-text-color) !important;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif !important;
   letter-spacing: 0 !important;
@@ -1245,10 +1252,6 @@ html[data-platform="ios"] .tab-bar-root.Zr9ao .KaTw3 {
   min-height: 62px !important;
 }
 
-/* Home iOS: +1 к шрифту кнопок действий */
-html[data-platform="ios"] .wallet-actions .action-label {
-  font-size: 13px !important;
-}
 
 /* iOS: чуть ниже высота самого бара, без смещения по вертикали */
 html[data-platform="ios"] .tab-bar-root.Zr9ao .o7k40 {
@@ -1270,15 +1273,19 @@ html[data-platform="ios"] .balance-int {
 html[data-platform="ios"] .balance-sep,
 html[data-platform="ios"] .balance-dec,
 html[data-platform="ios"] .balance-currency {
-  font-size: 34px !important;
+  font-size: 36px !important;
   line-height: 42px !important;
   font-weight: 600 !important;
+}
+html[data-platform="ios"] .balance-currency {
+  color: #8e8e93;  
+  padding-left: 8px;
 }
 
 html[data-platform="ios"] .wallet-actions {
   background: transparent !important;
   margin-top: 28px !important;
-  margin-bottom: 14px !important;
+  margin-bottom: 0 !important;
   padding-inline: 16px !important;
   gap: 8px !important;
 }
@@ -1291,8 +1298,7 @@ html[data-platform="ios"] .wallet-actions .action-item {
 }
 
 html[data-platform="ios"] .wallet-actions .action-label {
-  font-size: 13px !important;
-  font-weight: 600 !important;
+    font-size: 14px !important;
 }
 
 html[data-platform="ios"] .promo-wrapper {
@@ -1538,3 +1544,7 @@ html[data-platform="ios"] .topday-section > .JNQMw > .Rfm73.Jn71M.hCZ1A .section
   text-rendering: optimizeLegibility !important;
 }
 
+
+html[data-platform="ios"].PKleQ .XeMWN {
+  margin: 0px -1px 0 14px !important;
+}
