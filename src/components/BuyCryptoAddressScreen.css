@@ -211,6 +211,9 @@ html[data-platform="ios"][data-color-scheme="light"] .buy-crypto-address-screen 
 
 html[data-platform="ios"][data-color-scheme="light"] .buy-crypto-address-warning {
   color: var(--tg-theme-text-color, #1c1c1e);
+  background: var(--tg-theme-section-bg-color, #ffffff);
+  border-radius: 12px;
+  padding: 10px 12px;
 }
 
 html[data-platform="ios"][data-color-scheme="light"] .buy-crypto-address-qr-card,
