@@ -123,7 +123,9 @@ export function initTelegramThemeSync() {
     if (platform !== 'ios') return;
     if (typeof tg.setHeaderColor !== 'function') return;
 
-    let headerColor = themeParams?.bg_color;
+    const root = document.documentElement;
+    const cssBgColor = getComputedStyle(root).getPropertyValue('--tg-theme-bg-color').trim();
+    let headerColor = cssBgColor || themeParams?.bg_color;
     const scheme = String(colorScheme || '').toLowerCase();
     if (scheme !== 'light' && !headerColor) {
       headerColor = IOS_DARK_OVERRIDES.bg_color;

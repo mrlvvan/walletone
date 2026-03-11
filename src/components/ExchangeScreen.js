@@ -87,7 +87,32 @@ function ExchangeScreen({ onNavigateToDeposit, onBack, cryptoAssets = [] }) {
   }, [cryptoAssets, payPickerAssets]);
 
   const receiveCurrency = receiveAsset?.code || 'TON';
-  const receiveAmount = convert(payAmount, payCurrency, receiveCurrency);
+  const parseRubPrice = (value) => {
+    const normalized = String(value || '')
+      .replace(/[^\d,.\-]/g, '')
+      .replace(/\s/g, '')
+      .replace(',', '.');
+    const num = parseFloat(normalized);
+    return Number.isFinite(num) ? num : null;
+  };
+  const formatAmount = (num) => {
+    if (!Number.isFinite(num) || num <= 0) return '';
+    if (num >= 1000) return num.toFixed(2).replace(/\.?0+$/, '');
+    if (num >= 1) return num.toFixed(4).replace(/\.?0+$/, '');
+    if (num >= 0.01) return num.toFixed(6).replace(/\.?0+$/, '');
+    return num.toFixed(8).replace(/\.?0+$/, '');
+  };
+  const convertByAssetPrice = (amount, fromAsset, toAsset) => {
+    const amountNum = parseFloat(String(amount || '').replace(',', '.'));
+    if (!Number.isFinite(amountNum) || amountNum <= 0) return '';
+    const fromPriceRub = parseRubPrice(fromAsset?.price);
+    const toPriceRub = parseRubPrice(toAsset?.price);
+    if (!fromPriceRub || !toPriceRub) return '';
+    return formatAmount((amountNum * fromPriceRub) / toPriceRub);
+  };
+  const receiveAmount =
+    convert(payAmount, payCurrency, receiveCurrency) ||
+    convertByAssetPrice(payAmount, payAsset, receiveAsset);
 
   const handleSwap = () => {
     const newPay = receiveCurrency;
@@ -117,6 +142,11 @@ function ExchangeScreen({ onNavigateToDeposit, onBack, cryptoAssets = [] }) {
     setReceiveAsset(asset);
     setShowReceivePicker(false);
   };
+
+  const canSubmit =
+    !!payAmount &&
+    parseFloat(String(payAmount).replace(',', '.')) > 0 &&
+    payPickerAssets.some((a) => a.code === receiveCurrency);
 
   return (
     <div className="exchange-screen">
@@ -201,7 +231,7 @@ function ExchangeScreen({ onNavigateToDeposit, onBack, cryptoAssets = [] }) {
       <button
         type="button"
         className="exchange-submit-btn"
-        disabled={!payAmount || parseFloat(String(payAmount).replace(',', '.')) <= 0}
+        disabled={!canSubmit}
       >
         Обменять
       </button>
@@ -209,6 +239,8 @@ function ExchangeScreen({ onNavigateToDeposit, onBack, cryptoAssets = [] }) {
       {showPayPicker && (
         <ExchangeCurrencyPicker
           cryptoAssets={payPickerAssets}
+          popularIds={['usdt', 'ton', 'major']}
+          showAllSection={false}
           onSelect={handleSelectPay}
           onClose={() => setShowPayPicker(false)}
         />

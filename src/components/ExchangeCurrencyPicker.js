@@ -3,10 +3,20 @@ import './MarketScreen.css';
 import IconChangeUp from './Icons/IconChangeUp';
 import IconChangeDown from './Icons/IconChangeDown';
 
-function ExchangeCurrencyPicker({ cryptoAssets = [], onSelect, onClose, showPriceAndChange = true, showYieldBadge = true }) {
+function ExchangeCurrencyPicker({
+  cryptoAssets = [],
+  onSelect,
+  onClose,
+  showPriceAndChange = true,
+  showYieldBadge = true,
+  popularIds: popularIdsProp,
+  showAllSection = true,
+}) {
   const searchInputRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const popularIds = ['usdt', 'btc', 'ton', 'eth', 'trx', 'sol'];
+  const popularIds = (popularIdsProp && popularIdsProp.length > 0
+    ? popularIdsProp
+    : ['usdt', 'btc', 'ton', 'eth', 'trx', 'sol']).map((id) => String(id).toLowerCase());
 
   useEffect(() => {
     searchInputRef.current?.focus();
@@ -38,6 +48,9 @@ function ExchangeCurrencyPicker({ cryptoAssets = [], onSelect, onClose, showPric
     .filter((item) => popularIds.includes((item.id || '').toLowerCase()))
     .sort((a, b) => (byPopularOrder.get((a.id || '').toLowerCase()) ?? 999) - (byPopularOrder.get((b.id || '').toLowerCase()) ?? 999));
   const otherAssets = filtered.filter((item) => !popularIds.includes((item.id || '').toLowerCase()));
+  const sections = showAllSection
+    ? [{ title: 'Популярные', items: popularAssets }, { title: 'Все', items: otherAssets }]
+    : [{ title: 'Популярные', items: filtered }];
 
   return (
     <div className="FhO5I search-overlay-open">
@@ -99,7 +112,7 @@ function ExchangeCurrencyPicker({ cryptoAssets = [], onSelect, onClose, showPric
 
           <div className="wtAUk Rmex8" data-scroll-restoration-id="ExchangeCurrencyPicker">
             <div className="DTT0W yPGCL">
-              {[{ title: 'Популярные', items: popularAssets }, { title: 'Все', items: otherAssets }].map(
+              {sections.map(
                 ({ title, items }) =>
                   items.length > 0 ? (
                     <section className="oJKLh LySHd iXSn4 CgUOn lKYcT" key={title}>

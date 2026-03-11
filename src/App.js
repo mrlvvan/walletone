@@ -1816,6 +1816,25 @@ function App() {
     ...searchStocks,
     ...searchFunds,
   ];
+  const exchangeCryptoAssets = (() => {
+    const cryptos = allMarketAssetsForSearch.filter((a) => a.category === 'crypto');
+    if (cryptos.some((a) => String(a?.id || '').toLowerCase() === 'major')) return cryptos;
+    const majorAsset = assets.find((a) => String(a?.id || '').toLowerCase() === 'major');
+    if (!majorAsset) return cryptos;
+    return [
+      ...cryptos,
+      {
+        id: 'major',
+        name: majorAsset.name,
+        code: 'MAJOR',
+        price: majorAsset.price,
+        change: majorAsset.change,
+        icon: majorAsset.icon,
+        styleClass: majorAsset.styleClass,
+        category: 'crypto',
+      },
+    ];
+  })();
 
   const tonAssets = [
     {
@@ -2260,7 +2279,7 @@ function App() {
           <ExchangeScreen
             onNavigateToDeposit={() => setScreen('buyCrypto')}
             onBack={() => setScreen(prevScreen || 'home')}
-            cryptoAssets={allMarketAssetsForSearch.filter((a) => a.category === 'crypto')}
+            cryptoAssets={exchangeCryptoAssets}
           />
         )}
       </main>
