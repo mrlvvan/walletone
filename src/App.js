@@ -377,6 +377,23 @@ function App() {
     if (!backButton) return;
 
     const handleBack = () => {
+      if (screen === 'buyCryptoDeposit') {
+        setScreen('buyCrypto');
+        return;
+      }
+      if (screen === 'buyCryptoNetwork') {
+        setScreen('buyCryptoDeposit');
+        return;
+      }
+      if (screen === 'buyCryptoAddress') {
+        const assetCode = String(selectedDepositAsset?.code || '').toUpperCase();
+        if (assetCode === 'USDT') {
+          setScreen('buyCryptoNetwork');
+        } else {
+          setScreen('buyCryptoDeposit');
+        }
+        return;
+      }
       setScreen(prevScreen || 'home');
     };
 
@@ -394,7 +411,7 @@ function App() {
         backButton.hide();
       }
     };
-  }, [screen, prevScreen]);
+  }, [screen, prevScreen, selectedDepositAsset]);
 
   const walletStats = {
     balanceInt: '1',

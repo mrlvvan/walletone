@@ -17,7 +17,7 @@
 }
 
 html[data-color-scheme="light"] .buy-crypto-network-warning {
-  background: var(--tg-theme-section-bg-color, #ffffff);
+  background: var(--tg-theme-bg-color, #f4f4f5);
   color: var(--tg-theme-text-color, #1c1c1e);
 }
 

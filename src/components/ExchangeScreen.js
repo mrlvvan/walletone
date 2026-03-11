@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import './ExchangeScreen.css';
 import { useRates } from '../context/RatesContext';
 import { IconSwap } from './Icons';
@@ -32,14 +32,38 @@ const CURRENCY_ICONS = {
 function ExchangeScreen({ onNavigateToDeposit, onBack, cryptoAssets = [] }) {
   const { convert } = useRates();
   const [payAmount, setPayAmount] = useState('');
-  const [payCurrency, setPayCurrency] = useState('USDT');
+  const [payAsset, setPayAsset] = useState({ id: 'usdt', code: 'USDT', name: 'Доллары', icon: ICON_USDT });
   const [receiveAsset, setReceiveAsset] = useState({ id: 'ton', code: 'TON', name: 'Toncoin', icon: ICON_TON });
+  const [showPayPicker, setShowPayPicker] = useState(false);
   const [showReceivePicker, setShowReceivePicker] = useState(false);
+
+  const payCurrency = payAsset?.code || 'USDT';
+  const payPickerAssets = useMemo(() => {
+    const allowedCodes = ['USDT', 'TON', 'MAJOR'];
+    const fromProps = cryptoAssets
+      .filter((a) => allowedCodes.includes(String(a?.code || '').toUpperCase()))
+      .map((a) => ({ ...a, code: String(a?.code || '').toUpperCase() }));
+
+    const fallbacks = {
+      USDT: { id: 'usdt', code: 'USDT', name: 'Доллары', icon: ICON_USDT },
+      TON: { id: 'ton', code: 'TON', name: 'Toncoin', icon: ICON_TON },
+      MAJOR: { id: 'major', code: 'MAJOR', name: 'Major' },
+    };
+
+    const merged = [...fromProps];
+    allowedCodes.forEach((code) => {
+      if (!merged.some((a) => a.code === code)) merged.push(fallbacks[code]);
+    });
+
+    return allowedCodes
+      .map((code) => merged.find((a) => a.code === code))
+      .filter(Boolean);
+  }, [cryptoAssets]);
 
   useEffect(() => {
     const tg = window.Telegram?.WebApp || window.telegram?.webapp;
     const backButton = tg?.BackButton || tg?.backButton;
-    if (!backButton || showReceivePicker) return;
+    if (!backButton || showPayPicker || showReceivePicker) return;
     const handleBack = () => onBack?.();
     backButton.show();
     backButton.onClick(handleBack);
@@ -47,16 +71,20 @@ function ExchangeScreen({ onNavigateToDeposit, onBack, cryptoAssets = [] }) {
       backButton.offClick(handleBack);
       backButton.hide();
     };
-  }, [showReceivePicker, onBack]);
+  }, [showPayPicker, showReceivePicker, onBack]);
 
   useEffect(() => {
-    if (cryptoAssets.length > 0) {
+    if (cryptoAssets.length > 0 || payPickerAssets.length > 0) {
+      setPayAsset((prev) => {
+        const found = payPickerAssets.find((a) => a.code === prev?.code);
+        return found || prev;
+      });
       setReceiveAsset((prev) => {
         const found = cryptoAssets.find((a) => a.code === prev?.code);
         return found || prev;
       });
     }
-  }, [cryptoAssets]);
+  }, [cryptoAssets, payPickerAssets]);
 
   const receiveCurrency = receiveAsset?.code || 'TON';
   const receiveAmount = convert(payAmount, payCurrency, receiveCurrency);
@@ -64,14 +92,25 @@ function ExchangeScreen({ onNavigateToDeposit, onBack, cryptoAssets = [] }) {
   const handleSwap = () => {
     const newPay = receiveCurrency;
     const newReceiveCode = payCurrency;
+    const newPayAsset =
+      payPickerAssets.find((a) => a.code === newPay) ||
+      cryptoAssets.find((a) => a.code === newPay) ||
+      (newPay === 'USDT'
+        ? { id: 'usdt', code: 'USDT', name: 'Доллары', icon: ICON_USDT }
+        : { id: 'ton', code: 'TON', name: 'Toncoin', icon: ICON_TON });
     const newReceiveAsset =
       cryptoAssets.find((a) => a.code === newReceiveCode) ||
       (newReceiveCode === 'USDT'
         ? { id: 'usdt', code: 'USDT', name: 'Доллары', icon: ICON_USDT }
         : { id: 'ton', code: 'TON', name: 'Toncoin', icon: ICON_TON });
-    setPayCurrency(newPay);
+    setPayAsset(newPayAsset);
     setReceiveAsset(newReceiveAsset);
     setPayAmount(receiveAmount);
+  };
+
+  const handleSelectPay = (asset) => {
+    setPayAsset(asset);
+    setShowPayPicker(false);
   };
 
   const handleSelectReceive = (asset) => {
@@ -86,7 +125,7 @@ function ExchangeScreen({ onNavigateToDeposit, onBack, cryptoAssets = [] }) {
           <div className="exchange-row-header">
             <span className="exchange-row-label">
               <span className={`exchange-row-icon exchange-row-icon--${payCurrency === 'USDT' ? 'green' : 'blue'}`}>
-                {CURRENCY_ICONS[payCurrency]}
+                {payAsset?.icon || CURRENCY_ICONS[payCurrency]}
               </span>
               Вы платите
             </span>
@@ -112,7 +151,11 @@ function ExchangeScreen({ onNavigateToDeposit, onBack, cryptoAssets = [] }) {
               onChange={(e) => setPayAmount(e.target.value)}
               inputMode="decimal"
             />
-            <button type="button" className="exchange-currency-btn">
+            <button
+              type="button"
+              className="exchange-currency-btn"
+              onClick={() => setShowPayPicker(true)}
+            >
               {payCurrency}
               <span className="exchange-currency-chevron">{CHEVRON}</span>
             </button>
@@ -162,6 +205,14 @@ function ExchangeScreen({ onNavigateToDeposit, onBack, cryptoAssets = [] }) {
       >
         Обменять
       </button>
+
+      {showPayPicker && (
+        <ExchangeCurrencyPicker
+          cryptoAssets={payPickerAssets}
+          onSelect={handleSelectPay}
+          onClose={() => setShowPayPicker(false)}
+        />
+      )}
 
       {showReceivePicker && (
         <ExchangeCurrencyPicker

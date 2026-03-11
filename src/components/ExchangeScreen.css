@@ -207,3 +207,12 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+html[data-color-scheme="light"] .exchange-screen {
+  background: #ffffff;
+  color: #1c1c1e;
+}
+
+html[data-color-scheme="light"] .exchange-input {
+  color: #1c1c1e;
+}
