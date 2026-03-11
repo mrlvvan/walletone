@@ -1616,3 +1616,32 @@ html[data-platform="ios"] .wallet-actions .action-label {
   top: auto !important;
   line-height: 16px !important;
 }
+
+/* iOS TabBar: compact liquid-glass like desktop reference */
+html[data-platform="ios"] .tab-bar-root.Zr9ao {
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+html[data-platform="ios"] .tab-bar-root.Zr9ao .KaTw3 {
+  --container-padding: 3px !important;
+  height: 58px !important;
+  min-height: 58px !important;
+  background: rgba(58, 58, 62, 0.58) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: blur(16px) saturate(145%) !important;
+  backdrop-filter: blur(16px) saturate(145%) !important;
+}
+
+html[data-platform="ios"] .tab-bar-root.Zr9ao .o7k40 {
+  min-height: 54px !important;
+  padding: 6px 4px !important;
+  gap: 3px !important;
+}
+
+@supports (color: color-mix(in srgb, red, blue 50%)) {
+  html[data-platform="ios"] .tab-bar-root.Zr9ao .KaTw3 {
+    background: color-mix(in srgb, var(--tg-theme-section-bg-color, #2c2c2e) 62%, transparent) !important;
+    border-color: color-mix(in srgb, var(--tg-theme-text-color, #ffffff) 12%, transparent) !important;
+  }
+}
