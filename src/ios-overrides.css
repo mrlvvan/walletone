@@ -1066,6 +1066,9 @@ html[data-platform="ios"] svg.DJRQ9.ZWMe4 path {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 2px !important;
+  border-radius: 999px !important;
+  background: var(--tertiary-fill-background, rgba(123, 123, 123, 0.24)) !important;
 }
 
 [data-platform="ios"] .tab-chip {
@@ -1073,6 +1076,14 @@ html[data-platform="ios"] svg.DJRQ9.ZWMe4 path {
   min-height: 0;
   flex: 1 1 0;
   min-width: 0;
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .wallet-tabs {
+  background: #f4f4f4 !important;
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .wallet-tabs .tab-chip.active {
+  background: #ffffff !important;
 }
 
 /* Промо «Зарабатывайте до 25% годовых» — фикс выравнивания на iOS */
@@ -1615,6 +1626,15 @@ html[data-platform="ios"] .wallet-actions .action-label {
   position: static !important;
   top: auto !important;
   line-height: 16px !important;
+}
+
+/* iOS Asset: popup from 3-dots should match main button rounding */
+html[data-platform="ios"] .asset-action-popup {
+  border-radius: 24px !important;
+}
+
+html[data-platform="ios"] .asset-action-popup-item {
+  border-radius: 24px !important;
 }
 
 /* iOS TabBar: compact liquid-glass like desktop reference */

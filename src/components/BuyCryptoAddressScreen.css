@@ -202,3 +202,28 @@
 .buy-crypto-address-copy-btn:active {
   transform: translateY(1px);
 }
+
+/* iOS light: QR screen should follow light palette */
+html[data-platform="ios"][data-color-scheme="light"] .buy-crypto-address-screen {
+  background: var(--tg-theme-bg-color, #efeef4);
+  color: var(--tg-theme-text-color, #000000);
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .buy-crypto-address-warning {
+  color: var(--tg-theme-text-color, #1c1c1e);
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .buy-crypto-address-qr-card,
+html[data-platform="ios"][data-color-scheme="light"] .buy-crypto-address-card,
+html[data-platform="ios"][data-color-scheme="light"] .buy-crypto-address-qr-wrap {
+  background: var(--tg-theme-section-bg-color, #ffffff);
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .buy-crypto-address-value {
+  color: var(--tg-theme-text-color, #1c1c1e);
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .buy-crypto-address-qr-logo-badge {
+  background: #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
