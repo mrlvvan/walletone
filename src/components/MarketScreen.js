@@ -87,7 +87,7 @@ function MarketScreen({ marketTickers, fundTickers = [], topDay, topDayFall = []
   return (
     <>
       <div className={`FhO5I ${isSearchFocused ? 'search-overlay-open' : ''}`}>
-        <section className="oJKLh LySHd iXSn4 KIbKh ">
+        <section className={`${isSearchFocused ? 'oJKLh ' : ''}LySHd iXSn4 KIbKh`}>
           <div className="JNQMw">
             <div className="market-search-input-wrap">
               <div className="ydmxJ tf4r_ search-input-wrap ioskrug">

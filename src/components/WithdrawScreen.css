@@ -41,8 +41,8 @@
   align-items: center;
   gap: 14px;
   width: 100%;
-  padding: 14px 16px;
-  background: var(--tg-theme-secondary-bg-color, rgba(255, 255, 255, 0.06));
+  padding: 10px 16px;
+  background: #343437;
   border: none;
   border-radius: 16px;
   cursor: pointer;
@@ -52,11 +52,11 @@
 }
 
 .withdraw-item:hover {
-  background: var(--tg-theme-secondary-bg-color, rgba(255, 255, 255, 0.1));
+  background: #3a3a3d;
 }
 
 .withdraw-item:active {
-  background: var(--tg-theme-secondary-bg-color, rgba(255, 255, 255, 0.08));
+  background: #404044;
 }
 
 .withdraw-item-icon {

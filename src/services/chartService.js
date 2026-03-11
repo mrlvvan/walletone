@@ -264,25 +264,58 @@ export function buildChartGridAndAxis(points) {
 /**
  * Создаёт точки для fallback-графика по проценту изменения (например "2.16" или "-1.5").
  */
-export function createFallbackChartPoints(percentChange = 0) {
+export function createFallbackChartPoints(percentChange = 0, seedSource = "asset") {
   const now = Date.now();
   const dayMs = 86400000;
   const basePrice = 100;
+
   let change = 0;
   if (typeof percentChange === 'string') {
     const isNeg = percentChange.includes('↓') || percentChange.startsWith('-');
     const num = parseFloat(percentChange.replace(',', '.').replace(/[^\d.-]/g, '')) || 0;
     change = isNeg ? -Math.abs(num) : num;
   } else {
-    change = percentChange;
+    change = Number(percentChange) || 0;
   }
+
+  // Deterministic pseudo-random for stable chart shape per asset/period.
+  let seed = 0;
+  const key = String(seedSource || "asset");
+  for (let i = 0; i < key.length; i++) seed = (seed * 31 + key.charCodeAt(i)) >>> 0;
+  const rand = () => {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    return seed / 4294967296;
+  };
+
+  const pointsCount = 72;
   const endPrice = basePrice * (1 + change / 100);
+  const trendDelta = endPrice - basePrice;
+  const amplitude = Math.max(0.9, Math.abs(trendDelta) * 0.35);
+  const freqA = 2.2 + rand() * 2.4;
+  const freqB = 5.5 + rand() * 3.5;
+  const phaseA = rand() * Math.PI * 2;
+  const phaseB = rand() * Math.PI * 2;
+  const noiseAmp = amplitude * 0.38;
+
   const points = [];
-  for (let i = 0; i <= 24; i++) {
-    const t = now - dayMs + (dayMs * i) / 24;
-    const progress = i / 24;
-    const price = basePrice + (endPrice - basePrice) * progress;
+  for (let i = 0; i <= pointsCount; i++) {
+    const progress = i / pointsCount;
+    const t = now - dayMs + (dayMs * i) / pointsCount;
+    const trend = basePrice + trendDelta * progress;
+
+    const wave =
+      Math.sin(progress * Math.PI * freqA + phaseA) * amplitude +
+      Math.sin(progress * Math.PI * freqB + phaseB) * (amplitude * 0.42);
+    const noise = (rand() * 2 - 1) * noiseAmp;
+
+    // Fade volatility near edges so first/last points stay close to trend.
+    const edgeFade = Math.sin(progress * Math.PI);
+    const price = Math.max(0.0001, trend + (wave + noise) * edgeFade);
     points.push([t, price]);
   }
+
+  // Preserve exact start/end trend direction.
+  points[0][1] = basePrice;
+  points[points.length - 1][1] = endPrice;
   return points;
 }

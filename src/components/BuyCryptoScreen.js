@@ -33,7 +33,7 @@ const ICON_DEPOSIT = (
   </svg>
 );
 
-function BuyCryptoScreen() {
+function BuyCryptoScreen({ onSelectMethod }) {
   const methods = [
     {
       id: 'p2p-express',
@@ -59,7 +59,9 @@ function BuyCryptoScreen() {
   ];
 
   const handleSelect = (id) => {
-    // TODO: навигация на соответствующий экран
+    if (typeof onSelectMethod === 'function') {
+      onSelectMethod(id);
+    }
   };
 
   return (

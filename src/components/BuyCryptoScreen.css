@@ -75,8 +75,8 @@
   align-items: center;
   gap: 14px;
   width: 100%;
-  padding: 14px 16px;
-  background: #1a1a1a;
+  padding: 10px 16px;
+  background: #343437;
   border: none;
   border-radius: 16px;
   cursor: pointer;
@@ -86,11 +86,11 @@
 }
 
 .buy-crypto-item:hover {
-  background: #252525;
+  background: #3a3a3d;
 }
 
 .buy-crypto-item:active {
-  background: #2d2d2d;
+  background: #404044;
 }
 
 .buy-crypto-item-icon {

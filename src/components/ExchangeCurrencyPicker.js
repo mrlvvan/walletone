@@ -3,9 +3,10 @@ import './MarketScreen.css';
 import IconChangeUp from './Icons/IconChangeUp';
 import IconChangeDown from './Icons/IconChangeDown';
 
-function ExchangeCurrencyPicker({ cryptoAssets = [], onSelect, onClose }) {
+function ExchangeCurrencyPicker({ cryptoAssets = [], onSelect, onClose, showPriceAndChange = true, showYieldBadge = true }) {
   const searchInputRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const popularIds = ['usdt', 'btc', 'ton', 'eth', 'trx', 'sol'];
 
   useEffect(() => {
     searchInputRef.current?.focus();
@@ -31,6 +32,12 @@ function ExchangeCurrencyPicker({ cryptoAssets = [], onSelect, onClose }) {
     const code = (item.code || '').toLowerCase();
     return name.includes(q) || code.includes(q);
   });
+
+  const byPopularOrder = new Map(popularIds.map((id, idx) => [id, idx]));
+  const popularAssets = filtered
+    .filter((item) => popularIds.includes((item.id || '').toLowerCase()))
+    .sort((a, b) => (byPopularOrder.get((a.id || '').toLowerCase()) ?? 999) - (byPopularOrder.get((b.id || '').toLowerCase()) ?? 999));
+  const otherAssets = filtered.filter((item) => !popularIds.includes((item.id || '').toLowerCase()));
 
   return (
     <div className="FhO5I search-overlay-open">
@@ -92,78 +99,85 @@ function ExchangeCurrencyPicker({ cryptoAssets = [], onSelect, onClose }) {
 
           <div className="wtAUk Rmex8" data-scroll-restoration-id="ExchangeCurrencyPicker">
             <div className="DTT0W yPGCL">
-              <section className="oJKLh LySHd iXSn4 CgUOn lKYcT">
-                <div className="JNQMw">
-                  <div className="Rfm73 ZR_ns umRMK kJf7o">
-                    <div className="cpHhd YLSRc CF5m5 Ka5fP">Вы получите</div>
-                  </div>
-                  <div className="ydmxJ tf4r_">
-                    <div className="mjigr ODmGt LQUdc lIhZN search-results-list">
-                      {filtered.map((item) => {
-                        const changeStr = (item.change || '').trim();
-                        const isNegative = changeStr.startsWith('↓') || changeStr.startsWith('-');
-                        const changeValue = changeStr.replace(/^[-+]\s?/, '').replace(/^↓\s?/, '').replace(/^↑\s?/, '');
+              {[{ title: 'Популярные', items: popularAssets }, { title: 'Все', items: otherAssets }].map(
+                ({ title, items }) =>
+                  items.length > 0 ? (
+                    <section className="oJKLh LySHd iXSn4 CgUOn lKYcT" key={title}>
+                      <div className="JNQMw">
+                        <div className="Rfm73 ZR_ns umRMK kJf7o">
+                          <div className="cpHhd YLSRc CF5m5 Ka5fP">{title}</div>
+                        </div>
+                        <div className="ydmxJ tf4r_">
+                          <div className="mjigr ODmGt LQUdc lIhZN search-results-list">
+                            {items.map((item) => {
+                              const changeStr = (item.change || '').trim();
+                              const isNegative = changeStr.startsWith('↓') || changeStr.startsWith('-');
+                              const changeValue = changeStr.replace(/^[-+]\s?/, '').replace(/^↓\s?/, '').replace(/^↑\s?/, '');
 
-                        return (
-                          <div className="tSWgK" key={item.id}>
-                            <div
-                              className="r2DGg tizzh"
-                              role="button"
-                              tabIndex={0}
-                              onClick={() => onSelect && onSelect(item)}
-                              onKeyDown={(e) => e.key === 'Enter' && onSelect && onSelect(item)}
-                            >
-                              <div className="P13QV dAgC8">
-                                <div className="t1CPG Bcb3I">
-                                  <div className="RkvKd">
-                                    <div className={`asset-icon ${item.styleClass || ''}`}>{item.icon}</div>
-                                  </div>
-                                </div>
-                                <div className="f5GTj Wv9yg">
-                                  <div className="jOCse TYgZR NXXwZ">
-                                    <div className="cpHhd IqPae CF5m5 Ka5fP kzP3J">
-                                      <span>{item.name}</span>
-                                    </div>
-                                    {item.badge ? (
-                                      <div className="cpHhd YLSRc PmUAN Fx5Cf Bgj6A mdnGg">
-                                        <span>{item.code}</span>
-                                        <div className="cpHhd LMb8t CF5m5 jJi8N VbUp4 tej97">
-                                          {item.badge}
+                              return (
+                                <div className="tSWgK" key={item.id}>
+                                  <div
+                                    className="r2DGg tizzh"
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={() => onSelect && onSelect(item)}
+                                    onKeyDown={(e) => e.key === 'Enter' && onSelect && onSelect(item)}
+                                  >
+                                    <div className="P13QV dAgC8">
+                                      <div className="t1CPG Bcb3I">
+                                        <div className="RkvKd">
+                                          <div className={`asset-icon ${item.styleClass || ''}`}>{item.icon}</div>
                                         </div>
                                       </div>
-                                    ) : (
-                                      <div className="cpHhd YLSRc PmUAN Fx5Cf Bgj6A">{item.code}</div>
-                                    )}
-                                  </div>
-                                  <div className="eslGw CFakS">
-                                    <div className="jOCse TYgZR Gihoq">
-                                      <div className="cpHhd IqPae PmUAN Ka5fP kzP3J VyspS">
-                                        <span>{item.price}</span>
-                                      </div>
-                                      <div className="cpHhd YLSRc PmUAN Fx5Cf Bgj6A">
-                                        <div
-                                          className={`cpHhd YLSRc PmUAN ku6Sb G5Dxc ${
-                                            isNegative ? 'pPUsT' : 'WXss8'
-                                          }`}
-                                        >
-                                          <span className="G4GF9" aria-hidden="true">
-                                            {isNegative ? <IconChangeDown size={12} /> : <IconChangeUp size={12} />}
-                                          </span>
-                                          {changeValue}
+                                      <div className="f5GTj Wv9yg">
+                                        <div className="jOCse TYgZR NXXwZ">
+                                          <div className="cpHhd IqPae CF5m5 Ka5fP kzP3J">
+                                            <span>{item.name}</span>
+                                          </div>
+                                          {showYieldBadge && item.badge ? (
+                                            <div className="cpHhd YLSRc PmUAN Fx5Cf Bgj6A mdnGg">
+                                              <span>{item.code}</span>
+                                              <div className="cpHhd LMb8t CF5m5 jJi8N VbUp4 tej97">
+                                                {item.badge}
+                                              </div>
+                                            </div>
+                                          ) : (
+                                            <div className="cpHhd YLSRc PmUAN Fx5Cf Bgj6A">{item.code}</div>
+                                          )}
                                         </div>
+                                        {showPriceAndChange ? (
+                                          <div className="eslGw CFakS">
+                                            <div className="jOCse TYgZR Gihoq">
+                                              <div className="cpHhd IqPae PmUAN Ka5fP kzP3J VyspS">
+                                                <span>{item.price}</span>
+                                              </div>
+                                              <div className="cpHhd YLSRc PmUAN Fx5Cf Bgj6A">
+                                                <div
+                                                  className={`cpHhd YLSRc PmUAN ku6Sb G5Dxc ${
+                                                    isNegative ? 'pPUsT' : 'WXss8'
+                                                  }`}
+                                                >
+                                                  <span className="G4GF9" aria-hidden="true">
+                                                    {isNegative ? <IconChangeDown size={12} /> : <IconChangeUp size={12} />}
+                                                  </span>
+                                                  {changeValue}
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        ) : null}
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            </div>
+                              );
+                            })}
                           </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </section>
+                        </div>
+                      </div>
+                    </section>
+                  ) : null
+              )}
             </div>
           </div>
         </div>

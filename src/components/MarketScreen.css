@@ -498,7 +498,7 @@
 .JNQMw {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 0px;
 }
 
 /* ---------- Панель поиска (wtAUk) — вкладки Все/Крипто/Акции/Фонды + список «Все активы» ---------- */
@@ -878,7 +878,7 @@
 
 .FhO5I {
   width: 100%;
-  background-color: var(--tg-theme-section-bg-color, #212121);
+  background-color: var(--tg-theme-bg-color, #0f0f0f);
 }
 
 /* Полноэкранный оверлей поиска: перекрывает весь контент */

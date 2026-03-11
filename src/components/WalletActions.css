@@ -4,14 +4,14 @@
 .wallet-actions {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   gap: 8px;
   padding: 0;
   margin-top: 0;
   margin-bottom: 0;
-  color: var(--tg-theme-accent-text-color);
+  color: var(--tg-theme-text-color);
   background: var(--tg-theme-section-bg-color);
-  height: 85px;
+  height: 77px;
 }
 
 .actions-section {
@@ -21,32 +21,36 @@
 .action-item {
   background: transparent;
   border: none;
-  color: var(--tg-theme-accent-text-color);
+  color: var(--tg-theme-text-color);
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 5px;
   align-items: center;
   justify-content: center;
+  text-align: center;
   font-size: 13px;
   font-weight: 500;
   line-height: 1.2;
   flex: 1;
   padding: 0;
-  height: 65px;
+  height: 58px;
   border-radius: 20px;
+  box-sizing: border-box;
 }
 
 .action-icon {
-  width: 56px;
-  height: 56px;
+  width: 24px;
+  height: 24px;
   border-radius: 0;
   /* Фон убираем — подсветка идёт от .action-item, под иконкой и текстом сразу */
   background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  color: var(--tg-theme-accent-text-color);
+  line-height: 0;
+  font-size: 0;
+  color: var(--tg-theme-text-color);
+  flex-shrink: 0;
 }
 
 .action-label {
@@ -54,21 +58,76 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
-  color: var(--tg-theme-accent-text-color);
-  margin-top: -2px;
+  color: var(--tg-theme-text-color);
+  margin-top: 0;
   max-width: 100%;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: center;
 }
 
 .action-icon svg {
-  width: 36px;
-  height: 36px;
+  width: 24px;
+  height: 24px;
   display: block;
   fill: currentColor;
 }
 
 .action-icon svg path {
   fill: currentColor;
+  stroke: currentColor;
+}
+
+/* PC (non-iOS): аккуратная центровка и компактные иконки в action-кнопках */
+html:not([data-platform="ios"]) .wallet-actions {
+  align-items: center;
+  height: 66px;
+  min-height: 66px;
+  gap: 8px;
+}
+
+html:not([data-platform="ios"]) .wallet-actions .action-item {
+  height: 100%;
+  min-height: 66px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 0;
+  text-align: center;
+}
+
+html:not([data-platform="ios"]) .wallet-actions .action-icon {
+  width: 24px;
+  height: 24px;
+}
+
+html:not([data-platform="ios"]) .wallet-actions .action-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+html:not([data-platform="ios"]) .wallet-actions .action-label {
+  margin: 0;
+  line-height: 16px;
+  text-align: center;
+}
+
+/* PC theme colors: dark = white, light = black */
+html:not([data-platform="ios"]):not([data-color-scheme="light"]) .wallet-actions .action-item,
+html:not([data-platform="ios"]):not([data-color-scheme="light"]) .wallet-actions .action-label,
+html:not([data-platform="ios"]):not([data-color-scheme="light"]) .wallet-actions .action-icon {
+  color: #ffffff !important;
+}
+
+html:not([data-platform="ios"])[data-color-scheme="light"] .wallet-actions .action-item,
+html:not([data-platform="ios"])[data-color-scheme="light"] .wallet-actions .action-label,
+html:not([data-platform="ios"])[data-color-scheme="light"] .wallet-actions .action-icon {
+  color: #000000 !important;
+}
+
+html:not([data-platform="ios"]) .wallet-actions .action-icon svg,
+html:not([data-platform="ios"]) .wallet-actions .action-icon svg path {
+  fill: currentColor !important;
+  stroke: currentColor !important;
 }

@@ -15,12 +15,15 @@
   align-items: flex-start;
   gap: 2px;
   position: relative;
-  margin-top: 20px;
-  margin-bottom: 13px;
+  margin-top: 0px;
+  margin-bottom: 0;
+  padding-top: 16px;
+  padding-bottom: 10px;
+  background: var(--tg-theme-section-bg-color, #2b2b2b);
 }
 .asset-main{
-  padding-inline-end: 20px;
-  margin-inline-start: 20px;
+  padding-inline: 16px;
+  margin-inline: 0;
 }
 
 .asset-header-content {
@@ -193,12 +196,13 @@
 
 /* Секция графика цены */
 .asset-chart-section {
-  padding: 0 10px 10px 0;
+  padding: 0 16px 12px;
+  background: var(--tg-theme-section-bg-color, #2b2b2b);
 }
 
 .asset-chart-container {
   background: var(--tg-theme-section-bg-color, #2b2b2b);
-  border-radius: 14px;
+  border-radius: 0;
   margin-bottom: 10px;
   overflow: hidden;
   position: relative;

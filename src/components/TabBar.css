@@ -19,6 +19,11 @@
   backface-visibility: hidden;
 }
 
+/* PC (non-iOS): симметричные боковые отступы у навбара */
+html:not([data-platform="ios"]) .tab-bar-root.Zr9ao {
+  padding-inline: 12px !important;
+}
+
 /* Внутренняя обёртка — на всю ширину с отступами 16px (заданы у корня) */
 .tab-bar-root .QgRSk {
   pointer-events: auto;

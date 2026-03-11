@@ -46,17 +46,35 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
   }, [selectedAsset.id]);
   const periodIndex = Math.max(0, periods.indexOf(selectedPeriod));
 
+  const rawCode = (selectedAsset.code || "")
+    .split("·")[0]
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9-]/g, "");
+  const normalizedId = String(selectedAsset.id || "").toLowerCase();
   const symbol =
     (selectedAsset.code && selectedAsset.code.split(" · ")[0]) ||
     selectedAsset.name ||
     "—";
+  const displayName =
+    selectedAsset.name ||
+    (rawCode === "usdt" || normalizedId.includes("usdt") ? "Доллары" : symbol);
+  const normalizedIdBase = normalizedId.split("-")[0];
+  const detailKey =
+    assetDetails[normalizedId]
+      ? normalizedId
+      : assetDetails[normalizedIdBase]
+        ? normalizedIdBase
+        : assetDetails[rawCode]
+          ? rawCode
+          : null;
 
-  const coinData = assetDetails[selectedAsset.id] || {
+  const coinData = (detailKey ? assetDetails[detailKey] : null) || {
     price: selectedAsset.price || "— ₽",
     delta: selectedAsset.delta || "—",
     percent: selectedAsset.change || "—%",
     period: "24 ч",
-    description: `${selectedAsset.name} (${symbol}) — криптовалюта для переводов и расчётов.`,
+    description: `${displayName} (${symbol}) — криптовалюта для переводов и расчётов.`,
     features: [
       "Получайте и отправляйте кому угодно (с комиссией).",
       "Подходит для расчётов в сети.",
@@ -82,7 +100,10 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
     chartPoints && chartPoints.length >= 2
       ? chartPoints
       : !chartLoading
-        ? createFallbackChartPoints(coinData.percent || selectedAsset.change || 0)
+        ? createFallbackChartPoints(
+            coinData.percent || selectedAsset.change || 0,
+            `${selectedAsset.id}-${selectedPeriod}`
+          )
         : null;
   const canCollapseDescription = (coinData.description || "").length > 60;
 
@@ -97,7 +118,7 @@ function AssetScreen({ selectedAsset, activity, assetDetails = {} }) {
           </div>
           <div className="asset-title-group">
             <div className="asset-name-title">
-              <span className="asset-name-text">{selectedAsset.name}</span>
+              <span className="asset-name-text">{displayName}</span>
               <span className="asset-code-text">
                 {" "}
                 {selectedAsset.code?.split(" · ")[0] || "BTC"}

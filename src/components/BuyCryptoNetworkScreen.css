@@ -1,0 +1,85 @@
+.buy-crypto-network-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--tg-theme-section-bg-color, #2c2c2e);
+  color: var(--tg-theme-text-color, #ffffff);
+  padding: 12px 16px 24px;
+}
+
+.buy-crypto-network-warning {
+  background: #343437;
+  color: var(--tg-theme-text-color, #ffffff);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 14px;
+}
+
+.buy-crypto-network-title {
+  font-size: 15px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--tg-theme-section-header-text-color, #aaaaaa);
+  margin: 0 -16px 0;
+  padding: 8px 16px 6px;
+  background: var(--tg-theme-bg-color, #1c1c1e);
+}
+
+.buy-crypto-network-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0 -16px;
+  padding: 0 0 8px;
+  background: var(--tg-theme-section-bg-color, #2c2c2e);
+}
+
+.buy-crypto-network-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 16px;
+  background: var(--tg-theme-section-bg-color, #2c2c2e);
+  border: none;
+  color: inherit;
+  text-align: left;
+  border-radius: 12px;
+}
+
+.buy-crypto-network-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buy-crypto-network-icon svg {
+  width: 42px;
+  height: 42px;
+  display: block;
+}
+
+.buy-crypto-network-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.buy-crypto-network-name {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--tg-theme-text-color, #ffffff);
+}
+
+.buy-crypto-network-subtitle {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--tg-theme-subtitle-text-color, #aaaaaa);
+}
