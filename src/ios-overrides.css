@@ -1692,13 +1692,19 @@ html[data-platform="ios"] .wallet-actions .action-icon svg path {
 
 /* iOS only: larger SVGs + taller and rounder action buttons */
 html[data-platform="ios"] .wallet-actions .action-item {
-  height: 68px !important;
-  min-height: 68px !important;
+  height: 64px !important;
+  min-height: 64px !important;
   border-radius: 22px !important;
 }
 
 html[data-platform="ios"] .wallet-actions {
-  padding-inline: 18px !important;
+  padding-inline: 16px !important;
+}
+
+html[data-platform="ios"] .wallet-actions .action-label {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 15px !important;
 }
 
 html[data-platform="ios"] .wallet-actions .action-icon {
