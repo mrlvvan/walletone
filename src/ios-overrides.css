@@ -1676,3 +1676,37 @@ html[data-platform="ios"] .tab-bar-root.Zr9ao::after {
   content: none !important;
   display: none !important;
 }
+
+/* iOS only: action buttons text/icons use Telegram accent color */
+html[data-platform="ios"] .wallet-actions .action-item,
+html[data-platform="ios"] .wallet-actions .action-label,
+html[data-platform="ios"] .wallet-actions .action-icon {
+  color: var(--tg-theme-link-color, var(--tg-theme-accent-text-color, #8774e1)) !important;
+}
+
+html[data-platform="ios"] .wallet-actions .action-icon svg,
+html[data-platform="ios"] .wallet-actions .action-icon svg path {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* iOS only: larger SVGs + taller and rounder action buttons */
+html[data-platform="ios"] .wallet-actions .action-item {
+  height: 68px !important;
+  min-height: 68px !important;
+  border-radius: 22px !important;
+}
+
+html[data-platform="ios"] .wallet-actions {
+  padding-inline: 18px !important;
+}
+
+html[data-platform="ios"] .wallet-actions .action-icon {
+  width: 28px !important;
+  height: 28px !important;
+}
+
+html[data-platform="ios"] .wallet-actions .action-icon svg {
+  width: 30px !important;
+  height: 30px !important;
+}
