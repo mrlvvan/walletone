@@ -1,0 +1,496 @@
+/* ========== TonAssetScreen — развёртка монеты в TON-кошельке ==========
+ * Отдельная разметка: Ваш портфель, Обзор (Капитализация, Общее предложение, Владельцы, Ликвидность, Дата листинга). */
+
+.ton-asset-screen {
+  padding-bottom: 0;
+  min-height: auto;
+}
+
+.ton-asset-screen .section-gap {
+  margin: 0 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.ton-asset-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 16px 16px 10px;
+  background: var(--tg-theme-section-bg-color, #2b2b2b);
+}
+
+.ton-asset-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+}
+
+.ton-asset-header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+}
+
+/* Левая колонка: SVG → надпись → цена → дельта (вертикально) */
+.ton-asset-header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ton-asset-title-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.ton-asset-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ton-asset-icon-wrap {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ton-asset-icon-wrap .asset-icon-large {
+  position: static;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+}
+
+.ton-asset-icon-wrap svg,
+.ton-asset-icon-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Название и тикер на одной строке: Доллары USDT */
+.ton-asset-title-block {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.ton-asset-name {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--tg-theme-text-color, #1c1c1e);
+  margin: 0;
+}
+
+.ton-asset-code {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--tg-theme-subtitle-text-color, #8e8e93);
+}
+
+.ton-asset-profit-badge {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #61bd67;
+  background: rgba(97, 189, 103, 0.15);
+  flex-shrink: 0;
+}
+
+.ton-asset-price {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  color: var(--tg-theme-text-color, #1c1c1e);
+  font-variant-numeric: lining-nums tabular-nums;
+  margin-top: 4px;
+}
+
+.ton-asset-delta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.ton-asset-delta {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.ton-asset-delta.positive {
+  color: #61bd67;
+}
+
+.ton-asset-delta.negative {
+  color: #ff3b30;
+}
+
+.ton-asset-chart-wrap {
+  padding: 0 16px 12px;
+  background: var(--tg-theme-section-bg-color, #2b2b2b);
+}
+
+.ton-asset-chart-inner {
+  width: 100%;
+  height: 220px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ton-asset-chart-loading {
+  font-size: 14px;
+  color: var(--tg-theme-subtitle-text-color, rgba(255, 255, 255, 0.6));
+}
+
+.ton-asset-periods {
+  display: flex;
+  justify-content: center;
+  padding: 12px 16px 0;
+}
+
+.ton-asset-period-btn {
+  flex: 1;
+  max-width: 100px;
+  padding: 8px 12px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--tg-theme-hint-color, #8e8e93);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.ton-asset-period-btn.active {
+  color: var(--tg-theme-text-color, #fff);
+  background: rgba(123, 123, 123, 0.24);
+}
+
+/* Карточки секций: тёмно-серый фон, полное скругление, 12px по сторонам */
+.ton-asset-section {
+  margin: 0 12px;
+  padding: 20px 20px 16px;
+  background: #222222;
+  border-radius: 12px;
+}
+
+.ton-asset-section-header {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--tg-theme-text-color, #fff);
+  margin-bottom: 12px;
+}
+
+.ton-asset-section-content {
+  padding: 0;
+}
+
+/* Ваш портфель */
+.ton-portfolio-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.ton-portfolio-value {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  color: var(--tg-theme-text-color, #fff);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.ton-portfolio-percent {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--tg-theme-subtitle-text-color, rgba(255, 255, 255, 0.6));
+}
+
+.ton-portfolio-percent.positive {
+  color: #61bd67;
+}
+
+.ton-portfolio-percent.negative {
+  color: #ff3b30;
+}
+
+.ton-portfolio-main-balance {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+}
+
+.ton-portfolio-main-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ton-portfolio-main-icon .asset-icon-large {
+  position: static;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+}
+
+.ton-portfolio-main-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ton-portfolio-main-label {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--tg-theme-text-color, #fff);
+}
+
+.ton-portfolio-main-amount {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--tg-theme-subtitle-text-color, rgba(255, 255, 255, 0.6));
+}
+
+.ton-portfolio-main-value {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--tg-theme-text-color, #fff);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+/* Секция Обзор — TON-поля */
+.ton-asset-overview-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+}
+
+.ton-asset-overview-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--tg-theme-section-separator-color, rgba(255, 255, 255, 0.06));
+}
+
+.ton-asset-overview-item:last-child {
+  border-bottom: none;
+}
+
+.ton-asset-overview-label {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--tg-theme-text-color, #fff);
+}
+
+.ton-asset-overview-value {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--tg-theme-text-color, #fff);
+  font-variant-numeric: tabular-nums;
+}
+
+.ton-asset-bottom-area {
+  padding-bottom: calc(56px + var(--safe-area-inset-bottom, 0px));
+}
+
+.ton-asset-bottom-area .asset-scroll-tail {
+  height: 56px;
+}
+
+/* Контейнер в #ton-action-bar-root (index.html) — inline position:fixed, изоляция contain:layout */
+.ton-asset-action-bar-fixed {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+.ton-asset-action-bar-fixed .asset-action-bar,
+.ton-asset-action-bar-fixed .asset-action-popup-backdrop,
+.ton-asset-action-bar-fixed .asset-action-popup {
+  pointer-events: auto;
+}
+
+.ton-asset-action-bar-fixed .asset-action-bar {
+  position: relative;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 8px max(40px, calc(24px + var(--safe-area-inset-right, 0px))) calc(12px + env(safe-area-inset-bottom, 0px)) max(24px, calc(16px + var(--safe-area-inset-left, 0px)));
+}
+
+.ton-asset-action-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  z-index: 4;
+  background: transparent;
+}
+
+.ton-asset-action-btn {
+  flex: 1;
+  padding: 14px 16px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  background: var(--tg-theme-button-color, #8a6cfe);
+  color: var(--tg-theme-button-text-color, #fff);
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+.ton-asset-action-more {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--tg-theme-section-bg-color, #2d2d2d);
+  color: var(--tg-theme-text-color, #fff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.ton-asset-action-more svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Торговая активность за 24 ч */
+.ton-trading-volume-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.ton-trading-label {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--tg-theme-text-color, #fff);
+}
+
+.ton-trading-value {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--tg-theme-text-color, #fff);
+  font-variant-numeric: tabular-nums;
+}
+
+.ton-trading-bar-wrap {
+  margin-bottom: 8px;
+}
+
+.ton-trading-bar {
+  height: 8px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.ton-trading-legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ton-trading-buy {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #34c759;
+}
+
+.ton-trading-sell {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #ff3b30;
+}
+

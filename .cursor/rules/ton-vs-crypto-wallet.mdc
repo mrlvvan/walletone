@@ -1,0 +1,25 @@
+---
+description: Разделение логики TON кошелька и обычного крипто-кошелька
+globs: walletone/**/*
+alwaysApply: false
+---
+
+# TON кошелёк vs обычный кошелёк
+
+В приложении два режима кошелька: **TON** (`walletTab === 'ton'`) и **обычный крипто** (`walletTab === 'crypto'`).
+
+## Важно
+
+При добавлении или изменении функционала **проверяй**, нужна ли разная логика для TON и обычного кошелька.
+
+## Примеры
+
+- **BuyCryptoNetworkScreen**: для USDT/USDC в TON — 7/5 сетей (Toncoin, BSC, Base и т.д.), в обычном — 4 сети (TRC20, TON, SOL, ERC20).
+- **Стейблкоины в TON после выбора сети**: `USDT` + сеть **Toncoin** → `BuyCryptoAddressScreen` (QR / аватар). `USDT` + любая другая сеть или **любой USDC** → `TonOtherCryptoDepositScreen` с `bridgeSourceNetwork` (экран «копировать адрес» + малый QR, как мост). Обычный кошелёк — всегда `BuyCryptoAddressScreen`.
+- **Определение контекста**: использовать `walletTab === 'ton'`, а не `prevScreen`, т.к. при цепочке `tonCryptoWalletTransfer → buyCryptoDeposit → buyCryptoNetwork` значение `prevScreen` перезаписывается. Не ставить `setPrevScreen('buyCryptoNetwork')` при выборе сети — иначе ломается «назад» со списка сетей на стейблкоины.
+
+## Пути навигации
+
+- TON: TonDepositScreen → stablecoinSelect / otherCryptoSelect / tonCryptoWalletTransfer / tonWalletAddress
+- **Вывести (TON)**: главная TON → `tonWithdrawAsset` (`TonWithdrawAssetScreen`: поиск, «Вы выводите», список токенов) → по выбору актива → `withdraw` (как вывести средства).
+- Обычный: BuyCryptoScreen → buyCryptoDeposit; **Вывести (crypto)** → сразу `withdraw`.

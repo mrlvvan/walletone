@@ -1,0 +1,145 @@
+/* TON-кошелёк: экран выбора актива для вывода */
+
+.ton-withdraw-asset-screen {
+  min-height: 100%;
+  box-sizing: border-box;
+  padding: calc(8px + env(safe-area-inset-top, 0px)) 16px 24px;
+  background: var(--tg-theme-bg-color, #ffffff);
+  color: var(--tg-theme-text-color, #000000);
+}
+
+.ton-withdraw-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--tg-theme-secondary-bg-color, #efefef);
+  box-sizing: border-box;
+}
+
+.ton-withdraw-search-icon {
+  flex-shrink: 0;
+  display: flex;
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+
+.ton-withdraw-search-icon svg {
+  display: block;
+}
+
+.ton-withdraw-search-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--tg-theme-text-color, #000);
+  outline: none;
+}
+
+.ton-withdraw-search-input::placeholder {
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+
+.ton-withdraw-section-bar {
+  margin: 0 -16px 4px;
+  padding: 8px 16px 6px;
+  background: var(--tg-theme-secondary-bg-color, #f2f2f7);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.ton-withdraw-section-title {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--tg-theme-hint-color, #6d6d72);
+}
+
+.ton-withdraw-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ton-withdraw-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+}
+
+.ton-withdraw-row:last-child {
+  border-bottom: none;
+}
+
+.ton-withdraw-row:active {
+  opacity: 0.85;
+}
+
+.ton-withdraw-row-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ton-withdraw-row-icon svg {
+  width: 44px;
+  height: 44px;
+  display: block;
+}
+
+.ton-withdraw-row-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.ton-withdraw-row-name {
+  font-size: 17px;
+  line-height: 22px;
+  font-weight: 700;
+  color: var(--tg-theme-text-color, #000);
+}
+
+.ton-withdraw-row-code {
+  margin-top: 2px;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+
+.ton-withdraw-row-values {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.ton-withdraw-row-fiat {
+  font-size: 17px;
+  line-height: 22px;
+  font-weight: 600;
+  color: var(--tg-theme-text-color, #000);
+}
+
+.ton-withdraw-row-amount {
+  margin-top: 2px;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--tg-theme-hint-color, #8e8e93);
+}

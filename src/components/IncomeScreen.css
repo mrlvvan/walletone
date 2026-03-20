@@ -1,0 +1,100 @@
+/* IncomeScreen — секция «Доход»: серая заливка сверху, сетка карточек, метки «new» */
+
+.income-screen-wrap {
+  min-height: 100%;
+  padding-bottom: calc(var(--tabbar-height, 90px) + 24px + var(--safe-area-inset-bottom, 0px));
+}
+
+/* Верх «Доход» — чёрный фон как TON-баланс / ton-exchange-form-block, breakout на всю ширину */
+.income-hero {
+  background: #000000;
+  margin-inline: calc(-1 * var(--content-padding-inline, 16px));
+  padding-block: 40px 44px;
+  padding-inline: var(--content-padding-inline, 16px);
+  min-height: 220px;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Светлая тема: чёрный hero только на iOS (как полоса TON-кошелька); на остальных платформах — светлый фон */
+html[data-color-scheme="light"]:not([data-platform="ios"]) .income-hero {
+  background: var(--tg-theme-bg-color, #ffffff);
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .income-hero .income-hero-title {
+  color: #ffffff !important;
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .income-hero .income-hero-subtitle {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .income-hero .income-hero-icon-placeholder {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+.income-hero-icon-placeholder {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tg-theme-hint-color, #8e8e93);
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.income-hero-title {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--tg-theme-text-color, #ffffff);
+  margin: 0;
+}
+
+.income-hero-subtitle {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--tg-theme-hint-color, #8e8e93);
+  margin: 0;
+}
+
+/* Сетка карточек — переиспользуем LGGuk из App.css */
+.income-grid {
+  padding: 16px var(--content-padding-inline, 16px) 24px;
+}
+
+/* Метка «new» — диагональная, светло-голубая, как в референсе */
+.income-new-label,
+.income-grid .income-new-label {
+  align-items: center;
+  color: #fff;
+  display: flex;
+  height: 20px;
+  inset-inline-end: 0;
+  justify-content: center;
+  position: absolute;
+  top: -1px;
+  transform: rotate(45deg) translate(23px, -10px);
+  width: 79px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  text-align: center;
+}
+
+.income-card {
+  position: relative;
+}

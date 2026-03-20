@@ -1,0 +1,204 @@
+/* TonCryptoWalletTransferScreen — перевод из Крипто Кошелька в TON */
+
+.ton-crypto-wallet-transfer-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: calc(44px + env(safe-area-inset-top, 0px)) 24px calc(24px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+  background: var(--tg-theme-bg-color, #ffffff);
+  color: var(--tg-theme-text-color, #000000);
+}
+
+.ton-crypto-wallet-transfer-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.ton-crypto-wallet-transfer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--tg-theme-section-bg-color, #f0f0f0);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--tg-theme-text-color, #000000);
+}
+
+.ton-crypto-wallet-transfer-badge-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+
+.ton-crypto-wallet-transfer-balance {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.ton-crypto-wallet-transfer-amount-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.ton-crypto-wallet-transfer-amount {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 44px;
+  color: var(--tg-theme-text-color, #000000);
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 120px;
+  text-align: left;
+}
+
+.ton-crypto-wallet-transfer-amount::placeholder {
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+
+.ton-crypto-wallet-transfer-currency {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 44px;
+  color: var(--tg-theme-text-color, #000000);
+}
+
+.ton-crypto-wallet-transfer-rate {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+
+.ton-crypto-wallet-transfer-swap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+
+.ton-crypto-wallet-transfer-swap:hover {
+  color: var(--tg-theme-button-color, #2481cc);
+}
+
+.ton-crypto-wallet-transfer-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: var(--tg-theme-bg-color, #ffffff);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 72px;
+  z-index: 10;
+}
+
+.ton-crypto-wallet-transfer-bar-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tg-theme-button-color, #2481cc);
+  border-radius: 50%;
+}
+
+.ton-crypto-wallet-transfer-bar-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.ton-crypto-wallet-transfer-bar-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.ton-crypto-wallet-transfer-bar-balance {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--tg-theme-text-color, #000000);
+}
+
+.ton-crypto-wallet-transfer-select-asset {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--tg-theme-button-color, #2481cc);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  margin-top: 2px;
+}
+
+.ton-crypto-wallet-transfer-topup {
+  flex-shrink: 0;
+  padding: 10px 16px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #ffffff;
+  background: var(--tg-theme-button-color, #2481cc);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.ton-crypto-wallet-transfer-footer {
+  position: fixed;
+  left: 24px;
+  right: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  z-index: 11;
+}
+
+.ton-crypto-wallet-transfer-next {
+  width: 100%;
+  padding: 14px 24px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  color: #ffffff;
+  background: var(--tg-theme-hint-color, #8e8e93);
+  border: none;
+  border-radius: 12px;
+  cursor: not-allowed;
+  transition: background 0.2s;
+}
+
+.ton-crypto-wallet-transfer-next:not(:disabled) {
+  background: var(--tg-theme-button-color, #2481cc);
+  cursor: pointer;
+}
+
+.ton-crypto-wallet-transfer-next:not(:disabled):hover {
+  opacity: 0.9;
+}

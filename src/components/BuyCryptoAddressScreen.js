@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import QRCodeStyling from 'qr-code-styling';
-import { IconEthereum, IconSolana, IconToncoin, IconTron } from '../svg-icons.jsx';
+import { IconArbitrum, IconEthereum, IconPol, IconSolana, IconToncoin, IconTron } from '../svg-icons.jsx';
 import './BuyCryptoAddressScreen.css';
 
 const ADDRESS_BY_ASSET_NETWORK = {
@@ -8,6 +8,18 @@ const ADDRESS_BY_ASSET_NETWORK = {
     trc20: 'TSRfDaDkKVpPfqSwm7shCzN9vLdhuYcz2c',
     ton: 'UQBn0VppkjvVFhMWOg98lGcXiUgEmQBiHLDjf_UfeuSwoswz',
     sol: 'BeYk7iFRwDHep2SREhr6pMjr2Pdu11GiAbrNwSk81Hoa',
+    erc20: '0xe50EDF6E39B5c588EfA783d92224426146698EB8',
+    bep20: '0xe50EDF6E39B5c588EfA783d92224426146698EB8',
+    polygon: '0xe50EDF6E39B5c588EfA783d92224426146698EB8',
+    arb: '0xe50EDF6E39B5c588EfA783d92224426146698EB8',
+  },
+  USDC: {
+    trc20: 'TSRfDaDkKVpPfqSwm7shCzN9vLdhuYcz2c',
+    ton: 'UQBn0VppkjvVFhMWOg98lGcXiUgEmQBiHLDjf_UfeuSwoswz',
+    sol: 'BeYk7iFRwDHep2SREhr6pMjr2Pdu11GiAbrNwSk81Hoa',
+    base: '0xe50EDF6E39B5c588EfA783d92224426146698EB8',
+    polygon: '0xe50EDF6E39B5c588EfA783d92224426146698EB8',
+    arb: '0xe50EDF6E39B5c588EfA783d92224426146698EB8',
     erc20: '0xe50EDF6E39B5c588EfA783d92224426146698EB8',
   },
   TON: {
@@ -144,22 +156,138 @@ function QrWithHole({ value, size = 180 }) {
   return <div ref={containerRef} className="buy-crypto-address-qr-canvas" />;
 }
 
+/** TON-кошелёк: в центре QR — аватар Telegram (как «Внешний кошелёк»), не иконки токена/сети */
+function QrWithTelegramAvatar({ value, size = 188, avatarUrl }) {
+  const containerRef = useRef(null);
+  const [qrColor, setQrColor] = useState(() => getQrForegroundColor());
+  const [qrHoleImage, setQrHoleImage] = useState(() => getCenterHoleImage(getQrHoleColor()));
+  const [avatarError, setAvatarError] = useState(false);
+  const showAvatar = Boolean(avatarUrl) && !avatarError;
+
+  useEffect(() => {
+    setAvatarError(false);
+  }, [avatarUrl]);
+
+  useEffect(() => {
+    if (typeof document === 'undefined') return undefined;
+    const root = document.documentElement;
+    const observer = new MutationObserver(() => {
+      setQrColor(getQrForegroundColor());
+      setQrHoleImage(getCenterHoleImage(getQrHoleColor()));
+    });
+    observer.observe(root, { attributes: true, attributeFilter: ['data-color-scheme'] });
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    const qr = new QRCodeStyling({
+      width: size,
+      height: size,
+      type: 'svg',
+      data: value || '',
+      margin: 0,
+      qrOptions: {
+        errorCorrectionLevel: 'M',
+      },
+      dotsOptions: {
+        color: qrColor,
+        type: 'rounded',
+      },
+      backgroundOptions: {
+        color: 'transparent',
+      },
+      cornersSquareOptions: {
+        color: qrColor,
+        type: 'extra-rounded',
+      },
+      cornersDotOptions: {
+        color: qrColor,
+        type: 'square',
+      },
+      image: qrHoleImage,
+      imageOptions: {
+        hideBackgroundDots: true,
+        imageSize: 0.28,
+        margin: 4,
+        crossOrigin: 'anonymous',
+      },
+    });
+
+    qr.append(container);
+
+    return () => {
+      container.innerHTML = '';
+    };
+  }, [value, size, qrColor, qrHoleImage]);
+
+  return (
+    <>
+      <div ref={containerRef} className="buy-crypto-address-qr-canvas" />
+      <div className="buy-crypto-address-qr-avatar-shell">
+        {showAvatar ? (
+          <img
+            src={avatarUrl}
+            alt=""
+            className="buy-crypto-address-qr-avatar"
+            onError={() => setAvatarError(true)}
+          />
+        ) : (
+          <div className="buy-crypto-address-qr-avatar-fallback" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="20" r="20" fill="var(--tg-theme-button-color, #2481cc)" />
+              <path
+                fill="#fff"
+                d="M20 18a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-4 0-8 2-8 4v2h16v-2c0-2-4-4-8-4z"
+              />
+            </svg>
+          </div>
+        )}
+      </div>
+    </>
+  );
+}
+
+const IconBase = ({ size = 16 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 40 40" fill="none">
+    <rect width="40" height="40" fill="#0052FF" rx="20" />
+  </svg>
+);
+
+const IconBsc = ({ size = 16 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 40 40" fill="none">
+    <rect width="40" height="40" fill="#F3BA2F" rx="20" />
+    <path fill="#fff" d="M12.5 17.2L20 9.7l7.5 7.5 4.4-4.4L20 1 8.1 12.9l4.4 4.3zm-4.4 5.6L20 30.3l7.5-7.5 4.4 4.4L20 39 8.1 27.1l4.4-4.3zm27.8-5.6L20 30.3 8.1 18.4l1.5-1.5L20 27.3l10.4-10.4 1.5 1.5z" />
+  </svg>
+);
+
 function NetworkBadgeIcon({ assetCode, networkId, size = 16 }) {
-  if (assetCode !== 'USDT') return null;
+  if (assetCode !== 'USDT' && assetCode !== 'USDC') return null;
   if (networkId === 'trc20') return <IconTron size={size} />;
   if (networkId === 'ton') return <IconToncoin size={size} />;
   if (networkId === 'sol') return <IconSolana size={size} />;
   if (networkId === 'erc20') return <IconEthereum size={size} />;
+  if (networkId === 'bep20') return <IconBsc size={size} />;
+  if (networkId === 'base') return <IconBase size={size} />;
+  if (networkId === 'polygon') return <IconPol size={size} />;
+  if (networkId === 'arb') return <IconArbitrum size={size} />;
   return null;
 }
 
-function BuyCryptoAddressScreen({ asset, network }) {
+function BuyCryptoAddressScreen({ asset, network, useTelegramAvatarQr = false }) {
   const [copied, setCopied] = useState(false);
   const assetCode = String(asset?.code || '').toUpperCase();
   const networkId = String(network?.id || '').toLowerCase();
   const networkTitle = String(network?.title || '').toUpperCase();
   const networkBadge = NetworkBadgeIcon({ assetCode, networkId, size: 16 });
   const showNetworkBadge = assetCode === 'USDT' && Boolean(networkBadge);
+
+  const tg = typeof window !== 'undefined' && (window.Telegram?.WebApp || window.telegram?.webapp);
+  const userPhotoUrl = useTelegramAvatarQr ? tg?.initDataUnsafe?.user?.photo_url || null : null;
 
   const address = useMemo(() => getAddress(assetCode, networkId), [assetCode, networkId]);
 
@@ -190,23 +318,31 @@ function BuyCryptoAddressScreen({ asset, network }) {
       <p className="buy-crypto-address-warning">{warningText}</p>
 
       <section className="buy-crypto-address-qr-card">
-        <div className="buy-crypto-address-qr-wrap">
-          <QrWithHole value={address} size={188} />
+        <div
+          className={`buy-crypto-address-qr-wrap${useTelegramAvatarQr ? ' buy-crypto-address-qr-wrap--telegram-avatar' : ''}`}
+        >
+          {useTelegramAvatarQr ? (
+            <QrWithTelegramAvatar value={address} size={188} avatarUrl={userPhotoUrl} />
+          ) : (
+            <>
+              <QrWithHole value={address} size={188} />
 
-          <div className="buy-crypto-address-qr-logo-shell">
-            <div className="buy-crypto-address-qr-logo-main">
-              {assetCode === 'USDT' ? (
-                <QrTetherIcon size={38} />
-              ) : asset?.icon ? (
-                <span className="buy-crypto-address-qr-logo-asset-icon">{asset.icon}</span>
-              ) : (
-                <span className="buy-crypto-address-qr-logo-main-text">
-                  {assetCode || 'TOKEN'}
-                </span>
-              )}
-            </div>
-            {showNetworkBadge ? <div className="buy-crypto-address-qr-logo-badge">{networkBadge}</div> : null}
-          </div>
+              <div className="buy-crypto-address-qr-logo-shell">
+                <div className="buy-crypto-address-qr-logo-main">
+                  {assetCode === 'USDT' ? (
+                    <QrTetherIcon size={38} />
+                  ) : asset?.icon ? (
+                    <span className="buy-crypto-address-qr-logo-asset-icon">{asset.icon}</span>
+                  ) : (
+                    <span className="buy-crypto-address-qr-logo-main-text">
+                      {assetCode || 'TOKEN'}
+                    </span>
+                  )}
+                </div>
+                {showNetworkBadge ? <div className="buy-crypto-address-qr-logo-badge">{networkBadge}</div> : null}
+              </div>
+            </>
+          )}
         </div>
         <p className="buy-crypto-address-qr-caption">
           Отсканируйте QR-код

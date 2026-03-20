@@ -63,6 +63,15 @@ html:not([data-platform="ios"]) .tab-bar-root.Zr9ao {
   overflow: hidden;
 }
 
+/* TON режим: 3 вкладки вместо 4 */
+.KaTw3[data-tabs-count="3"] {
+  --tab-row-inner: calc(100% - 2 * var(--container-padding) - 2 * var(--tab-spacing));
+  --tab-cell-width: calc(var(--tab-row-inner) / 3);
+}
+.KaTw3[data-tabs-count="3"] .yEKB7 {
+  grid-template-columns: minmax(0, 1fr) 8px minmax(0, 1fr) 8px minmax(0, 1fr);
+}
+
 /* Desktop (non-iOS): более компактный liquid-glass */
 html:not([data-platform="ios"]) .KaTw3 {
   --container-padding: 3px;
@@ -101,6 +110,34 @@ html:not([data-platform="ios"]) .KaTw3 {
     background: color-mix(in srgb, var(--tg-theme-section-bg-color, #2c2c2e) 62%, transparent);
     border-color: color-mix(in srgb, var(--tg-theme-text-color, #fff) 12%, transparent);
   }
+}
+
+/* TON режим: 3 вкладки вместо 4 */
+.KaTw3[data-tabs-count="3"] {
+  --tab-row-inner: calc(100% - 2 * var(--container-padding) - 2 * var(--tab-spacing));
+  --tab-cell-width: calc(var(--tab-row-inner) / 3);
+}
+
+.KaTw3[data-tabs-count="3"] + * .yEKB7,
+.KaTw3[data-tabs-count="3"] ~ .yEKB7 { display: none; }
+/* Переопределяем grid через родителя — yEKB7 внутри KaTw3 */
+.KaTw3[data-tabs-count="3"] .yEKB7 {
+  grid-template-columns: minmax(0, 1fr) 8px minmax(0, 1fr) 8px minmax(0, 1fr);
+}
+
+.KaTw3[data-tabs-count="3"] .o7k40:nth-child(1) { grid-column: 1; }
+.KaTw3[data-tabs-count="3"] .o7k40:nth-child(2) { grid-column: 3; }
+.KaTw3[data-tabs-count="3"] .o7k40:nth-child(3) { grid-column: 5; }
+
+/* TON-режим: 3 вкладки (TON Кошелёк, Обмен, Доход) */
+.KaTw3[data-tabs-count="3"] {
+  --tab-row-inner: calc(100% - 2 * var(--container-padding) - 2 * var(--tab-spacing));
+  --tab-cell-width: calc(var(--tab-row-inner) / 3);
+}
+
+.KaTw3[data-tabs-count="3"] ~ .yEKB7,
+.KaTw3[data-tabs-count="3"] .yEKB7 {
+  grid-template-columns: minmax(0, 1fr) 8px minmax(0, 1fr) 8px minmax(0, 1fr);
 }
 
 /* Скользящий индикатор: 4px от краёв навигатора (сверху, снизу, слева, справа) */
@@ -156,6 +193,21 @@ html:not([data-platform="ios"]) .KaTw3 {
   width: 100%;
   min-width: 0;
 }
+
+/* TON-режим: 3 вкладки (TON Кошелёк, Обмен, Доход) */
+.KaTw3[data-tabs-count="3"] {
+  --tab-row-inner: calc(100% - 2 * var(--container-padding) - 2 * var(--tab-spacing));
+  --tab-cell-width: calc(var(--tab-row-inner) / 3);
+}
+
+.KaTw3[data-tabs-count="3"] .yEKB7 {
+  grid-template-columns: minmax(0, 1fr) 8px minmax(0, 1fr) 8px minmax(0, 1fr);
+}
+
+.KaTw3[data-tabs-count="3"] .o7k40:nth-child(1) { grid-column: 1; }
+.KaTw3[data-tabs-count="3"] .o7k40:nth-child(2) { grid-column: 3; }
+.KaTw3[data-tabs-count="3"] .o7k40:nth-child(3) { grid-column: 5; }
+.KaTw3[data-tabs-count="3"] .o7k40:nth-child(4) { display: none; }
 
 /* Один таб: иконка 28 + gap 4 + текст 14 + padding — без обрезки подписи */
 .o7k40 {
@@ -224,13 +276,35 @@ html:not([data-platform="ios"]) .o7k40 {
   max-width: 100%;
 }
 
-/* Иконки наследуют цвет текста */
-.wallet-lottie_fill-color path,
-.FJOWj .wallet-lottie_fill-color path {
-  fill: currentColor;
+/* Иконки наследуют цвет текста (атрибут fill из Lottie — через !important) */
+.tab-bar-root.Zr9ao .wallet-lottie_fill-color path,
+.tab-bar-root.Zr9ao .FJOWj .wallet-lottie_fill-color path,
+.tab-bar-root.Zr9ao .wallet-lottie_fill-color rect,
+.tab-bar-root.Zr9ao .FJOWj .wallet-lottie_fill-color rect {
+  fill: currentColor !important;
 }
 
-.wallet-lottie_stroke-color path,
-.FJOWj .wallet-lottie_stroke-color path {
-  stroke: currentColor;
+.tab-bar-root.Zr9ao .wallet-lottie_stroke-color path,
+.tab-bar-root.Zr9ao .FJOWj .wallet-lottie_stroke-color path {
+  stroke: currentColor !important;
+}
+
+/* TON-навбар: уже на 70–80px, цвет SVG/надписей при active, выделение — ниже opacity */
+.tab-bar-root--ton .QgRSk {
+  max-width: calc(100% - 80px);
+  margin-inline: auto;
+}
+.tab-bar-root--ton .o7k40 {
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+.tab-bar-root--ton .o7k40.active {
+  color: var(--tg-theme-button-color, #007aff);
+}
+.tab-bar-root--ton .nK_WK.tab-bar-pill {
+  background: rgba(135, 116, 225, 0.16);
+}
+@supports (color: color-mix(in srgb, red, blue 50%)) {
+  .tab-bar-root--ton .nK_WK.tab-bar-pill {
+    background: color-mix(in srgb, var(--tg-theme-button-color, #8774e1) 16%, transparent);
+  }
 }

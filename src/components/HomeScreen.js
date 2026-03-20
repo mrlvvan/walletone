@@ -2,6 +2,7 @@ import AssetsSection from "./AssetsSection";
 import ListRow from "./ListRow";
 import PromoSlider from "./PromoSlider";
 import TrendingSection from "./TrendingSection";
+import TonWalletContent from "./TonWalletContent";
 import WalletActions from "./WalletActions";
 import WalletHero from "./WalletHero";
 
@@ -12,6 +13,9 @@ function HomeScreen({
   cryptoTotal,
   promoSlides,
   trendingItems,
+  tonWalletData,
+  walletTab,
+  onWalletTabChange,
   onOpenAsset,
   onOpenTrade,
   onTransfer,
@@ -19,9 +23,19 @@ function HomeScreen({
   onWithdraw,
   onSwap,
 }) {
+  const isTon = walletTab === 'ton';
   return (
     <>
-      <WalletHero stats={walletStats} />
+      <WalletHero activeTab={walletTab} onTabChange={onWalletTabChange} stats={walletStats} />
+      {isTon ? (
+        <TonWalletContent
+          {...tonWalletData}
+          onTransfer={onTransfer}
+          onAddDeposit={onAddDeposit}
+          onWithdraw={onWithdraw}
+        />
+      ) : (
+        <>
       <WalletActions onTransfer={onTransfer} onAddDeposit={onAddDeposit} onWithdraw={onWithdraw} onSwap={onSwap} />
       <div className="section-gap" aria-hidden="true" />
       <PromoSlider slides={promoSlides.slice(0, 1)} />
@@ -169,6 +183,8 @@ function HomeScreen({
       <div className="section-gap" />
       <div className="section-gap" />
       <div className="section-gap" />
+        </>
+      )}
     </>
   );
 }

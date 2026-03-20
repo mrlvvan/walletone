@@ -1623,7 +1623,7 @@
 /* Секция «Все активы» — размер заголовка как у «Продукты», «Посмотреть все» — цвет как в «Топ дня» */
 .CgUOn.lKYcT .Rfm73 {
   justify-content: space-between;
-  width: 100%;
+  width: 93%;
   padding-block: 20px 4px;
   padding-inline: 20px;
   box-sizing: border-box;
@@ -1756,21 +1756,32 @@
 
 .CgUOn.lKYcT .f5GTj .jOCse.NXXwZ {
   align-items: flex-start;
-  gap: 4px;
+  gap: 0;
   min-width: 0;
 }
 
 .CgUOn.lKYcT .f5GTj .jOCse.NXXwZ .cpHhd.IqPae.CF5m5.Ka5fP.kzP3J {
   margin: 0;
   padding: 0;
+  line-height: 1.2;
 }
 
 .CgUOn.lKYcT .f5GTj .jOCse.NXXwZ .cpHhd.YLSRc.PmUAN.Fx5Cf.Bgj6A,
 .CgUOn.lKYcT .f5GTj .jOCse.NXXwZ .cpHhd.YLSRc.PmUAN.Fx5Cf.Bgj6A.mdnGg {
-  margin: 0;
+  margin: 2px 0 0 0;
   padding: 0;
-  line-height: 18px;
+  line-height: 1.2;
   align-self: flex-start;
+}
+
+/* Ваши токены — компактнее */
+.CgUOn.lKYcT.your-tokens-section .f5GTj {
+  gap: 6px;
+}
+
+.CgUOn.lKYcT.your-tokens-section .f5GTj .jOCse.NXXwZ .cpHhd.YLSRc.PmUAN.Fx5Cf.Bgj6A,
+.CgUOn.lKYcT.your-tokens-section .f5GTj .jOCse.NXXwZ .cpHhd.YLSRc.PmUAN.Fx5Cf.Bgj6A.mdnGg {
+  margin: 0;
 }
 
 .CgUOn.lKYcT .f5GTj .jOCse.NXXwZ .mdnGg {

@@ -11,6 +11,8 @@ function ExchangeCurrencyPicker({
   showYieldBadge = true,
   popularIds: popularIdsProp,
   showAllSection = true,
+  customSections,
+  searchPlaceholder = 'Поиск',
 }) {
   const searchInputRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -35,22 +37,35 @@ function ExchangeCurrencyPicker({
     };
   }, [onClose]);
 
-  const filtered = cryptoAssets.filter((item) => {
+  const filterBySearch = (items) => {
     const q = (searchQuery || '').trim().toLowerCase();
-    if (!q) return true;
-    const name = (item.name || '').toLowerCase();
-    const code = (item.code || '').toLowerCase();
-    return name.includes(q) || code.includes(q);
-  });
+    if (!q) return items;
+    return items.filter((item) => {
+      const name = (item.name || '').toLowerCase();
+      const code = (item.code || '').toLowerCase();
+      return name.includes(q) || code.includes(q);
+    });
+  };
 
-  const byPopularOrder = new Map(popularIds.map((id, idx) => [id, idx]));
-  const popularAssets = filtered
-    .filter((item) => popularIds.includes((item.id || '').toLowerCase()))
-    .sort((a, b) => (byPopularOrder.get((a.id || '').toLowerCase()) ?? 999) - (byPopularOrder.get((b.id || '').toLowerCase()) ?? 999));
-  const otherAssets = filtered.filter((item) => !popularIds.includes((item.id || '').toLowerCase()));
-  const sections = showAllSection
-    ? [{ title: 'Популярные', items: popularAssets }, { title: 'Все', items: otherAssets }]
-    : [{ title: 'Популярные', items: filtered }];
+  const sections = customSections
+    ? customSections.map((s) => ({ ...s, items: filterBySearch(s.items) }))
+    : (() => {
+        const filtered = cryptoAssets.filter((item) => {
+          const q = (searchQuery || '').trim().toLowerCase();
+          if (!q) return true;
+          const name = (item.name || '').toLowerCase();
+          const code = (item.code || '').toLowerCase();
+          return name.includes(q) || code.includes(q);
+        });
+        const byPopularOrder = new Map(popularIds.map((id, idx) => [id, idx]));
+        const popularAssets = filtered
+          .filter((item) => popularIds.includes((item.id || '').toLowerCase()))
+          .sort((a, b) => (byPopularOrder.get((a.id || '').toLowerCase()) ?? 999) - (byPopularOrder.get((b.id || '').toLowerCase()) ?? 999));
+        const otherAssets = filtered.filter((item) => !popularIds.includes((item.id || '').toLowerCase()));
+        return showAllSection
+          ? [{ title: 'Популярные', items: popularAssets }, { title: 'Все', items: otherAssets }]
+          : [{ title: 'Популярные', items: filtered }];
+      })();
 
   return (
     <div className="FhO5I search-overlay-open">
@@ -90,7 +105,7 @@ function ExchangeCurrencyPicker({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
-                  <div className="TlsKl">Поиск</div>
+                  <div className="TlsKl">{searchPlaceholder}</div>
                   <div className="V2GJs" aria-hidden="true">
                     <button
                       type="button"
@@ -113,9 +128,9 @@ function ExchangeCurrencyPicker({
           <div className="wtAUk Rmex8" data-scroll-restoration-id="ExchangeCurrencyPicker">
             <div className="DTT0W yPGCL">
               {sections.map(
-                ({ title, items }) =>
+                ({ title, items, showBalance }) =>
                   items.length > 0 ? (
-                    <section className="oJKLh LySHd iXSn4 CgUOn lKYcT" key={title}>
+                    <section className={`oJKLh LySHd iXSn4 CgUOn lKYcT${showBalance ? ' your-tokens-section' : ''}`} key={title}>
                       <div className="JNQMw">
                         <div className="Rfm73 ZR_ns umRMK kJf7o">
                           <div className="cpHhd YLSRc CF5m5 Ka5fP">{title}</div>
@@ -126,6 +141,7 @@ function ExchangeCurrencyPicker({
                               const changeStr = (item.change || '').trim();
                               const isNegative = changeStr.startsWith('↓') || changeStr.startsWith('-');
                               const changeValue = changeStr.replace(/^[-+]\s?/, '').replace(/^↓\s?/, '').replace(/^↑\s?/, '');
+                              const hasBalance = item.balanceRub || item.balanceCrypto;
 
                               return (
                                 <div className="tSWgK" key={item.id}>
@@ -147,7 +163,23 @@ function ExchangeCurrencyPicker({
                                           <div className="cpHhd IqPae CF5m5 Ka5fP kzP3J">
                                             <span>{item.name}</span>
                                           </div>
-                                          {showYieldBadge && item.badge ? (
+                                          {hasBalance ? (
+                                            <div className="cpHhd YLSRc PmUAN Fx5Cf Bgj6A mdnGg">
+                                              {showPriceAndChange && (item.price || item.change) ? (
+                                                <>
+                                                  {item.price ? <span>{item.price}</span> : null}
+                                                  {item.change ? (
+                                                    <span className={isNegative ? 'pPUsT' : 'WXss8'} style={{ marginLeft: 4 }}>
+                                                      <span className="G4GF9" aria-hidden="true">
+                                                        {isNegative ? <IconChangeDown size={12} /> : <IconChangeUp size={12} />}
+                                                      </span>
+                                                      {changeValue}
+                                                    </span>
+                                                  ) : null}
+                                                </>
+                                              ) : null}
+                                            </div>
+                                          ) : showYieldBadge && item.badge ? (
                                             <div className="cpHhd YLSRc PmUAN Fx5Cf Bgj6A mdnGg">
                                               <span>{item.code}</span>
                                               <div className="cpHhd LMb8t CF5m5 jJi8N VbUp4 tej97">
@@ -158,25 +190,43 @@ function ExchangeCurrencyPicker({
                                             <div className="cpHhd YLSRc PmUAN Fx5Cf Bgj6A">{item.code}</div>
                                           )}
                                         </div>
-                                        {showPriceAndChange ? (
+                                        {!hasBalance && showPriceAndChange && (item.price || item.change) ? (
                                           <div className="eslGw CFakS">
                                             <div className="jOCse TYgZR Gihoq">
-                                              <div className="cpHhd IqPae PmUAN Ka5fP kzP3J VyspS">
-                                                <span>{item.price}</span>
-                                              </div>
-                                              <div className="cpHhd YLSRc PmUAN Fx5Cf Bgj6A">
-                                                <div
-                                                  className={`cpHhd YLSRc PmUAN ku6Sb G5Dxc ${
-                                                    isNegative ? 'pPUsT' : 'WXss8'
-                                                  }`}
-                                                >
-                                                  <span className="G4GF9" aria-hidden="true">
-                                                    {isNegative ? <IconChangeDown size={12} /> : <IconChangeUp size={12} />}
-                                                  </span>
-                                                  {changeValue}
+                                              {item.price ? (
+                                                <div className="cpHhd IqPae PmUAN Ka5fP kzP3J VyspS">
+                                                  <span>{item.price}</span>
                                                 </div>
-                                              </div>
+                                              ) : null}
+                                              {item.change ? (
+                                                <div className="cpHhd YLSRc PmUAN Fx5Cf Bgj6A">
+                                                  <div
+                                                    className={`cpHhd YLSRc PmUAN ku6Sb G5Dxc ${
+                                                      isNegative ? 'pPUsT' : 'WXss8'
+                                                    }`}
+                                                  >
+                                                    <span className="G4GF9" aria-hidden="true">
+                                                      {isNegative ? <IconChangeDown size={12} /> : <IconChangeUp size={12} />}
+                                                    </span>
+                                                    {changeValue}
+                                                  </div>
+                                                </div>
+                                              ) : null}
                                             </div>
+                                          </div>
+                                        ) : null}
+                                        {hasBalance ? (
+                                          <div className="eslGw CFakS" style={{ marginLeft: 'auto', marginRight: 16, paddingRight: 16, textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: showBalance ? 2 : 6 }}>
+                                            {item.balanceRub ? (
+                                              <div className="cpHhd IqPae PmUAN Ka5fP kzP3J VyspS">
+                                                {item.balanceRub}
+                                              </div>
+                                            ) : null}
+                                            {item.balanceCrypto ? (
+                                              <div className="cpHhd YLSRc PmUAN Fx5Cf Bgj6A">
+                                                {item.balanceCrypto}
+                                              </div>
+                                            ) : null}
                                           </div>
                                         ) : null}
                                       </div>

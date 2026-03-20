@@ -1,14 +1,27 @@
-function WalletHero({ stats }) {
+function WalletHero({ stats, activeTab = 'crypto', onTabChange }) {
   return (
-    <section className="wallet-hero">
-      <div className="wallet-tabs">
-        <button className="tab-chip active" type="button">
+    <section className={`wallet-hero ${activeTab === 'ton' ? 'wallet-hero--tabs-only' : ''}`}>
+      <div className="wallet-tabs" role="tablist">
+        <button
+          className={`tab-chip ${activeTab === 'crypto' ? 'active' : ''}`}
+          type="button"
+          role="tab"
+          aria-selected={activeTab === 'crypto'}
+          onClick={() => onTabChange?.('crypto')}
+        >
           Крипто
         </button>
-        <button className="tab-chip" type="button">
+        <button
+          className={`tab-chip ${activeTab === 'ton' ? 'active' : ''}`}
+          type="button"
+          role="tab"
+          aria-selected={activeTab === 'ton'}
+          onClick={() => onTabChange?.('ton')}
+        >
           TON
         </button>
       </div>
+      {activeTab === 'crypto' && (
       <div className="wallet-balance">
         <div className="balance-label">Баланс</div>
         <div className="balance-amount large">
@@ -43,6 +56,7 @@ function WalletHero({ stats }) {
           <span className="balance-period">{stats.period}</span>
         </div>
       </div>
+      )}
     </section>
   );
 }

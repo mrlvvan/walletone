@@ -565,7 +565,7 @@
 
 .asset-scroll-tail {
   height: 72px;
-  background:var(--tg-theme-bg-color, #212121);
+  background: var(--tg-theme-bg-color, #212121);
 }
 
 

@@ -130,4 +130,5 @@ html:not([data-platform="ios"]) .wallet-actions .action-icon svg,
 html:not([data-platform="ios"]) .wallet-actions .action-icon svg path {
   fill: currentColor !important;
   stroke: currentColor !important;
+  stroke-width: 0px;
 }

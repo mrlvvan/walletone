@@ -1,0 +1,358 @@
+/* TON кошелёк: пополнение BTC/ETH/SOL → конвертация в TON (референс swaps) */
+
+.ton-other-crypto-deposit {
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+  box-sizing: border-box;
+  background: var(--tg-theme-secondary-bg-color, #efefef);
+  color: var(--tg-theme-text-color, #1c1c1e);
+  font-family: system-ui, -apple-system, Roboto, sans-serif;
+}
+
+.ton-other-crypto-deposit-scroll {
+  padding: calc(12px + env(safe-area-inset-top, 0px)) 16px
+    calc(88px + env(safe-area-inset-bottom, 0px));
+  box-sizing: border-box;
+}
+
+.ton-other-crypto-deposit-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.ton-other-crypto-deposit-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  padding-left: 28px;
+}
+
+.ton-other-crypto-deposit-icons--single {
+  padding-left: 0;
+}
+
+.ton-other-crypto-deposit-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid var(--tg-theme-secondary-bg-color, #efefef);
+  background: var(--tg-theme-bg-color, #fff);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.ton-other-crypto-deposit-icon--from svg {
+  width: 72px;
+  height: 72px;
+  display: block;
+}
+
+.ton-other-crypto-deposit-icon--ton svg {
+  width: 72px;
+  height: 72px;
+  display: block;
+}
+
+.ton-other-crypto-deposit-icon--from {
+  z-index: 1;
+}
+
+.ton-other-crypto-deposit-icon--ton {
+  margin-left: -28px;
+  z-index: 2;
+}
+
+.ton-other-crypto-deposit-icon--single svg {
+  width: 72px;
+  height: 72px;
+  display: block;
+}
+
+.ton-other-crypto-deposit-titles {
+  margin-bottom: 8px;
+}
+
+.ton-other-crypto-deposit-line {
+  margin: 0;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+  color: var(--tg-theme-text-color, #000);
+}
+
+.ton-other-crypto-deposit-code {
+  font-weight: 600;
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+
+.ton-other-crypto-deposit-sub {
+  font-weight: 600;
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+
+.ton-other-crypto-deposit-rate {
+  margin: 0;
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+
+.ton-other-crypto-deposit-card {
+  background: var(--tg-theme-bg-color, #ffffff);
+  border-radius: 16px;
+  padding: 16px 14px 14px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+.ton-other-crypto-deposit-card-label {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--tg-theme-hint-color, #8e8e93);
+  margin-bottom: 8px;
+}
+
+.ton-other-crypto-deposit-address {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 14px;
+  line-height: 20px;
+  word-break: break-all;
+  color: var(--tg-theme-text-color, #1c1c1e);
+  margin-bottom: 14px;
+}
+
+.ton-other-crypto-deposit-actions {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.ton-other-crypto-deposit-copy {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 12px;
+  background: var(--tg-theme-button-color, #2481cc);
+  color: var(--tg-theme-button-text-color, #ffffff);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ton-other-crypto-deposit-copy svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.ton-other-crypto-deposit-copy:active {
+  opacity: 0.92;
+}
+
+.ton-other-crypto-deposit-qr-btn {
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  background: var(--tg-theme-secondary-bg-color, #e8e8e8);
+  color: var(--tg-theme-text-color, #1c1c1e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.ton-other-crypto-deposit-qr-btn svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+.ton-other-crypto-deposit-qr-btn:active {
+  opacity: 0.9;
+}
+
+.ton-other-crypto-deposit-info {
+  background: var(--tg-theme-bg-color, #ffffff);
+  border-radius: 16px;
+  padding: 14px 14px 12px;
+  margin-bottom: 0;
+}
+
+.ton-other-crypto-deposit-legal {
+  margin: 16px 0 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--tg-theme-hint-color, #8e8e93);
+  text-align: center;
+}
+
+.ton-other-crypto-deposit-legal a {
+  color: var(--tg-theme-link-color, #2481cc);
+  text-decoration: none;
+}
+
+.ton-other-crypto-deposit-info-title {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--tg-theme-hint-color, #6d6d72);
+}
+
+.ton-other-crypto-deposit-info-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ton-other-crypto-deposit-info-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--tg-theme-text-color, #1c1c1e);
+}
+
+.ton-other-crypto-deposit-info-item:last-child {
+  margin-bottom: 0;
+}
+
+.ton-other-crypto-deposit-info-item strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--tg-theme-text-color, #000);
+}
+
+.ton-other-crypto-deposit-info-item p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 17px;
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+
+.ton-other-crypto-deposit-info-icon-wrap {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tg-theme-hint-color, #aeaeb2);
+}
+
+.ton-other-crypto-deposit-info-icon-wrap svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.ton-other-crypto-deposit-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: var(--tg-theme-secondary-bg-color, #efefef);
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+}
+
+.ton-other-crypto-deposit-home {
+  width: 100%;
+  min-height: 50px;
+  border: none;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--tg-theme-button-color, #2481cc) 18%, transparent);
+  color: var(--tg-theme-button-color, #2481cc);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+.ton-other-crypto-deposit-home:active {
+  opacity: 0.9;
+}
+
+.ton-other-crypto-deposit-qr-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.ton-other-crypto-deposit-qr-close {
+  margin-bottom: 16px;
+  border: none;
+  background: var(--tg-theme-bg-color, #fff);
+  color: var(--tg-theme-link-color, #2481cc);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.ton-other-crypto-deposit-qr-sheet {
+  background: var(--tg-theme-bg-color, #fff);
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.ton-other-crypto-deposit-qr-canvas {
+  width: 220px;
+  height: 220px;
+}
+
+.ton-other-crypto-deposit-qr-canvas > svg,
+.ton-other-crypto-deposit-qr-canvas > canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* Тёмная тема Telegram */
+html[data-color-scheme='dark'] .ton-other-crypto-deposit {
+  background: var(--tg-theme-bg-color, #1c1c1e);
+}
+
+html[data-color-scheme='dark'] .ton-other-crypto-deposit-card,
+html[data-color-scheme='dark'] .ton-other-crypto-deposit-info,
+html[data-color-scheme='dark'] .ton-other-crypto-deposit-icon {
+  background: var(--tg-theme-section-bg-color, #2c2c2e);
+}
+
+html[data-color-scheme='dark'] .ton-other-crypto-deposit-icon {
+  border-color: var(--tg-theme-bg-color, #1c1c1e);
+}
+
+html[data-color-scheme='dark'] .ton-other-crypto-deposit-qr-btn {
+  background: var(--tg-theme-section-bg-color, #3a3a3c);
+  color: var(--tg-theme-text-color, #fff);
+}
+
+html[data-color-scheme='dark'] .ton-other-crypto-deposit-footer {
+  background: var(--tg-theme-bg-color, #1c1c1e);
+  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.06);
+}

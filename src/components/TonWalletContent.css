@@ -1,0 +1,677 @@
+/* ========== TonWalletContent.css — TON-кошелёк (вторая вкладка на главной) ========== */
+
+/* TON: общий отступ страницы 12px вместо 16px */
+.content.screen-home:has(.ton-wallet-content) {
+  --content-padding-inline: 12px;
+  /*
+   * Вертикаль между полоской табов (wallet-hero--tabs-only) и блоком ton-wallet-header.
+   * Меняйте только здесь (и при необходимости в ios-overrides) — не копите margin/padding по кускам.
+   * 0 — по потоку; отрицательное — подтянуть контент TON вверх (убрать «лишний» зазор под свой фон).
+   */
+  --ton-hero-to-header-gap: 0px;
+  /* Насколько header заходит под табы, чтобы скрыть шов (раньше было фикс -4px). */
+  --ton-header-overlap-tabs: 4px;
+  padding-inline: 12px !important;
+}
+
+/* Убирает тонкую линию между вкладками и адресом: wallet-hero и ton-wallet-header перекрывают границу */
+.content.screen-home:has(.ton-wallet-content) .wallet-hero.wallet-hero--tabs-only {
+  margin-top: calc(-1 * var(--ton-header-overlap-tabs, 4px));
+  padding-top: var(--ton-header-overlap-tabs, 4px);
+  box-shadow: 0 -4px 0 0 #1b1b1b, 0 6px 0 0 #1b1b1b; /* вверх — padding .content; вниз — перекрывает линию над адресом */
+}
+
+/* Стиль схож с Крипто, но имеет характерные отличия: адрес вместо «Баланс», 3 кнопки и т.д. */
+
+/* Отступ снизу, чтобы TabBar не перекрывал последний контент при скролле */
+.ton-wallet-content {
+  display: flow-root; /* без margin-collapse «сквозь» обёртку к wallet-hero */
+  margin-top: var(--ton-hero-to-header-gap, 0px);
+  background-color: var(--tg-theme-bg-color, #212121);
+  padding-bottom: calc(var(--tabbar-height, 90px) + 8px + var(--safe-area-inset-bottom, 0px));
+}
+
+/* Spacer под TabBar — гарантирует, что TabBar перекрывает только эту зону, а не контент */
+.ton-wallet-tabbar-spacer {
+  min-height: calc(var(--tabbar-height, 90px) + 6px + var(--safe-area-inset-bottom, 0px));
+}
+
+/* Верхняя часть: адрес, баланс, кнопки — тёмный фон на всю ширину (breakout из padding) */
+/* background + ::before — сплошной слой #1b1b1b; overlap — перекрывает линию под вкладками */
+.ton-wallet-content .ton-wallet-header {
+  position: relative;
+  background-color: #1b1b1b;
+  margin-inline: calc(-1 * var(--content-padding-inline, 24px));
+  margin-top: calc(-1 * var(--ton-header-overlap-tabs, 4px));
+  padding-inline: var(--content-padding-inline, 24px);
+  padding-bottom: 0px;
+  box-shadow: 0 -1px 0 0 #1b1b1b, 0 2px 0 0 #1b1b1b; /* сверху и снизу — убирает тонкую линию */
+  margin-bottom: 22px;
+}
+.ton-wallet-content .ton-wallet-header::before {
+  content: '';
+  position: absolute;
+  inset: -20px 0 -20px 0; /* расширяем выше/ниже на 20px чтобы точно перекрыть margin */
+  left: 0;
+  right: 0;
+  background-color: #1b1b1b;
+  z-index: 0;
+}
+.ton-wallet-content .ton-wallet-header > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Первый section-gap после header — прозрачный, фон задаёт .ton-wallet-content (серый под кнопками на iOS) */
+.ton-wallet-header + .section-gap {
+  background-color: transparent;
+}
+
+/* Адрес + копировать */
+.ton-wallet-address-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.ton-wallet-address {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--tg-theme-hint-color, #8e8e93);
+  letter-spacing: 0.02em;
+}
+
+.ton-wallet-address-copy {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  color: var(--tg-theme-hint-color, #8e8e93);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ton-wallet-address-copy:hover {
+  color: var(--tg-theme-text-color);
+}
+
+.ton-wallet-address-copy svg {
+  width: 19px;
+  height: 18px;
+}
+
+/* Баланс */
+.ton-wallet-balance {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.ton-balance-amount.large {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 56px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  color: var(--tg-theme-text-color);
+}
+
+.ton-balance-int { font-size: 44px; font-weight: 500; }
+.ton-balance-sep { font-size: 32px; font-weight: 500; line-height: 40px; }
+.ton-balance-dec { font-size: 32px; font-weight: 500; line-height: 40px; }
+.ton-balance-currency { font-size: 32px; font-weight: 500; opacity: 1; }
+
+.ton-balance-change {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.ton-balance-delta.negative { color: #ff6b6b; }
+.ton-balance-delta.positive { color: #34c759; }
+
+.ton-balance-pill {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ton-balance-pill.negative {
+  background: rgba(255, 107, 107, 0.15);
+  color: #ff6b6b;
+}
+
+.ton-balance-pill.positive {
+  background: rgba(52, 199, 89, 0.15);
+  color: #34c759;
+}
+
+.ton-balance-pill-icon svg { width: 12px; height: 16px; }
+
+.ton-balance-period {
+  color: var(--tg-theme-subtitle-text-color, #8e8e93);
+}
+
+/* Кнопки: Перевести, Пополнить, Вывести — как wallet-actions: на всю ширину контента */
+.ton-wallet-actions {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 8px;
+  padding: 0;
+  margin: 24px 0 0;
+  color: var(--tg-theme-text-color);
+  background: transparent;
+}
+
+/* Плитка кнопок: на iOS --ton-ios-panel-bg с родителя (тёмная тема #2c2c2e); иначе section-bg. */
+.ton-action-item {
+  background: var(--ton-ios-panel-bg, var(--tg-theme-section-bg-color));
+  border: none;
+  color: var(--tg-theme-text-color);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  flex: 1;
+  min-width: 0;
+  padding: 6px 8px;
+  min-height: 46px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.ton-action-item:hover {
+  background: color-mix(in srgb, var(--ton-ios-panel-bg, var(--tg-theme-section-bg-color)) 90%, rgba(255, 255, 255, 0.1));
+}
+
+@supports not (color: color-mix(in srgb, red, blue 50%)) {
+  .ton-action-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.ton-action-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.ton-action-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.ton-action-label {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  color: inherit;
+}
+
+/* Секции — как list-card/section в основе. .ton-wallet-content .ton-card — высокая специфичность,
+ * чтобы переопределить .ton-card из MarketScreen.css (align-items: center, text-align: center). */
+.ton-wallet-content .ton-card {
+  display: block;
+  background: var(--tg-theme-section-bg-color, #212121);
+  border-radius: var(--border-radius-regular);
+  padding: 16px;
+  margin: 0;
+  overflow: hidden;
+  text-align: left;
+}
+
+/* Заголовок секции — всегда по левому краю (переопределяет center от родителя) */
+.ton-card-title {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--tg-theme-section-header-text-color, #8a95a8);
+  text-align: left !important;
+  margin: 8px 0 12px;
+  padding: 0;
+}
+
+/* Завершите настройку */
+
+.ton-setup-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0 0px;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  color: var(--tg-theme-text-color);
+}
+
+.ton-setup-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #faa774;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ton-setup-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.ton-setup-text {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.ton-setup-chevron {
+  color: var(--tg-theme-hint-color);
+  display: flex;
+  align-items: center;
+}
+
+/* Промо USDT — зелёный баннер */
+.ton-promo-banner {
+  min-height: 100px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  position: relative;
+}
+
+.ton-promo-green {
+  background: radial-gradient(204.89% 111.8% at 0% 100%, rgb(3, 191, 97) 0%, rgba(0, 77, 38, 0) 100%), radial-gradient(204.89% 111.8% at 100% 0%, rgb(113, 218, 1) 0%, rgba(0, 77, 38, 0) 100%), rgb(0, 77, 38);
+  color: #ffffff;
+}
+
+.ton-promo-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 2;
+  flex: 1;
+  min-width: 0;
+  max-width: 72%;
+}
+
+.ton-promo-title {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.ton-promo-link {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* SVG поверх баннера справа, на всю ширину и высоту — как в оригинале */
+.ton-promo-art {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+.ton-promo-art-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right center;
+}
+
+.ton-promo-apy {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.2;
+}
+
+.ton-promo-dots {
+  display: none; /* точки убраны */
+}
+
+.ton-promo-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.ton-promo-dot.active {
+  background: #ffffff;
+}
+
+.ton-promo-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* Токены — контент как в «Завершите настройку»: padding 12px 0, gap 12px, выравнивание слева */
+.ton-tokens-list {
+  margin: 0;
+  text-align: left;
+}
+
+.ton-token-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.ton-token-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ton-token-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ton-token-icon svg {
+  width: 42px;
+  height: 42px;
+}
+
+.ton-token-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--tg-theme-text-color);
+}
+
+.ton-token-amount {
+  font-size: 13px;
+  color: var(--tg-theme-hint-color);
+  margin-top: 2px;
+}
+
+.ton-token-right {
+  text-align: right;
+}
+
+.ton-token-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--tg-theme-text-color);
+}
+
+.ton-token-delta {
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.ton-token-delta.negative { color: #ff6b6b; }
+.ton-token-delta.positive { color: #34c759; }
+
+/* Доходные активы — как «Завершите настройку»: padding 12px 0, gap 12px */
+.ton-yield-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  color: var(--tg-theme-text-color);
+}
+
+.ton-yield-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ton-yield-icon svg {
+  width: 40px;
+  height: 40px;
+}
+
+.ton-yield-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.ton-yield-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ton-yield-subtitle {
+  font-size: 13px;
+  color: var(--tg-theme-hint-color);
+  margin-top: 2px;
+}
+
+.ton-yield-chevron {
+  color: var(--tg-theme-hint-color);
+  display: flex;
+  align-items: center;
+}
+
+/* История активности — контент как в «Завершите настройку»: padding 12px 0, gap 12px, выравнивание слева */
+.ton-activity-list {
+  margin: 0;
+  text-align: left;
+}
+
+.ton-activity-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+/* Иконки активности — как в истории: круг акцентный, стрелка белая (в середине не меняет цвет) */
+.ton-activity-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ton-activity-icon .ton-activity-icon-inner {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ton-activity-icon svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+/* out/in: круг — цвет акцента, стрелка — белая (button-text-color) */
+.ton-wallet-content .ton-activity-icon.ton-activity-icon-out,
+.ton-wallet-content .ton-activity-icon.ton-activity-icon-in {
+  background: var(--tg-theme-button-color, #8774e1);
+  color: var(--tg-theme-button-text-color, #ffffff);
+}
+
+/* activated: фиолетовый фон, галочка белая */
+.ton-wallet-content .ton-activity-icon.ton-activity-icon-activated {
+  background: rgba(129, 95, 235, 0.25);
+  color: #8774e1;
+}
+
+.ton-activity-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.ton-activity-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--tg-theme-text-color);
+}
+
+.ton-activity-detail {
+  font-size: 13px;
+  color: var(--tg-theme-hint-color);
+  margin-top: 2px;
+}
+
+.ton-activity-right {
+  text-align: right;
+}
+
+.ton-activity-amount {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--tg-theme-text-color);
+}
+
+.ton-activity-amount.positive {
+  color: #34c759;
+}
+
+.ton-activity-time {
+  font-size: 13px;
+  color: var(--tg-theme-hint-color);
+  margin-top: 2px;
+}
+
+/* FAQ — под историей активности, как в референсе */
+.ton-faq-card {
+  margin-top: 0;
+}
+
+.ton-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+}
+
+.ton-faq-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  color: var(--tg-theme-text-color);
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.ton-faq-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.ton-faq-item:last-child {
+  padding-bottom: 12px;
+}
+
+.ton-faq-item:first-of-type {
+  padding-top: 10px;
+}
+
+.ton-faq-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.ton-faq-chevron {
+  color: var(--tg-theme-hint-color);
+  flex-shrink: 0;
+}

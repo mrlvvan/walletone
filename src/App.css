@@ -108,6 +108,7 @@
 /* Без хедера: верхний отступ уменьшен */
 /* Область контента (под шапкой, над таббаром) */
 .content {
+  --content-padding-inline: 24px;
   flex: 1;
   padding: 16px 24px 0px;
   /* Общий фон контента (в светлой теме — белый, в тёмной — тёмный) */
@@ -136,6 +137,29 @@
   padding-bottom: 0;
   background-color: var(--tg-theme-bg-color, #212121);
   margin: 0;
+}
+
+/* Компактный режим: только вкладки (TON), без блока баланса — минимум места */
+/* TON-экран: тёмный фон под слайдером + full-width (breakout из padding) */
+.wallet-hero--tabs-only {
+  min-height: 0;
+  gap: 0;
+  padding: 0;
+  flex: 0 0 auto;
+  align-self: stretch;
+  background-color: #1b1b1b !important;
+  margin-inline: calc(-1 * var(--content-padding-inline, 24px));
+  padding-inline: var(--content-padding-inline, 24px);
+}
+.wallet-hero--tabs-only .wallet-tabs {
+  margin: 12px 0 4px;
+}
+
+/* TON-кошелёк: тёмный фон верхней зоны (слайдер табов + header) — full-width несмотря на padding */
+.content.screen-home .wallet-hero.wallet-hero--tabs-only {
+  background-color: #1b1b1b !important;
+  margin-inline: calc(-1 * var(--content-padding-inline, 24px));
+  padding-inline: var(--content-padding-inline, 24px);
 }
 
 /* Вкладки «Крипто» / «TON» над балансом — pill-слайдер */
@@ -2016,6 +2040,7 @@ html:not([data-platform="ios"]) .content.screen-home,
 html:not([data-platform="ios"]) .content.screen-trade,
 html:not([data-platform="ios"]) .content.screen-bonus,
 html:not([data-platform="ios"]) .content.screen-history {
+  --content-padding-inline: 16px;
   background: var(--tg-theme-bg-color) !important;
   padding-inline: 16px !important;
 }
@@ -2029,7 +2054,8 @@ html:not([data-platform="ios"]) .content.screen-history .section-gap {
 }
 
 /* Кошелек: общий фон страницы + фон элементов, меньшие скругления */
-html:not([data-platform="ios"]) .content.screen-home .wallet-hero,
+/* TON-экран: wallet-hero--tabs-only оставляем #1b1b1b (не переопределяем) */
+html:not([data-platform="ios"]) .content.screen-home .wallet-hero:not(.wallet-hero--tabs-only),
 html:not([data-platform="ios"]) .content.screen-home .wallet-balance {
   background: var(--tg-theme-bg-color) !important;
 }
@@ -2043,7 +2069,8 @@ html:not([data-platform="ios"]) .content.screen-home .wallet-actions {
 html:not([data-platform="ios"]) .content.screen-home .wallet-actions .action-item,
 html:not([data-platform="ios"]) .content.screen-home .list-card,
 html:not([data-platform="ios"]) .content.screen-home .section,
-html:not([data-platform="ios"]) .content.screen-home .section-button {
+html:not([data-platform="ios"]) .content.screen-home .section-button,
+html:not([data-platform="ios"]) .content.screen-home .ton-card {
   background: var(--tg-theme-section-bg-color) !important;
   border-radius: 15px !important;
 }
@@ -2060,7 +2087,8 @@ html:not([data-platform="ios"]) .content.screen-home .promo-slider {
 
 /* ПК: немного компактнее высота блоков, без изменений типографики */
 html:not([data-platform="ios"]) .content.screen-home .list-card,
-html:not([data-platform="ios"]) .content.screen-home .section {
+html:not([data-platform="ios"]) .content.screen-home .section,
+html:not([data-platform="ios"]) .content.screen-home .ton-card {
   padding-block: 9px !important;
 }
 
@@ -2246,17 +2274,19 @@ html:not([data-platform="ios"]) .FhO5I.search-overlay-open .wtAUk.Rmex8[data-scr
   overflow: hidden !important;
 }
 
-/* Плашки заголовков "Популярные"/"Все" */
+/* Плашки заголовков "Ваши токены"/"Все токены" — уже по ширине, чёрный фон, скругление только сверху */
 html:not([data-platform="ios"]) .FhO5I.search-overlay-open .wtAUk.Rmex8[data-scroll-restoration-id="ExchangeCurrencyPicker"] .Rfm73.ZR_ns.umRMK.kJf7o {
-  background: #1a1b20 !important;
-  margin-top: -1px !important;
+  background: #000 !important;
+  margin: 0 31px 0 19                                                                                                                                                                                                         px !important;
   padding: 8px 12px !important;
-  margin-bottom: 0 !important;
+  border-radius: 12px 12px 0 0 !important;
 }
 
 html:not([data-platform="ios"]) .FhO5I.search-overlay-open .wtAUk.Rmex8[data-scroll-restoration-id="ExchangeCurrencyPicker"] .Rfm73.ZR_ns.umRMK.kJf7o + .ydmxJ.tf4r_ {
   margin-top: 0 !important;
   padding-top: 0 !important;
+  margin-left: 16px !important;
+  margin-right: 32px !important;
 }
 
 html:not([data-platform="ios"]) .FhO5I.search-overlay-open .wtAUk.Rmex8[data-scroll-restoration-id="ExchangeCurrencyPicker"] .mjigr.ODmGt.LQUdc.lIhZN {
@@ -2334,6 +2364,19 @@ html:not([data-platform="ios"]) .FhO5I.search-overlay-open .wtAUk.Rmex8[data-scr
 html:not([data-platform="ios"]) .FhO5I.search-overlay-open .wtAUk.Rmex8[data-scroll-restoration-id="ExchangeCurrencyPicker"] .Wv9yg::before {
   content: none !important;
   display: none !important;
+}
+
+/* ExchangeCurrencyPicker (все платформы): плашки заголовков — уже, чёрный фон, скругление сверху */
+.FhO5I.search-overlay-open .wtAUk.Rmex8[data-scroll-restoration-id="ExchangeCurrencyPicker"] .Rfm73.ZR_ns.umRMK.kJf7o {
+  background: #000 !important;
+  margin: 0 16px 0 32px !important;
+  padding: 8px 12px !important;
+  border-radius: 12px 12px 0 0 !important;
+}
+
+.FhO5I.search-overlay-open .wtAUk.Rmex8[data-scroll-restoration-id="ExchangeCurrencyPicker"] .Rfm73.ZR_ns.umRMK.kJf7o + .ydmxJ.tf4r_ {
+  margin-left: 16px !important;
+  margin-right: 32px !important;
 }
 
 /* ExchangeCurrencyPicker (все платформы): убрать белые полосы между монетами */

@@ -69,6 +69,49 @@
   background: #212121;
 }
 
+/* TON-кошелёк: аватар в центре QR (оверлей), без иконок токена */
+.buy-crypto-address-qr-wrap--telegram-avatar {
+  overflow: visible;
+}
+
+.buy-crypto-address-qr-wrap--telegram-avatar .buy-crypto-address-qr-avatar-shell {
+  position: absolute;
+  inset: 50%;
+  transform: translate(-50%, -50%);
+  width: 53px;
+  height: 53px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.buy-crypto-address-qr-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--tg-theme-bg-color, #ffffff);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.buy-crypto-address-qr-avatar-fallback {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.buy-crypto-address-qr-avatar-fallback svg {
+  width: 46px;
+  height: 46px;
+  display: block;
+}
+
 .buy-crypto-address-qr-canvas {
   width: 100%;
   height: 100%;

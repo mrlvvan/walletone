@@ -21,14 +21,31 @@ html[data-color-scheme="light"] .buy-crypto-network-warning {
   color: var(--tg-theme-text-color, #1c1c1e);
 }
 
+.buy-crypto-network-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 -16px 0;
+  padding: 8px 16px 6px;
+  background: var(--tg-theme-bg-color, #1c1c1e);
+}
+
+.buy-crypto-network-header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.buy-crypto-network-header-icon svg {
+  display: block;
+}
+
 .buy-crypto-network-title {
   font-size: 15px;
   line-height: 18px;
   font-weight: 500;
   color: var(--tg-theme-section-header-text-color, #aaaaaa);
-  margin: 0 -16px 0;
-  padding: 8px 16px 6px;
-  background: var(--tg-theme-bg-color, #1c1c1e);
 }
 
 .buy-crypto-network-list {

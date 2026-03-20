@@ -1,17 +1,26 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import './App.css';
 import AssetScreen from './components/AssetScreen';
-import BonusScreen from './components/BonusScreen';
+import IncomeScreen from './components/IncomeScreen';
 import HomeScreen from './components/HomeScreen';
 import TransferScreen from './components/TransferScreen';
 import BuyCryptoScreen from './components/BuyCryptoScreen';
 import WithdrawScreen from './components/WithdrawScreen';
+import TonWithdrawAssetScreen from './components/TonWithdrawAssetScreen';
 import BuyCryptoNetworkScreen from './components/BuyCryptoNetworkScreen';
 import BuyCryptoAddressScreen from './components/BuyCryptoAddressScreen';
 import ExchangeScreen from './components/ExchangeScreen';
 import ExchangeCurrencyPicker from './components/ExchangeCurrencyPicker';
 import HistoryScreen from './components/HistoryScreen';
 import MarketScreen from './components/MarketScreen';
+import TonExchangeScreen from './components/TonExchangeScreen';
+import TonAssetScreen from './components/TonAssetScreen';
+import TonDepositScreen from './components/TonDepositScreen';
+import StablecoinSelectScreen from './components/StablecoinSelectScreen';
+import OtherCryptoSelectScreen from './components/OtherCryptoSelectScreen';
+import TonWalletAddressScreen from './components/TonWalletAddressScreen';
+import TonCryptoWalletTransferScreen from './components/TonCryptoWalletTransferScreen';
+import TonOtherCryptoDepositScreen from './components/TonOtherCryptoDepositScreen';
 import TabBar from './components/TabBar';
 import { initTelegramThemeSync } from './telegramTheme';
 import { fetchAllPrices } from './services/priceService';
@@ -298,10 +307,48 @@ function App() {
 
   const [screen, setScreen] = useState('home');
   const [prevScreen, setPrevScreen] = useState('home');
+  const [walletTab, setWalletTab] = useState('crypto');
   const mainRef = useRef(null);
+
+  const tonWalletData = {
+    address: 'UQBD...INHFO',
+    balanceInt: '0',
+    balanceDec: '55',
+    deltaUsd: '<0,01 $',
+    percent: '35,00%',
+    period: 'За всё время',
+    isNegative: true,
+    tokens: [
+      {
+        id: 'ton',
+        name: 'Toncoin',
+        code: 'TON',
+        amount: '0,005 TON',
+        value: '0,56 ₽',
+        delta: '<0,01 $',
+        isNegative: true,
+        icon: <IconToncoin size={42} />,
+      },
+      {
+        id: 'usdt',
+        name: 'USDT',
+        code: 'USDT',
+        amount: '0 USDT',
+        value: '0,00 ₽',
+        delta: null,
+        icon: <IconDollar size={42} />,
+      },
+    ],
+    activity: [
+      { id: 'a1', type: 'out', title: 'Отправлено', detail: 'UQDg...ZRvi', amount: '10 USDT', time: '28 дек. 2025 г. в 04:55' },
+      { id: 'a2', type: 'in', title: 'Получено', detail: 'UQDf...rCJV', amount: '+0,03 TON', time: '28 дек. 2025 г. в 04:55', isPositive: true },
+      { id: 'a3', type: 'in', title: 'Получено', detail: 'HAC', amount: '+10 USDT', time: '28 дек. 2025 г. в 00:12', isPositive: true },
+    ],
+  };
   const [selectedAsset, setSelectedAsset] = useState(assets[0]);
   const [selectedDepositAsset, setSelectedDepositAsset] = useState(null);
   const [selectedDepositNetwork, setSelectedDepositNetwork] = useState(null);
+  const [initialExchangeState, setInitialExchangeState] = useState(null);
   const [livePrices, setLivePrices] = useState({});
   const { updateRates } = useRates();
 
@@ -377,17 +424,30 @@ function App() {
     if (!backButton) return;
 
     const handleBack = () => {
+      if (screen === 'stablecoinSelect' || screen === 'otherCryptoSelect' || screen === 'tonWalletAddress' || screen === 'tonCryptoWalletTransfer') {
+        setScreen('buyCrypto');
+        return;
+      }
+      if (screen === 'tonOtherCryptoDeposit') {
+        const depCode = String(selectedDepositAsset?.code || '').toUpperCase();
+        if (depCode === 'USDT' || depCode === 'USDC') {
+          setScreen('buyCryptoNetwork');
+        } else {
+          setScreen('otherCryptoSelect');
+        }
+        return;
+      }
       if (screen === 'buyCryptoDeposit') {
         setScreen('buyCrypto');
         return;
       }
       if (screen === 'buyCryptoNetwork') {
-        setScreen('buyCryptoDeposit');
+        setScreen(prevScreen === 'stablecoinSelect' ? 'stablecoinSelect' : prevScreen === 'otherCryptoSelect' ? 'otherCryptoSelect' : 'buyCryptoDeposit');
         return;
       }
       if (screen === 'buyCryptoAddress') {
         const assetCode = String(selectedDepositAsset?.code || '').toUpperCase();
-        if (assetCode === 'USDT') {
+        if (assetCode === 'USDT' || assetCode === 'USDC' || assetCode === 'BTC' || assetCode === 'ETH' || assetCode === 'SOL') {
           setScreen('buyCryptoNetwork');
         } else {
           setScreen('buyCryptoDeposit');
@@ -397,7 +457,7 @@ function App() {
       setScreen(prevScreen || 'home');
     };
 
-    if (screen === 'asset' || screen === 'transfer' || screen === 'buyCrypto' || screen === 'buyCryptoDeposit' || screen === 'buyCryptoNetwork' || screen === 'buyCryptoAddress' || screen === 'withdraw') {
+    if (screen === 'asset' || screen === 'transfer' || screen === 'buyCrypto' || screen === 'stablecoinSelect' || screen === 'otherCryptoSelect' || screen === 'tonWalletAddress' || screen === 'tonCryptoWalletTransfer' || screen === 'tonOtherCryptoDeposit' || screen === 'buyCryptoDeposit' || screen === 'buyCryptoNetwork' || screen === 'buyCryptoAddress' || screen === 'withdraw' || screen === 'tonWithdrawAsset') {
       backButton.show();
       backButton.onClick(handleBack);
     } else {
@@ -407,7 +467,7 @@ function App() {
 
     return () => {
       backButton.offClick(handleBack);
-      if (screen === 'asset' || screen === 'transfer' || screen === 'buyCrypto' || screen === 'buyCryptoDeposit' || screen === 'buyCryptoNetwork' || screen === 'buyCryptoAddress' || screen === 'withdraw') {
+      if (screen === 'asset' || screen === 'transfer' || screen === 'buyCrypto' || screen === 'stablecoinSelect' || screen === 'otherCryptoSelect' || screen === 'tonWalletAddress' || screen === 'tonCryptoWalletTransfer' || screen === 'tonOtherCryptoDeposit' || screen === 'buyCryptoDeposit' || screen === 'buyCryptoNetwork' || screen === 'buyCryptoAddress' || screen === 'withdraw' || screen === 'tonWithdrawAsset') {
         backButton.hide();
       }
     };
@@ -1784,15 +1844,20 @@ function App() {
   ];
   const searchStocks = marketTickers.map((t) => ({
     ...t,
-    name: t.code.replace(/x$/i, ''),
-    price: '—',
+    name: t.name || t.code?.replace(/x$/i, '') || t.code,
+    price: t.price || '—',
     category: 'stocks',
   }));
   const searchFunds = fundTickers.map((t) => ({
     ...t,
-    name: t.code.replace(/x$/i, ''),
-    price: '—',
+    name: t.name || t.code?.replace(/x$/i, '') || t.code,
+    price: t.price || '—',
     category: 'funds',
+  }));
+  const searchTopDay = topDay.map((t) => ({
+    ...t,
+    name: t.name || t.code?.replace(/x$/i, '') || t.code,
+    price: t.price || '—',
   }));
   const mergeAssetWithLive = (asset) => {
     const live = livePrices[asset.id];
@@ -1816,6 +1881,15 @@ function App() {
     ...searchStocks,
     ...searchFunds,
   ];
+  const allTokensForExchange = (() => {
+    const seen = new Set();
+    return [...allMarketAssetsForSearch, ...searchTopDay].filter((item) => {
+      const key = (item?.id || item?.code || '').toLowerCase();
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  })();
   const exchangeCryptoAssets = (() => {
     const cryptos = allMarketAssetsForSearch.filter((a) => a.category === 'crypto');
     if (cryptos.some((a) => String(a?.id || '').toLowerCase() === 'major')) return cryptos;
@@ -2121,10 +2195,17 @@ function App() {
           screen === 'bonus' ? 'screen-bonus' : ''
         } ${screen === 'asset' ? 'screen-asset' : ''} ${screen === 'transfer' ? 'screen-transfer' : ''} ${
           screen === 'buyCrypto' ? 'screen-buy-crypto' : ''
+        } ${screen === 'stablecoinSelect' ? 'screen-buy-crypto' : ''
+        } ${screen === 'otherCryptoSelect' ? 'screen-buy-crypto' : ''
+        } ${screen === 'tonOtherCryptoDeposit' ? 'screen-buy-crypto' : ''
+        } ${screen === 'tonWalletAddress' ? 'screen-buy-crypto' : ''
+        } ${screen === 'tonCryptoWalletTransfer' ? 'screen-buy-crypto' : ''
         } ${screen === 'buyCryptoDeposit' ? 'screen-buy-crypto' : ''
         } ${screen === 'buyCryptoNetwork' ? 'screen-buy-crypto' : ''
         } ${screen === 'buyCryptoAddress' ? 'screen-buy-crypto' : ''
-        } ${screen === 'withdraw' ? 'screen-withdraw' : ''} ${screen === 'home' ? 'screen-home' : ''} ${
+        } ${screen === 'withdraw' || screen === 'tonWithdrawAsset' ? 'screen-withdraw' : ''} ${
+          screen === 'home' ? 'screen-home' : ''
+        } ${
           screen === 'trade' ? 'screen-trade' : ''
         }`}
       >
@@ -2136,6 +2217,9 @@ function App() {
             cryptoTotal={cryptoTotal}
             promoSlides={promoSlides}
             trendingItems={trendingItems}
+            tonWalletData={tonWalletData}
+            walletTab={walletTab}
+            onWalletTabChange={setWalletTab}
             onOpenAsset={openAsset}
             onOpenTrade={() => setScreen('trade')}
             onTransfer={() => {
@@ -2148,61 +2232,105 @@ function App() {
             }}
             onWithdraw={() => {
               setPrevScreen(screen);
-              setScreen('withdraw');
+              if (walletTab === 'ton') {
+                setScreen('tonWithdrawAsset');
+              } else {
+                setScreen('withdraw');
+              }
             }}
             onSwap={() => {
+              setInitialExchangeState(null);
               setPrevScreen(screen);
               setScreen('exchange');
             }}
           />
         )}
-        {screen === 'asset' && (
-          <AssetScreen
-            selectedAsset={selectedAsset}
-            activity={activity}
-            assetDetails={(() => {
-              const merged = {};
-              for (const [id, d] of Object.entries(assetDetails)) {
-                const live = livePrices[id] || {};
-                merged[id] = { ...d, ...live };
-                if (live.percent != null && merged[id].overview?.capitalization) {
-                  merged[id] = {
-                    ...merged[id],
-                    overview: {
-                      ...merged[id].overview,
-                      capitalization: {
-                        ...merged[id].overview.capitalization,
-                        change: live.percent,
-                        isPositive: !String(live.percent).startsWith('-'),
+        {screen === 'asset' &&
+          (walletTab === 'ton' ? (
+            <TonAssetScreen
+              selectedAsset={selectedAsset}
+              tonWalletData={tonWalletData}
+              assetDetails={(() => {
+                const merged = {};
+                for (const [id, d] of Object.entries(assetDetails)) {
+                  const live = livePrices[id] || {};
+                  merged[id] = { ...d, ...live };
+                }
+                for (const [id, p] of Object.entries(livePrices)) {
+                  if (!merged[id]) {
+                    merged[id] = { ...p };
+                  }
+                }
+                return merged;
+              })()}
+            />
+          ) : (
+            <AssetScreen
+              selectedAsset={selectedAsset}
+              activity={activity}
+              assetDetails={(() => {
+                const merged = {};
+                for (const [id, d] of Object.entries(assetDetails)) {
+                  const live = livePrices[id] || {};
+                  merged[id] = { ...d, ...live };
+                  if (live.percent != null && merged[id].overview?.capitalization) {
+                    merged[id] = {
+                      ...merged[id],
+                      overview: {
+                        ...merged[id].overview,
+                        capitalization: {
+                          ...merged[id].overview.capitalization,
+                          change: live.percent,
+                          isPositive: !String(live.percent).startsWith('-'),
+                        },
                       },
-                    },
-                  };
+                    };
+                  }
                 }
-              }
-              for (const [id, p] of Object.entries(livePrices)) {
-                if (!merged[id]) {
-                  const desc = (id in { tsla:1, goog:1, nvda:1, aapl:1, coin:1, hood:1, mcd:1, cisco:1, amzn:1 }) ? 'токенизированная акция для переводов и расчётов.' : 'криптовалюта для переводов и расчётов.';
-                  merged[id] = { ...p, description: `${id.toUpperCase()} — ${desc}`, features: ['Получайте и отправляйте кому угодно (с комиссией).', 'Подходит для расчётов в сети.'], overview: { capitalization: { value: '—', change: p.percent || '—', isPositive: !String(p.percent || '').startsWith('-') }, volume: { value: '—', change: '—', isPositive: true }, inCirculation: { value: '—' } } };
+                for (const [id, p] of Object.entries(livePrices)) {
+                  if (!merged[id]) {
+                    const desc = (id in { tsla:1, goog:1, nvda:1, aapl:1, coin:1, hood:1, mcd:1, cisco:1, amzn:1 }) ? 'токенизированная акция для переводов и расчётов.' : 'криптовалюта для переводов и расчётов.';
+                    merged[id] = { ...p, description: `${id.toUpperCase()} — ${desc}`, features: ['Получайте и отправляйте кому угодно (с комиссией).', 'Подходит для расчётов в сети.'], overview: { capitalization: { value: '—', change: p.percent || '—', isPositive: !String(p.percent || '').startsWith('-') }, volume: { value: '—', change: '—', isPositive: true }, inCirculation: { value: '—' } } };
+                  }
                 }
-              }
-              return merged;
-            })()}
-          />
-        )}
-        {screen === 'trade' && (
-          <MarketScreen
-            marketTickers={marketTickers}
-            fundTickers={fundTickers}
-            topDay={topDay}
-            topDayFall={topDayFall}
-            assets={marketAssetsWithLive}
-            searchAssets={allMarketAssetsForSearch}
-            tonAssets={tonAssets}
-            onOpenAsset={openAsset}
-          />
-        )}
+                return merged;
+              })()}
+            />
+          ))}
+        {screen === 'trade' &&
+          (walletTab === 'ton' ? (
+            <TonExchangeScreen
+              marketTickers={marketTickers}
+              fundTickers={fundTickers}
+              mainTokens={tonAssets}
+              topDay={topDay}
+              allTokensForExchange={allTokensForExchange}
+              cryptoAssets={exchangeCryptoAssets}
+              onOpenAsset={openAsset}
+              onNavigateToDeposit={() => {
+                setPrevScreen('trade');
+                setScreen('buyCrypto');
+              }}
+              onNavigateToExchange={(state) => {
+                setInitialExchangeState(state);
+                setPrevScreen('trade');
+                setScreen('exchange');
+              }}
+            />
+          ) : (
+            <MarketScreen
+              marketTickers={marketTickers}
+              fundTickers={fundTickers}
+              topDay={topDay}
+              topDayFall={topDayFall}
+              assets={marketAssetsWithLive}
+              searchAssets={allMarketAssetsForSearch}
+              tonAssets={tonAssets}
+              onOpenAsset={openAsset}
+            />
+          ))}
         {screen === 'bonus' && (
-          <BonusScreen activeItems={bonusItems} completedItems={completedBonusItems} />
+          <IncomeScreen />
         )}
         {screen === 'history' && <HistoryScreen items={historyItems} />}
         {screen === 'transfer' && (
@@ -2213,14 +2341,83 @@ function App() {
           />
         )}
         {screen === 'buyCrypto' && (
-          <BuyCryptoScreen
-            onSelectMethod={(id) => {
-              if (id === 'deposit') {
-                setPrevScreen('buyCrypto');
-                setSelectedDepositAsset(null);
-                setSelectedDepositNetwork(null);
-                setScreen('buyCryptoDeposit');
-              }
+          walletTab === 'ton' ? (
+            <TonDepositScreen
+              onSelectMethod={(id) => {
+                if (id === 'crypto-wallet') {
+                  setPrevScreen('buyCrypto');
+                  setScreen('tonCryptoWalletTransfer');
+                }
+                if (id === 'stablecoins') {
+                  setPrevScreen('buyCrypto');
+                  setSelectedDepositAsset(null);
+                  setSelectedDepositNetwork(null);
+                  setScreen('stablecoinSelect');
+                }
+                if (id === 'other-crypto') {
+                  setPrevScreen('buyCrypto');
+                  setSelectedDepositAsset(null);
+                  setSelectedDepositNetwork(null);
+                  setScreen('otherCryptoSelect');
+                }
+                if (id === 'external-wallet') {
+                  setPrevScreen('buyCrypto');
+                  setScreen('tonWalletAddress');
+                }
+              }}
+            />
+          ) : (
+            <BuyCryptoScreen
+              onSelectMethod={(id) => {
+                if (id === 'deposit') {
+                  setPrevScreen('buyCrypto');
+                  setSelectedDepositAsset(null);
+                  setSelectedDepositNetwork(null);
+                  setScreen('buyCryptoDeposit');
+                }
+              }}
+            />
+          )
+        )}
+        {screen === 'otherCryptoSelect' && (
+          <OtherCryptoSelectScreen
+            onSelect={(asset) => {
+              setSelectedDepositAsset(asset);
+              setSelectedDepositNetwork(null);
+              setPrevScreen('otherCryptoSelect');
+              setScreen('tonOtherCryptoDeposit');
+            }}
+          />
+        )}
+        {screen === 'tonOtherCryptoDeposit' && (
+          <TonOtherCryptoDepositScreen
+            asset={selectedDepositAsset}
+            bridgeSourceNetwork={selectedDepositNetwork}
+            onHome={() => setScreen('home')}
+          />
+        )}
+        {screen === 'tonWalletAddress' && (
+          <TonWalletAddressScreen />
+        )}
+        {screen === 'tonCryptoWalletTransfer' && (
+          <TonCryptoWalletTransferScreen
+            onSelectAsset={() => {
+              setPrevScreen('tonCryptoWalletTransfer');
+              setScreen('buyCryptoDeposit');
+            }}
+            onTopUp={() => {
+              setPrevScreen('tonCryptoWalletTransfer');
+              setScreen('buyCryptoDeposit');
+            }}
+          />
+        )}
+        {screen === 'stablecoinSelect' && (
+          <StablecoinSelectScreen
+            onSelect={(asset) => {
+              setSelectedDepositAsset(asset);
+              setSelectedDepositNetwork(null);
+              setPrevScreen('stablecoinSelect');
+              setScreen('buyCryptoNetwork');
             }}
           />
         )}
@@ -2232,7 +2429,7 @@ function App() {
             onSelect={(asset) => {
               const assetCode = String(asset?.code || '').toUpperCase();
               setSelectedDepositAsset(asset);
-              if (assetCode === 'USDT') {
+              if (assetCode === 'USDT' || assetCode === 'USDC') {
                 setSelectedDepositNetwork(null);
                 setPrevScreen('buyCryptoDeposit');
                 setScreen('buyCryptoNetwork');
@@ -2261,10 +2458,17 @@ function App() {
           <BuyCryptoNetworkScreen
             asset={selectedDepositAsset}
             cryptoAssets={allMarketAssetsForSearch.filter((a) => a.category === 'crypto')}
+            isTonWallet={walletTab === 'ton'}
             onSelectNetwork={(network) => {
               setSelectedDepositNetwork(network);
-              setPrevScreen('buyCryptoNetwork');
-              setScreen('buyCryptoAddress');
+              const code = String(selectedDepositAsset?.code || '').toUpperCase();
+              const useStablecoinBridge =
+                walletTab === 'ton' && (code === 'USDC' || (code === 'USDT' && network.id !== 'ton'));
+              if (useStablecoinBridge) {
+                setScreen('tonOtherCryptoDeposit');
+              } else {
+                setScreen('buyCryptoAddress');
+              }
             }}
           />
         )}
@@ -2272,19 +2476,43 @@ function App() {
           <BuyCryptoAddressScreen
             asset={selectedDepositAsset}
             network={selectedDepositNetwork}
+            useTelegramAvatarQr={walletTab === 'ton'}
           />
         )}
         {screen === 'withdraw' && <WithdrawScreen />}
+        {screen === 'tonWithdrawAsset' && (
+          <TonWithdrawAssetScreen
+            assets={tonWalletData.tokens.map((t) => ({
+              id: t.id,
+              name: t.name,
+              code: t.code || String(t.name || '').slice(0, 4).toUpperCase(),
+              amount: t.amount,
+              value: t.value,
+              icon: t.icon,
+            }))}
+            onSelectAsset={() => {
+              setPrevScreen('tonWithdrawAsset');
+              setScreen('withdraw');
+            }}
+          />
+        )}
         {screen === 'exchange' && (
           <ExchangeScreen
+            useTonLayout={!!initialExchangeState}
+            initialPayAmount={initialExchangeState?.payAmount}
+            initialPayAsset={initialExchangeState?.payAsset}
+            initialReceiveAsset={initialExchangeState?.receiveAsset}
             onNavigateToDeposit={() => setScreen('buyCrypto')}
-            onBack={() => setScreen(prevScreen || 'home')}
+            onBack={() => {
+              setInitialExchangeState(null);
+              setScreen(prevScreen || 'home');
+            }}
             cryptoAssets={exchangeCryptoAssets}
           />
         )}
       </main>
 
-      {screen !== 'asset' && screen !== 'transfer' && screen !== 'buyCrypto' && screen !== 'buyCryptoDeposit' && screen !== 'buyCryptoNetwork' && screen !== 'buyCryptoAddress' && screen !== 'withdraw' && screen !== 'exchange' && (
+      {screen !== 'asset' && screen !== 'transfer' && screen !== 'buyCrypto' && screen !== 'stablecoinSelect' && screen !== 'otherCryptoSelect' && screen !== 'tonWalletAddress' && screen !== 'tonCryptoWalletTransfer' && screen !== 'tonOtherCryptoDeposit' && screen !== 'buyCryptoDeposit' && screen !== 'buyCryptoNetwork' && screen !== 'buyCryptoAddress' && screen !== 'withdraw' && screen !== 'tonWithdrawAsset' && screen !== 'exchange' && (
         <TabBar
           activeTab={
             screen === 'trade'
@@ -2295,6 +2523,7 @@ function App() {
               ? 'history'
               : 'wallet'
           }
+          walletTab={walletTab}
           onChange={handleTabChange}
         />
       )}

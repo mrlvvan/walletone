@@ -1,0 +1,404 @@
+/* TonExchangeScreen — экран обмена TON: как TON кошелёк, без сплошного серого бг */
+
+/* Фон контента — theme bg, НЕ #1b1b1b (как в TON кошельке) */
+.content:has(.ton-exchange-screen),
+/* ExchangeScreen в режиме TON (из TonExchangeScreen) — тот же блок обменника */
+.content:has(.exchange-screen-ton) {
+  --content-padding-inline: 12px;
+  padding-inline: 12px !important;
+  background-color: var(--tg-theme-bg-color, #212121) !important;
+}
+
+/* Отступы между секциями — тот же цвет, что и общий бг (без визуальной разницы) */
+.content:has(.ton-exchange-screen) .section-gap {
+  background: var(--tg-theme-bg-color, #212121) !important;
+}
+
+.ton-exchange-screen {
+  background: transparent;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 0;
+  padding-bottom: calc(80px + var(--safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  color: var(--tg-theme-text-color, #ffffff);
+}
+
+/* Блок обменника — чёрный как верх TON-кошелька (баланс); breakout на всю ширину */
+.ton-exchange-form-block {
+  position: relative;
+  margin-inline: calc(-1 * var(--content-padding-inline, 12px));
+  padding-inline: var(--content-padding-inline, 12px);
+  padding-top: 20px;
+  padding-bottom: 16px;
+  background-color: #000000;
+  z-index: 1;
+  padding: 16px 20px 16px 20px !important;
+}
+
+/* Светлый блок обменника — не iOS: на iOS светлая тема оставляем чёрный стол как TON-баланс */
+html[data-color-scheme="light"]:not([data-platform="ios"]) .ton-exchange-form-block {
+  background-color: var(--tg-theme-bg-color, #ffffff) !important;
+}
+
+.ton-exchange-form {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Меньший шрифт чисел и эквивалент в рублях */
+.ton-exchange-form-block .exchange-input {
+  font-size: 28px;
+  line-height: 36px;
+}
+.ton-exchange-form-block .exchange-amount-rub {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--tg-theme-hint-color, #8e8e93);
+  margin-top: 4px;
+}
+/* Левая колонка: инпут + рубли */
+.ton-exchange-form-block .ton-exchange-left-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+/* Правая колонка: кнопка валюты + баланс/Макс под ней */
+.ton-exchange-form-block .ton-exchange-currency-col,
+.ton-exchange-form-block .exchange-currency-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+.ton-exchange-form-block .exchange-row-input-wrap .exchange-balance-wrap {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.ton-exchange-form-block .exchange-balance-value {
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+.ton-exchange-form-block .exchange-balance-link {
+  color: var(--tg-theme-link-color, #8774e1);
+  cursor: pointer;
+}
+
+/* Layout: слева — инпут + руб, справа — кнопка валюты + баланс/Макс под ней */
+.ton-exchange-form-block .exchange-row-input-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.ton-exchange-form-block .ton-exchange-left-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ton-exchange-form-block .ton-exchange-currency-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+/* Меньший шрифт чисел слева */
+.ton-exchange-form-block .exchange-input {
+  font-size: 28px !important;
+  line-height: 34px !important;
+}
+/* Эквивалент в рублях под числом */
+.ton-exchange-form-block .exchange-amount-rub {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+/* Баланс и Макс под кнопкой валюты */
+.ton-exchange-form-block .ton-exchange-currency-col .exchange-balance-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.ton-exchange-form-block .ton-exchange-currency-col .exchange-balance-value {
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+.ton-exchange-form-block .ton-exchange-currency-col .exchange-balance-link {
+  color: var(--tg-theme-link-color, #8774e1);
+  cursor: pointer;
+}
+
+/* Кнопка валюты: иконка слева от названия, название белым, шеврон серый */
+.ton-exchange-form-block .exchange-currency-btn {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.ton-exchange-form-block .exchange-currency-name {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 24px;
+}
+.ton-exchange-form-block .exchange-currency-chevron {
+  color: var(--tg-theme-subtitle-text-color, #8e8e93);
+}
+
+/* Левый столбец: инпут + эквивалент в рублях */
+.ton-exchange-form-block .ton-exchange-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+.ton-exchange-form-block .exchange-amount-rub {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+/* Правый столбец: кнопка валюты + баланс/Макс под ней */
+.ton-exchange-form-block .ton-exchange-currency-col,
+.ton-exchange-form-block .exchange-currency-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+.ton-exchange-form-block .exchange-row-input-wrap .exchange-balance-wrap {
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.ton-exchange-form-block .exchange-row-input-wrap .exchange-balance-value {
+  color: var(--tg-theme-hint-color, #8e8e93);
+}
+.ton-exchange-form-block .exchange-row-input-wrap .exchange-balance-link {
+  color: var(--tg-theme-link-color, #8774e1);
+  cursor: pointer;
+}
+/* Меньший размер чисел в инпуте */
+.ton-exchange-form-block .exchange-input {
+  font-size: 28px;
+  line-height: 34px;
+}
+
+/* Переопределяем divider — под 12px padding, кнопка swap по центру, разрыв посередине */
+.ton-exchange-form-block .exchange-divider {
+  margin-inline: calc(-1 * var(--content-padding-inline, 12px));
+  justify-content: center;
+}
+
+/* Плитка #2c2c2e на чёрном (как кнопки действий в TON-кошельке); перебить .exchange-swap-btn (полупрозрачный accent) */
+.ton-exchange-form-block .exchange-swap-btn {
+  right: auto;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  background-color: #2c2c2e !important;
+  background-image: none !important;
+  border: none !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
+}
+
+.ton-exchange-form-block .exchange-swap-btn:hover {
+  background-color: #3a3a3c !important;
+}
+
+html[data-color-scheme="light"]:not([data-platform="ios"]) .ton-exchange-form-block .exchange-swap-btn {
+  background-color: var(--tg-theme-section-bg-color, #ffffff) !important;
+  color: var(--tg-theme-text-color, #000000) !important;
+}
+
+html[data-color-scheme="light"]:not([data-platform="ios"]) .ton-exchange-form-block .exchange-swap-btn:hover {
+  background-color: #ebebeb !important;
+}
+.ton-exchange-form-block .exchange-swap-btn svg {
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px;
+  min-height: 24px;
+  flex-shrink: 0;
+}
+
+/* Полоска посередине — чёрная; разрыв по центру (следом за кнопкой 32px) */
+.ton-exchange-form-block .exchange-divider {
+  height: 32px;
+}
+.ton-exchange-form-block .exchange-divider::before {
+  left: 0;
+  right: 50%;
+  margin-right: 24px; /* половина кнопки 32px + отступ */
+  background: rgba(255, 255, 255, 0.14) !important;
+}
+.ton-exchange-form-block .exchange-divider::after {
+  right: 0;
+  left: 50%;
+  margin-left: 24px;
+  background: rgba(255, 255, 255, 0.14) !important;
+}
+
+html[data-color-scheme="light"]:not([data-platform="ios"]) .ton-exchange-form-block .exchange-divider::before,
+html[data-color-scheme="light"]:not([data-platform="ios"]) .ton-exchange-form-block .exchange-divider::after {
+  background: rgba(0, 0, 0, 0.12) !important;
+}
+
+/* iOS светлая тема: типографика на чёрном блоке обмена */
+html[data-platform="ios"][data-color-scheme="light"] .ton-exchange-form-block .exchange-row-label {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .ton-exchange-form-block .exchange-input {
+  color: #ffffff !important;
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .ton-exchange-form-block .exchange-input::placeholder {
+  color: rgba(255, 255, 255, 0.35) !important;
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .ton-exchange-form-block .exchange-amount-rub {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .ton-exchange-form-block .exchange-balance-value {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+html[data-platform="ios"][data-color-scheme="light"] .ton-exchange-form-block .exchange-currency-chevron {
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+.ton-exchange-submit-wrap {
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0 0 8px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.ton-exchange-submit-btn {
+  flex-shrink: 0;
+  min-width: 200px;
+  margin: 0;
+  padding: 14px 24px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--tg-theme-button-text-color, #ffffff);
+  background: var(--tg-theme-button-color, #8774e1);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.ton-exchange-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ton-exchange-sections {
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/*
+ * Только TON обменник: не дублировать боковые отступы.
+ * У .content уже padding-inline (12px); глобальные правила trade/iOS добавляют
+ * margin 16px + width calc(100% - 32px) и padding 16px у карточек — сужают сетку.
+ */
+.content:has(.ton-exchange-screen) .ton-exchange-sections .market-us-row {
+  margin-inline: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/*
+ * Заголовки секций: слева вровень с контентом карточек, нормальные вертикальные отступы.
+ * — «Акции и фонды»: сетка на всю ширину карточки → без лишнего inset (как левый край плитки).
+ * — «Основные токены» / «Топ торгов»: 16px = горизонтальный padding серой плитки .ydmxJ.tf4r_.
+ */
+.content:has(.ton-exchange-screen) .ton-exchange-sections .market-us-row .market-section-header .Rfm73.Jn71M.hCZ1A {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding-inline: 0 !important;
+  padding-block: 12px 10px !important;
+  margin: 0 !important;
+}
+
+.content:has(.ton-exchange-screen) .ton-exchange-sections .ton-exchange-main-tokens .Rfm73.Jn71M.hCZ1A,
+.content:has(.ton-exchange-screen) .ton-exchange-sections .ton-exchange-top-trades .Rfm73.Jn71M.hCZ1A {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding-inline: 16px !important;
+  padding-block: 12px 10px !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+.content:has(.ton-exchange-screen) .ton-exchange-sections .market-section.market-section-card {
+  margin-inline: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-inline: 0 !important;
+  box-sizing: border-box;
+}
+
+/* «Основные токены» / «Топ торгов»: заголовок на фоне страницы, сетка в серой плитке (как Топ дня / TON на Рынке) */
+.content:has(.ton-exchange-screen) .ton-exchange-sections .ton-exchange-main-tokens,
+.content:has(.ton-exchange-screen) .ton-exchange-sections .ton-exchange-top-trades {
+  margin-inline: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.content:has(.ton-exchange-screen) .ton-exchange-sections .ton-exchange-main-tokens .JNQMw,
+.content:has(.ton-exchange-screen) .ton-exchange-sections .ton-exchange-top-trades .JNQMw {
+  gap: 12px;
+}
+
+.content:has(.ton-exchange-screen) .ton-exchange-sections .ton-exchange-main-tokens .ydmxJ.tf4r_,
+.content:has(.ton-exchange-screen) .ton-exchange-sections .ton-exchange-top-trades .ydmxJ.tf4r_ {
+  background: var(--tg-theme-section-bg-color, #212121) !important;
+  border-radius: 16px;
+  padding: 12px 16px !important;
+  margin-inline: 0 !important;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+html[data-platform="ios"] .content:has(.ton-exchange-screen) .ton-exchange-sections .ton-exchange-main-tokens .ydmxJ.tf4r_,
+html[data-platform="ios"] .content:has(.ton-exchange-screen) .ton-exchange-sections .ton-exchange-top-trades .ydmxJ.tf4r_ {
+  border-radius: 24px !important;
+}
+
+/* Только «Акции и фонды»: убрать лишний горизонтальный padding у обёртки (как на Рынке). */
+.content:has(.ton-exchange-screen) .ton-exchange-sections .market-section-card .Ofdvj.PReSx {
+  padding-inline: 0 !important;
+}
