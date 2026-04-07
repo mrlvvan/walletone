@@ -2274,10 +2274,12 @@ html:not([data-platform="ios"]) .FhO5I.search-overlay-open .wtAUk.Rmex8[data-scr
   overflow: hidden !important;
 }
 
-/* Плашки заголовков "Ваши токены"/"Все токены" — уже по ширине, чёрный фон, скругление только сверху */
+/* Плашки заголовков "Ваши токены"/"Все токены" — симметричные боковые отступы (как поле поиска) */
 html:not([data-platform="ios"]) .FhO5I.search-overlay-open .wtAUk.Rmex8[data-scroll-restoration-id="ExchangeCurrencyPicker"] .Rfm73.ZR_ns.umRMK.kJf7o {
   background: #000 !important;
-  margin: 0 31px 0 19                                                                                                                                                                                                         px !important;
+  margin-inline: 16px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
   padding: 8px 12px !important;
   border-radius: 12px 12px 0 0 !important;
 }
@@ -2285,8 +2287,11 @@ html:not([data-platform="ios"]) .FhO5I.search-overlay-open .wtAUk.Rmex8[data-scr
 html:not([data-platform="ios"]) .FhO5I.search-overlay-open .wtAUk.Rmex8[data-scroll-restoration-id="ExchangeCurrencyPicker"] .Rfm73.ZR_ns.umRMK.kJf7o + .ydmxJ.tf4r_ {
   margin-top: 0 !important;
   padding-top: 0 !important;
-  margin-left: 16px !important;
-  margin-right: 32px !important;
+  margin-inline: 16px !important;
+  width: auto !important;
+  max-width: none !important;
+  align-self: stretch !important;
+  box-sizing: border-box !important;
 }
 
 html:not([data-platform="ios"]) .FhO5I.search-overlay-open .wtAUk.Rmex8[data-scroll-restoration-id="ExchangeCurrencyPicker"] .mjigr.ODmGt.LQUdc.lIhZN {
@@ -2366,17 +2371,30 @@ html:not([data-platform="ios"]) .FhO5I.search-overlay-open .wtAUk.Rmex8[data-scr
   display: none !important;
 }
 
-/* ExchangeCurrencyPicker (все платформы): плашки заголовков — уже, чёрный фон, скругление сверху */
+/* ExchangeCurrencyPicker (все платформы): плашка + список — одинаковые боковые поля (без сдвига вправо на iOS) */
+/* Перебить .CgUOn.lKYcT .Rfm73 { width: 93% } — ширина как у строк списка (flex stretch − margin-inline) */
+.FhO5I.search-overlay-open .wtAUk.Rmex8[data-scroll-restoration-id="ExchangeCurrencyPicker"] .CgUOn.lKYcT .Rfm73.ZR_ns.umRMK.kJf7o {
+  width: auto !important;
+  max-width: none !important;
+  align-self: stretch !important;
+  justify-content: flex-start !important;
+}
+
 .FhO5I.search-overlay-open .wtAUk.Rmex8[data-scroll-restoration-id="ExchangeCurrencyPicker"] .Rfm73.ZR_ns.umRMK.kJf7o {
   background: #000 !important;
-  margin: 0 16px 0 32px !important;
+  margin-inline: 16px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
   padding: 8px 12px !important;
   border-radius: 12px 12px 0 0 !important;
 }
 
 .FhO5I.search-overlay-open .wtAUk.Rmex8[data-scroll-restoration-id="ExchangeCurrencyPicker"] .Rfm73.ZR_ns.umRMK.kJf7o + .ydmxJ.tf4r_ {
-  margin-left: 16px !important;
-  margin-right: 32px !important;
+  margin-inline: 16px !important;
+  width: auto !important;
+  max-width: none !important;
+  align-self: stretch !important;
+  box-sizing: border-box !important;
 }
 
 /* ExchangeCurrencyPicker (все платформы): убрать белые полосы между монетами */

@@ -5,10 +5,10 @@
   padding-bottom: calc(var(--tabbar-height, 90px) + 24px + var(--safe-area-inset-bottom, 0px));
 }
 
-/* Верх «Доход» — чёрный фон как TON-баланс / ton-exchange-form-block, breakout на всю ширину */
+/* Верх «Доход»: обычный кошелёк — фон как у секций темы; TON — чёрная полоса и breakout (как TON-баланс) */
 .income-hero {
-  background: #000000;
-  margin-inline: calc(-1 * var(--content-padding-inline, 16px));
+  background: var(--tg-theme-section-bg-color, #212121);
+  margin-inline: 0;
   padding-block: 40px 44px;
   padding-inline: var(--content-padding-inline, 16px);
   min-height: 220px;
@@ -21,20 +21,26 @@
   gap: 10px;
 }
 
-/* Светлая тема: чёрный hero только на iOS (как полоса TON-кошелька); на остальных платформах — светлый фон */
-html[data-color-scheme="light"]:not([data-platform="ios"]) .income-hero {
+.income-screen-wrap--ton .income-hero {
+  background: #000000;
+  margin-inline: calc(-1 * var(--content-padding-inline, 16px));
+  padding-inline: var(--content-padding-inline, 16px);
+}
+
+html[data-color-scheme="light"]:not([data-platform="ios"]) .income-screen-wrap:not(.income-screen-wrap--ton) .income-hero {
   background: var(--tg-theme-bg-color, #ffffff);
 }
 
-html[data-platform="ios"][data-color-scheme="light"] .income-hero .income-hero-title {
+/* iOS светлая тема: светлый текст только на чёрном hero TON */
+html[data-platform="ios"][data-color-scheme="light"] .income-screen-wrap--ton .income-hero .income-hero-title {
   color: #ffffff !important;
 }
 
-html[data-platform="ios"][data-color-scheme="light"] .income-hero .income-hero-subtitle {
+html[data-platform="ios"][data-color-scheme="light"] .income-screen-wrap--ton .income-hero .income-hero-subtitle {
   color: rgba(255, 255, 255, 0.55) !important;
 }
 
-html[data-platform="ios"][data-color-scheme="light"] .income-hero .income-hero-icon-placeholder {
+html[data-platform="ios"][data-color-scheme="light"] .income-screen-wrap--ton .income-hero .income-hero-icon-placeholder {
   background: rgba(255, 255, 255, 0.12) !important;
   color: rgba(255, 255, 255, 0.45) !important;
 }
@@ -43,13 +49,18 @@ html[data-platform="ios"][data-color-scheme="light"] .income-hero .income-hero-i
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--tg-theme-secondary-bg-color, rgba(120, 120, 128, 0.16));
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--tg-theme-hint-color, #8e8e93);
   font-size: 28px;
   font-weight: 600;
+}
+
+.income-screen-wrap--ton .income-hero-icon-placeholder {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--tg-theme-hint-color, #8e8e93);
 }
 
 .income-hero-title {

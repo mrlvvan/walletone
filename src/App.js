@@ -2329,9 +2329,7 @@ function App() {
               onOpenAsset={openAsset}
             />
           ))}
-        {screen === 'bonus' && (
-          <IncomeScreen />
-        )}
+        {screen === 'bonus' && <IncomeScreen walletTab={walletTab} />}
         {screen === 'history' && <HistoryScreen items={historyItems} />}
         {screen === 'transfer' && (
           <TransferScreen

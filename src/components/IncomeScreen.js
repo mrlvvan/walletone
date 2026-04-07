@@ -94,9 +94,10 @@ function renderIncomeIcon(item) {
   return <span className="bonus-fallback-icon">{item.icon || '?'}</span>;
 }
 
-function IncomeScreen() {
+function IncomeScreen({ walletTab = 'crypto' }) {
+  const isTonWallet = walletTab === 'ton';
   return (
-    <div className="income-screen-wrap">
+    <div className={`income-screen-wrap${isTonWallet ? ' income-screen-wrap--ton' : ''}`}>
       <section className="income-hero">
         <div className="income-hero-icon-placeholder" aria-hidden="true">
           {/* Иконка % пока не реализована — placeholder */}
