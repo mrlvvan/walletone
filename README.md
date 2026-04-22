@@ -1,6 +1,6 @@
 # Wallet One
 
-Учебный фронтенд: копия интерфейса **Telegram Wallet** (для портфолио и практики), без продуктовой привязки к Telegram.
+Учебный фронтенд: копия интерфейса **Telegram Wallet**, без продуктовой привязки к Telegram.
 
 ## Стек
 
@@ -14,15 +14,5 @@
 - **Криптовалюты** — [CoinMarketCap](https://coinmarketcap.com/api/) (`/v1/cryptocurrency/quotes/latest`, котировки в RUB) при наличии ключа; иначе fallback на публичный [CoinGecko](https://www.coingecko.com/en/api) (`/api/v3/simple/price` и данные для графиков).
 - **Курс USD → RUB** — [ExchangeRate-API](https://www.exchangerate-api.com/) (`/v4/latest/USD`) для пересчёта цен.
 - **Акции (акции/ETF в интерфейсе)** — [Finnhub](https://finnhub.io/) (котировки в USD, пересчёт в ₽ по курсу выше) — по желанию, ключ `REACT_APP_FINNHUB_KEY`.
-- **Графики** — те же CMC / CoinGecko, что и для цен (см. `src/services/chartService.js`).
+- **Графики** — те же CMC / CoinGecko, что и для цен 
 
-Переменные окружения (опционально): `REACT_APP_CMC_API_KEY`, `REACT_APP_FINNHUB_KEY`.
-
-## Запуск
-
-```bash
-npm install
-npm start
-```
-
-Сборка: `npm run build`.
