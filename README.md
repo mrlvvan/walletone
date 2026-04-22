@@ -1,7 +1,6 @@
 # Wallet One
 
-Учебный фронтенд: копия интерфейса **Telegram Wallet**, без продуктовой привязки к Telegram.
-
+Учебный фронтенд: копия интерфейса **Telegram Wallet**
 ## Стек
 
 - **React** 19, **Create React App** (`react-scripts`)
