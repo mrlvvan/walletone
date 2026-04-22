@@ -2,6 +2,7 @@
   "name": "walletone",
   "version": "0.1.0",
   "private": true,
+  "description": "Учебная копия UI Telegram Wallet: React (CRA), курсы через CoinMarketCap / CoinGecko, USD↔RUB (ExchangeRate-API), акции — Finnhub.",
   "devDependencies": {
     "cross-env": "^7.0.3"
   },

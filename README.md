@@ -1,70 +1,28 @@
-# Getting Started with Create React App
+# Wallet One
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Учебный фронтенд: копия интерфейса **Telegram Wallet** (для портфолио и практики), без продуктовой привязки к Telegram.
 
-## Available Scripts
+## Стек
 
-In the project directory, you can run:
+- **React** 19, **Create React App** (`react-scripts`)
+- **Lottie** (`lottie-react`) — анимации
+- **QR** (`qrcode.react`, `qr-code-styling`)
+- **Тесты** — React Testing Library, Jest (через CRA)
 
-### `npm start`
+## Внешние API (курсы и графики)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Криптовалюты** — [CoinMarketCap](https://coinmarketcap.com/api/) (`/v1/cryptocurrency/quotes/latest`, котировки в RUB) при наличии ключа; иначе fallback на публичный [CoinGecko](https://www.coingecko.com/en/api) (`/api/v3/simple/price` и данные для графиков).
+- **Курс USD → RUB** — [ExchangeRate-API](https://www.exchangerate-api.com/) (`/v4/latest/USD`) для пересчёта цен.
+- **Акции (акции/ETF в интерфейсе)** — [Finnhub](https://finnhub.io/) (котировки в USD, пересчёт в ₽ по курсу выше) — по желанию, ключ `REACT_APP_FINNHUB_KEY`.
+- **Графики** — те же CMC / CoinGecko, что и для цен (см. `src/services/chartService.js`).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Переменные окружения (опционально): `REACT_APP_CMC_API_KEY`, `REACT_APP_FINNHUB_KEY`.
 
-### `npm test`
+## Запуск
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install
+npm start
+```
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Сборка: `npm run build`.
